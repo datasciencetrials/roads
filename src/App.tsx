@@ -268,21 +268,6 @@ function RequireAdmin({ label, children }: { label: string; children: React.Reac
 //  super → full dashboards & reports, no input/audit/admin
 //  admin → everything
 function AppGate() {
-  const { user, isAuthenticated } = useAuth();
-
-  if (!isAuthenticated || !user) return <LoginPage />;
-
-  // Identity Manager: new users await admin approval; revoked users are blocked.
-  if (user.access === 'pending' || user.access === 'revoked') return <AccessPending />;
-
-  if (isFieldRole(user.role)) {
-    return (
-      <Suspense fallback={<ModuleSpinner />}>
-        <RMSFieldShell />
-      </Suspense>
-    );
-  }
-
   return (
     <>
       <AppShell />

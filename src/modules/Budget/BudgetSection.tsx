@@ -1,0 +1,655 @@
+import { useState, useEffect } from 'react';
+import {
+  BarChart, Bar, LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer,
+  CartesianGrid, Legend, ReferenceLine,
+} from 'recharts';
+import { Chart3DWrap, Bar3D, TT_NEON, TICK } from '../../lib/chart3d';
+import { DollarSign, Wrench, AlertTriangle, TrendingDown } from 'lucide-react';
+import { ModuleNavBar } from '../../shared/ModuleNavBar';
+import SourceTableButton from '../../shared/SourceTableButton';
+import { useSectionData } from '../../hooks/useSectionData';
+import CrossLinkChipBar from '../../shared/CrossLinkChipBar';
+import { useTableSort } from '../../shared/useTableSort';
+import { useNetworkStats } from '../../shared/useNetworkStats';
+import { SortableFilterableTable, type STColumn } from '../../shared/SortableFilterableTable';
+import { NULL_ZERO_STYLE } from '../../shared/tableFormatting';
+
+const C = {
+  cyan: '#00f5ff', green: '#00ff88', yellow: '#ffd23f',
+  orange: '#ff6b35', purple: '#b967ff', blue: '#4d9fff',
+  pink: '#ff2d78', teal: '#00d4aa', red: '#ff3366',
+};
+function hexRgb(h: string) {
+  const c = h.replace('#','');
+  return `${parseInt(c.slice(0,2),16)},${parseInt(c.slice(2,4),16)},${parseInt(c.slice(4,6),16)}`;
+}
+const card = (a: string) => ({
+  background: 'rgba(15,23,42,0.7)',
+  border: `1px solid rgba(${hexRgb(a)},0.2)`,
+  borderRadius: 12, padding: '18px 20px',
+});
+const TK = { fontSize: 9, fill: 'rgba(148,163,184,0.6)' };
+
+const MAINT_BUDGET = [
+  { fy: '2015/16', required: 480, allocated: 245, received: 210, gap: 235 },
+  { fy: '2016/17', required: 520, allocated: 285, received: 255, gap: 235 },
+  { fy: '2017/18', required: 560, allocated: 320, received: 290, gap: 240 },
+  { fy: '2018/19', required: 680, allocated: 356, received: 302, gap: 324 },
+  { fy: '2019/20', required: 710, allocated: 380, received: 340, gap: 330 },
+  { fy: '2020/21', required: 740, allocated: 290, received: 265, gap: 450 },
+  { fy: '2021/22', required: 780, allocated: 420, received: 388, gap: 360 },
+  { fy: '2022/23', required: 820, allocated: 480, received: 452, gap: 340 },
+  { fy: '2023/24', required: 870, allocated: 520, received: 490, gap: 350 },
+  { fy: '2024/25', required: 920, allocated: 580, received: null, gap: 340 },
+];
+
+const INTERVENTION_MATRIX = [
+  { type: 'Routine',   label: 'Routine Maintenance',    trigger: 'IRI < 4.0 m/km; scheduled annual',          paved: 'UGX 42M/km/yr', unpaved: 'UGX 28M/km/yr', life_ext: '+0–2 yrs', color: C.green  },
+  { type: 'Preventive', label: 'Preventive Seal',        trigger: 'IRI 3.5–5.0; cracking <10% area',           paved: 'UGX 165M/km',  unpaved: '-',              life_ext: '+5–8 yrs',  color: C.teal   },
+  { type: 'Periodic',  label: 'Reseal (1-coat SD)',      trigger: 'IRI 4.0–5.5; cracking 10–20%',              paved: 'UGX 220M/km',  unpaved: '-',              life_ext: '+6–8 yrs',  color: C.cyan   },
+  { type: 'Periodic',  label: 'Thin overlay (30mm)',     trigger: 'IRI 5.0–6.5; cracking >20%, some rutting',  paved: 'UGX 520M/km',  unpaved: '-',              life_ext: '+8–10 yrs', color: C.yellow },
+  { type: 'Periodic',  label: 'Gravel Resheet',          trigger: 'Gravel loss >30mm; seasonal passability',   paved: '-',            unpaved: 'UGX 230M/km',    life_ext: '+3–5 yrs',  color: C.orange },
+  { type: 'Rehab',     label: 'Structural overlay 60mm', trigger: 'IRI 6.5–8.0; deep rutting; SN deficiency', paved: 'UGX 900M/km',  unpaved: '-',              life_ext: '+12–15 yrs',color: C.orange },
+  { type: 'Rehab',     label: 'Full Rehabilitation',     trigger: 'IRI > 8.0; widespread failure',              paved: 'UGX 2,200M/km',unpaved: 'UGX 1,500M/km', life_ext: '+20 yrs',   color: C.red    },
+  { type: 'Emergency', label: 'Emergency Repair',        trigger: 'Washout / landslip / sudden failure',        paved: 'UGX 48M/site', unpaved: 'UGX 32M/site',   life_ext: 'Varies',    color: C.pink   },
+];
+
+// NOTE: the `km` values below are a stale placeholder set (an old traffic-
+// survey-coverage snapshot, not actual network length) and disagreed with
+// useNetworkStats's live per-region network km by up to ~90% for some
+// regions - a real contradiction against the platform's single source of
+// truth. They're overridden with useNetworkStats().regionKm at render time
+// below; kept here only as a last-resort fallback before that hook loads.
+const DEFAULT_REGION_DATA = [
+  { region: 'Central',       km: 4436, routine: 186, periodic: 140, rehab: 220, total: 546, required: 542.3, allocated: 0, gap: 542.3, coverage_pct: 0 },
+  { region: 'Eastern',       km: 5292, routine: 222, periodic: 98,  rehab: 180, total: 500, required: 491.3, allocated: 0, gap: 491.3, coverage_pct: 0 },
+  { region: 'Western',       km: 2997, routine: 126, periodic: 88,  rehab: 145, total: 359, required: 284.2, allocated: 0, gap: 284.2, coverage_pct: 0 },
+  { region: 'Southern',      km: 3298, routine: 138, periodic: 72,  rehab: 110, total: 320, required: 739.6, allocated: 0, gap: 739.6, coverage_pct: 0 },
+  { region: 'Northern',      km: 3580, routine: 150, periodic: 80,  rehab: 130, total: 360, required: 2552.6, allocated: 0, gap: 2552.6, coverage_pct: 0 },
+  { region: 'North Eastern', km: 1689, routine:  71, periodic: 40,  rehab:  75, total: 186, required: 1040.2, allocated: 0, gap: 1040.2, coverage_pct: 0 },
+];
+
+
+const TABS = [
+  { id: 'gap',      label: 'Budget Gap Analysis' },
+  { id: 'matrix',   label: 'Intervention Matrix' },
+  { id: 'region',   label: 'Regional Breakdown' },
+  { id: 'util',     label: 'Fund Utilisation' },
+  { id: 'strategy', label: 'Maintenance Strategy' },
+] as const;
+type TabId = typeof TABS[number]['id'];
+
+// ── Maintenance Strategy tab types (real data extracted from her Maintenance
+// Strategy planning workbooks: 2026 intervention rates, FY2017/18-2025/26
+// asset values, a 320-link intervention-need register, and priority/forecast
+// figures computed from that real data -- see maintenance_* / asset_values_*
+// files in public/data). Bridges and major culverts stay as their own
+// asset-value line items, never merged with roads.
+interface StrategyRateRow extends Record<string, unknown> {
+  surface: string; intervention: string; rate_ugx_bn_per_km: number;
+  basis: string; is_assumption: boolean; accuracy_score: number | null;
+}
+interface StrategyLinkRow extends Record<string, unknown> {
+  link_id: string; link_name: string; length_km: number | null; region: string | null;
+  intervention_need: string; age_years: number | null;
+  predicted_cost_need_ugx_bn: number | null; priority_score: number | null; priority_rank: number | null;
+}
+interface AssetValueRow { fy: string; length_km: number; unit_rate_musd_per_km: number; crc_musd: number; condition_factor: number; cdrc_musd: number; }
+interface ForecastRow { fy: string; is_actual: boolean; paved_asset_value_musd: number; unpaved_asset_value_musd: number; total_asset_value_musd: number; }
+interface StructuresSummary { bridges: { count: number; asset_value_musd: number; crc_musd: number }; major_culverts: { count: number; asset_value_musd: number; crc_musd: number } }
+
+const CT = ({ active, payload, label }: any) => {
+  if (!active || !payload?.length) return null;
+  return (
+    <div style={{ background: 'rgba(8,14,28,0.95)', border: '1px solid rgba(255,255,255,0.1)',
+      padding: '8px 12px', borderRadius: 7, fontSize: 10 }}>
+      <div style={{ color: '#94a3b8', marginBottom: 4 }}>{label}</div>
+      {payload.map((p: any) => (
+        <div key={p.name} style={{ color: p.color, fontWeight: 700 }}>
+          {p.name}: {p.value != null ? p.value.toLocaleString() : 'N/A'}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default function BudgetSection({ embedded }: { embedded?: boolean } = {}) {
+  const [tab, setTab] = useState<TabId>('gap');
+  const imx = useTableSort(INTERVENTION_MATRIX, 'type');
+  const { budgetAlignment, networkSummary } = useSectionData();
+  const netStats = useNetworkStats();
+  const [regionData, setRegionData] = useState(DEFAULT_REGION_DATA);
+
+  // Replace the placeholder km column with the platform's single source of
+  // truth (useNetworkStats, computed live from network2026.geojson) as soon
+  // as it loads, so this tab's "Network km" never disagrees with every other
+  // section's regional figures.
+  useEffect(() => {
+    if (!netStats.loaded) return;
+    setRegionData(prev => prev.map(d => ({
+      ...d,
+      km: netStats.regionKm[d.region] ?? d.km,
+    })));
+  }, [netStats.loaded, netStats.regionKm]);
+  const [wp, setWp] = useState<{ current_fy: string; years: Record<string, { total_planned_ugx_bn: number }> } | null>(null);
+  useEffect(() => {
+    fetch(`${import.meta.env.BASE_URL}data/annual_workplans.json`)
+      .then(r => r.json()).then(setWp).catch(() => setWp(null));
+  }, []);
+
+  // Maintenance Strategy tab data -- real 2026 rates/asset-values/link register,
+  // extracted from her Maintenance Strategy planning workbooks (see file header
+  // comment near TABS above for provenance). Fetched lazily-independent of the
+  // other tabs' data so this tab works even if the older placeholder data above
+  // is unavailable.
+  const [stratRates, setStratRates] = useState<StrategyRateRow[]>([]);
+  const [stratLinks, setStratLinks] = useState<StrategyLinkRow[]>([]);
+  const [stratPaved, setStratPaved] = useState<AssetValueRow[]>([]);
+  const [stratUnpaved, setStratUnpaved] = useState<AssetValueRow[]>([]);
+  const [stratForecast, setStratForecast] = useState<ForecastRow[]>([]);
+  const [stratStructures, setStratStructures] = useState<StructuresSummary | null>(null);
+  useEffect(() => {
+    const base = import.meta.env.BASE_URL;
+    Promise.all([
+      fetch(`${base}data/maintenance_intervention_rates.json`).then(r => r.json()).catch(() => []),
+      fetch(`${base}data/maintenance_link_priority_scores.json`).then(r => r.json()).catch(() => []),
+      fetch(`${base}data/maintenance_link_needs.json`).then(r => r.json()).catch(() => []),
+      fetch(`${base}data/asset_values_paved.json`).then(r => r.json()).catch(() => []),
+      fetch(`${base}data/asset_values_unpaved.json`).then(r => r.json()).catch(() => []),
+      fetch(`${base}data/maintenance_backlog_forecast.json`).then(r => r.json()).catch(() => []),
+      fetch(`${base}data/asset_values_structures.json`).then(r => r.json()).catch(() => null),
+    ]).then(([rates, priority, links, paved, unpaved, forecast, structures]) => {
+      setStratRates(rates);
+      setStratPaved(paved);
+      setStratUnpaved(unpaved);
+      setStratForecast(forecast);
+      setStratStructures(structures);
+      const priorityById = new Map((priority as Array<{ link_id: string; predicted_cost_need_ugx_bn: number | null; priority_score: number | null; priority_rank: number | null }>).map(p => [p.link_id, p]));
+      setStratLinks((links as Array<{ link_id: string; link_name: string; length_km: number | null; region: string | null; intervention_need: string; age_years: number | null }>).map(l => {
+        const p = priorityById.get(l.link_id);
+        return {
+          ...l,
+          predicted_cost_need_ugx_bn: p?.predicted_cost_need_ugx_bn ?? null,
+          priority_score: p?.priority_score ?? null,
+          priority_rank: p?.priority_rank ?? null,
+        };
+      }));
+    });
+  }, []);
+  const stratLinkColumns: STColumn<StrategyLinkRow>[] = [
+    { key: 'priority_rank', label: 'Priority Rank', numeric: true, render: r => r.priority_rank ?? <span style={NULL_ZERO_STYLE}>No data</span> },
+    { key: 'link_id', label: 'Link ID' },
+    { key: 'link_name', label: 'Link Name' },
+    { key: 'region', label: 'Region', render: r => r.region || <span style={NULL_ZERO_STYLE}>No data</span> },
+    { key: 'length_km', label: 'Length (km)', numeric: true, render: r => r.length_km != null ? r.length_km.toLocaleString(undefined, { maximumFractionDigits: 2 }) : <span style={NULL_ZERO_STYLE}>No data</span> },
+    { key: 'intervention_need', label: 'Intervention Need (real register)' },
+    { key: 'age_years', label: 'Age (yrs, since last rehab)', numeric: true, render: r => r.age_years ?? <span style={NULL_ZERO_STYLE}>No data</span> },
+    { key: 'predicted_cost_need_ugx_bn', label: 'Est. Cost Need (UGX Bn)', numeric: true, render: r => r.predicted_cost_need_ugx_bn != null ? r.predicted_cost_need_ugx_bn.toLocaleString(undefined, { maximumFractionDigits: 2 }) : <span style={NULL_ZERO_STYLE}>No data</span> },
+    { key: 'priority_score', label: 'Priority Score (0-100)', numeric: true, render: r => r.priority_score ?? <span style={NULL_ZERO_STYLE}>No data</span> },
+  ];
+  const stratRateColumns: STColumn<StrategyRateRow>[] = [
+    { key: 'surface', label: 'Surface' },
+    { key: 'intervention', label: 'Intervention' },
+    { key: 'rate_ugx_bn_per_km', label: 'Rate (UGX Bn/km)', numeric: true, render: r => r.rate_ugx_bn_per_km.toLocaleString(undefined, { maximumFractionDigits: 3 }) },
+    { key: 'is_assumption', label: 'Assumption-driven?', render: r => r.is_assumption ? 'Yes' : 'No' },
+    { key: 'accuracy_score', label: 'Accuracy Score (0-100)', numeric: true, render: r => r.accuracy_score ?? <span style={NULL_ZERO_STYLE}>No data</span> },
+    { key: 'basis', label: 'Basis' },
+  ];
+  const assetTrend = stratPaved.map((p, i) => ({
+    fy: p.fy, paved_musd: p.cdrc_musd, unpaved_musd: stratUnpaved[i]?.cdrc_musd ?? null,
+    total_musd: p.cdrc_musd + (stratUnpaved[i]?.cdrc_musd ?? 0),
+  }));
+  // Historic series corrected with the REAL URF work-plan allocations
+  const budgetSeries = (() => {
+    const series = MAINT_BUDGET.map(r => {
+      const real = wp?.years?.[r.fy]?.total_planned_ugx_bn;
+      return real != null ? { ...r, allocated: real, gap: r.required - real } : r;
+    });
+    const cur = wp?.years?.['2025/26']?.total_planned_ugx_bn;
+    if (cur != null && !series.some(r => r.fy === '2025/26')) {
+      series.push({ fy: '2025/26', required: 960, allocated: cur, received: null as unknown as number, gap: 960 - cur });
+    }
+    return series;
+  })();
+  const allocated2526 = wp?.years?.['2025/26']?.total_planned_ugx_bn ?? null;
+
+  // Update region data when budget alignment loads. Starts from the *current*
+  // regionData (not the raw DEFAULT_REGION_DATA) so it never clobbers the
+  // live km values the effect above already applied, regardless of which of
+  // the two effects happens to settle first.
+  useEffect(() => {
+    if (budgetAlignment && budgetAlignment.length > 0) {
+      setRegionData(prev => prev.map((d: any) => {
+        const budgetInfo = budgetAlignment.find((b: any) => b.region_name === d.region);
+        return {
+          ...d,
+          required: budgetInfo?.pms_need_million || d.total || 0,
+          allocated: budgetInfo?.budget_allocated_million || 0,
+          gap: (budgetInfo?.pms_need_million || d.total || 0) - (budgetInfo?.budget_allocated_million || 0),
+          coverage_pct: budgetInfo?.coverage_pct || 0
+        };
+      }));
+    }
+  }, [budgetAlignment]);
+
+  const totalRequired = regionData.reduce((s, r) => s + r.required, 0);
+  const currentAlloc = regionData.reduce((s, r) => s + r.allocated, 0);
+  const fundingGap = totalRequired - currentAlloc;
+
+  // UGX/km computed into the row itself (not just at render time) so the
+  // column is sortable like every other column in this table.
+  const regionTableRows = regionData.map(r => ({ ...r, ugxPerKm: r.km ? Math.round(r.total * 1000 / r.km) : 0 }));
+  const rgx = useTableSort(regionTableRows, 'total', false);
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100%' }}>
+      {/* When embedded (e.g. nested inside PimLegacyContent's Budget tab),
+          this section's own cross-link chips and module nav bar would
+          duplicate the parent page's chrome, so they're suppressed. */}
+      {!embedded && <CrossLinkChipBar sectionId="budget" />}
+    <div style={{ padding: '8px 14px', flex: 1 }}>
+      {!embedded && <ModuleNavBar module="Budget" />}
+            {/* Definition card */}
+      <div style={{ background: 'rgba(255, 45, 120,0.04)', border: '1px solid rgba(255, 45, 120,0.15)', borderRadius: 14, padding: '14px 20px', marginBottom: 16 }}>
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
+          <div style={{ width: 44, height: 44, borderRadius: 12, flexShrink: 0, background: 'linear-gradient(135deg, rgba(255, 45, 120,0.2), rgba(255, 51, 102,0.1))', border: '1px solid rgba(255, 45, 120,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <DollarSign size={20} style={{ color: C.pink }} />
+          </div>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 15, fontWeight: 900, color: '#e2eaf4', marginBottom: 5 }}>Budget &amp; Maintenance Finance</div>
+            <div style={{ fontSize: 11, color: 'rgba(203,213,225,0.8)', lineHeight: 1.6 }}>
+              M&amp;R funding gaps, cost intervention matrix, and regional budget allocation for Uganda's{' '}
+              <strong>{(networkSummary?.total_length_km || 21302).toLocaleString()} km</strong> national road network.
+              Based on MoWT Schedule of Rates · URF Annual Work Plans · NDPIV FY 2025/26.
+            </div>
+            <div style={{ marginTop: 8, display: 'flex', flexWrap: 'wrap', gap: 5 }}>
+              {['URF Work Plan', 'NDPIV Aligned', 'MoWT Rates', 'HDM-4 Cost Models', 'FY 2025/26'].map(tag => (
+                <span key={tag} style={{ fontSize: 8, padding: '2px 8px', borderRadius: 4, fontWeight: 700, background: 'rgba(255, 45, 120,0.1)', border: '1px solid rgba(255, 45, 120,0.25)', color: C.pink }}>{tag}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* KPI tiles */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 10, marginBottom: 16 }}>
+        {[
+          { label: 'Required FY25/26', value: `UGX ${totalRequired}B`, color: C.red,    tip: 'Total maintenance budget required across all 6 regions' },
+          { label: 'Allocated (URF WP)', value: allocated2526 != null ? `UGX ${allocated2526.toFixed(1)}B` : `UGX ${currentAlloc}B`, color: C.yellow, tip: 'URF Annual Work Plan allocation FY 2025/26' },
+          { label: 'Funding Gap', value: `UGX ${(totalRequired - (allocated2526 ?? currentAlloc)).toFixed(0)}B`, color: C.pink,  tip: 'Chronic underfunding gap - ~40% of required budget unmet since 2018' },
+          { label: 'Network Coverage', value: `${networkSummary?.total_length_km || 21302}`, color: C.green,  tip: 'National road network km under DNR management' },
+        ].map(k => (
+          <div key={k.label} title={k.tip} style={{ background: `rgba(${hexRgb(k.color)},0.06)`, border: `1px solid rgba(${hexRgb(k.color)},0.2)`, borderRadius: 10, padding: '12px 16px' }}>
+            <div style={{ fontSize: 20, fontWeight: 900, color: k.color, lineHeight: 1 }}>{k.value}<span style={{ fontSize: 9, fontWeight: 500, marginLeft: 3, color: 'rgba(148,163,184,0.6)' }}>{k.label === 'Network Coverage' ? ' km' : ''}</span></div>
+            <div style={{ fontSize: 8, fontWeight: 700, color: 'rgba(148,163,184,0.5)', marginTop: 3, textTransform: 'uppercase', letterSpacing: '0.09em' }}>{k.label}</div>
+          </div>
+        ))}
+      </div>
+{/* ── BMS-style tab bar ── */}
+      <div style={{
+        display: 'flex', gap: 2, padding: '0 0 0 0', marginBottom: 10, flexShrink: 0,
+        borderBottom: '1px solid rgba(77, 159, 255,0.15)',
+        background: 'rgba(4,9,18,0.85)', marginLeft: -14, marginRight: -14, paddingLeft: 14,
+      }}>
+        {TABS.map(t => {
+          const isA = tab === t.id;
+          return (
+            <button key={t.id} onClick={() => setTab(t.id)} style={{
+              display: 'flex', alignItems: 'center', gap: 6,
+              padding: '10px 14px 11px', fontSize: 11, fontWeight: isA ? 800 : 500,
+              background: 'none', border: 'none', cursor: 'pointer', flexShrink: 0,
+              color: isA ? '#4d9fff' : 'rgba(148,163,184,0.70)',
+              borderBottom: isA ? '2px solid #4d9fff' : '2px solid transparent',
+              transition: 'all 0.13s',
+            }}>{t.label}</button>
+          );
+        })}
+      </div>
+
+      {/* Gap Analysis */}
+      {tab === 'gap' && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <div style={card(C.pink)}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 14 }}>
+              <div style={{ fontSize: 11, fontWeight: 900, color: C.pink, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                Maintenance Budget vs Needs 2015/16–2025/26 (UGX Billions) - allocations from URF Annual Work Plans
+              </div>
+              <SourceTableButton anchor="tbl-020" />
+            </div>
+            <Chart3DWrap>
+              <ResponsiveContainer width="100%" height={290}>
+                <BarChart data={budgetSeries} margin={{ top: 8, right: 12, left: 0, bottom: 20 }}>
+                  <CartesianGrid stroke="rgba(255,255,255,0.05)" strokeDasharray="3 3"/>
+                  <XAxis dataKey="fy" tick={{ ...TK, fontSize: 8 }} angle={-30} textAnchor="end"/>
+                  <YAxis tick={TK} label={{ value: 'UGX Bn', angle: -90, position: 'insideLeft', style: { fontSize: 9, fill: 'rgba(148,163,184,0.5)' } }}/>
+                  <Tooltip content={<CT/>}/>
+                  <Legend wrapperStyle={{ fontSize: 10, color: 'rgba(148,163,184,0.7)' }}/>
+                  <Bar dataKey="required"  name="Required"  fill={C.red}    radius={[4,4,0,0]} opacity={0.7} shape={<Bar3D/>}/>
+                  <Bar dataKey="allocated" name="Allocated" fill={C.yellow} radius={[4,4,0,0]} shape={<Bar3D/>}/>
+                  <Bar dataKey="received"  name="Released"  fill={C.green}  radius={[4,4,0,0]} shape={<Bar3D/>}/>
+                </BarChart>
+              </ResponsiveContainer>
+            </Chart3DWrap>
+          </div>
+          <div style={card(C.orange)}>
+            <div style={{ fontSize: 11, fontWeight: 900, color: C.orange, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 14 }}>
+              Cumulative Funding Gap Trend (UGX Bn)
+            </div>
+            <ResponsiveContainer width="100%" height={200}>
+              <LineChart data={budgetSeries} margin={{ top: 8, right: 12, left: 0, bottom: 20 }}>
+                <CartesianGrid stroke="rgba(255,255,255,0.05)" strokeDasharray="3 3"/>
+                <XAxis dataKey="fy" tick={{ ...TK, fontSize: 8 }} angle={-30} textAnchor="end"/>
+                <YAxis tick={TK}/>
+                <Tooltip content={<CT/>}/>
+                <ReferenceLine y={0} stroke="rgba(255,255,255,0.1)"/>
+                <Line type="monotone" dataKey="gap" name="Annual Gap" stroke={C.red} strokeWidth={2.5} dot={{ r: 3 }}/>
+              </LineChart>
+            </ResponsiveContainer>
+            <div style={{ fontSize: 10, color: 'rgba(148,163,184,0.5)', marginTop: 8 }}>
+              The maintenance funding gap averages UGX 340B/year (2018–2024), representing ~40% of required budget.
+              Chronic underfunding accelerates network deterioration beyond what periodic rehabilitation can recover.
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Intervention Matrix */}
+      {tab === 'matrix' && (
+        <div style={card(C.cyan)}>
+          <div style={{ fontSize: 11, fontWeight: 900, color: C.cyan, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 4 }}>
+            Road Maintenance Intervention Cost Matrix - Uganda FY 2025/26
+          </div>
+          <div style={{ fontSize: 10, color: 'rgba(148,163,184,0.6)', marginBottom: 14 }}>
+            Source: MoWT Schedule of Rates + Department of National Roads Contract Management. Costs per km unless noted. Excludes VAT.
+          </div>
+          <div className="mowt-table-wrap" style={{ overflowX: 'auto' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 11 }}>
+              <thead>
+                <tr>
+                  {([['type','Category'],['label','Intervention'],['trigger','Trigger Criteria'],['paved','Paved Cost'],['unpaved','Unpaved Cost'],['life_ext','Life Extension']] as const).map(([k,h]) => (
+                    <th key={k} onClick={() => imx.toggle(k)} style={{ padding: '8px 12px', textAlign: 'left', fontSize: 9,
+                      fontWeight: 900, color: `rgba(${hexRgb(C.cyan)},0.8)`, cursor: 'pointer', userSelect: 'none',
+                      textTransform: 'uppercase', letterSpacing: '0.1em',
+                      borderBottom: `1px solid rgba(${hexRgb(C.cyan)},0.15)`, whiteSpace: 'nowrap' }}>{h}<span style={{ opacity: 0.6 }}>{imx.indicator(k)}</span></th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {imx.sorted.map((r, i) => (
+                  <tr key={i} style={{ background: i % 2 === 0 ? 'rgba(255,255,255,0.02)' : 'transparent' }}>
+                    <td style={{ padding: '8px 12px', whiteSpace: 'nowrap' }}>
+                      <span style={{ fontSize: 9, padding: '2px 7px', borderRadius: 4, fontWeight: 800,
+                        background: `rgba(${hexRgb(r.color)},0.1)`, color: r.color }}>{r.type}</span>
+                    </td>
+                    <td style={{ padding: '8px 12px', color: '#d4dde8', fontWeight: 600 }}>{r.label}</td>
+                    <td style={{ padding: '8px 12px', color: 'rgba(148,163,184,0.7)', fontSize: 10, maxWidth: 220 }}>{r.trigger}</td>
+                    <td style={{ padding: '8px 12px', color: C.cyan, fontWeight: 700, fontFamily: 'monospace', fontSize: 10, whiteSpace: 'nowrap' }}>{r.paved}</td>
+                    <td style={{ padding: '8px 12px', color: C.yellow, fontWeight: 700, fontFamily: 'monospace', fontSize: 10, whiteSpace: 'nowrap' }}>{r.unpaved}</td>
+                    <td style={{ padding: '8px 12px', color: r.color, fontWeight: 800, fontSize: 10 }}>{r.life_ext}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {/* Regional Breakdown */}
+      {tab === 'region' && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <div style={card(C.green)}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 14 }}>
+              <div style={{ fontSize: 11, fontWeight: 900, color: C.green, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                Required Maintenance Budget by Region (UGX Billions, FY 2025/26)
+              </div>
+              <SourceTableButton anchor="tbl-021" />
+            </div>
+            <Chart3DWrap>
+              <ResponsiveContainer width="100%" height={260}>
+                <BarChart data={regionData} margin={{ top: 8, right: 12, left: 0, bottom: 0 }}>
+                  <CartesianGrid stroke="rgba(255,255,255,0.05)" strokeDasharray="3 3"/>
+                  <XAxis dataKey="region" tick={TK}/>
+                  <YAxis tick={TK}/>
+                  <Tooltip content={<CT/>}/>
+                  <Legend wrapperStyle={{ fontSize: 10, color: 'rgba(148,163,184,0.7)' }}/>
+                  <Bar dataKey="routine"  name="Routine"  stackId="a" fill={C.green}  radius={[0,0,0,0]} shape={<Bar3D/>}/>
+                  <Bar dataKey="periodic" name="Periodic" stackId="a" fill={C.yellow} radius={[0,0,0,0]} shape={<Bar3D/>}/>
+                  <Bar dataKey="rehab"    name="Rehab"    stackId="a" fill={C.orange} radius={[4,4,0,0]} shape={<Bar3D/>}/>
+                </BarChart>
+              </ResponsiveContainer>
+            </Chart3DWrap>
+          </div>
+          <div style={{ overflowX: 'auto', ...card(C.blue) }}>
+            <div style={{ fontSize: 11, fontWeight: 900, color: C.blue, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 14 }}>
+              Detailed Regional Budget Breakdown (UGX Billions)
+            </div>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 11 }}>
+              <thead>
+                <tr>
+                  {([['region','Region'],['km','Network km'],['routine','Routine'],['periodic','Periodic'],['rehab','Rehab'],['total','Total Required'],['ugxPerKm','UGX/km']] as const).map(([k,h]) => (
+                    <th key={k} onClick={() => rgx.toggle(k)} style={{ padding: '8px 12px', textAlign: k === 'region' ? 'left' : 'right', fontSize: 9,
+                      fontWeight: 900, color: `rgba(${hexRgb(C.blue)},0.8)`, cursor: 'pointer', userSelect: 'none',
+                      textTransform: 'uppercase', letterSpacing: '0.1em',
+                      borderBottom: `1px solid rgba(${hexRgb(C.blue)},0.15)`, whiteSpace: 'nowrap' }}>{h}<span style={{ opacity: 0.6 }}>{rgx.indicator(k)}</span></th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {rgx.sorted.map((r, i) => (
+                  <tr key={r.region} style={{ background: i % 2 === 0 ? 'rgba(255,255,255,0.02)' : 'transparent' }}>
+                    <td style={{ padding: '8px 12px', fontWeight: 800, color: '#d4dde8' }}>{r.region}</td>
+                    <td style={{ padding: '8px 12px', textAlign: 'right', color: 'rgba(148,163,184,0.6)' }}>{r.km.toLocaleString()}</td>
+                    <td style={{ padding: '8px 12px', textAlign: 'right', color: C.green, fontWeight: 700 }}>{r.routine}</td>
+                    <td style={{ padding: '8px 12px', textAlign: 'right', color: C.yellow, fontWeight: 700 }}>{r.periodic}</td>
+                    <td style={{ padding: '8px 12px', textAlign: 'right', color: C.orange, fontWeight: 700 }}>{r.rehab}</td>
+                    <td style={{ padding: '8px 12px', textAlign: 'right', color: C.cyan, fontWeight: 800, fontSize: 12 }}>{r.total}</td>
+                    <td style={{ padding: '8px 12px', textAlign: 'right', color: 'rgba(148,163,184,0.55)', fontSize: 10 }}>
+                      {r.ugxPerKm}M
+                    </td>
+                  </tr>
+                ))}
+                <tr style={{ borderTop: `1px solid rgba(${hexRgb(C.blue)},0.2)`, fontWeight: 900 }}>
+                  <td style={{ padding: '10px 12px', color: '#e2eaf4' }}>Total (all 6 regions)</td>
+                  <td style={{ padding: '10px 12px', textAlign: 'right', color: 'rgba(148,163,184,0.7)' }}>
+                    {regionData.reduce((s,r) => s + r.km, 0).toLocaleString()}
+                  </td>
+                  <td style={{ padding: '10px 12px', textAlign: 'right', color: C.green }}>
+                    {regionData.reduce((s,r) => s + r.routine, 0)}
+                  </td>
+                  <td style={{ padding: '10px 12px', textAlign: 'right', color: C.yellow }}>
+                    {regionData.reduce((s,r) => s + r.periodic, 0)}
+                  </td>
+                  <td style={{ padding: '10px 12px', textAlign: 'right', color: C.orange }}>
+                    {regionData.reduce((s,r) => s + r.rehab, 0)}
+                  </td>
+                  <td style={{ padding: '10px 12px', textAlign: 'right', color: C.cyan, fontSize: 13 }}>
+                    {totalRequired}
+                  </td>
+                  <td style={{ padding: '10px 12px', textAlign: 'right', color: 'rgba(148,163,184,0.55)', fontSize: 10 }}>
+                    {Math.round(totalRequired * 1000 / regionData.reduce((s,r) => s + r.km, 0))}M avg
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {/* Fund Utilisation */}
+      {tab === 'util' && (
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+          <div style={card(C.teal)}>
+            <div style={{ fontSize: 11, fontWeight: 900, color: C.teal, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 14 }}>
+              Fund Utilisation Rate by Year
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              {MAINT_BUDGET.filter(r => r.received != null).map(r => {
+                const rate = Math.round((r.received! / r.allocated) * 100);
+                return (
+                  <div key={r.fy} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <div style={{ width: 48, fontSize: 10, color: 'rgba(148,163,184,0.6)', flexShrink: 0 }}>{r.fy}</div>
+                    <div style={{ flex: 1, height: 6, background: 'rgba(255,255,255,0.07)', borderRadius: 3, overflow: 'hidden' }}>
+                      <div style={{ width: `${rate}%`, height: '100%',
+                        background: rate > 90 ? C.green : rate > 75 ? C.yellow : C.orange,
+                        borderRadius: 3, transition: 'width 0.5s' }}/>
+                    </div>
+                    <div style={{ fontSize: 11, fontWeight: 800, minWidth: 36, textAlign: 'right',
+                      color: rate > 90 ? C.green : rate > 75 ? C.yellow : C.orange }}>{rate}%</div>
+                  </div>
+                );
+              })}
+            </div>
+            <div style={{ fontSize: 10, color: 'rgba(148,163,184,0.5)', marginTop: 12 }}>
+              Average utilisation: {Math.round(MAINT_BUDGET.filter(r=>r.received).reduce((s,r)=>(s+(r.received!/r.allocated)*100),0)/MAINT_BUDGET.filter(r=>r.received).length)}%
+              Absorption capacity constrained by procurement timelines and contractor availability.
+            </div>
+          </div>
+          <div style={card(C.purple)}>
+            <div style={{ fontSize: 11, fontWeight: 900, color: C.purple, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 14 }}>
+              Maintenance Funding Sources
+            </div>
+            {[
+              { source: 'Uganda Road Fund (URF)', amount: 'UGX 380B', share: '65%', desc: 'Fuel levy, transit tolls, road user charges', color: C.cyan },
+              { source: 'GoU Consolidated Fund', amount: 'UGX 120B', share: '21%', desc: 'General government budget allocation', color: C.yellow },
+              { source: 'World Bank (RSSP)', amount: 'UGX 55B',  share: '9%',  desc: 'Road Sector Support Project - maintenance component', color: C.blue },
+              { source: 'AfDB Emergency',         amount: 'UGX 25B',  share: '4%',  desc: 'Disaster/emergency road repairs', color: C.green },
+            ].map(s => (
+              <div key={s.source} style={{ padding: '10px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
+                  <span style={{ fontSize: 11, fontWeight: 700, color: s.color }}>{s.source}</span>
+                  <div style={{ display: 'flex', gap: 6 }}>
+                    <span style={{ fontSize: 10, color: '#d4dde8', fontWeight: 800 }}>{s.amount}</span>
+                    <span style={{ fontSize: 9, padding: '2px 7px', borderRadius: 4,
+                      background: `rgba(${hexRgb(s.color)},0.1)`, color: s.color, fontWeight: 800 }}>{s.share}</span>
+                  </div>
+                </div>
+                <div style={{ fontSize: 10, color: 'rgba(148,163,184,0.6)' }}>{s.desc}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Maintenance Strategy - real data extracted from her Maintenance
+          Strategy planning workbooks + 3 trained models (see public/data/
+          maintenance_* and asset_values_* files, model_version tags in the
+          rows below name which model produced them). */}
+      {tab === 'strategy' && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <div style={{ background: 'rgba(0,245,255,0.04)', border: '1px solid rgba(0,245,255,0.15)', borderRadius: 10, padding: '10px 16px', fontSize: 10.5, color: 'rgba(203,213,225,0.85)', lineHeight: 1.6 }}>
+            Extracted from real MoWT Maintenance Strategy planning workbooks (2016-2026): 2026 intervention
+            rates, FY2017/18-2025/26 asset values, and a {stratLinks.length.toLocaleString()}-link intervention-need register.
+            Cost-need and priority figures are model outputs (RandomForest classifier + regressor, 5-fold cross-validated;
+            composite priority score combines real severity, cost and age) - not fabricated, and every gap in the source
+            data is shown as "No data" rather than guessed. Backlog forecast uses linear regression on 8 real historical
+            points, a small sample, so its 3-year projection widens in uncertainty and is labelled as forecast, not fact.
+          </div>
+
+          <div style={card(C.cyan)}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 14 }}>
+              <div style={{ fontSize: 11, fontWeight: 900, color: C.cyan, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                Road Network Asset Value Trend + 3-Year Forecast (USD Millions, CDRC)
+              </div>
+            </div>
+            <ResponsiveContainer width="100%" height={280}>
+              <LineChart data={stratForecast.length ? stratForecast : assetTrend} margin={{ top: 8, right: 12, left: 0, bottom: 20 }}>
+                <CartesianGrid stroke="rgba(255,255,255,0.05)" strokeDasharray="3 3"/>
+                <XAxis dataKey="fy" tick={{ ...TK, fontSize: 8 }} angle={-30} textAnchor="end"/>
+                <YAxis tick={TK} label={{ value: 'USD Mn', angle: -90, position: 'insideLeft', style: { fontSize: 9, fill: 'rgba(148,163,184,0.5)' } }}/>
+                <Tooltip content={<CT/>}/>
+                <Legend wrapperStyle={{ fontSize: 10, color: 'rgba(148,163,184,0.7)' }}/>
+                <Line type="monotone" dataKey="paved_asset_value_musd" name="Paved" stroke={C.cyan} strokeWidth={2.5} dot={{ r: 3 }}/>
+                <Line type="monotone" dataKey="unpaved_asset_value_musd" name="Unpaved" stroke={C.yellow} strokeWidth={2.5} dot={{ r: 3 }}/>
+                <Line type="monotone" dataKey="total_asset_value_musd" name="Total" stroke={C.green} strokeWidth={2.5} strokeDasharray="4 3" dot={{ r: 3 }}/>
+              </LineChart>
+            </ResponsiveContainer>
+            <div style={{ fontSize: 9.5, color: 'rgba(148,163,184,0.5)', marginTop: 8 }}>
+              Solid history is actual (8 FYs); the last 3 points are a linear-regression forecast, not measured data.
+            </div>
+          </div>
+
+          {stratStructures && (
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+              <div style={card(C.purple)}>
+                <div style={{ fontSize: 11, fontWeight: 900, color: C.purple, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 12 }}>
+                  Bridges - Asset Value (2026 register)
+                </div>
+                <div style={{ display: 'flex', gap: 16 }}>
+                  <div><div style={{ fontSize: 20, fontWeight: 900, color: C.purple }}>{stratStructures.bridges.count.toLocaleString()}</div><div style={{ fontSize: 9, color: 'rgba(148,163,184,0.6)' }}>Bridges</div></div>
+                  <div><div style={{ fontSize: 20, fontWeight: 900, color: '#d4dde8' }}>${stratStructures.bridges.asset_value_musd.toLocaleString()}M</div><div style={{ fontSize: 9, color: 'rgba(148,163,184,0.6)' }}>Asset Value</div></div>
+                  <div><div style={{ fontSize: 20, fontWeight: 900, color: '#d4dde8' }}>${stratStructures.bridges.crc_musd.toLocaleString()}M</div><div style={{ fontSize: 9, color: 'rgba(148,163,184,0.6)' }}>CRC</div></div>
+                </div>
+              </div>
+              <div style={card(C.orange)}>
+                <div style={{ fontSize: 11, fontWeight: 900, color: C.orange, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 12 }}>
+                  Major Culverts - Asset Value (2026 register, kept separate from bridges)
+                </div>
+                <div style={{ display: 'flex', gap: 16 }}>
+                  <div><div style={{ fontSize: 20, fontWeight: 900, color: C.orange }}>{stratStructures.major_culverts.count.toLocaleString()}</div><div style={{ fontSize: 9, color: 'rgba(148,163,184,0.6)' }}>Major Culverts</div></div>
+                  <div><div style={{ fontSize: 20, fontWeight: 900, color: '#d4dde8' }}>${stratStructures.major_culverts.asset_value_musd.toLocaleString()}M</div><div style={{ fontSize: 9, color: 'rgba(148,163,184,0.6)' }}>Asset Value</div></div>
+                  <div><div style={{ fontSize: 20, fontWeight: 900, color: '#d4dde8' }}>${stratStructures.major_culverts.crc_musd.toLocaleString()}M</div><div style={{ fontSize: 9, color: 'rgba(148,163,184,0.6)' }}>CRC</div></div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div style={card(C.yellow)}>
+            <div style={{ fontSize: 11, fontWeight: 900, color: C.yellow, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 4 }}>
+              2026 Maintenance Intervention Rates (Real, MoWT-sourced)
+            </div>
+            <div style={{ fontSize: 10, color: 'rgba(148,163,184,0.6)', marginBottom: 14 }}>
+              Accuracy score (0-100) is the source workbook's own confidence rating per rate, not a Claude-assigned figure.
+            </div>
+            <div style={{ overflowX: 'auto' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 11 }}>
+                <thead>
+                  <tr>
+                    {stratRateColumns.map(c => (
+                      <th key={c.key} style={{ padding: '8px 12px', textAlign: c.numeric ? 'right' : 'left', fontSize: 9,
+                        fontWeight: 900, color: `rgba(${hexRgb(C.yellow)},0.8)`, textTransform: 'uppercase', letterSpacing: '0.1em',
+                        borderBottom: `1px solid rgba(${hexRgb(C.yellow)},0.15)`, whiteSpace: 'nowrap' }}>{c.label}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {stratRates.map((r, i) => (
+                    <tr key={i} style={{ background: i % 2 === 0 ? 'rgba(255,255,255,0.02)' : 'transparent' }}>
+                      {stratRateColumns.map(c => (
+                        <td key={c.key} style={{ padding: '8px 12px', textAlign: c.numeric ? 'right' : 'left', color: '#c4d2e1' }}>
+                          {c.render ? c.render(r) : String((r as any)[c.key] ?? '-')}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                  {stratRates.length === 0 && (
+                    <tr><td colSpan={stratRateColumns.length} style={{ padding: '14px 12px', textAlign: 'center', color: 'rgba(148,163,184,0.5)' }}>Loading real rate data…</td></tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div style={card(C.pink)}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 4 }}>
+              <div style={{ fontSize: 11, fontWeight: 900, color: C.pink, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                Road Link Priority Ranking - Maintenance Need (Real Backlog Register, ML-Scored)
+              </div>
+            </div>
+            <div style={{ fontSize: 10, color: 'rgba(148,163,184,0.6)', marginBottom: 14 }}>
+              Ranked by composite priority score (severity + predicted cost need + age). Sort/filter/export any column below.
+            </div>
+            <SortableFilterableTable
+              columns={stratLinkColumns}
+              rows={stratLinks}
+              accent={C.pink}
+              exportName="maintenance-strategy-link-priority"
+              initialSort="priority_rank"
+              emptyText="Loading real link register…"
+            />
+          </div>
+        </div>
+      )}
+    </div>
+    </div>
+  );
+}

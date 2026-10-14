@@ -1,0 +1,66 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: github-pages-deploy
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund --legacy-peer-deps
+
+      - name: Restore clean source HTML entry points
+        # The build's own output lands on these same root paths (index.html,
+        # index.ntis.html, index.npms.html, index.nbms.html) once published
+        # below, so a prior run's BUILT html can otherwise get checked out
+        # here and be mistaken for source, poisoning the next build (it
+        # references stale hashed asset filenames from the previous build).
+        # .github/source-html/ is the untouched golden copy of the real
+        # Vite entry HTML — always reset root to it before building.
+        run: cp .github/source-html/index.html .github/source-html/index.ntis.html .github/source-html/index.npms.html .github/source-html/index.nbms.html ./
+
+      - name: Build
+        run: npx vite build
+        env:
+          NODE_ENV: production
+          VITE_SUPABASE_URL: https://vbidhkvzjigatfygnycg.supabase.co
+          VITE_SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZiaWRoa3Z6amlnYXRmeWdueWNnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3Mzg0NDQsImV4cCI6MjA5NzMxNDQ0NH0.4M5lsUvcoh2giNpbF5X7nMPepNVp1U9Em6Ro4aZwgY4
+
+      - name: Publish build output to main branch root
+        run: |
+          rsync -a dist/ ./ --exclude '.git'
+          touch .nojekyll
+
+      - name: Commit and push built site to main
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: publish built site to main [skip ci]"
+          commit_user_name: "MoWT Deploy Bot"
+          commit_user_email: "deploy@mowt.go.ug"
+          push_options: '--force-with-lease'

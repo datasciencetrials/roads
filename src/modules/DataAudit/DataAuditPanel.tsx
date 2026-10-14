@@ -1,0 +1,179 @@
+/**
+ * DataAuditPanel - cross-section data audit results.
+ * Accessible from the Admin Tools nav by all users.
+ * Runs audit on mount and shows a badge on issues.
+ */
+import { useEffect, useState } from 'react';
+import { CheckCircle2, AlertTriangle, XCircle, RefreshCw, ShieldCheck } from 'lucide-react';
+import { useNetworkStats } from '../../shared/useNetworkStats';
+import { runDataAudit, type AuditResult } from './DataAuditEngine';
+import { SortableFilterableTable, type STColumn } from '../../shared/SortableFilterableTable';
+
+const BASE = import.meta.env.BASE_URL;
+
+const STATUS_COLOR: Record<string, string> = {
+  ok:       '#22c55e',
+  mismatch: '#f97316',
+  missing:  '#ef4444',
+  info:     '#94a3b8',
+};
+const STATUS_ICON: Record<string, React.ReactNode> = {
+  ok:       <CheckCircle2 size={13} style={{ color: '#22c55e' }} />,
+  mismatch: <AlertTriangle size={13} style={{ color: '#f97316' }} />,
+  missing:  <XCircle size={13} style={{ color: '#ef4444' }} />,
+  info:     <ShieldCheck size={13} style={{ color: '#94a3b8' }} />,
+};
+// Human-readable label for each raw status code, instead of rendering the
+// code itself (rule: labels, not raw codes).
+const STATUS_LABEL: Record<string, string> = {
+  ok: 'Pass', mismatch: 'Mismatch', missing: 'Missing', info: 'Info',
+};
+
+const auditColumns: STColumn<AuditResult>[] = [
+  { key: 'status', label: 'Status', render: r => (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+      {STATUS_ICON[r.status]}
+      <span style={{ fontSize: 9, fontWeight: 700, color: STATUS_COLOR[r.status] }}>{STATUS_LABEL[r.status] ?? r.status}</span>
+    </div>
+  ) },
+  { key: 'tab', label: 'Tab', render: r => <span style={{ color: '#94a3b8' }}>{r.tab}</span> },
+  { key: 'field', label: 'Field', render: r => <span style={{ color: '#e2eaf4', fontWeight: 600 }}>{r.field}</span> },
+  { key: 'value', label: 'Value', render: r => <span style={{ color: STATUS_COLOR[r.status], fontFamily: 'monospace' }}>{String(r.value)}</span> },
+  { key: 'expected', label: 'Expected', render: r => <span style={{ color: 'rgba(148,163,184,0.7)', fontFamily: 'monospace' }}>{String(r.expected)}</span> },
+  { key: 'notes', label: 'Notes', render: r => <span style={{ color: 'rgba(148,163,184,0.6)' }}>{r.notes || <span style={{ color: 'rgba(148,163,184,0.4)', fontStyle: 'italic' }}>No notes</span>}</span> },
+];
+
+export default function DataAuditPanel() {
+  const networkStats = useNetworkStats();
+  const [results, setResults] = useState<AuditResult[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [lastRun, setLastRun] = useState<Date | null>(null);
+
+  async function runAudit() {
+    setLoading(true);
+    try {
+      const r = await runDataAudit(networkStats, BASE);
+      setResults(r);
+      setLastRun(new Date());
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => { if (networkStats.loaded) { runAudit(); } }, [networkStats.loaded]);
+
+  const issues    = results.filter(r => r.status === 'mismatch' || r.status === 'missing');
+  const okCount   = results.filter(r => r.status === 'ok').length;
+  const infoCount = results.filter(r => r.status === 'info').length;
+
+  return (
+    <div style={{
+      position: 'absolute', inset: 0, overflowY: 'auto',
+      background: 'rgba(2,5,8,0.98)', fontFamily: "'Inter','Segoe UI',sans-serif",
+      padding: '24px 20px',
+    }}>
+
+        <div style={{background:'rgba(244,63,94,0.04)',border:'1px solid rgba(244,63,94,0.14)',borderRadius:10,padding:'10px 16px',marginBottom:16,display:'flex',alignItems:'center',gap:10,flexWrap:'wrap'}}>
+          <span style={{fontSize:15,fontWeight:800,color:'rgba(244,63,94,1)',letterSpacing:-0.3}}>Data Audit & Quality Engine</span>
+          <span style={{fontSize:11,color:'#94a3b8',fontWeight:500}}>Data Quality · Completeness · Validation · Supabase</span>
+        </div>
+      {/* Header */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24 }}>
+        <div style={{
+          width: 40, height: 40, borderRadius: 11,
+          background: 'rgba(0, 245, 255,0.1)', border: '1px solid rgba(0, 245, 255,0.25)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}>
+          <ShieldCheck size={20} style={{ color: '#00f5ff' }} />
+        </div>
+        <div>
+          <div style={{ fontSize: 18, fontWeight: 900, color: '#e2eaf4' }}>Data Audit</div>
+          <div style={{ fontSize: 10, color: 'rgba(148,163,184,0.6)' }}>
+            Cross-section KPI validation · Single source of truth checks
+            {lastRun && ` · Last run ${lastRun.toLocaleTimeString('en-UG')}`}
+          </div>
+        </div>
+        <button
+          onClick={runAudit}
+          disabled={loading}
+          style={{
+            marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 6,
+            padding: '7px 14px', borderRadius: 8, fontSize: 11, fontWeight: 700,
+            background: 'rgba(0, 245, 255,0.1)', border: '1px solid rgba(0, 245, 255,0.25)',
+            color: '#00f5ff', cursor: loading ? 'default' : 'pointer',
+          }}
+        >
+          <RefreshCw size={12} style={{ animation: loading ? 'spin 1s linear infinite' : 'none' }} />
+          {loading ? 'Running…' : 'Re-run Audit'}
+        </button>
+      </div>
+
+      {/* Summary chips */}
+      <div style={{ display: 'flex', gap: 10, marginBottom: 20, flexWrap: 'wrap' }}>
+        {[
+          { label: `${okCount} Passed`,    color: '#22c55e', bg: 'rgba(34,197,94,0.1)'  },
+          { label: `${issues.length} Issues`, color: issues.length > 0 ? '#f97316' : '#22c55e', bg: `rgba(${issues.length > 0 ? '249,115,22' : '34,197,94'},0.1)` },
+          { label: `${infoCount} Info`,    color: '#94a3b8', bg: 'rgba(148,163,184,0.08)' },
+        ].map(c => (
+          <div key={c.label} style={{
+            padding: '5px 12px', borderRadius: 20, fontSize: 11, fontWeight: 700,
+            color: c.color, background: c.bg, border: `1px solid ${c.color}33`,
+          }}>
+            {c.label}
+          </div>
+        ))}
+      </div>
+
+      {/* Network stats summary */}
+      <div style={{
+        background: 'rgba(8,14,28,0.55)', border: '1px solid rgba(255,255,255,0.07)',
+        borderRadius: 12, padding: '14px 16px', marginBottom: 20,
+      }}>
+        <div style={{ fontSize: 10, fontWeight: 900, color: 'rgba(0, 245, 255,0.6)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 10 }}>
+          Network Stats - Single Source of Truth (network2026.geojson)
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: 10 }}>
+          {[
+            { label: 'Total km',     value: networkStats.totalKm.toLocaleString() },
+            { label: 'Total links',  value: networkStats.totalLinks.toLocaleString() },
+            { label: 'Paved km',     value: networkStats.pavedKm.toLocaleString() },
+            { label: 'Unpaved km',   value: networkStats.unpavedKm.toLocaleString() },
+            { label: 'Paved %',      value: `${networkStats.pavedPct}%` },
+            { label: 'Bridges',      value: networkStats.totalBridges.toLocaleString() },
+            { label: 'Data vintage', value: networkStats.dataVintage },
+          ].map(s => (
+            <div key={s.label}>
+              <div style={{ fontSize: 9, color: 'rgba(148,163,184,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>{s.label}</div>
+              <div style={{ fontSize: 13, fontWeight: 800, color: '#e2eaf4', marginTop: 2 }}>{s.value}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Results table */}
+      {loading ? (
+        <div style={{ textAlign: 'center', padding: 40, color: 'rgba(148,163,184,0.4)', fontSize: 13 }}>
+          Running audit…
+        </div>
+      ) : (
+        <div style={{ background: 'rgba(8,14,28,0.55)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 12, padding: 12 }}>
+          <SortableFilterableTable
+            columns={auditColumns}
+            rows={results}
+            accent="#00f5ff"
+            exportName="data_audit_results"
+            initialSort="status"
+            rowStyle={r => ({
+              background: r.status === 'mismatch' ? 'rgba(249,115,22,0.04)' : r.status === 'missing' ? 'rgba(239,68,68,0.04)' : undefined,
+            })}
+          />
+        </div>
+      )}
+    </div>
+  );
+}
+
+/** Badge count for nav - returns number of issues found */
+export function getAuditIssueCount(results: AuditResult[]): number {
+  return results.filter(r => r.status === 'mismatch' || r.status === 'missing').length;
+}

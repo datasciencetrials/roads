@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Check site uptime
         run: |
-          URL="https://networkengineringmowt-ai.github.io/${{ github.event.repository.name }}/"
+          URL="https://datasciencetrials.github.io/${{ github.event.repository.name }}/"
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL" || echo "000")
           echo "Site: $URL"
           echo "Status: $STATUS"

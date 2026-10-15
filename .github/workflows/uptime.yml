@@ -15,7 +15,7 @@ jobs:
       - name: Check site
         id: check
         run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://networkengineringmowt-ai.github.io/uganda_nrms/)
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://datasciencetrials.github.io/roads/)
           echo "status=$STATUS" >> "$GITHUB_OUTPUT"
           if [ "$STATUS" != "200" ]; then
             echo "Site returned $STATUS"
@@ -42,5 +42,5 @@ jobs:
         run: |
           OPEN_ISSUE=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "🔴 Site Down: uganda_nrms in:title" --json number --jq '.[0].number')
           if [ -n "$OPEN_ISSUE" ]; then
-            gh issue close "$OPEN_ISSUE" --repo "$GITHUB_REPOSITORY" --comment "Site recovered — returned 200 at $(date -u +%FT%TZ)."
+            gh issue close "$OPEN_ISSUE" --repo "$GITHUB_REPOSITORY" --comment "Site recovered, returned 200 at $(date -u +%FT%TZ)."
           fi

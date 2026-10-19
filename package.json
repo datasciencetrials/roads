@@ -16,6 +16,7 @@
     "watch": "node watcher.mjs",
     "watch:bg": "start /B node watcher.mjs > uganda-roads-watcher.log 2>&1",
     "build:npms": "vite build --config vite.npms.config.ts",
+    "build:nbms": "vite build --config vite.nbms.config.ts",
     "preview:npms": "vite preview --config vite.npms.config.ts --host 127.0.0.1",
     "build:ntis": "vite build --mode ntis"
   },

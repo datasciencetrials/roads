@@ -44,10 +44,11 @@ function SubTabBar({
   tabs, active, onSelect,
 }: { tabs: SubTab[]; active: string; onSelect: (id: string) => void }) {
   return (
-    <div style={{
+    <div className="nbms-sub-tabs" style={{
       display: 'flex', gap: 4, padding: '6px 14px 0',
       borderBottom: '1px solid rgba(255,255,255,0.06)',
       background: 'rgba(4,9,18,0.6)', flexShrink: 0,
+      width: '100%', minWidth: 0, maxWidth: '100%', overflowX: 'auto', overflowY: 'hidden',
     }}>
       {tabs.map(t => {
         const isActive = t.id === active;
@@ -99,26 +100,35 @@ export default function BMSSection() {
   return (
     <div style={{
       display: 'flex', flexDirection: 'column', height: '100%',
+      width: '100%', minWidth: 0, maxWidth: '100%',
       background: 'rgba(2,5,8,0.97)',
       fontFamily: "'Inter','Segoe UI',sans-serif",
     }}>
 
-        <div style={{background:'rgba(14,165,233,0.04)',border:'1px solid rgba(14,165,233,0.14)',borderRadius:10,padding:'10px 16px',marginBottom:16,display:'flex',alignItems:'center',gap:10,flexWrap:'wrap'}}>
+        <div className="nbms-system-banner" style={{background:'rgba(14,165,233,0.04)',border:'1px solid rgba(14,165,233,0.14)',borderRadius:10,padding:'10px 16px',marginBottom:16,display:'flex',alignItems:'center',gap:10,flexWrap:'wrap',width:'100%',minWidth:0,maxWidth:'100%'}}>
           <span style={{fontSize:15,fontWeight:800,color:'rgba(14,165,233,1)',letterSpacing:-0.3}}>Bridge Management System</span>
           <span style={{fontSize:11,color:'#94a3b8',fontWeight:500}}>MoWT · NBI Protocol · Load Capacity · Inspection</span>
         </div>
       <style>{`
         @keyframes bms-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .nbms-main-tabs, .nbms-sub-tabs { scrollbar-width: thin; }
+        @media (max-width: 640px) {
+          .nbms-system-banner { margin-bottom: 8px !important; border-radius: 0 !important; }
+          .nbms-works-heading { align-items: flex-start !important; flex-wrap: wrap !important; }
+          .nbms-works-heading-copy { flex-basis: calc(100% - 60px) !important; min-width: 0 !important; }
+          .nbms-works-source { margin-left: 60px !important; }
+        }
       `}</style>
 
       {/* Cross-section links are hidden in the standalone NBMS build (no other sections to jump to) */}
       {!import.meta.env.VITE_STANDALONE && <CrossLinkChipBar sectionId="bms" />}
 
       {/* ── Main tab bar ── */}
-      <div style={{
+      <div className="nbms-main-tabs" style={{
         display: 'flex', gap: 2, padding: '0 14px',
         borderBottom: '1px solid rgba(77, 159, 255,0.15)',
         background: 'rgba(4,9,18,0.85)', flexShrink: 0,
+        width: '100%', minWidth: 0, maxWidth: '100%', overflowX: 'auto', overflowY: 'hidden',
       }}>
         {MAIN_TABS.map(t => {
           const isActive = t.id === mainTab;
@@ -144,7 +154,7 @@ export default function BMSSection() {
       )}
 
       {/* ── Content area ── */}
-      <div style={contentStyle}>
+      <div style={{ ...contentStyle, width: '100%', minWidth: 0, maxWidth: '100%' }}>
         <Suspense fallback={<Spinner />}>
 
           {/* Tab 1: Dashboard */}

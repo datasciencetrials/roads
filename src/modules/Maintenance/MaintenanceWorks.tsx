@@ -39,6 +39,7 @@ export default function MaintenanceWorks() {
   const [priorityF,  setPriorityF]  = useState<WorkOrderPriority | 'all'>('all');
   const [showForm,   setShowForm]   = useState(false);
   const [editing,    setEditing]    = useState<WorkOrder | null>(null);
+  const isPublicStandaloneNBMS = import.meta.env.VITE_STANDALONE === '1' && import.meta.env.VITE_APP_ID === 'nbms';
 
   const filtered = useMemo(() => {
     let list = [...workOrders].sort((a, b) =>
@@ -117,9 +118,11 @@ export default function MaintenanceWorks() {
           </SearchableSelect>
           <div className="flex-1" />
           <span className="text-xs text-slate-500">{filtered.length} work orders</span>
-          <button onClick={() => { setEditing(null); setShowForm(true); }} className="bms-btn-primary text-xs py-1.5">
-            <Plus size={13} /> New Work Order
-          </button>
+          {!isPublicStandaloneNBMS && (
+            <button onClick={() => { setEditing(null); setShowForm(true); }} className="bms-btn-primary text-xs py-1.5">
+              <Plus size={13} /> New Work Order
+            </button>
+          )}
         </div>
       </div>
 
@@ -154,15 +157,15 @@ export default function MaintenanceWorks() {
             { key: 'cost', label: 'Cost (UGX)', numeric: true, total: 'sum', render: wo => formatUGX(wo.cost) },
             { key: 'contractor', label: 'Contractor' },
             { key: 'engineerInCharge', label: 'Engineer' },
-            { key: 'id', label: 'Actions', render: wo => (
-                <SearchableSelect
-                  value={wo.status}
-                  onChange={v => updateStatus(wo, v as WorkOrderStatus)}
-                  style={{ fontSize: 10.5, padding: '3px 8px' }}
-                >
-                  {['Planned','In Progress','Completed','On Hold','Cancelled'].map(s => <option key={s} value={s}>{s}</option>)}
-                </SearchableSelect>
-              ) },
+            ...(!isPublicStandaloneNBMS ? [{ key: 'id', label: 'Actions', render: (wo: WorkOrder) => (
+              <SearchableSelect
+                value={wo.status}
+                onChange={v => updateStatus(wo, v as WorkOrderStatus)}
+                style={{ fontSize: 10.5, padding: '3px 8px' }}
+              >
+                {['Planned','In Progress','Completed','On Hold','Cancelled'].map(s => <option key={s} value={s}>{s}</option>)}
+              </SearchableSelect>
+            ) }] : []),
           ] as STColumn<WorkOrder>[]}
           rows={filtered}
         />

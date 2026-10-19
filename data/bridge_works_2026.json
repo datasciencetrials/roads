@@ -52,7 +52,7 @@
  },
  {
   "id": "BRW-2026-04",
-  "lot": "Lot 2 – Nabukhaya, Nambola, Namatsimeri, Sahana and Khamitsaru Bridges on Kufu – Lwakhakha Road and Rubongi Bridge on Tororo – Nagongera Road",
+	  "lot": "Lot 2: Nabukhaya, Nambola, Namatsimeri, Sahana and Khamitsaru Bridges on Kufu - Lwakhakha Road and Rubongi Bridge on Tororo - Nagongera Road",
   "funder": "GOU",
   "contractor": "China Railway No. 7",
   "supervisor": "In-house",
@@ -63,7 +63,7 @@
   "amount_paid_ugx": null,
   "outstanding_ugx": null,
   "physical_progress_pct": 73.75,
-  "status": "Contract was signed on 4th August 2021; Commencement date was 14 September 2021, Original Completion date was 14 September 2024, 1st Revised Completion date is 25 August 2025 and 2nd Revised Completion date is 21 November 2026. As of March 2026, cumulative overall Physical Progress was 73.75% against Planned Progress of 100%. Time progress is 146.99% (original contract period) or 86.48% (revised contract period). Financial Progress is 63.40% Certified (IPCs No. 1 – 9 and advance payment) or 61.69% paid (IPCs No.1 – 6 & IPC No.9) and Advance Payment) Design Design is complete. Physical works on progress as below: Nametsimeri The structure is complete; Approach road works commencing. Nabukhaya The 10m single span bridge is complete. Approach road works ongoing with G15 fill works in progress nearing completion. Contractor sourcing out G30 wearing course material. Preliminary checks for bitumen ongoing for DBST. Nambola The structure is complete; Approach road works commencing. Khamitsaru 10m bridge is complete. Backfill complete. Approach road works commencing Final design approved. Sahana Bridge structure is complete. Approach Road works resuming. Rubongi Bridge structure is complet",
+	  "status": "Contract was signed on 4th August 2021; Commencement date was 14 September 2021, Original Completion date was 14 September 2024, 1st Revised Completion date is 25 August 2025 and 2nd Revised Completion date is 21 November 2026. As of March 2026, cumulative overall Physical Progress was 73.75% against Planned Progress of 100%. Time progress is 146.99% (original contract period) or 86.48% (revised contract period). Financial Progress is 63.40% Certified (IPCs No. 1 - 9 and advance payment) or 61.69% paid (IPCs No.1 - 6 & IPC No.9) and Advance Payment) Design Design is complete. Physical works on progress as below: Nametsimeri The structure is complete; Approach road works commencing. Nabukhaya The 10m single span bridge is complete. Approach road works ongoing with G15 fill works in progress nearing completion. Contractor sourcing out G30 wearing course material. Preliminary checks for bitumen ongoing for DBST. Nambola The structure is complete; Approach road works commencing. Khamitsaru 10m bridge is complete. Backfill complete. Approach road works commencing Final design approved. Sahana Bridge structure is complete. Approach Road works resuming. Rubongi Bridge structure is complet",
   "compensation": "Valuation exercise was undertaken for some sections of the road. IVD exercise to be undertaken for Sahana and Nametsimeri bridges. Plans are underway for data capture for Khamitsaru bridge. PAPs have sued the GoU for illegal usage of their land.",
   "report_period": "2026-04"
  },
@@ -120,7 +120,7 @@
  },
  {
   "id": "BRW-2026-08",
-  "lot": "Emergency Reconstruction of Selected Sections Along Kampala – Masaka Road Damaged by Floods Under Design And Build For Katonga Bridge (2.7 Km), Lwera Swamp (11.6 Km) And Kalandazi Swamp (1.5 Km)",
+	  "lot": "Emergency Reconstruction of Selected Sections Along Kampala - Masaka Road Damaged by Floods Under Design And Build For Katonga Bridge (2.7 Km), Lwera Swamp (11.6 Km) And Kalandazi Swamp (1.5 Km)",
   "funder": "GOU",
   "contractor": "China Communications Construction Company Ltd Consultant Prome Consultants Ltd",
   "supervisor": null,
@@ -137,7 +137,7 @@
  },
  {
   "id": "BRW-2026-09",
-  "lot": "Emergency Reconstruction of Ssezibwa Bridge (1.6km) along Kalagi – Kayunga Road under Design and Build",
+	  "lot": "Emergency Reconstruction of Ssezibwa Bridge (1.6km) along Kalagi - Kayunga Road under Design and Build",
   "funder": "GOU",
   "contractor": "Ms Dynaco Ltd Consultant Professional Engineering Consultants",
   "supervisor": null,
@@ -224,7 +224,7 @@
   "id": "BRW-2026-14",
   "lot": "Kampala Flyover Construction and Road Upgrading Project: Lot-1 (Package 1: Clock Tower Flyover & Package 2: Nsambya - Mukwano Road)",
   "funder": "JICA/ GOU",
-  "contractor": "Shimizu – Konoike Joint Venture Consultant Nippon Koei/Eight- Japan Engineering Consultants / ICS – Engineering & Engineering & Environment Ltd",
+	  "contractor": "Shimizu - Konoike Joint Venture Consultant Nippon Koei/Eight- Japan Engineering Consultants / ICS - Engineering & Engineering & Environment Ltd",
   "supervisor": null,
   "project_manager": "Lawrence PARIO",
   "project_engineer": "s: Arthur MIJUMBI Morris O. ODRUA",

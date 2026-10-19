@@ -223,7 +223,7 @@ export default function GISMapView() {
                   condFilter.includes(r) ? 'bg-slate-700' : 'bg-transparent opacity-35'
                 }`}>
                 <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ background: CONDITION_COLORS[r] }} />
-                <span className="text-[10px] text-slate-300 flex-1">{r} – {conditionLabel(r)}</span>
+            <span className="text-[10px] text-slate-300 flex-1">{r}: {conditionLabel(r)}</span>
                 <span className="text-[10px] text-slate-500">{yearStats[r] || 0}</span>
               </button>
             ))}
@@ -336,7 +336,7 @@ export default function GISMapView() {
             <button onClick={handlePlay}
               className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm transition-colors">
               {isPlaying ? <Pause size={15} /> : <Play size={15} />}
-              {isPlaying ? 'Pause' : 'Play 2018–2024'}
+              {isPlaying ? 'Pause' : 'Play 2018-2024'}
             </button>
             <div className="text-[10px] text-slate-500">
               {isPlaying
@@ -463,7 +463,7 @@ const StructurePanel = memo(function StructurePanel({
           {/* Condition strip with enriched info */}
           <div className="mt-3 flex items-center gap-2 flex-wrap">
             <span className={`badge ${conditionBadge(s.displayRating)} text-[10px] px-2 py-1 rounded`}>
-              {s.displayRating} – {conditionLabel(s.displayRating)}
+              {s.displayRating}: {conditionLabel(s.displayRating)}
             </span>
             {s.inspectionDue && (
               <span className="flex items-center gap-1 text-[9px] text-red-400 font-bold bg-red-900/30 px-2 py-1 rounded">
@@ -516,7 +516,7 @@ const StructurePanel = memo(function StructurePanel({
             <div className="p-4 space-y-4">
 
               {/* Condition history */}
-              <Section title="Condition History (2018–2024)">
+              <Section title="Condition History (2018-2024)">
                 <div className="flex items-end gap-1 h-12">
                   {YEARS.map(yr => {
                     const hist = s.conditionHistory.find(h => h.year === yr);
@@ -569,7 +569,7 @@ const StructurePanel = memo(function StructurePanel({
                   <Field l="Last Inspection" v={formatDate(s.lastInspection)} />
                   <Field l="Next Inspection" v={formatDate(s.nextInspection)} />
                   <Field l="Status" v={s.inspectionDue ? '⚠ Overdue' : '✓ Current'} highlight={s.inspectionDue ? 'amber' : 'green'} />
-                  <Field l="Overall Rating" v={`${s.conditionRating} – ${conditionLabel(s.conditionRating)}`} highlight={s.conditionRating <= 2 ? 'red' : undefined} />
+        <Field l="Overall Rating" v={`${s.conditionRating}: ${conditionLabel(s.conditionRating)}`} highlight={s.conditionRating <= 2 ? 'red' : undefined} />
                 </Grid>
                 {s.defects.length > 0 && (
                   <div className="mt-2">

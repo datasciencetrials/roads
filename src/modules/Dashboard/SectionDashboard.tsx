@@ -163,7 +163,9 @@ function SectionSubTabs({ sectionId, accent }: { sectionId: string; accent: stri
   // Every section uses the exact same six-tab bar, same order, no exceptions -
   // section-specific content (e.g. TIS Road Safety) lives inside one of these
   // fixed slots via SECTION_EXTRAS instead of adding its own tab.
-  const tabs = SUBTABS;
+  const tabs = import.meta.env.VITE_STANDALONE === '1' && import.meta.env.VITE_APP_ID === 'nbms'
+    ? SUBTABS.filter(item => item.id !== 'capture')
+    : SUBTABS;
 
   // Publish the visible tab (and which section it belongs to) so the
   // platform-wide Export menu in PageToolbar can offer formats relevant to

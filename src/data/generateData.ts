@@ -41,6 +41,7 @@ interface BridgeProps {
 }
 
 interface CulvertProps {
+  asset_uid: string;
   culvert_n: string;
   road:      string;
   link_name: string;
@@ -204,14 +205,13 @@ async function loadBridges(): Promise<Structure[]> {
 // ─── Main loader: culverts ────────────────────────────────────────────────────
 
 async function loadCulverts(): Promise<Structure[]> {
-  const res  = await fetch(`${import.meta.env.BASE_URL}culverts.geojson`);
-  const geo  = await res.json() as { features: { id: number; geometry: { coordinates: [number, number] }; properties: CulvertProps }[] };
+  const res  = await fetch(`${import.meta.env.BASE_URL}data/major_culverts_approved.geojson`);
+  const geo  = await res.json() as { features: { id: number; geometry: { coordinates: [number, number] } | null; properties: CulvertProps }[] };
 
   return geo.features
-    .filter(f => f.geometry?.coordinates?.[0] && f.geometry?.coordinates?.[1])
     .map((f, idx) => {
       const p    = f.properties;
-      const id   = String(p.culvert_n || p.link_no || `C${idx}`).replace(/\s/g, '');
+      const id   = String(p.asset_uid || p.culvert_n || p.link_no || `C${idx}`).replace(/\s/g, '');
       const seed = hashStr(id + String(idx) + 'C');
 
       const yearBuilt  = 1970 + seededInt(seed, 0, 45);
@@ -235,8 +235,8 @@ async function loadCulverts(): Promise<Structure[]> {
         roadNumber:   p.link_no || '',
         region:       p.region || 'Central',
         chainage:     parseFloat((seededRandom(seed) * 300).toFixed(2)),
-        lat:          parseFloat(f.geometry.coordinates[1].toFixed(6)),
-        lng:          parseFloat(f.geometry.coordinates[0].toFixed(6)),
+        lat:          f.geometry?.coordinates?.[1] != null ? parseFloat(f.geometry.coordinates[1].toFixed(6)) : 0,
+        lng:          f.geometry?.coordinates?.[0] != null ? parseFloat(f.geometry.coordinates[0].toFixed(6)) : 0,
         spanLength:   spanLen,
         noOfSpans:    1,
         noOfLanes:    1,

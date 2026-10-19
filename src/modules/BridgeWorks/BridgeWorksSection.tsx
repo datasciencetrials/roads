@@ -75,7 +75,7 @@ export default function BridgeWorksSection() {
   }, [works, q]);
 
   return (
-    <div style={{ padding: '22px 20px', minHeight: '100%',
+    <div style={{ padding: '22px 20px', minHeight: '100%', width: '100%', minWidth: 0, maxWidth: '100%', overflowX: 'hidden',
       background: 'radial-gradient(1200px 600px at 80% -10%, rgba(0, 212, 170,0.10), transparent), linear-gradient(180deg, rgba(8,14,28,0.5), transparent)' }}>
 
       {/* ─── Definition card ─── */}
@@ -98,22 +98,22 @@ export default function BridgeWorksSection() {
       </div>
       {/* ── Liquid-glass header ── */}
       <div style={{ ...liquidGlass(C.teal, 20), padding: '18px 22px', marginBottom: 18 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+        <div className="nbms-works-heading" style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
           <div style={{ ...glass(C.teal, 14), width: 46, height: 46, display: 'flex',
             alignItems: 'center', justifyContent: 'center', color: C.teal }}>
             <Hammer size={22} />
           </div>
-          <div style={{ flex: 1 }}>
-            <div style={{ fontSize: 19, fontWeight: 900, color: '#eaf6ff', letterSpacing: '-0.01em' }}>
+          <div className="nbms-works-heading-copy" style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontSize: 19, fontWeight: 900, color: '#eaf6ff', letterSpacing: '-0.01em', overflowWrap: 'anywhere' }}>
               Bridge Works - Development Projects
             </div>
             <div style={{ fontSize: 11.5, color: 'rgba(200,225,235,0.7)', marginTop: 2 }}>
               MOWT Projects Status Report · End of April 2026 · {kpis.count} active lots
             </div>
           </div>
-          <span style={{ ...glass(src === 'supabase' ? C.green : C.gray, 999), padding: '5px 12px',
+          <span className="nbms-works-source" style={{ ...glass(src === 'supabase' ? C.green : C.gray, 999), padding: '5px 12px',
             fontSize: 10, fontWeight: 800, color: src === 'supabase' ? C.green : C.gray }}>
-            {src === 'supabase' ? '● SUPABASE MIRROR' : src === 'bundle' ? '● DRIVE DATA (G:)' : '… loading'}
+            {src === 'supabase' ? '● GOVERNED DATABASE MIRROR' : src === 'bundle' ? '● GOVERNED REPOSITORY DATA' : '… loading'}
           </span>
         </div>
       </div>
@@ -210,7 +210,7 @@ export default function BridgeWorksSection() {
 
       <div style={{ fontSize: 9, color: 'rgba(148,163,184,0.45)', marginTop: 18, textAlign: 'center' }}>
         Source: MOWT Projects Status Report - §1.4 Bridges Development Projects (April 2026).
-        {src === 'bundle' && ' Serving from the G: Drive data bundle (canonical store).'}
+        {src === 'bundle' && ' Serving from the governed repository data bundle.'}
       </div>
     </div>
   );

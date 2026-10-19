@@ -84,7 +84,15 @@ const DCOND = ['Good', 'Fair', 'Poor', 'Failed'];
 const DCLR: Record<string, string> = { Good: '#22c55e', Fair: '#eab308', Poor: '#f97316', Failed: '#ef4444' };
 export default function DrainageDashboard() {
   const [rows, setRows] = useState<Row[] | null>(null);
-  useEffect(() => { let d = false; q('culvert_inventory').then(r => { if (!d) setRows(r); }); return () => { d = true; }; }, []);
+  useEffect(() => {
+    if (import.meta.env.VITE_STANDALONE === '1' && import.meta.env.VITE_APP_ID === 'nbms') {
+      setRows([]);
+      return;
+    }
+    let d = false;
+    q('culvert_inventory').then(r => { if (!d) setRows(r); });
+    return () => { d = true; };
+  }, []);
   if (rows === null) return <div style={{ padding: 20, color: '#64748b', fontSize: 12 }}>Loading drainage inventory…</div>;
   if (!rows.length) return <Empty what='drainage structure' />;
   const kCond = key(rows, /condition|rating|state/i); const kType = key(rows, /type|structure/i);

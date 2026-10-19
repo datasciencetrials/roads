@@ -53,7 +53,7 @@ const COLUMNS: STColumn<Structure>[] = [
   { key: 'yearBuilt',       label: 'Year Built', numeric: true },
   { key: 'conditionRating', label: 'Condition', render: (s) => (
       <span className={`badge ${conditionBadge(s.conditionRating)}`}>
-        {s.conditionRating} – {conditionLabel(s.conditionRating)}
+      {s.conditionRating}: {conditionLabel(s.conditionRating)}
       </span>
     ) },
   { key: 'lastInspection',  label: 'Last Inspection', date: true, render: (s) => formatDate(s.lastInspection) },

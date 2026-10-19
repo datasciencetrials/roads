@@ -35,7 +35,7 @@ export default function StructureDetailModal({ structure: s, onClose }: Props) {
             <div className="flex items-center gap-3 mb-1">
               <span className="badge badge-blue text-xs">{s.id}</span>
               <span className={`badge ${conditionBadge(s.conditionRating)}`}>
-                {s.conditionRating} – {conditionLabel(s.conditionRating)}
+          {s.conditionRating}: {conditionLabel(s.conditionRating)}
               </span>
               <span className="badge badge-slate capitalize">{s.type}</span>
             </div>
@@ -100,7 +100,7 @@ export default function StructureDetailModal({ structure: s, onClose }: Props) {
             {/* Column 2 */}
             <div className="space-y-5">
               {/* Condition trend */}
-              <Section title="Condition History (2018–2024)">
+              <Section title="Condition History (2018-2024)">
                 <div className="mt-1">
                   <ResponsiveContainer width="100%" height={130}>
                     <LineChart data={histData} margin={{ top: 4, right: 8, left: -20, bottom: 0 }}>

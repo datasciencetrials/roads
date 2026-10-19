@@ -240,7 +240,7 @@ export default function RoadVideoView() {
 
   // ── Status badge (inline render, no nested component) ─────────────────────
   // NOTE: this only ever reflects the transient server-probe state (null /
-  // true / false) — nothing that must persist beyond the probe belongs here.
+  // true / false) - nothing that must persist beyond the probe belongs here.
   function renderStatus() {
     if (serverOnline === null) {
       return (
@@ -278,7 +278,7 @@ export default function RoadVideoView() {
   return (
     <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
 
-      {/* ── Definition Card (permanent page header — always part of the layout, ── */}
+      {/* ── Definition Card (permanent page header - always part of the layout, ── */}
       {/* independent of the transient server-probe / status badge above)      ── */}
       <div style={{background:'rgba(244,63,94,0.04)',border:'1px solid rgba(244,63,94,0.14)',borderRadius:10,padding:'10px 16px',marginBottom:16,display:'flex',alignItems:'center',gap:10,flexWrap:'wrap'}}>
           <span style={{fontSize:15,fontWeight:800,color:'rgba(244,63,94,1)',letterSpacing:-0.3}}>Road Video Intelligence</span>

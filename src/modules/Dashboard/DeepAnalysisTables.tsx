@@ -123,7 +123,7 @@ function DescriptiveStatsCard({ accent, nums, rows, sectionId }: { accent: strin
     { key: 'count', label: 'Count', numeric: true, render: r => fmtN(r.count) },
     { key: 'sum', label: 'Sum', numeric: true, render: r => fmtN(r.sum) },
     { key: 'mean', label: 'Mean', numeric: true, render: r => fmtN(r.mean, 1) },
-    { key: 'mode', label: 'Mode', numeric: true, render: r => r.mode != null ? fmtN(r.mode, 1) : '—' },
+    { key: 'mode', label: 'Mode', numeric: true, render: r => r.mode != null ? fmtN(r.mode, 1) : '-' },
     { key: 'min', label: 'Min', numeric: true, render: r => fmtN(r.min, 1) },
     { key: 'p25', label: 'P25', numeric: true, render: r => fmtN(r.p25, 1) },
     { key: 'median', label: 'Median', numeric: true, render: r => <span style={{ color: '#ffd23f', fontWeight: 800 }}>{fmtN(r.median, 1)}</span> },
@@ -141,7 +141,7 @@ function DescriptiveStatsCard({ accent, nums, rows, sectionId }: { accent: strin
   ];
 
   return (
-    <Card title={`Descriptive statistics — all ${nums.length} numeric attributes (${rows.length.toLocaleString()} records)`} accent={accent}>
+    <Card title={`Descriptive statistics - all ${nums.length} numeric attributes (${rows.length.toLocaleString()} records)`} accent={accent}>
       <SortableFilterableTable columns={columns} rows={statRows} accent={accent} exportName={sectionId + '_numeric_stats'} initialSort="attr" />
       <div style={{ fontSize: 10, color: '#475569', marginTop: 6 }}>Formulas: Mean = Sum/Count; Variance/StdDev = population (÷N); SE and 95% CI use the sample convention (÷N-1, z≈1.96); Skewness/Kurtosis are sample, bias-corrected; Pxx by linear interpolation on the full sorted series.</div>
     </Card>
@@ -171,7 +171,7 @@ function CorrelationCard({ accent, nums, rows, sectionId }: { accent: string; nu
   ];
 
   return (
-    <Card title={`Inferential: correlation & significance matrix — ${nums.length} numeric attributes (${corrRows.length} pairs)`} accent={accent}>
+    <Card title={`Inferential: correlation & significance matrix - ${nums.length} numeric attributes (${corrRows.length} pairs)`} accent={accent}>
       <SortableFilterableTable columns={columns} rows={corrRows} accent={accent} exportName={sectionId + '_correlation_matrix'} initialSort="r" />
       <div style={{ fontSize: 10, color: '#475569', marginTop: 6 }}>Pearson r with a two-tailed t-test (df = n-2). * p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001, n.s. = not significant. |r| ≥ 0.7 strong, 0.4-0.7 moderate, &lt;0.4 weak - regardless of significance, correlation is not causation.</div>
     </Card>
@@ -264,12 +264,12 @@ function GroupAnalysisCard({ accent, cat, rows, nums, lenCol, sectionId }: {
   });
 
   return (
-    <Card title={`Group analysis by ${prettyLabel(cat)} — ${groupRows.length} categories × ${rows.length.toLocaleString()} records`} accent={accent}>
+    <Card title={`Group analysis by ${prettyLabel(cat)} - ${groupRows.length} categories × ${rows.length.toLocaleString()} records`} accent={accent}>
       <SortableFilterableTable columns={columns as STColumn<any>[]} rows={flatRows} accent={accent} exportName={sectionId + '_by_' + cat} initialSort="count" />
       {anovaRows.length > 0 && (
         <div style={{ marginTop: 12 }}>
           <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.04em', color: 'rgba(148,163,184,0.9)', marginBottom: 6 }}>
-            Inferential: one-way ANOVA — does {prettyLabel(cat)} significantly affect each measure?
+            Inferential: one-way ANOVA - does {prettyLabel(cat)} significantly affect each measure?
           </div>
           <AnovaTable accent={accent} anovaRows={anovaRows} sectionId={sectionId} cat={cat} />
         </div>
@@ -326,7 +326,7 @@ function CrossRelationCard({ accent, a, b, rows, sectionId }: { accent: string; 
   }, [a, b, rows]);
 
   return (
-    <Card title={`Cross-relation matrix — ${prettyLabel(a)} × ${prettyLabel(b)} (record counts, all data)`} accent={accent}>
+    <Card title={`Cross-relation matrix - ${prettyLabel(a)} × ${prettyLabel(b)} (record counts, all data)`} accent={accent}>
       <SortableFilterableTable columns={columns} rows={pivotRows} accent={accent} exportName={sectionId + '_cross_' + a + '_' + b} initialSort="Total" />
       <div style={{ marginTop: 10, fontSize: 10.5 }}>
         <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.04em', color: 'rgba(148,163,184,0.9)', marginBottom: 4 }}>
@@ -372,7 +372,7 @@ export function DeepAnalysisTables({ sectionId, accent = '#00f5ff' }: { sectionI
   return (
     <div style={{ width: '100%' }}>
       <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.04em', color: accent, margin: '4px 0 10px' }}>
-        Deep analytics — {N.toLocaleString()} records analysed in full: group statistics, distributions, cross-relations
+        Deep analytics - {N.toLocaleString()} records analysed in full: group statistics, distributions, cross-relations
       </div>
       <DescriptiveStatsCard accent={accent} nums={P.nums} rows={rows} sectionId={sectionId} />
       {P.nums.length >= 2 && <CorrelationCard accent={accent} nums={P.nums} rows={rows} sectionId={sectionId} />}

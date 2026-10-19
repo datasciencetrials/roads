@@ -73,7 +73,7 @@ const C = {
 };
 
 // ─── Station network constants (corrected figures) ────────────────────────────
-const ATC_LEGACY_COUNT = 15;   // 2016–2022 sites
+const ATC_LEGACY_COUNT = 15;   // 2016-2022 sites
 const ATC_NEW_COUNT    = 10;   // post-2025 new sites
 const ATC_TOTAL        = ATC_LEGACY_COUNT + ATC_NEW_COUNT;  // 25
 // TIS manual stations come from atc_stations.geojson (298 features)
@@ -371,7 +371,7 @@ function TrafficLayer({
 function MapLegend({ mode }: { mode: MapMode }) {
   const items: [string, string][] =
     mode === 'adt'
-      ? [['<2k',C.green],['2k–8k',C.yellow],['8k–15k',C.orange],['>15k',C.pink]]
+      ? [['<2k',C.green],['2k-8k',C.yellow],['8k-15k',C.orange],['>15k',C.pink]]
       : mode === 'surface'
       ? [['Paved',ROAD_STYLES.paved.color],['Unpaved',ROAD_STYLES.unpaved.color],['Unknown',ROAD_STYLES.unknown.color]]
       : [['Class A',C.cyan],['Class B',C.green],['Class C',C.amber],['Class M','#94a3b8']];
@@ -835,7 +835,7 @@ export default function TrafficSection() {
     { id: 'linxclass'       as const, label: 'Link × Class Table'       },
     { id: 'trafficanalytics'as const, label: 'Traffic Analytics'        },
     { id: 'trafficsummary'  as const, label: 'Traffic Tables'           },
-    { id: 'proj2040'        as const, label: 'ADT 2016–2040 Projection' },
+    { id: 'proj2040'        as const, label: 'ADT 2016-2040 Projection' },
   ];
   const TRENDS_TABS = [
     { id: 'growthfactors' as const, label: 'Growth Factors'        },
@@ -1065,7 +1065,7 @@ export default function TrafficSection() {
             })}
           </div>
 
-          {/* Legend – right */}
+          {/* Legend - right */}
           <div style={{ marginLeft: 'auto', flexShrink: 0 }}>
             <MapLegend mode={mode} />
           </div>
@@ -1281,7 +1281,7 @@ export default function TrafficSection() {
           }} />
         </div>
 
-        {/* KPI 1 – Total Network ADT */}
+        {/* KPI 1 - Total Network ADT */}
         <div style={{ ...KPI_GLASS, borderColor: 'rgba(0, 245, 255,0.14)' }}>
           <div style={{
             fontSize: 8, fontWeight: 700, color: 'rgba(0, 245, 255,0.45)',
@@ -1298,7 +1298,7 @@ export default function TrafficSection() {
           </div>
         </div>
 
-        {/* KPI 2 – Network Growth Ratio */}
+        {/* KPI 2 - Network Growth Ratio */}
         <div style={{ ...KPI_GLASS, borderColor: 'rgba(0, 255, 136,0.14)' }}>
           <div style={{
             fontSize: 8, fontWeight: 700, color: 'rgba(0, 255, 136,0.45)',
@@ -1315,16 +1315,16 @@ export default function TrafficSection() {
           </div>
         </div>
 
-        {/* KPI 3 – Sparkline trajectory */}
+        {/* KPI 3 - Sparkline trajectory */}
         <div style={{ ...KPI_GLASS, borderColor: 'rgba(0, 212, 170,0.12)' }}>
           <div style={{
             fontSize: 8, fontWeight: 700, color: 'rgba(0, 212, 170,0.45)',
             textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 6,
-          }}>Network Trajectory Envelope (2016 – Now)</div>
+          }}>Network Trajectory Envelope (2016 - Now)</div>
           {kpis && <SparklineArea avgAadt={kpis.avgAadt} />}
         </div>
 
-        {/* KPI 4 – ATC Stations split */}
+        {/* KPI 4 - ATC Stations split */}
         <div style={{ ...KPI_GLASS, borderColor: 'rgba(0,195,255,0.14)' }}>
           <div style={{
             fontSize: 7, fontWeight: 700, color: 'rgba(0,195,255,0.45)',
@@ -1342,7 +1342,7 @@ export default function TrafficSection() {
             <div style={{ textAlign: 'right' }}>
               <div style={{ fontSize: 10, color: C.atcCyan, fontWeight: 700 }}>
                 <Wifi size={9} style={{ display: 'inline', marginRight: 3 }} />
-                {ATC_LEGACY_COUNT} legacy (2016–22)
+                {ATC_LEGACY_COUNT} legacy (2016-22)
               </div>
               <div style={{ fontSize: 10, color: '#00ea90', fontWeight: 700, marginTop: 2 }}>
                 <Wifi size={9} style={{ display: 'inline', marginRight: 3 }} />
@@ -1364,7 +1364,7 @@ export default function TrafficSection() {
           </div>
         </div>
 
-        {/* KPI 5 – Survey Nodes */}
+        {/* KPI 5 - Survey Nodes */}
         <div style={{ ...KPI_GLASS, borderColor: 'rgba(77, 159, 255,0.14)' }}>
           <div style={{
             fontSize: 7, fontWeight: 700, color: 'rgba(77, 159, 255,0.45)',
@@ -1376,7 +1376,7 @@ export default function TrafficSection() {
           <div style={{ fontSize: 8, color: 'rgba(148,163,184,0.4)', marginTop: 2 }}>road links monitored</div>
         </div>
 
-        {/* KPI 6 – Surface Paving Index */}
+        {/* KPI 6 - Surface Paving Index */}
         <div style={{ ...KPI_GLASS, borderColor: 'rgba(185, 103, 255,0.14)' }}>
           <div style={{
             fontSize: 8, fontWeight: 700, color: 'rgba(185, 103, 255,0.45)',
@@ -1401,7 +1401,7 @@ export default function TrafficSection() {
           </div>
         </div>
 
-        {/* KPI 7 – Class Node Spread */}
+        {/* KPI 7 - Class Node Spread */}
         <div style={{ ...KPI_GLASS, borderColor: 'rgba(148,163,184,0.08)' }}>
           <div style={{
             fontSize: 8, fontWeight: 700, color: 'rgba(148,163,184,0.4)',
@@ -1422,7 +1422,7 @@ export default function TrafficSection() {
                 <div style={{ marginBottom: 14 }}>
                   <div style={{ fontSize: 15, fontWeight: 900, color: '#e2eaf4' }}>Traffic Analytics - National Network</div>
                   <div style={{ fontSize: 10, color: 'rgba(148,163,184,0.55)', marginTop: 2 }}>
-                    AADT trends 2016–2025 · vehicle class composition · regional distribution · TIS / ATC data
+                    AADT trends 2016-2025 · vehicle class composition · regional distribution · TIS / ATC data
                   </div>
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10, marginBottom: 16 }}>
@@ -1443,7 +1443,7 @@ export default function TrafficSection() {
                 {kpis && <VehicleClassChart avgAadt={kpis.avgAadt} />}
                 <div style={{ background:'rgba(8,14,28,0.55)', border:'1px solid rgba(255,255,255,0.07)', borderRadius:10, padding:'12px 14px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
-                    <div style={{ fontSize:11, fontWeight:800, color:'#e2eaf4' }}>Network AADT Growth Index 2016–2025</div>
+                    <div style={{ fontSize:11, fontWeight:800, color:'#e2eaf4' }}>Network AADT Growth Index 2016-2025</div>
                     <SourceTableButton anchor="tbl-008" />
                   </div>
                   {kpis && <SparklineArea avgAadt={kpis.avgAadt} />}

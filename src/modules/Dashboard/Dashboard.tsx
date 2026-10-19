@@ -155,9 +155,9 @@ export default function Dashboard() {
     .map(([month,count])=>({ month:month.slice(5), count }));
 
   const priorityBins = useMemo(()=>{
-    const bins = [{label:'0–20',min:0,max:20,count:0},{label:'21–40',min:21,max:40,count:0},
-      {label:'41–60',min:41,max:60,count:0},{label:'61–80',min:61,max:80,count:0},
-      {label:'81–100',min:81,max:100,count:0}];
+    const bins = [{label:'0-20',min:0,max:20,count:0},{label:'21-40',min:21,max:40,count:0},
+      {label:'41-60',min:41,max:60,count:0},{label:'61-80',min:61,max:80,count:0},
+      {label:'81-100',min:81,max:100,count:0}];
     structures.forEach(s => {
       const b = bins.find(b=>s.priorityScore>=b.min && s.priorityScore<=b.max);
       if (b) b.count++;

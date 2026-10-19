@@ -49,10 +49,10 @@ interface GFSummary {
 
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const SEASON_LABELS: Record<string, string> = {
-  long_rains:  'Long Rains (Mar–May)',
-  dry1:        'Dry Season 1 (Jun–Aug)',
-  short_rains: 'Short Rains (Sep–Nov)',
-  dry2:        'Dry Season 2 (Dec–Feb)',
+  long_rains:  'Long Rains (Mar-May)',
+  dry1:        'Dry Season 1 (Jun-Aug)',
+  short_rains: 'Short Rains (Sep-Nov)',
+  dry2:        'Dry Season 2 (Dec-Feb)',
 };
 const SEASON_ORDER = ['long_rains', 'dry1', 'short_rains', 'dry2'];
 
@@ -190,9 +190,9 @@ function MonthlyHeatmap({
         <span style={{ fontSize: 8, color: 'rgba(148,163,184,0.4)' }}>MEF scale:</span>
         {[
           { color: 'rgba(0,200,136,0.7)', label: '< 0.85 low traffic' },
-          { color: 'rgba(0,80,60,0.4)',   label: '0.85–1.0' },
+          { color: 'rgba(0,80,60,0.4)',   label: '0.85-1.0' },
           { color: 'rgba(148,163,184,0.1)', label: '1.0 baseline' },
-          { color: 'rgba(255, 107, 53,0.4)', label: '1.0–1.15' },
+          { color: 'rgba(255, 107, 53,0.4)', label: '1.0-1.15' },
           { color: 'rgba(255,40,10,0.7)',  label: '> 1.15 peak' },
         ].map(({ color, label }) => (
           <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
@@ -513,7 +513,7 @@ export default function GrowthFactorsPanel() {
         <div>
           <h1 style={{ fontSize: 18, fontWeight: 800, color: '#fff', margin: 0 }}>Growth Factors</h1>
           <p style={{ fontSize: 11, color: 'rgba(148,163,184,0.5)', margin: 0 }}>
-            Monthly expansion, seasonal variation & annual growth · {data.year_range[0]}–{data.year_range[1]}
+            Monthly expansion, seasonal variation & annual growth · {data.year_range[0]}-{data.year_range[1]}
             {generatedDate && <span style={{ marginLeft: 6 }}>· generated {generatedDate}</span>}
           </p>
         </div>
@@ -568,7 +568,7 @@ export default function GrowthFactorsPanel() {
           },
           {
             label: 'Year Range',
-            value: `${data.year_range[0]}–${data.year_range[1]}`,
+            value: `${data.year_range[0]}-${data.year_range[1]}`,
             sub: 'survey years', color: '#00f5ff',
           },
           {
@@ -620,7 +620,7 @@ export default function GrowthFactorsPanel() {
               Seasonal Factors by Region - {effectiveYear}{isNearest ? ' (nearest survey year)' : ''}
             </div>
             <div style={{ fontSize: 10, color: 'rgba(148,163,184,0.45)' }}>
-              Uganda seasons: Long Rains (Mar–May) · Dry 1 (Jun–Aug) · Short Rains (Sep–Nov) · Dry 2 (Dec–Feb)
+              Uganda seasons: Long Rains (Mar-May) · Dry 1 (Jun-Aug) · Short Rains (Sep-Nov) · Dry 2 (Dec-Feb)
             </div>
           </div>
         </div>

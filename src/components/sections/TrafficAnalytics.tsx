@@ -511,7 +511,7 @@ function MacroTab({ features }: { features: PredFeature[] }) {
       {/* 1. Growth trajectory */}
       <div style={{ ...GLASS, padding:'18px 20px' }}>
         <div style={{ fontSize:12, fontWeight:800, color:'#fff', marginBottom:3 }}>
-          Network Mean ADT Growth Trajectory (2016 – 2035)
+          Network Mean ADT Growth Trajectory (2016 - 2035)
         </div>
         <div style={{ fontSize:10, color:'rgba(148,163,184,0.45)', marginBottom:12 }}>
           Projected average annual daily traffic · COVID-19 dip visible at 2020 · ML ensemble forecast
@@ -562,7 +562,7 @@ function MacroTab({ features }: { features: PredFeature[] }) {
       {/* 6. YOY rates */}
       <div style={{ ...GLASS, padding:'18px 20px' }}>
         <div style={{ fontSize:12, fontWeight:800, color:'#fff', marginBottom:3 }}>
-          YOY Increment Rates (2016 – 2035)
+          YOY Increment Rates (2016 - 2035)
         </div>
         <div style={{ fontSize:10, color:'rgba(148,163,184,0.45)', marginBottom:12 }}>
           Year-over-year growth rate · 2020 COVID dip clearly visible
@@ -980,7 +980,7 @@ function StrategicTab({ features, stations }: { features: PredFeature[]; station
           { head:'Heavy Vehicle Network Pressure', col:C.orange,
             body:`Heavy vehicle traffic represents a disproportionate share of pavement wear on Class B and C roads. The Northern corridor (A1/A2) carries significant freight traffic to South Sudan and DRC, with heavy vehicle percentages exceeding 25% on several links.` },
           { head:'ATC Station Coverage', col:C.teal,
-            body:`The 25-station automatic traffic count network (15 legacy 2016–22 + 10 new 2025+) provides real-time monitoring across all 6 maintenance regions. An additional ${stations.length} manual TIS survey stations supplement the ATC network. Station density is highest in the Central region but expansion is recommended for Eastern and North Eastern regions to support ML model accuracy.` },
+            body:`The 25-station automatic traffic count network (15 legacy 2016-22 + 10 new 2025+) provides real-time monitoring across all 6 maintenance regions. An additional ${stations.length} manual TIS survey stations supplement the ATC network. Station density is highest in the Central region but expansion is recommended for Eastern and North Eastern regions to support ML model accuracy.` },
         ].map(s=>(
           <div key={s.head} style={{ marginBottom:14, paddingLeft:12,
             borderLeft:`2px solid rgba(${hexRgb(s.col)},0.4)` }}>
@@ -1066,7 +1066,7 @@ export default function TrafficAnalytics() {
       <div style={{ marginBottom:18 }}>
         <div style={{ fontSize:9, fontWeight:800, color:'rgba(255, 210, 63,0.55)',
           letterSpacing:'0.18em', textTransform:'uppercase', marginBottom:3 }}>
-          Uganda National Roads · Deep Analytics · ML Ensemble 2025–2040
+          Uganda National Roads · Deep Analytics · ML Ensemble 2025-2040
         </div>
         <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end' }}>
           <div style={{ fontSize:22, fontWeight:900, color:'#ffd23f', lineHeight:1.2,
@@ -1120,7 +1120,7 @@ export default function TrafficAnalytics() {
 
       <div style={{ marginTop:22, fontSize:8, color:'rgba(100,116,139,0.35)', textAlign:'center' }}>
         Uganda National Roads · Department of National Roads / DNR 2025 · XGBoost + LightGBM ensemble ·
-        ATC data: Department of National Roads Traffic Management Unit · Forecasts modelled 2025–2040
+        ATC data: Department of National Roads Traffic Management Unit · Forecasts modelled 2025-2040
       </div>
     </div>
   );

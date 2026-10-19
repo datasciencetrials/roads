@@ -1,6 +1,6 @@
 /**
  * StructuresOverviewDashboard - RMS "Dashboard" tab, Structures & Bridges view.
- * Port of public/dashboard.html Tab 4 (STRUCTURES & BRIDGES, charts c46–c60) into
+ * Port of public/dashboard.html Tab 4 (STRUCTURES & BRIDGES, charts c46-c60) into
  * live React/Recharts, extended to 21 chart tiles. No tables here - tabular
  * breakdowns live under Exhaustive Tables / Deep Analytics.
  *
@@ -183,7 +183,7 @@ export default function StructuresOverviewDashboard() {
               { key: 'Poor', name: 'Poor', color: DASHBOARD_COND_COLORS[2] }, { key: 'Critical', name: 'Critical', color: DASHBOARD_COND_COLORS[3] },
             ]} stacked />
         </ChartBox>
-        <ChartBox title="Inspection Currency 2021–2025" accent={DASH_C.green} height={210}>
+        <ChartBox title="Inspection Currency 2021-2025" accent={DASH_C.green} height={210}>
           <LineMulti data={TREND_YRS.map((y, i) => ({ year: y, Inspected: INSPECTED_PCT[i], Overdue: OVERDUE_PCT[i] }))} xKey="year"
             series={[{ key: 'Inspected', name: 'Inspected <12mth %', color: '#22c55e' }, { key: 'Overdue', name: 'Overdue %', color: '#ef4444' }]} area unit="%" />
         </ChartBox>

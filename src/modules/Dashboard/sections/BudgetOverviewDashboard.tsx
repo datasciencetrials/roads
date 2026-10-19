@@ -1,6 +1,6 @@
 /**
  * BudgetOverviewDashboard - RMS "Dashboard" tab, Budget & Finance view.
- * Port of public/dashboard.html Tab 5 (BUDGET & FINANCE, charts c61–c74) into
+ * Port of public/dashboard.html Tab 5 (BUDGET & FINANCE, charts c61-c74) into
  * live React/Recharts, extended to 23 chart tiles. Real FY25/26 budget figures
  * (matches the platform's official 1,842bn UGX allocation) plus a handful of
  * straightforward derivations (regional backlog split, utilisation trend,
@@ -126,14 +126,14 @@ export default function BudgetOverviewDashboard() {
             { name: 'Remaining', delta: 0, isTotal: true },
           ]} unit="bn" />
         </ChartBox>
-        <ChartBox title="Budget vs Actuals FY22–26" subtitle="bn UGX" accent={DASH_C.cyan} height={190}>
+        <ChartBox title="Budget vs Actuals FY22-26" subtitle="bn UGX" accent={DASH_C.cyan} height={190}>
           <BarV data={BUD_YRS.map((y, i) => ({ year: y, Allocated: BUD_ALLOC[i], Spent: BUD_SPENT[i] }))} xKey="year"
             series={[{ key: 'Allocated', name: 'Allocated', color: DASH_C.cyan }, { key: 'Spent', name: 'Spent', color: DASH_C.green }]} unit="bn" />
         </ChartBox>
       </ChartGrid>
 
       <ChartGrid cols="3">
-        <ChartBox title="Budget Trend 2020–2028" subtitle="*projected, bn UGX" accent={DASH_C.cyan} height={210}>
+        <ChartBox title="Budget Trend 2020-2028" subtitle="*projected, bn UGX" accent={DASH_C.cyan} height={210}>
           <LineMulti data={TREND_YRS.map((y, i) => ({ year: y, Allocated: TREND_ALLOC[i], Spent: TREND_SPENT[i] }))} xKey="year"
             series={[{ key: 'Allocated', name: 'Allocated', color: DASH_C.cyan }, { key: 'Spent', name: 'Spent', color: DASH_C.green }]} unit="bn" area />
         </ChartBox>
@@ -222,7 +222,7 @@ export default function BudgetOverviewDashboard() {
       </ChartGrid>
 
       <ChartGrid cols="2">
-        <ChartBox title="Budget Utilisation Rate" subtitle="spent / allocated, FY22–26, %" accent={DASH_C.orange} height={190}>
+        <ChartBox title="Budget Utilisation Rate" subtitle="spent / allocated, FY22-26, %" accent={DASH_C.orange} height={190}>
           <LineMulti data={BUD_YRS.map((y, i) => ({ year: y, util: UTIL_TREND[i] }))} xKey="year"
             series={[{ key: 'util', name: 'Utilisation %', color: DASH_C.orange }]} unit="%" />
         </ChartBox>

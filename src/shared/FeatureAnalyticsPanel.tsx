@@ -56,7 +56,7 @@ export interface AtcStationFeature {
   stationType?: 'ATC' | 'TIS';   // ATC = automatic, TIS = manual
   monthly?: { month: string; total: number }[];
   vehicleClasses?: { label: string; count: number }[];
-  growthTrend?: number[];         // AADT values 2016–2025 (10 points)
+  growthTrend?: number[];         // AADT values 2016-2025 (10 points)
 }
 
 export type FeatureData = RoadLinkFeature | BridgeFeature | CulvertFeature | AtcStationFeature;
@@ -375,7 +375,7 @@ function AtcPanel({ f, onClose }: { f: AtcStationFeature; onClose: () => void })
           fontSize: 9, fontWeight: 800, padding: '2px 8px', borderRadius: 8,
           background: `rgba(${rgb},0.12)`, color: accent,
           border: `1px solid rgba(${rgb},0.3)`,
-        }}>{isATC ? 'ATC – Automatic' : 'TIS – Manual'}</span>
+        }}>{isATC ? 'ATC - Automatic' : 'TIS - Manual'}</span>
       </div>
 
       <Row label="Station ID" value={f.id} />
@@ -400,14 +400,14 @@ function AtcPanel({ f, onClose }: { f: AtcStationFeature; onClose: () => void })
         <TelemetryChart active color={accent} />
       </div>
 
-      {/* AADT growth trend 2016–2025 */}
+      {/* AADT growth trend 2016-2025 */}
       {f.growthTrend && f.growthTrend.length >= 2 && (
         <div style={{ marginTop: 14 }}>
           <div style={{
             fontSize: 9, fontWeight: 700, color: 'rgba(0, 255, 136,0.6)',
             textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 6,
           }}>
-            AADT Growth 2016 – 2025
+            AADT Growth 2016 - 2025
           </div>
           <Sparkline data={f.growthTrend} color="#00ff88" />
           <div style={{

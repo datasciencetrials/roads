@@ -525,7 +525,7 @@ export default function OverloadingSection() {
               <span className="text-slate-300">Base score</span> = min(100, heavy_veh_day / 1000 × 100).
               Multiplied by surface vulnerability: unpaved ×1.3, Class&nbsp;C ×1.2.
               Sources: SATCC/TRH4 ESAL factors · AFCAP Uganda overloading surveys
-              (+25% HGV, +10% bus) · Department of National Roads traffic count surveys 2017–2025.
+              (+25% HGV, +10% bus) · Department of National Roads traffic count surveys 2017-2025.
             </p>
           </div>
         </div>

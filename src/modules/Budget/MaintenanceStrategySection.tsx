@@ -29,7 +29,7 @@ function conditionColor(rating?: string | null) {
   return (rating && CONDITION_COLOR[rating]) || 'rgba(148,163,184,0.6)';
 }
 function ConditionPill({ value }: { value?: string | null }) {
-  if (!value) return <span style={{ color: 'rgba(148,163,184,0.4)' }}>—</span>;
+  if (!value) return <span style={{ color: 'rgba(148,163,184,0.4)' }}>-</span>;
   const c = conditionColor(value);
   return (
     <span style={{
@@ -198,8 +198,8 @@ export default function MaintenanceStrategySection() {
           {[
             { label: 'Total Network', value: `${no.totalNetworkKm?.toLocaleString()} km`, color: C.blue, tip: `${no.pavedKm?.toLocaleString()} km paved, ${no.unpavedKm?.toLocaleString()} km unpaved` },
             { label: 'Current Asset Value', value: `US$ ${(no.currentAssetValueMnUsdJul2024 / 1000).toFixed(1)}Bn`, color: C.green, tip: 'Depreciated replacement cost, July 2024' },
-            { label: 'Bridges', value: `${data.structuresSummary.bridges.count}`, color: C.cyan, tip: `${data.structuresSummary.bridges.pavedCount} on paved, ${data.structuresSummary.bridges.unpavedCount} on unpaved roads — reported separately from culverts` },
-            { label: 'Major Culverts', value: `${data.structuresSummary.majorCulverts.count}`, color: C.purple, tip: `${data.structuresSummary.majorCulverts.pavedCount} on paved, ${data.structuresSummary.majorCulverts.unpavedCount} on unpaved roads — reported separately from bridges` },
+            { label: 'Bridges', value: `${data.structuresSummary.bridges.count}`, color: C.cyan, tip: `${data.structuresSummary.bridges.pavedCount} on paved, ${data.structuresSummary.bridges.unpavedCount} on unpaved roads - reported separately from culverts` },
+            { label: 'Major Culverts', value: `${data.structuresSummary.majorCulverts.count}`, color: C.purple, tip: `${data.structuresSummary.majorCulverts.pavedCount} on paved, ${data.structuresSummary.majorCulverts.unpavedCount} on unpaved roads - reported separately from bridges` },
             { label: '5-Yr Investment Need', value: `UGX ${data.fiveYearInvestmentPlan.annual.find(a => a.fy === 'Total / Avg')?.programmeCostBnUgx?.toLocaleString()}Bn`, color: C.pink, tip: `${data.fiveYearInvestmentPlan.period}` },
           ].map(k => (
             <div key={k.label} title={k.tip} style={{ background: `rgba(${hexRgb(k.color)},0.06)`, border: `1px solid rgba(${hexRgb(k.color)},0.2)`, borderRadius: 10, padding: '12px 16px' }}>
@@ -266,7 +266,7 @@ export default function MaintenanceStrategySection() {
               </div>
               <div style={card(C.purple)}>
                 <div style={{ fontSize: 11, fontWeight: 900, color: C.purple, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 14 }}>
-                  Unpaved Road Condition — 2024 vs 2025 (%)
+                  Unpaved Road Condition - 2024 vs 2025 (%)
                 </div>
                 <ResponsiveContainer width="100%" height={230}>
                   <BarChart data={data.unpavedConditionDistribution} margin={{ top: 8, right: 12, left: 0, bottom: 8 }}>
@@ -314,7 +314,7 @@ export default function MaintenanceStrategySection() {
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
               <div style={card(C.cyan)}>
-                <div style={{ fontSize: 11, fontWeight: 900, color: C.cyan, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 10 }}>Paved Roads — Asset Value Series (US$ Mn)</div>
+                <div style={{ fontSize: 11, fontWeight: 900, color: C.cyan, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 10 }}>Paved Roads - Asset Value Series (US$ Mn)</div>
                 <SortableFilterableTable
                   accent={C.cyan}
                   exportName="paved-asset-values"
@@ -326,7 +326,7 @@ export default function MaintenanceStrategySection() {
                 />
               </div>
               <div style={card(C.orange)}>
-                <div style={{ fontSize: 11, fontWeight: 900, color: C.orange, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 10 }}>Unpaved Roads — Asset Value Series (US$ Mn)</div>
+                <div style={{ fontSize: 11, fontWeight: 900, color: C.orange, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 10 }}>Unpaved Roads - Asset Value Series (US$ Mn)</div>
                 <SortableFilterableTable
                   accent={C.orange}
                   exportName="unpaved-asset-values"
@@ -342,7 +342,7 @@ export default function MaintenanceStrategySection() {
         )}
 
         {/* Bridges and Major Culverts are always kept on separate tabs with separate
-            tables/charts/totals — never merged into one figure or one table. */}
+            tables/charts/totals - never merged into one figure or one table. */}
         {tab === 'bridges' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 16 }}>
@@ -359,7 +359,7 @@ export default function MaintenanceStrategySection() {
               </div>
               <div style={card(C.cyan)}>
                 <div style={{ fontSize: 11, fontWeight: 900, color: C.cyan, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 14 }}>
-                  Bridge Stock — {data.structuresSummary.bridges.count} Structures (US$ {data.structuresSummary.bridges.assetValueMnUsd}Mn asset value)
+                  Bridge Stock - {data.structuresSummary.bridges.count} Structures (US$ {data.structuresSummary.bridges.assetValueMnUsd}Mn asset value)
                 </div>
                 <div style={{ fontSize: 11, color: 'rgba(203,213,225,0.8)', lineHeight: 1.8 }}>
                   {data.structuresSummary.bridges.pavedCount} on paved roads · {data.structuresSummary.bridges.unpavedCount} on unpaved roads.
@@ -390,7 +390,7 @@ export default function MaintenanceStrategySection() {
               </div>
               <div style={card(C.purple)}>
                 <div style={{ fontSize: 11, fontWeight: 900, color: C.purple, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 14 }}>
-                  Major Culvert Stock — {data.structuresSummary.majorCulverts.count} Structures (US$ {data.structuresSummary.majorCulverts.assetValueMnUsd}Mn asset value)
+                  Major Culvert Stock - {data.structuresSummary.majorCulverts.count} Structures (US$ {data.structuresSummary.majorCulverts.assetValueMnUsd}Mn asset value)
                 </div>
                 <div style={{ fontSize: 11, color: 'rgba(203,213,225,0.8)', lineHeight: 1.8 }}>
                   {data.structuresSummary.majorCulverts.pavedCount} on paved roads · {data.structuresSummary.majorCulverts.unpavedCount} on unpaved roads.
@@ -451,7 +451,7 @@ export default function MaintenanceStrategySection() {
             </div>
             <div style={card(C.blue)}>
               <div style={{ fontSize: 11, fontWeight: 900, color: C.blue, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 14 }}>
-                Intervention Mix — Links, Length &amp; Cost (5-Year Programme)
+                Intervention Mix - Links, Length &amp; Cost (5-Year Programme)
               </div>
               <ResponsiveContainer width="100%" height={260}>
                 <BarChart data={data.fiveYearInvestmentPlan.interventionMix} margin={{ top: 8, right: 12, left: 0, bottom: 60 }}>

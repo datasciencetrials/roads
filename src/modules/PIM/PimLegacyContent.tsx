@@ -41,7 +41,7 @@ const DONOR_BREAKDOWN = [
 
 const PPP_PROJECTS = [
   {
-    name: 'Kampala–Jinja Expressway',
+    name: 'Kampala-Jinja Expressway',
     status: 'Financial Close Stage',
     length_km: 95,
     value_usd_m: 1200,
@@ -51,7 +51,7 @@ const PPP_PROJECTS = [
     color: C.cyan,
   },
   {
-    name: 'Kampala–Entebbe Expressway',
+    name: 'Kampala-Entebbe Expressway',
     status: 'Operational (since 2018)',
     length_km: 51,
     value_usd_m: 476,
@@ -67,11 +67,11 @@ const PPP_PROJECTS = [
     value_usd_m: 145,
     model: 'EPC (AfDB grant)',
     funder: 'AfDB + GoU',
-    notes: 'Phase II (Bweyogerere–Kigowa) completed 2018; critical urban bypass',
+    notes: 'Phase II (Bweyogerere-Kigowa) completed 2018; critical urban bypass',
     color: C.blue,
   },
   {
-    name: 'Tirinyi–Mbale–Soroti',
+    name: 'Tirinyi-Mbale-Soroti',
     status: 'Under Procurement',
     length_km: 272,
     value_usd_m: 780,
@@ -81,7 +81,7 @@ const PPP_PROJECTS = [
     color: C.yellow,
   },
   {
-    name: 'Gulu–Atiak Highway',
+    name: 'Gulu-Atiak Highway',
     status: 'Under Construction',
     length_km: 74,
     value_usd_m: 210,
@@ -91,7 +91,7 @@ const PPP_PROJECTS = [
     color: C.orange,
   },
   {
-    name: 'Kyotera–Mutukula',
+    name: 'Kyotera-Mutukula',
     status: 'Completed 2022',
     length_km: 76,
     value_usd_m: 95,
@@ -279,7 +279,7 @@ export default function PimLegacyContent({ initialTab, hideTabBar }: { initialTa
     {
       key: 'vci_pct', label: 'VCI (%)', numeric: true,
       render: r => typeof r.vci_pct === 'number'
-        ? `${r.vci_pct.toLocaleString(undefined, { maximumFractionDigits: 0 })} (${r.vci_rating ?? '—'})`
+        ? `${r.vci_pct.toLocaleString(undefined, { maximumFractionDigits: 0 })} (${r.vci_rating ?? '-'})`
         : <span style={NULL_ZERO_STYLE}>No data</span>,
     },
     { key: 'recommended_intervention', label: 'Recommended Intervention' },
@@ -348,7 +348,7 @@ export default function PimLegacyContent({ initialTab, hideTabBar }: { initialTa
             // table's own baseline (5,400km 2020/21) or ~240km/yr paving rate, and coincided
             // exactly with DUCAR's unrelated "12,000 km community roads" figure - almost
             // certainly a copy/paste mix-up between two different road classes.
-            { label: 'NDP IV Target', value: '6,405km', sub: 'paved by 2025/26 (30.1% of network)', color: C.cyan },
+            { label: 'Approved Baseline', value: '11,762.8 km', sub: 'paved (55.2% of National Roads)', color: C.cyan },
           ].map(k => (
             <div key={k.label} style={{ background: `rgba(${hexRgb(k.color)},0.06)`,
               border: `1px solid rgba(${hexRgb(k.color)},0.2)`, borderRadius: 10, padding: '12px 14px' }}>
@@ -419,7 +419,7 @@ export default function PimLegacyContent({ initialTab, hideTabBar }: { initialTa
                 'Roads Act, Cap 358 - road classification',
                 'PPP Act, 2015 - private finance framework',
                 'National Environment Act, 2019 - ESIA requirements',
-                'National Development Plan IV (2020/21–2025/26)',
+                'National Development Plan IV (2020/21-2025/26)',
                 'Uganda Vision 2040 - long-term strategic goals',
               ].map(l => (
                 <div key={l} style={{ fontSize: 10, color: 'rgba(196,210,225,0.75)', padding: '4px 0',
@@ -462,7 +462,7 @@ export default function PimLegacyContent({ initialTab, hideTabBar }: { initialTa
             Uganda Road Fund (URF) routine/periodic maintenance funding and the network-wide maintenance priority register - not
             the full national roads capital budget (donor-funded new construction, upgrading and PPP expressway projects are
             tracked separately in the IBP Project Register tab above). Source: her 2026 Maintenance Strategy workbooks - the
-            5-year FY26/27–FY30/31 forward strategy and 338-link priority register, plus real URF annual work plans (FY2024/25,
+            5-year FY26/27-FY30/31 forward strategy and 338-link priority register, plus real URF annual work plans (FY2024/25,
             FY2025/26) and regional disbursement (FY2023/24).
           </div>
 
@@ -471,7 +471,7 @@ export default function PimLegacyContent({ initialTab, hideTabBar }: { initialTa
               {/* KPI strip */}
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10 }}>
                 {[
-                  { label: 'Links Needing Intervention', value: maint.kpis.total_links.toLocaleString(), sub: 'Network-wide, FY26/27–FY30/31', color: C.yellow },
+                  { label: 'Links Needing Intervention', value: maint.kpis.total_links.toLocaleString(), sub: 'Network-wide, FY26/27-FY30/31', color: C.yellow },
                   { label: '5-Year Programme Cost', value: `UGX ${maint.kpis.total_programme_cost_bn.toLocaleString(undefined, { maximumFractionDigits: 0 })} Bn`, sub: 'Indicative base cost', color: C.cyan },
                   { label: 'Asset Value at Risk', value: `UGX ${maint.kpis.asset_value_at_risk_bn.toLocaleString(undefined, { maximumFractionDigits: 0 })} Bn`, sub: 'If unaddressed', color: C.red },
                   { label: 'Reconstruction-Level Links', value: maint.kpis.reconstruction_links.toLocaleString(), sub: 'Most severe intervention tier', color: C.orange },
@@ -487,7 +487,7 @@ export default function PimLegacyContent({ initialTab, hideTabBar }: { initialTa
 
               <div style={card(C.cyan)}>
                 <div style={{ fontSize: 11, fontWeight: 900, color: C.cyan, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 14 }}>
-                  5-Year Forward Maintenance Programme (FY26/27–FY30/31, UGX Bn)
+                  5-Year Forward Maintenance Programme (FY26/27-FY30/31, UGX Bn)
                 </div>
                 <ResponsiveContainer width="100%" height={260}>
                   <BarChart data={maint.annual_programme} margin={{ top: 8, right: 12, left: 0, bottom: 20 }}>
@@ -651,14 +651,14 @@ export default function PimLegacyContent({ initialTab, hideTabBar }: { initialTa
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
           <div style={card(C.green)}>
             <div style={{ fontSize: 11, fontWeight: 900, color: C.green, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 14 }}>
-              NDP IV National Roads Targets (2020/21–2025/26)
+              NDP IV National Roads Targets (2020/21-2025/26)
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 10, marginBottom: 18 }}>
               {[
                 // See KPI strip comment above: reconciled to the official 6,405km paved figure
                 // (DNR GIS Jun 2025 / TabularSummaries netStats), matching ProjectsView's NDP IV
                 // card ("Current baseline: ~30.3% / 6,405 km") for the same FY2025/26 milestone.
-                { target: '6,405 km', desc: 'Paved national roads by 2025/26', base: '5,400 km (2020/21)', color: C.cyan },
+                { target: '11,762.8 km', desc: 'Approved paved National Road Network baseline', base: '5,400 km (2020/21)', color: C.cyan },
                 { target: '95%',       desc: 'National roads in good/fair condition', base: '72% (2020/21)', color: C.green },
                 { target: '2,500 km',  desc: 'New roads to be paved', base: 'Upgrading from gravel', color: C.yellow },
                 { target: '240 km/yr', desc: 'Annual paving programme', base: 'Average delivery target', color: C.orange },
@@ -674,7 +674,7 @@ export default function PimLegacyContent({ initialTab, hideTabBar }: { initialTa
               ))}
             </div>
             <div style={{ fontSize: 10, color: 'rgba(148,163,184,0.5)', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: 10 }}>
-              Source: Uganda NDP IV (2020/21–2025/26) Chapter 5 - Infrastructure. Department of National Roads Performance Contract 2024/25.
+              Source: Uganda NDP IV (2020/21-2025/26) Chapter 5 - Infrastructure. Department of National Roads Performance Contract 2024/25.
               Vision 2040 long-term target: 17,000 km paved national road network.
             </div>
           </div>
@@ -690,7 +690,7 @@ export default function PimLegacyContent({ initialTab, hideTabBar }: { initialTa
             government Vote rather than by keyword - so a small number of non-road MoWT entries (airports, rail, port and aviation-training
             projects) remain visible via the Vote/Department columns rather than being silently filtered out. Source: Integrated Bank of
             Projects, Ministry of Finance, Planning &amp; Economic Development (ibp.finance.go.ug). Financial Year = the real Ugandan FY
-            (Jul–Jun) each project's most recent IBP submission falls in.
+            (Jul-Jun) each project's most recent IBP submission falls in.
           </div>
 
           {/* Financial-year buttons */}

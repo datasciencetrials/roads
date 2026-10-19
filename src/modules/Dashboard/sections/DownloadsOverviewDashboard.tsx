@@ -36,7 +36,7 @@ function freshColor(days: number): string {
 }
 
 // ─── Data model ───────────────────────────────────────────────────────────────
-const TOTAL_EXPORTS = 18460; // YTD Jan–Aug 2026, sum of every breakdown below
+const TOTAL_EXPORTS = 18460; // YTD Jan-Aug 2026, sum of every breakdown below
 
 const DATASETS = ['Structures', 'Road Network', 'Traffic Counts', 'Condition Survey', 'Reserves'];
 const DATASET_COUNTS = [6870, 5240, 2860, 2380, 1110]; // sums to TOTAL_EXPORTS
@@ -67,7 +67,7 @@ const REGION_DOWNLOADS = [3843, 3397, 3712, 2603, 2861, 2044]; // sums to TOTAL_
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'];
 const MONTHLY_DOWNLOADS = [1780, 1920, 2050, 2240, 2410, 2530, 2600, 2930]; // sums to TOTAL_EXPORTS
-const API_PCT_TREND = [52, 55, 58, 60, 63, 65, 68, 70]; // rising API adoption, Jan–Aug 2026
+const API_PCT_TREND = [52, 55, 58, 60, 63, 65, 68, 70]; // rising API adoption, Jan-Aug 2026
 const API_SHARE_PCT = 62; // headline API-vs-manual split
 
 const TOP_FILES = [
@@ -160,7 +160,7 @@ export default function DownloadsOverviewDashboard() {
       </ChartGrid>
 
       <ChartGrid cols="12">
-        <ChartBox title="Download Volume Trend" subtitle="monthly, Jan–Aug 2026" accent={DASH_C.green} height={260}>
+        <ChartBox title="Download Volume Trend" subtitle="monthly, Jan-Aug 2026" accent={DASH_C.green} height={260}>
           <LineMulti data={MONTHS.map((m, i) => ({ month: m, Downloads: MONTHLY_DOWNLOADS[i] }))} xKey="month"
             series={[{ key: 'Downloads', name: 'Downloads', color: DASH_C.green }]} area />
         </ChartBox>

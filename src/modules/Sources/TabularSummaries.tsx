@@ -34,9 +34,9 @@ const CLASS_COLORS_TS: Record<string, string> = { A:'#00f5ff', B:'#00ff88', C:'#
 // ── Data constants (real DNR GIS / TIS / BMS data) ──────────────────────────
 const CONDITION_DIST = [
   { label: 'Good',          km: 4790,  pct: 22.6, color: '#22c55e', iriRange: '< 3 m/km'  },
-  { label: 'Fair',          km: 5595,  pct: 26.4, color: '#84cc16', iriRange: '3–5 m/km'  },
-  { label: 'Poor',          km: 6102,  pct: 28.8, color: '#eab308', iriRange: '5–8 m/km'  },
-  { label: 'Bad',           km: 3101,  pct: 14.7, color: '#f97316', iriRange: '8–12 m/km' },
+  { label: 'Fair',          km: 5595,  pct: 26.4, color: '#84cc16', iriRange: '3-5 m/km'  },
+  { label: 'Poor',          km: 6102,  pct: 28.8, color: '#eab308', iriRange: '5-8 m/km'  },
+  { label: 'Bad',           km: 3101,  pct: 14.7, color: '#f97316', iriRange: '8-12 m/km' },
   { label: 'Very Bad',      km: 1572,  pct:  7.4, color: '#ef4444', iriRange: '> 12 m/km' },
   { label: 'Not Surveyed',  km: 0,     pct:  0.0, color: '#94a3b8', iriRange: 'N/A'        },
 ];
@@ -46,16 +46,16 @@ const CONDITION_DIST = [
 // inside TabularSummaries(), which read live from network2026.geojson.
 
 const TRAFFIC_TOP = [
-  { road: 'A002_Link01', name: 'Kampala–Jinja', aadt: 23800, cls: 'A', year: 2025 },
-  { road: 'A003_Link01', name: 'Kampala–Mbarara', aadt: 19400, cls: 'A', year: 2025 },
-  { road: 'A001_Link01', name: 'Kampala–Gulu (Karuma)', aadt: 15200, cls: 'A', year: 2025 },
-  { road: 'A005_Link01', name: 'Busega–Bujuuko', aadt: 30909, cls: 'A', year: 2025 },
-  { road: 'A002_Link06', name: 'Masaka–Lyantonde', aadt: 14200, cls: 'A', year: 2025 },
-  { road: 'B101_Link02', name: 'Kalagi–Bukoloto–Kayunga', aadt: 7800, cls: 'B', year: 2025 },
-  { road: 'A003_Link04', name: 'Mbarara–Kabale', aadt: 7200, cls: 'A', year: 2025 },
-  { road: 'A006_Link12', name: 'Gulu–Atiak', aadt: 5800, cls: 'A', year: 2025 },
-  { road: 'B102_Link01', name: 'Njeru–Bukoloto', aadt: 5300, cls: 'B', year: 2025 },
-  { road: 'A007_Link04', name: 'Mbale–Namunsi–Kumi', aadt: 6200, cls: 'A', year: 2025 },
+  { road: 'A002_Link01', name: 'Kampala-Jinja', aadt: 23800, cls: 'A', year: 2025 },
+  { road: 'A003_Link01', name: 'Kampala-Mbarara', aadt: 19400, cls: 'A', year: 2025 },
+  { road: 'A001_Link01', name: 'Kampala-Gulu (Karuma)', aadt: 15200, cls: 'A', year: 2025 },
+  { road: 'A005_Link01', name: 'Busega-Bujuuko', aadt: 30909, cls: 'A', year: 2025 },
+  { road: 'A002_Link06', name: 'Masaka-Lyantonde', aadt: 14200, cls: 'A', year: 2025 },
+  { road: 'B101_Link02', name: 'Kalagi-Bukoloto-Kayunga', aadt: 7800, cls: 'B', year: 2025 },
+  { road: 'A003_Link04', name: 'Mbarara-Kabale', aadt: 7200, cls: 'A', year: 2025 },
+  { road: 'A006_Link12', name: 'Gulu-Atiak', aadt: 5800, cls: 'A', year: 2025 },
+  { road: 'B102_Link01', name: 'Njeru-Bukoloto', aadt: 5300, cls: 'B', year: 2025 },
+  { road: 'A007_Link04', name: 'Mbale-Namunsi-Kumi', aadt: 6200, cls: 'A', year: 2025 },
 ];
 const TRAFFIC_TOP_COLUMNS: STColumn<typeof TRAFFIC_TOP[number]>[] = [
   { key: 'road', label: 'Link ID', render: r => <span style={{ color: C.cyan }}>{r.road}</span> },
@@ -97,26 +97,26 @@ const PAVEMENT_TYPES = [
 ];
 
 const OPRC_TABLE = [
-  { lot: 'Lot 1',  roads: 'Kampala–Gulu (A1)',       km:  347, contractor: 'COLAS',          status: 'Active',    score: 88 },
-  { lot: 'Lot 2',  roads: 'Kampala–Mbarara (A3)',     km:  266, contractor: 'STRABAG',         status: 'Active',    score: 82 },
-  { lot: 'Lot 3',  roads: 'Kampala–Masaka (A4)',      km:  152, contractor: 'SEACOM',           status: 'Active',    score: 79 },
-  { lot: 'Lot 4',  roads: 'Jinja–Mbale (A2)',         km:  185, contractor: 'Dott Services',   status: 'Active',    score: 91 },
-  { lot: 'Lot 5',  roads: 'Gulu–Kitgum–Moroto',       km:  510, contractor: 'China Wu Yi',     status: 'Active',    score: 74 },
-  { lot: 'Lot 6',  roads: 'Hoima–Masindi–Lira',       km:  487, contractor: 'COLAS',           status: 'Active',    score: 86 },
-  { lot: 'Lot 7',  roads: 'Mbarara–Kabale–Katuna',    km:  331, contractor: 'SEACOM',           status: 'Completed', score: 80 },
+  { lot: 'Lot 1',  roads: 'Kampala-Gulu (A1)',       km:  347, contractor: 'COLAS',          status: 'Active',    score: 88 },
+  { lot: 'Lot 2',  roads: 'Kampala-Mbarara (A3)',     km:  266, contractor: 'STRABAG',         status: 'Active',    score: 82 },
+  { lot: 'Lot 3',  roads: 'Kampala-Masaka (A4)',      km:  152, contractor: 'SEACOM',           status: 'Active',    score: 79 },
+  { lot: 'Lot 4',  roads: 'Jinja-Mbale (A2)',         km:  185, contractor: 'Dott Services',   status: 'Active',    score: 91 },
+  { lot: 'Lot 5',  roads: 'Gulu-Kitgum-Moroto',       km:  510, contractor: 'China Wu Yi',     status: 'Active',    score: 74 },
+  { lot: 'Lot 6',  roads: 'Hoima-Masindi-Lira',       km:  487, contractor: 'COLAS',           status: 'Active',    score: 86 },
+  { lot: 'Lot 7',  roads: 'Mbarara-Kabale-Katuna',    km:  331, contractor: 'SEACOM',           status: 'Completed', score: 80 },
   { lot: 'Lot 8',  roads: 'Eastern Uganda network',   km:  892, contractor: 'STRABAG',         status: 'Active',    score: 77 },
   { lot: 'Lot 9',  roads: 'North Eastern / Karamoja', km:  430, contractor: 'China Wu Yi',     status: 'Suspended', score: 71 },
 ];
 
 const NDPIV_PROJECTS = [
   { name: 'Kampala Northern Bypass Phase 2', type: 'Roads', km: 17.5,  budget_bn: 420,  progress: 68, funded_by: 'AfDB / GoU' },
-  { name: 'Kapchorwa–Suam Road',             type: 'Roads', km: 79.3,  budget_bn: 285,  progress: 41, funded_by: 'OFID / GoU' },
-  { name: 'Kigumba–Masindi–Hoima',           type: 'Roads', km: 131.0, budget_bn: 510,  progress: 85, funded_by: 'AfDB / GoU' },
-  { name: 'Rukungiri–Kihihi–Kanungu',        type: 'Roads', km: 74.0,  budget_bn: 240,  progress: 23, funded_by: 'IDA / GoU'  },
-  { name: 'Fort Portal–Kamwenge',            type: 'Roads', km: 73.5,  budget_bn: 320,  progress: 55, funded_by: 'IDA / GoU'  },
-  { name: 'Soroti–Katakwi–Moroto',           type: 'Roads', km: 266.0, budget_bn: 890,  progress: 12, funded_by: 'EIB / GoU'  },
-  { name: 'Mpondwe–Kasese–Dura',             type: 'Roads', km: 103.5, budget_bn: 380,  progress: 72, funded_by: 'EU / GoU'   },
-  { name: 'Ntungamo–Mirama Hills',           type: 'Roads', km: 37.2,  budget_bn: 165,  progress: 90, funded_by: 'AfDB / GoU' },
+  { name: 'Kapchorwa-Suam Road',             type: 'Roads', km: 79.3,  budget_bn: 285,  progress: 41, funded_by: 'OFID / GoU' },
+  { name: 'Kigumba-Masindi-Hoima',           type: 'Roads', km: 131.0, budget_bn: 510,  progress: 85, funded_by: 'AfDB / GoU' },
+  { name: 'Rukungiri-Kihihi-Kanungu',        type: 'Roads', km: 74.0,  budget_bn: 240,  progress: 23, funded_by: 'IDA / GoU'  },
+  { name: 'Fort Portal-Kamwenge',            type: 'Roads', km: 73.5,  budget_bn: 320,  progress: 55, funded_by: 'IDA / GoU'  },
+  { name: 'Soroti-Katakwi-Moroto',           type: 'Roads', km: 266.0, budget_bn: 890,  progress: 12, funded_by: 'EIB / GoU'  },
+  { name: 'Mpondwe-Kasese-Dura',             type: 'Roads', km: 103.5, budget_bn: 380,  progress: 72, funded_by: 'EU / GoU'   },
+  { name: 'Ntungamo-Mirama Hills',           type: 'Roads', km: 37.2,  budget_bn: 165,  progress: 90, funded_by: 'AfDB / GoU' },
 ];
 
 const BRIDGE_INVENTORY = [
@@ -195,11 +195,11 @@ const ATC_STATIONS_COLUMNS: STColumn<typeof ATC_STATIONS[number]>[] = [
 ];
 
 const FERRY_ROUTES = [
-  { id: 'F01', name: 'Namasale–Lwampanga', water_body: 'Lake Kyoga', km: 18.5, frequency: 'Daily', capacity_veh: 12 },
-  { id: 'F02', name: 'Bukakata–Buwama',    water_body: 'Lake Victoria', km: 22.4, frequency: 'Daily', capacity_veh: 20 },
-  { id: 'F03', name: 'Ntoroko–Kaiso',      water_body: 'Lake Albert',   km: 14.8, frequency: '3×/day', capacity_veh: 8  },
+  { id: 'F01', name: 'Namasale-Lwampanga', water_body: 'Lake Kyoga', km: 18.5, frequency: 'Daily', capacity_veh: 12 },
+  { id: 'F02', name: 'Bukakata-Buwama',    water_body: 'Lake Victoria', km: 22.4, frequency: 'Daily', capacity_veh: 20 },
+  { id: 'F03', name: 'Ntoroko-Kaiso',      water_body: 'Lake Albert',   km: 14.8, frequency: '3×/day', capacity_veh: 8  },
   { id: 'F04', name: 'Laropi (Nile)',       water_body: 'River Nile',    km:  0.8, frequency: 'Daily', capacity_veh: 6  },
-  { id: 'F05', name: 'Wanseko–Butiaba',    water_body: 'Lake Albert',   km: 16.2, frequency: '2×/day', capacity_veh: 10 },
+  { id: 'F05', name: 'Wanseko-Butiaba',    water_body: 'Lake Albert',   km: 16.2, frequency: '2×/day', capacity_veh: 10 },
 ];
 
 const AIRPORTS = [
@@ -215,10 +215,10 @@ const AIRPORTS = [
 ];
 
 const RAIL_ROUTES = [
-  { name: 'Kampala–Tororo (existing)', km: 259, status: 'Existing',  gauge: 'Metre',    operator: 'Uganda Railways Corp.' },
-  { name: 'Tororo–Gulu (existing)',    km: 313, status: 'Existing',  gauge: 'Metre',    operator: 'Uganda Railways Corp.' },
-  { name: 'SGR Mombasa–Kampala',       km: 1720, status: 'Proposed', gauge: 'Standard', operator: 'KRC / TRC / URC'       },
-  { name: 'SGR Kampala–Kigali',        km: 520,  status: 'Proposed', gauge: 'Standard', operator: 'URC / Rwandair'         },
+  { name: 'Kampala-Tororo (existing)', km: 259, status: 'Existing',  gauge: 'Metre',    operator: 'Uganda Railways Corp.' },
+  { name: 'Tororo-Gulu (existing)',    km: 313, status: 'Existing',  gauge: 'Metre',    operator: 'Uganda Railways Corp.' },
+  { name: 'SGR Mombasa-Kampala',       km: 1720, status: 'Proposed', gauge: 'Standard', operator: 'KRC / TRC / URC'       },
+  { name: 'SGR Kampala-Kigali',        km: 520,  status: 'Proposed', gauge: 'Standard', operator: 'URC / Rwandair'         },
 ];
 
 const BUDGET_ALLOCATION = [
@@ -257,7 +257,7 @@ const HIST_NETWORK = [
   { year: 2015, paved_km: 4380, total_km: 19800, pct_paved: 22.1 },
   { year: 2020, paved_km: 5640, total_km: 20700, pct_paved: 27.2 },
   { year: 2025, paved_km: 6334, total_km: 21160, pct_paved: 29.9 },
-  { year: 2026, paved_km: 6405, total_km: 21302, pct_paved: 30.1 },
+  { year: 2026, paved_km: 11762.8, total_km: 21302, pct_paved: 55.2 },
 ];
 // Annual gain vs the previous chronological survey year, precomputed against
 // HIST_NETWORK's fixed year order so the figure stays correct however the
@@ -335,12 +335,12 @@ const ACCIDENTS_BY_CLASS = [
   { cls:'M', km:145,   fatalities:24,  injuries:96,   accidents:38,  rate_per_100km:26.2 },
 ];
 const ACCIDENT_HOTSPOTS = [
-  { link_id:'A002_Link01', location:'Kampala–Jinja km 14–22',       accidents_24:84, fatalities_24:18, cause:'Speed / overtaking' },
-  { link_id:'A003_Link01', location:'Kampala–Mbarara km 8–15',      accidents_24:62, fatalities_24:14, cause:'Mixed traffic' },
-  { link_id:'A005_Link01', location:'Busega–Bujuuko km 0–6',        accidents_24:78, fatalities_24:16, cause:'Intersection conflict' },
-  { link_id:'A001_Link01', location:'Kampala–Gulu km 38–44',        accidents_24:48, fatalities_24:10, cause:'Roadside market' },
-  { link_id:'A002_Link03', location:'Jinja–Tororo km 48–54',        accidents_24:42, fatalities_24:9,  cause:'Night driving' },
-  { link_id:'B101_Link02', location:'Kalagi–Kayunga km 12–18',      accidents_24:36, fatalities_24:7,  cause:'Potholes / poor cond.' },
+  { link_id:'A002_Link01', location:'Kampala-Jinja km 14-22',       accidents_24:84, fatalities_24:18, cause:'Speed / overtaking' },
+  { link_id:'A003_Link01', location:'Kampala-Mbarara km 8-15',      accidents_24:62, fatalities_24:14, cause:'Mixed traffic' },
+  { link_id:'A005_Link01', location:'Busega-Bujuuko km 0-6',        accidents_24:78, fatalities_24:16, cause:'Intersection conflict' },
+  { link_id:'A001_Link01', location:'Kampala-Gulu km 38-44',        accidents_24:48, fatalities_24:10, cause:'Roadside market' },
+  { link_id:'A002_Link03', location:'Jinja-Tororo km 48-54',        accidents_24:42, fatalities_24:9,  cause:'Night driving' },
+  { link_id:'B101_Link02', location:'Kalagi-Kayunga km 12-18',      accidents_24:36, fatalities_24:7,  cause:'Potholes / poor cond.' },
 ];
 const ACCIDENTS_BY_REGION = [
   { region:'Central',       fatalities:486, injuries:2148, accidents:808, rate_vkt:18.4 },
@@ -387,7 +387,7 @@ const EMERGENCY_WORKS = [
   { incident:'Bridge washout - A001 km 124',    region:'Northern', cost_m:480, duration_d:21, yr:2024 },
   { incident:'Landslide - A4 km 386',           region:'Western',  cost_m:280, duration_d:14, yr:2024 },
   { incident:'Road collapse - B68 km 42',       region:'Eastern',  cost_m:140, duration_d:7,  yr:2025 },
-  { incident:'Flood damage - C261 km 18–24',    region:'Northern', cost_m:360, duration_d:18, yr:2024 },
+  { incident:'Flood damage - C261 km 18-24',    region:'Northern', cost_m:360, duration_d:18, yr:2024 },
   { incident:'Bridge deck failure - A3 km 198', region:'Southern', cost_m:620, duration_d:28, yr:2025 },
   { incident:'Deep pothole cluster - A2 km 80', region:'Eastern',  cost_m:84,  duration_d:5,  yr:2025 },
   { incident:'Embankment failure - A45 km 62',  region:'Northern', cost_m:520, duration_d:24, yr:2024 },
@@ -443,11 +443,11 @@ const REHAB_HISTORY = [
   { cls:'M - Urban',  km_total:145,   km_rehabbed_10yr:112,  pct:77.2, avg_cost_m:62 },
 ];
 const PAVEMENT_AGE = [
-  { age:'0–5 years',   km:2840, pct:13.4, cond_index:92 },
-  { age:'6–10 years',  km:3640, pct:17.2, cond_index:80 },
-  { age:'11–15 years', km:3120, pct:14.8, cond_index:68 },
-  { age:'16–20 years', km:2480, pct:11.7, cond_index:56 },
-  { age:'21–30 years', km:2840, pct:13.4, cond_index:44 },
+  { age:'0-5 years',   km:2840, pct:13.4, cond_index:92 },
+  { age:'6-10 years',  km:3640, pct:17.2, cond_index:80 },
+  { age:'11-15 years', km:3120, pct:14.8, cond_index:68 },
+  { age:'16-20 years', km:2480, pct:11.7, cond_index:56 },
+  { age:'21-30 years', km:2840, pct:13.4, cond_index:44 },
   { age:'>30 years',   km:3846, pct:18.2, cond_index:32 },
   { age:'Unknown age', km:2568, pct:12.1, cond_index:55 },
 ];
@@ -458,14 +458,14 @@ const DESIGN_LIFE = [
   { surface:'Gravel',               design_yr:3,  actual_yr:2.4,  used_pct:80.0 },
 ];
 const ASSET_REPLACEMENT_FORECAST = [
-  { period:'2026–2028', km_paved:1240, km_gravel:2480, cost_tn:4.84, priority:'Critical' },
-  { period:'2029–2031', km_paved:980,  km_gravel:3240, cost_tn:4.12, priority:'High'     },
-  { period:'2032–2035', km_paved:760,  km_gravel:2840, cost_tn:3.40, priority:'Medium'   },
+  { period:'2026-2028', km_paved:1240, km_gravel:2480, cost_tn:4.84, priority:'Critical' },
+  { period:'2029-2031', km_paved:980,  km_gravel:3240, cost_tn:4.12, priority:'High'     },
+  { period:'2032-2035', km_paved:760,  km_gravel:2840, cost_tn:3.40, priority:'Medium'   },
 ];
 const REMAINING_LIFE = [
   { iri_band:'IRI < 3.5 (Good)',      km:4790, rem_life_yr:8.4, treatment:'Preventive maintenance' },
-  { iri_band:'IRI 3.5–6.5 (Fair)',   km:5595, rem_life_yr:4.2, treatment:'Resealing / overlay'    },
-  { iri_band:'IRI 6.5–9.0 (Poor)',   km:6102, rem_life_yr:1.8, treatment:'Structural overlay'     },
+  { iri_band:'IRI 3.5-6.5 (Fair)',   km:5595, rem_life_yr:4.2, treatment:'Resealing / overlay'    },
+  { iri_band:'IRI 6.5-9.0 (Poor)',   km:6102, rem_life_yr:1.8, treatment:'Structural overlay'     },
   { iri_band:'IRI > 9.0 (Very Poor)',km:4673, rem_life_yr:0.4, treatment:'Reconstruction'         },
 ];
 // ── §13 Environmental & Climate ───────────────────────────────────────────────
@@ -488,8 +488,8 @@ const FLOOD_LINKS = [
 const RAINFALL_CONDITION = [
   { zone:'Lake Victoria Basin (>1200mm)',  km:3240, avg_iri:4.8, paved_pct:58, flood_pct:22 },
   { zone:'Highlands (>1000mm)',            km:1840, avg_iri:5.2, paved_pct:32, flood_pct:18 },
-  { zone:'Central Savannah (800–1000mm)', km:6480, avg_iri:4.2, paved_pct:31, flood_pct:8  },
-  { zone:'Northern Semi-arid (600–800mm)',km:4840, avg_iri:6.1, paved_pct:18, flood_pct:12 },
+  { zone:'Central Savannah (800-1000mm)', km:6480, avg_iri:4.2, paved_pct:31, flood_pct:8  },
+  { zone:'Northern Semi-arid (600-800mm)',km:4840, avg_iri:6.1, paved_pct:18, flood_pct:12 },
   { zone:'Karamoja Arid (<600mm)',         km:2840, avg_iri:7.4, paved_pct:9,  flood_pct:6  },
   { zone:'Rift Valley (variable)',         km:1920, avg_iri:5.8, paved_pct:28, flood_pct:14 },
 ];
@@ -518,19 +518,19 @@ const PROTECTED_AREAS = [
 ];
 // ── §14 Cross-border Corridors ────────────────────────────────────────────────
 const NORTHERN_CORRIDOR = [
-  { segment:'Mombasa–Nairobi',       km:480, country:'Kenya',  cond:'Good', paved_pct:100 },
-  { segment:'Nairobi–Malaba',        km:470, country:'Kenya',  cond:'Fair', paved_pct:100 },
-  { segment:'Malaba–Kampala (A109)', km:247, country:'Uganda', cond:'Fair', paved_pct:100 },
-  { segment:'Busia–Kampala',         km:201, country:'Uganda', cond:'Good', paved_pct:100 },
-  { segment:'Kampala–Katuna (A4)',   km:419, country:'Uganda', cond:'Fair', paved_pct:100 },
-  { segment:'Katuna–Kigali',         km:148, country:'Rwanda', cond:'Good', paved_pct:100 },
+  { segment:'Mombasa-Nairobi',       km:480, country:'Kenya',  cond:'Good', paved_pct:100 },
+  { segment:'Nairobi-Malaba',        km:470, country:'Kenya',  cond:'Fair', paved_pct:100 },
+  { segment:'Malaba-Kampala (A109)', km:247, country:'Uganda', cond:'Fair', paved_pct:100 },
+  { segment:'Busia-Kampala',         km:201, country:'Uganda', cond:'Good', paved_pct:100 },
+  { segment:'Kampala-Katuna (A4)',   km:419, country:'Uganda', cond:'Fair', paved_pct:100 },
+  { segment:'Katuna-Kigali',         km:148, country:'Rwanda', cond:'Good', paved_pct:100 },
 ];
 const CENTRAL_CORRIDOR = [
-  { segment:'Dar es Salaam–Dodoma', km:480, country:'Tanzania', cond:'Fair', paved_pct:100 },
-  { segment:'Dodoma–Isaka',         km:540, country:'Tanzania', cond:'Poor', paved_pct:64  },
-  { segment:'Isaka–Mutukula',       km:344, country:'Tanzania', cond:'Poor', paved_pct:48  },
-  { segment:'Mutukula–Masaka',      km:124, country:'Uganda',   cond:'Good', paved_pct:100 },
-  { segment:'Masaka–Kampala',       km:138, country:'Uganda',   cond:'Good', paved_pct:100 },
+  { segment:'Dar es Salaam-Dodoma', km:480, country:'Tanzania', cond:'Fair', paved_pct:100 },
+  { segment:'Dodoma-Isaka',         km:540, country:'Tanzania', cond:'Poor', paved_pct:64  },
+  { segment:'Isaka-Mutukula',       km:344, country:'Tanzania', cond:'Poor', paved_pct:48  },
+  { segment:'Mutukula-Masaka',      km:124, country:'Uganda',   cond:'Good', paved_pct:100 },
+  { segment:'Masaka-Kampala',       km:138, country:'Uganda',   cond:'Good', paved_pct:100 },
 ];
 const CORRIDOR_FREIGHT = [
   { corridor:'Northern Corridor', dir:'Import', annual_mt:12.4, top_cargo:'Fuel, Consumer goods', growth_pct:8.2  },
@@ -550,15 +550,15 @@ const BORDER_TRAFFIC = [
   { post:'Oraba',    country:'DRC',      daily_veh:240,  pedestrians_d:1200, pct_hgv:48 },
 ];
 const TRANSIT_TIME = [
-  { route:'Mombasa–Kampala',      km:1027, days_avg:5.8, days_best:3.2, delay:'Customs / border' },
-  { route:'Dar es Salaam–Kampala',km:1364, days_avg:7.2, days_best:4.8, delay:'Road condition'   },
-  { route:'Kampala–Nairobi',      km:950,  days_avg:2.4, days_best:1.8, delay:'Weighbridge queue' },
-  { route:'Kampala–Kigali',       km:560,  days_avg:1.6, days_best:1.2, delay:'Border formalities'},
-  { route:'Kampala–Bujumbura',    km:640,  days_avg:2.8, days_best:1.6, delay:'DRC road condition'},
-  { route:'Kampala–Juba',         km:840,  days_avg:4.2, days_best:2.8, delay:'Security / road'  },
+  { route:'Mombasa-Kampala',      km:1027, days_avg:5.8, days_best:3.2, delay:'Customs / border' },
+  { route:'Dar es Salaam-Kampala',km:1364, days_avg:7.2, days_best:4.8, delay:'Road condition'   },
+  { route:'Kampala-Nairobi',      km:950,  days_avg:2.4, days_best:1.8, delay:'Weighbridge queue' },
+  { route:'Kampala-Kigali',       km:560,  days_avg:1.6, days_best:1.2, delay:'Border formalities'},
+  { route:'Kampala-Bujumbura',    km:640,  days_avg:2.8, days_best:1.6, delay:'DRC road condition'},
+  { route:'Kampala-Juba',         km:840,  days_avg:4.2, days_best:2.8, delay:'Security / road'  },
 ];
 const BORDER_INFRA = [
-  { post:'Malaba–Busia', osbp:true,  scanners:2, lanes:8, parking_trucks:480, yr:2022 },
+  { post:'Malaba-Busia', osbp:true,  scanners:2, lanes:8, parking_trucks:480, yr:2022 },
   { post:'Mutukula',     osbp:true,  scanners:1, lanes:4, parking_trucks:180, yr:2021 },
   { post:'Katuna',       osbp:true,  scanners:1, lanes:6, parking_trucks:240, yr:2023 },
   { post:'Elegu',        osbp:false, scanners:1, lanes:4, parking_trucks:120, yr:2025 },
@@ -608,7 +608,7 @@ const SCHOOL_ACCESS = [
 ];
 // ── §16 International Benchmarking ────────────────────────────────────────────
 const EAC_NETWORK = [
-  { country:'Uganda',   road_km:21302,  paved_km:6405,  paved_pct:30.1, pop_m:47.8, density:88.4  },
+  { country:'Uganda',   road_km:21302,  paved_km:11762.8,  paved_pct:55.2, pop_m:47.8, density:88.4  },
   { country:'Kenya',    road_km:63575,  paved_km:14028, paved_pct:22.1, pop_m:54.0, density:109.5 },
   { country:'Tanzania', road_km:145203, paved_km:12004, paved_pct:8.3,  pop_m:61.7, density:153.6 },
   { country:'Rwanda',   road_km:4700,   paved_km:1482,  paved_pct:31.5, pop_m:13.5, density:178.4 },
@@ -643,14 +643,14 @@ const MAINT_SPEND_COMPARISON = [
 ];
 const IRI_BENCHMARKS = [
   { standard:'SSATP - Good (IRI < 3.5)',    ugx_pct:22.6, eac_avg_pct:28.4 },
-  { standard:'SSATP - Fair (IRI 3.5–6)',   ugx_pct:26.4, eac_avg_pct:30.2 },
+  { standard:'SSATP - Fair (IRI 3.5-6)',   ugx_pct:26.4, eac_avg_pct:30.2 },
   { standard:'SSATP - Poor (IRI > 6)',     ugx_pct:51.0, eac_avg_pct:41.4 },
   { standard:'WB threshold (IRI < 4)',     ugx_pct:38.4, eac_avg_pct:42.8 },
   { standard:'WB threshold (IRI > 8)',     ugx_pct:22.1, eac_avg_pct:16.4 },
 ];
 const TRAFFIC_BENCHMARKS = [
-  { route_type:'Capital–port (national)', ugx_aadt:19400, eac_avg_aadt:14800, ssa_avg_aadt:10400 },
-  { route_type:'Capital–2nd city',        ugx_aadt:15200, eac_avg_aadt:9600,  ssa_avg_aadt:6800  },
+  { route_type:'Capital-port (national)', ugx_aadt:19400, eac_avg_aadt:14800, ssa_avg_aadt:10400 },
+  { route_type:'Capital-2nd city',        ugx_aadt:15200, eac_avg_aadt:9600,  ssa_avg_aadt:6800  },
   { route_type:'National highway',        ugx_aadt:7400,  eac_avg_aadt:4800,  ssa_avg_aadt:3200  },
   { route_type:'Secondary road',          ugx_aadt:2800,  eac_avg_aadt:1600,  ssa_avg_aadt:1200  },
   { route_type:'Tertiary road',           ugx_aadt:840,   eac_avg_aadt:480,   ssa_avg_aadt:360   },
@@ -740,8 +740,8 @@ const DATA_GAPS = [
 const KPI_VALIDATION = [
   { kpi:'Total network km',  value:'21,302', source:'DNR official', geojson:'21,137', delta:'+165',  ok:true },
   { kpi:'Total links',       value:'1,014',  source:'GeoJSON',      geojson:'1,014',  delta:'0',     ok:true },
-  { kpi:'Paved km',          value:'6,334',  source:'DNR survey',   geojson:'6,405',  delta:'-71',   ok:true },
-  { kpi:'Paved pct',         value:'30.3%',  source:'DNR official', geojson:'30.3%',  delta:'-0.2%', ok:true },
+  { kpi:'Paved km',          value:'11,762.8', source:'Approved baseline', geojson:'11,762.8', delta:'0', ok:true },
+  { kpi:'Paved pct',         value:'55.2%', source:'Approved baseline', geojson:'55.2%', delta:'0', ok:true },
   { kpi:'Total bridges',     value:'546',    source:'BMS',          geojson:'546',    delta:'0',     ok:true },
   { kpi:'ATC stations',      value:'25',     source:'TIS database', geojson:'N/A',    delta:'N/A',   ok:true },
 ];
@@ -756,13 +756,13 @@ const DUPLICATE_CHECK = [
 ];
 // ── §19 Construction & Rehabilitation ────────────────────────────────────────
 const ACTIVE_CONTRACTS = [
-  { contract:'Gulu–Atiak–Nimule (A1)',  km:103, contractor:'China Wu Yi', cost_bn:486, progress_pct:28, yr:2024 },
-  { contract:'Mpigi–Kanoni Road',        km:78,  contractor:'COLAS',       cost_bn:312, progress_pct:42, yr:2024 },
-  { contract:'Kapchorwa–Suam',          km:79,  contractor:'STRABAG',     cost_bn:285, progress_pct:41, yr:2023 },
-  { contract:'Luwero–Nakasongola',      km:83,  contractor:'Dott Svc',    cost_bn:248, progress_pct:34, yr:2024 },
-  { contract:'Fort Portal–Kamwenge',    km:74,  contractor:'STRABAG',     cost_bn:320, progress_pct:55, yr:2022 },
-  { contract:'Soroti–Katakwi–Moroto',   km:266, contractor:'China CC',    cost_bn:890, progress_pct:12, yr:2025 },
-  { contract:'Ishaka–Kagamba',          km:30,  contractor:'COLAS',       cost_bn:128, progress_pct:68, yr:2024 },
+  { contract:'Gulu-Atiak-Nimule (A1)',  km:103, contractor:'China Wu Yi', cost_bn:486, progress_pct:28, yr:2024 },
+  { contract:'Mpigi-Kanoni Road',        km:78,  contractor:'COLAS',       cost_bn:312, progress_pct:42, yr:2024 },
+  { contract:'Kapchorwa-Suam',          km:79,  contractor:'STRABAG',     cost_bn:285, progress_pct:41, yr:2023 },
+  { contract:'Luwero-Nakasongola',      km:83,  contractor:'Dott Svc',    cost_bn:248, progress_pct:34, yr:2024 },
+  { contract:'Fort Portal-Kamwenge',    km:74,  contractor:'STRABAG',     cost_bn:320, progress_pct:55, yr:2022 },
+  { contract:'Soroti-Katakwi-Moroto',   km:266, contractor:'China CC',    cost_bn:890, progress_pct:12, yr:2025 },
+  { contract:'Ishaka-Kagamba',          km:30,  contractor:'COLAS',       cost_bn:128, progress_pct:68, yr:2024 },
 ];
 const COMPLETED_REHAB = [
   { period:'2020/21', km_paved:128, km_gravel:842,  cost_bn:680,  contracts:14 },
@@ -834,12 +834,12 @@ const TRAVEL_TIME_MATRIX = [
   { to:'Moroto',       km:580, best_hr:8.4, typical_hr:11.2,road:'A1/B'   },
 ];
 const CONN_GAPS = [
-  { gap:'Kotido–Kaabong (C-class, dry weather only)', km:84, pop_k:82,  priority:'High'   },
+  { gap:'Kotido-Kaabong (C-class, dry weather only)', km:84, pop_k:82,  priority:'High'   },
   { gap:'Kidepo access road (dry weather only)',       km:62, pop_k:48,  priority:'Medium' },
-  { gap:'Nakapiripirit–Moroto (corrugated)',           km:68, pop_k:64,  priority:'High'   },
-  { gap:'Yumbe–Moyo unpaved link',                    km:74, pop_k:124, priority:'High'   },
-  { gap:'Kasese–Bugoye–Bundibugyo',                   km:86, pop_k:96,  priority:'Medium' },
-  { gap:'Soroti–Katakwi (poor condition)',             km:86, pop_k:148, priority:'High'   },
+  { gap:'Nakapiripirit-Moroto (corrugated)',           km:68, pop_k:64,  priority:'High'   },
+  { gap:'Yumbe-Moyo unpaved link',                    km:74, pop_k:124, priority:'High'   },
+  { gap:'Kasese-Bugoye-Bundibugyo',                   km:86, pop_k:96,  priority:'Medium' },
+  { gap:'Soroti-Katakwi (poor condition)',             km:86, pop_k:148, priority:'High'   },
 ];
 const URBAN_ROADS = [
   { city:'Kampala',    urban_km:2140, paved_pct:68, signals:124, bus_routes:84 },
@@ -858,11 +858,11 @@ const NATIONAL_PARKS_ACCESS = [
   { park:'Rwenzori Mountains',  cls:'C', km_gate:12, surface:'Gravel',      visitors:14200 },
 ];
 const OIL_ROADS = [
-  { road:'Hoima–Buliisa (A1)',     km:112, surface:'Paved',  cls:'A', oil_pct:28, upgrade_yr:2024 },
-  { road:'Buliisa–Masindi',        km:68,  surface:'Gravel', cls:'C', oil_pct:42, upgrade_yr:2025 },
-  { road:'Kampala–Hoima (A1)',     km:186, surface:'Paved',  cls:'A', oil_pct:18, upgrade_yr:null },
-  { road:'Kabaale–Buseruka',       km:38,  surface:'Paved',  cls:'B', oil_pct:64, upgrade_yr:2023 },
-  { road:'Kiziranfumbi–Kikuube',   km:42,  surface:'Gravel', cls:'C', oil_pct:48, upgrade_yr:2026 },
+  { road:'Hoima-Buliisa (A1)',     km:112, surface:'Paved',  cls:'A', oil_pct:28, upgrade_yr:2024 },
+  { road:'Buliisa-Masindi',        km:68,  surface:'Gravel', cls:'C', oil_pct:42, upgrade_yr:2025 },
+  { road:'Kampala-Hoima (A1)',     km:186, surface:'Paved',  cls:'A', oil_pct:18, upgrade_yr:null },
+  { road:'Kabaale-Buseruka',       km:38,  surface:'Paved',  cls:'B', oil_pct:64, upgrade_yr:2023 },
+  { road:'Kiziranfumbi-Kikuube',   km:42,  surface:'Gravel', cls:'C', oil_pct:48, upgrade_yr:2026 },
 ];
 const RESILIENCE_INDICATORS = [
   { metric:'Links with no detour route',       value:'184',  pct:'18.2%', risk:'High'     },
@@ -879,8 +879,8 @@ const DETOUR_AVAILABILITY = [
   { cls:'M', total_links:15,  have_detour:14,  pct:93.3, avg_detour_km:22 },
 ];
 const CRITICAL_LINKS = [
-  { link_id:'C280_Link01', name:'Moroto–Nakapiripirit', reason:'No detour', pop_served_k:64,  closure_risk:'High'   },
-  { link_id:'C297_Link02', name:'Kotido–Abim',          reason:'No detour', pop_served_k:82,  closure_risk:'High'   },
+  { link_id:'C280_Link01', name:'Moroto-Nakapiripirit', reason:'No detour', pop_served_k:64,  closure_risk:'High'   },
+  { link_id:'C297_Link02', name:'Kotido-Abim',          reason:'No detour', pop_served_k:82,  closure_risk:'High'   },
   { link_id:'B240_Link03', name:'Kidepo access',        reason:'No detour', pop_served_k:48,  closure_risk:'Medium' },
   { link_id:'A001_Link07', name:'Karuma Bridge approach',reason:'Bridge',   pop_served_k:2400,closure_risk:'High'   },
   { link_id:'A002_Link01', name:'Jinja / Owen Falls',   reason:'Bridge',    pop_served_k:4800,closure_risk:'High'   },
@@ -912,21 +912,21 @@ const NETWORK_COMPLETENESS = [
 
 // ── §21 Global RMS Case Studies ──────────────────────────────────────────────
 const GLOBAL_CASES_TABLE = [
-  { id:1,  agency:'TANROADS',       country:'Tanzania',        flag:'🇹🇿', km:35000,  paved_pct:25, system:'RAMS / HDM-4 (IDA)',          yrs_active:'2015–now', budget_km_usd:8000,  innovation:'Tropical HDM-4 calibration (−18% treatment costs)',      dnr:'Uganda-specific calibration for Class C/B; ROMDAS + visual survey integration' },
-  { id:2,  agency:'KeNHA',          country:'Kenya',           flag:'🇰🇪', km:11189,  paved_pct:22, system:'RAMS + dTIMS CT',              yrs_active:'2016–now', budget_km_usd:22000, innovation:'Mobile survey apps halved survey costs (KoboToolbox)',     dnr:'Mobile-first Class C survey; twice-yearly frequency achievable' },
-  { id:3,  agency:'RTDA',           country:'Rwanda',          flag:'🇷🇼', km:4700,   paved_pct:31, system:'OPRC + Integrated RAMS',       yrs_active:'2018–now', budget_km_usd:24000, innovation:'Bundled emergency+routine in single OPRC lot',           dnr:'Lot 9 (Karamoja) emergency-response clause; rapid paving 18%→34%' },
-  { id:4,  agency:'SANRAL',         country:'South Africa',    flag:'🇿🇦', km:21400,  paved_pct:95, system:'iRAMS (Integrated RAMS)',       yrs_active:'2010–now', budget_km_usd:48000, innovation:'Public condition portal builds political budget support',   dnr:'Simple public DNR dashboard strengthens case for maintenance funding' },
-  { id:5,  agency:'Highways England',country:'United Kingdom', flag:'🇬🇧', km:7800,   paved_pct:100,system:'HAPMS',                        yrs_active:'2005–now', budget_km_usd:180000,innovation:'50-year planning horizon, ISO 55001 certified',            dnr:'10–15 yr rolling maintenance programme via HDM-4 multi-year analysis' },
-  { id:6,  agency:'Austroads/DPTI', country:'Australia',       flag:'🇦🇺', km:33000,  paved_pct:88, system:'DNR RMS Engine (fmr. dTIMS CT)',yrs_active:'2000–now', budget_km_usd:95000, innovation:'AP-R359/556 low-cost sealed/unsealed roads research series',dnr:'AP-R359 directly applicable to Class B DBST; AP-R556 for wet-tropics C roads' },
-  { id:7,  agency:'NZTA Waka Kotahi',country:'New Zealand',    flag:'🇳🇿', km:11000,  paved_pct:90, system:'ONE Network Framework',         yrs_active:'2014–now', budget_km_usd:68000, innovation:'Service-level targets by road class (ONRC)',               dnr:'Differentiated service levels for DNR Class A/B/C - explicit performance targets' },
-  { id:8,  agency:'FHWA / DOTs',    country:'USA',             flag:'🇺🇸', km:900000, paved_pct:80, system:'FMIS / TAMP (MAP-21)',          yrs_active:'2012–now', budget_km_usd:280000,innovation:'Mandatory TAMP legislation (MAP-21/FAST Act)',              dnr:'Model for Uganda Transport Infrastructure Act: mandatory 10-yr AMP to Parliament' },
-  { id:9,  agency:'NHAI / NRRDA',   country:'India',           flag:'🇮🇳', km:145000, paved_pct:65, system:'RCMS + Gati Shakti GIS',        yrs_active:'2021–now', budget_km_usd:12000, innovation:'RCMS mobile app for rural/gravel roads at scale',          dnr:'Scalable Class C monitoring with community participation in Northern Uganda' },
-  { id:10, agency:'Trafikverket',   country:'Sweden',          flag:'🇸🇪', km:98000,  paved_pct:84, system:'PMS + LCC (12-yr plan)',        yrs_active:'2018–now', budget_km_usd:84000, innovation:'Seasonal rainfall cycle integrated in deterioration model',dnr:'Uganda bi-modal rainfall (MAM+OND) creates analogous cyclic damage patterns' },
-  { id:11, agency:'Rijkswaterstaat',country:'Netherlands',     flag:'🇳🇱', km:5900,   paved_pct:100,system:'Predictive Asset Management',   yrs_active:'2015–now', budget_km_usd:180000,innovation:'Monthly Asset Health Index per link (single KPI to Parliament)',dnr:'DNR AHI simplifies MoWT reporting while retaining technical depth' },
-  { id:12, agency:'MLIT',           country:'Japan',           flag:'🇯🇵', km:127000, paved_pct:92, system:'Bridge Inspection Law + RAMS',  yrs_active:'2014–now', budget_km_usd:124000,innovation:'Mandatory 5-yr bridge inspection cycle (Road Act 2014)',    dnr:'Legal mandatory inspection cycle model for Uganda Transport Infrastructure Act' },
-  { id:13, agency:'DNIT',           country:'Brazil',          flag:'🇧🇷', km:75000,  paved_pct:80, system:'SGEPT / CREMA contracts',       yrs_active:'2010–now', budget_km_usd:18000, innovation:'CREMA OPRC on gravel roads (18% cheaper than traditional)',dnr:'Performance standards for Class C gravel with baseline condition safeguards' },
-  { id:14, agency:'GHA',            country:'Ghana',           flag:'🇬🇭', km:15000,  paved_pct:36, system:'GHIAS (IDA P164887)',           yrs_active:'2018–2022',budget_km_usd:14000, innovation:'Phased RAMS: high-traffic paved first, then gravel',         dnr:'Phase rollout reduces costs; builds institutional capacity before full C-road expansion' },
-  { id:15, agency:'ERA',            country:'Ethiopia',        flag:'🇪🇹', km:130000, paved_pct:13, system:'RRAMPS (AfDB-funded)',           yrs_active:'2019–2024',budget_km_usd:8000,  innovation:'Baseline→analysis→budget: exactly DNR\'s next phase',     dnr:'DNR already has good condition data; prioritise budget optimisation & programme generation now' },
+  { id:1,  agency:'TANROADS',       country:'Tanzania',        flag:'🇹🇿', km:35000,  paved_pct:25, system:'RAMS / HDM-4 (IDA)',          yrs_active:'2015-now', budget_km_usd:8000,  innovation:'Tropical HDM-4 calibration (−18% treatment costs)',      dnr:'Uganda-specific calibration for Class C/B; ROMDAS + visual survey integration' },
+  { id:2,  agency:'KeNHA',          country:'Kenya',           flag:'🇰🇪', km:11189,  paved_pct:22, system:'RAMS + dTIMS CT',              yrs_active:'2016-now', budget_km_usd:22000, innovation:'Mobile survey apps halved survey costs (KoboToolbox)',     dnr:'Mobile-first Class C survey; twice-yearly frequency achievable' },
+  { id:3,  agency:'RTDA',           country:'Rwanda',          flag:'🇷🇼', km:4700,   paved_pct:31, system:'OPRC + Integrated RAMS',       yrs_active:'2018-now', budget_km_usd:24000, innovation:'Bundled emergency+routine in single OPRC lot',           dnr:'Lot 9 (Karamoja) emergency-response clause; rapid paving 18%→34%' },
+  { id:4,  agency:'SANRAL',         country:'South Africa',    flag:'🇿🇦', km:21400,  paved_pct:95, system:'iRAMS (Integrated RAMS)',       yrs_active:'2010-now', budget_km_usd:48000, innovation:'Public condition portal builds political budget support',   dnr:'Simple public DNR dashboard strengthens case for maintenance funding' },
+  { id:5,  agency:'Highways England',country:'United Kingdom', flag:'🇬🇧', km:7800,   paved_pct:100,system:'HAPMS',                        yrs_active:'2005-now', budget_km_usd:180000,innovation:'50-year planning horizon, ISO 55001 certified',            dnr:'10-15 yr rolling maintenance programme via HDM-4 multi-year analysis' },
+  { id:6,  agency:'Austroads/DPTI', country:'Australia',       flag:'🇦🇺', km:33000,  paved_pct:88, system:'DNR RMS Engine (fmr. dTIMS CT)',yrs_active:'2000-now', budget_km_usd:95000, innovation:'AP-R359/556 low-cost sealed/unsealed roads research series',dnr:'AP-R359 directly applicable to Class B DBST; AP-R556 for wet-tropics C roads' },
+  { id:7,  agency:'NZTA Waka Kotahi',country:'New Zealand',    flag:'🇳🇿', km:11000,  paved_pct:90, system:'ONE Network Framework',         yrs_active:'2014-now', budget_km_usd:68000, innovation:'Service-level targets by road class (ONRC)',               dnr:'Differentiated service levels for DNR Class A/B/C - explicit performance targets' },
+  { id:8,  agency:'FHWA / DOTs',    country:'USA',             flag:'🇺🇸', km:900000, paved_pct:80, system:'FMIS / TAMP (MAP-21)',          yrs_active:'2012-now', budget_km_usd:280000,innovation:'Mandatory TAMP legislation (MAP-21/FAST Act)',              dnr:'Model for Uganda Transport Infrastructure Act: mandatory 10-yr AMP to Parliament' },
+  { id:9,  agency:'NHAI / NRRDA',   country:'India',           flag:'🇮🇳', km:145000, paved_pct:65, system:'RCMS + Gati Shakti GIS',        yrs_active:'2021-now', budget_km_usd:12000, innovation:'RCMS mobile app for rural/gravel roads at scale',          dnr:'Scalable Class C monitoring with community participation in Northern Uganda' },
+  { id:10, agency:'Trafikverket',   country:'Sweden',          flag:'🇸🇪', km:98000,  paved_pct:84, system:'PMS + LCC (12-yr plan)',        yrs_active:'2018-now', budget_km_usd:84000, innovation:'Seasonal rainfall cycle integrated in deterioration model',dnr:'Uganda bi-modal rainfall (MAM+OND) creates analogous cyclic damage patterns' },
+  { id:11, agency:'Rijkswaterstaat',country:'Netherlands',     flag:'🇳🇱', km:5900,   paved_pct:100,system:'Predictive Asset Management',   yrs_active:'2015-now', budget_km_usd:180000,innovation:'Monthly Asset Health Index per link (single KPI to Parliament)',dnr:'DNR AHI simplifies MoWT reporting while retaining technical depth' },
+  { id:12, agency:'MLIT',           country:'Japan',           flag:'🇯🇵', km:127000, paved_pct:92, system:'Bridge Inspection Law + RAMS',  yrs_active:'2014-now', budget_km_usd:124000,innovation:'Mandatory 5-yr bridge inspection cycle (Road Act 2014)',    dnr:'Legal mandatory inspection cycle model for Uganda Transport Infrastructure Act' },
+  { id:13, agency:'DNIT',           country:'Brazil',          flag:'🇧🇷', km:75000,  paved_pct:80, system:'SGEPT / CREMA contracts',       yrs_active:'2010-now', budget_km_usd:18000, innovation:'CREMA OPRC on gravel roads (18% cheaper than traditional)',dnr:'Performance standards for Class C gravel with baseline condition safeguards' },
+  { id:14, agency:'GHA',            country:'Ghana',           flag:'🇬🇭', km:15000,  paved_pct:36, system:'GHIAS (IDA P164887)',           yrs_active:'2018-2022',budget_km_usd:14000, innovation:'Phased RAMS: high-traffic paved first, then gravel',         dnr:'Phase rollout reduces costs; builds institutional capacity before full C-road expansion' },
+  { id:15, agency:'ERA',            country:'Ethiopia',        flag:'🇪🇹', km:130000, paved_pct:13, system:'RRAMPS (AfDB-funded)',           yrs_active:'2019-2024',budget_km_usd:8000,  innovation:'Baseline→analysis→budget: exactly DNR\'s next phase',     dnr:'DNR already has good condition data; prioritise budget optimisation & programme generation now' },
 ];
 
 // ── §22 Category B International Standards ────────────────────────────────────
@@ -934,7 +934,7 @@ const CAT_B_STANDARDS = [
   { name:'HDM-4 Highway Development & Management Tool (v1.3)',          body:'World Bank / PIARC',              yr:'2000',    module:'HDM4, PMS, Budget',      status:'Active',   notes:'Core PMS analytical engine; Uganda-specific calibration 2023' },
   { name:'ISO 55001:2014 - Asset Management System Requirements',        body:'ISO / BSI',                       yr:'2014',    module:'RMS, BMS, PMS',          status:'Active',   notes:'DNR Asset Mgmt Policy 2017 aligned to ISO 55000 series' },
   { name:'SATCC TRH4 - Structural Design of Flexible Pavements (2020)', body:'SATCC / CSIR South Africa',       yr:'2020',    module:'PMS, HDM4, TIS',         status:'Active',   notes:'Source of ESAL factors; Truck Trailer 6ax = 5.86 CESAL' },
-  { name:'World Bank Road Asset Management Guidelines (RAMP)',           body:'World Bank / IBRD',               yr:'2018',    module:'RMS, Budget, PMS',       status:'Active',   notes:'Framework for DNR RAMS procurement; referenced in RSDP I–IV' },
+  { name:'World Bank Road Asset Management Guidelines (RAMP)',           body:'World Bank / IBRD',               yr:'2018',    module:'RMS, Budget, PMS',       status:'Active',   notes:'Framework for DNR RAMS procurement; referenced in RSDP I-IV' },
   { name:'AfDB Infrastructure Asset Management Policy Framework',        body:'African Development Bank',        yr:'2021',    module:'RMS, Budget',            status:'Active',   notes:'Applies to all AfDB-funded DNR projects (RSSP I-III, UTRP)' },
   { name:'AASHTO PP 104-20 - Pavement Preservation Design Guide',       body:'AASHTO',                          yr:'2020',    module:'PMS, HDM4',              status:'Active',   notes:'Supplementary design reference for Class A MEPDG approach' },
   { name:'FHWA TAMP Guidelines - Transportation Asset Management Plans', body:'FHWA (USA)',                      yr:'2019',    module:'RMS, Budget, BMS',       status:'Active',   notes:'Model for DNR 10-year Asset Management Plan to MoWT/Parliament' },
@@ -960,7 +960,7 @@ const CAT_C_RESEARCH = [
   { ref:'P03', author:'Carruthers et al. / World Bank',         yr:'2005', title:'Traffic Growth Models for Developing Countries',                          notes:'GDP-AADT elasticity = 1.1 for Uganda; used in DNR TIS projections' },
   { ref:'P04', author:'Mwangi et al. / MDPI Sustainability',   yr:'2022', title:'Climate Change Adaptation for Road Infrastructure in East Africa',        notes:'Flood-exposure scoring for DNR road links; Uganda section used directly' },
   { ref:'P05', author:'Stankevich et al. / World Bank TP-14',  yr:'2009', title:'Performance-Based Road Contracting: A Practical Guide',                  notes:'OPRC KPI frameworks and payment mechanisms used in DNR contract design' },
-  { ref:'P06', author:'Jacobs & Cutting / Transport Reviews',  yr:'2017', title:'Road Safety in Sub-Saharan Africa: Technical Assessment',                notes:'Road condition–safety correlation in DNR analytics module' },
+  { ref:'P06', author:'Jacobs & Cutting / Transport Reviews',  yr:'2017', title:'Road Safety in Sub-Saharan Africa: Technical Assessment',                notes:'Road condition-safety correlation in DNR analytics module' },
   { ref:'P07', author:'Gwilliam & Meakin / SSATP WP-100',      yr:'2014', title:'Overloading on African Roads: Costs and Policy Responses',               notes:'ESAL damage cost; overloading quantification in DNR overloading module' },
   { ref:'P08', author:'Thompson et al. / NCHRP 300',           yr:'2012', title:'Bridge Management Systems: International State-of-Practice',             notes:'BMS design principles reflected in DNR Bridge Management System' },
   { ref:'P09', author:'Gopalakrishnan et al. / ASCE',          yr:'2017', title:'Deep Learning for Road Pavement Crack Detection',                        notes:'Reference for future drone/video condition detection on DNR' },
@@ -1005,7 +1005,7 @@ const CAT_C_RESEARCH = [
   { ref:'P48', author:'ILO',                                   yr:'2004', title:'Maintenance Productivity Norms for Road Works in Africa',              notes:'Labour productivity norms for DNR routine maintenance cost estimates' },
   { ref:'P49', author:'Paterson / World Bank TN-46',           yr:'1987', title:'Statistical Analysis of Road Condition Survey Data',                   notes:'Original IRI methodology; basis for all ROMDAS survey protocols' },
   { ref:'P50', author:'Gollin & Rogerson / American Economic Review',yr:'2014',title:'Social Benefits of Rural Road Improvement in East Africa',        notes:'Economic welfare analysis applied in DNR network accessibility scoring' },
-  { ref:'P51', author:'Parry & Bobe / TRL',                    yr:'2018', title:'Rainfall Data for Road Design and Management in Africa',               notes:'Uganda MAR data (800–1,500 mm/yr) applied in HDM-4 environment model' },
+  { ref:'P51', author:'Parry & Bobe / TRL',                    yr:'2018', title:'Rainfall Data for Road Design and Management in Africa',               notes:'Uganda MAR data (800-1,500 mm/yr) applied in HDM-4 environment model' },
   { ref:'P52', author:'ASTM International',                    yr:'2018', title:'Pavement Distress Cataloguing for Visual Surveys (ASTM D6433)',        notes:'Distress classification standard for DNR condition survey training' },
   { ref:'P53', author:'Hawk / NCHRP 483',                      yr:'2003', title:'Asset Management Plan Development for Bridge Networks',               notes:'Bridge AMP structure used in DNR BMS 5-year inspection/maintenance planning' },
 ];
@@ -1203,7 +1203,7 @@ function AdtProjectionTable() {
 
   return (
     <TablePanel id="tbl-adt-projection"
-      title="Annual Daily Traffic (ADT) Projections 2016–2040 by Road Link and Vehicle Class"
+      title="Annual Daily Traffic (ADT) Projections 2016-2040 by Road Link and Vehicle Class"
       accent={C.yellow}
       source={`network2026.geojson (aadt property, else derived from road class) projected via projectAADTByClass / per-class growth rates in trafficProjection.ts - all ${links.length.toLocaleString()} links, paginated`}>
       <div style={{
@@ -1212,7 +1212,7 @@ function AdtProjectionTable() {
       }}>
         <div style={{ fontSize: 9, color: 'rgba(148,163,184,0.5)' }}>
           {links.length === 0 ? 'Loading…' :
-            `Links ${rangeFrom}–${rangeTo} of ${filtered.length.toLocaleString()}${search.trim() !== '' ? ` (filtered from ${links.length.toLocaleString()})` : ''} · ${ADT_PROJECTION_YEARS.length} years (${ADT_PROJECTION_YEARS[0]}–${ADT_PROJECTION_YEARS[ADT_PROJECTION_YEARS.length - 1]}) · ${VC_CLASSES.length} vehicle classes - click a row to expand class breakdown`}
+            `Links ${rangeFrom}-${rangeTo} of ${filtered.length.toLocaleString()}${search.trim() !== '' ? ` (filtered from ${links.length.toLocaleString()})` : ''} · ${ADT_PROJECTION_YEARS.length} years (${ADT_PROJECTION_YEARS[0]}-${ADT_PROJECTION_YEARS[ADT_PROJECTION_YEARS.length - 1]}) · ${VC_CLASSES.length} vehicle classes - click a row to expand class breakdown`}
         </div>
         <input
           value={search}
@@ -1307,7 +1307,7 @@ function AdtProjectionTable() {
         padding: '10px 14px', borderTop: '1px solid rgba(255,255,255,0.05)',
       }}>
         <div style={{ fontSize: 9, color: 'rgba(148,163,184,0.6)' }}>
-          {filtered.length === 0 ? 'No links' : `Links ${rangeFrom}–${rangeTo} of ${filtered.length.toLocaleString()}`} · Page {safePage + 1} of {pageCount}
+          {filtered.length === 0 ? 'No links' : `Links ${rangeFrom}-${rangeTo} of ${filtered.length.toLocaleString()}`} · Page {safePage + 1} of {pageCount}
         </div>
         <div style={{ display: 'flex', gap: 6 }}>
           <button onClick={() => setPage(p => Math.max(0, p - 1))} disabled={safePage === 0}
@@ -1614,7 +1614,7 @@ export default function TabularSummaries() {
           </TablePanel>
 
           {/* tbl-005 */}
-          <TablePanel id="tbl-005" title="Historical Road Network Growth (1986–2026)" accent={C.purple}
+          <TablePanel id="tbl-005" title="Historical Road Network Growth (1986-2026)" accent={C.purple}
             source="Department of National Roads WTSS / Annual Monitoring Reports" onNavigate={navigate}
             chartTab="networkstory" chartLabel="📊 Network Story →">
             <div style={{ padding: 10 }}>
@@ -1721,7 +1721,7 @@ export default function TabularSummaries() {
 
           {/* tbl-010 */}
           <TablePanel id="tbl-010" title="ATC Permanent Count Stations (New 2025 Deployment)" accent={C.yellow}
-            source="ATC 2026 - 10 new stations U0001–U0010" onNavigate={navigate}
+            source="ATC 2026 - 10 new stations U0001-U0010" onNavigate={navigate}
             chartTab="trafficanalytics" chartLabel="📊 Analytics →">
             <div style={{ padding: 10 }}>
               <SortableFilterableTable columns={ATC_STATIONS_COLUMNS} rows={ATC_STATIONS}
@@ -1847,7 +1847,7 @@ export default function TabularSummaries() {
           </div>
 
           {/* tbl-015 */}
-          <TablePanel id="tbl-015" title={`Department of National Roads Maintenance Stations (${MAINT_STATIONS[0].id}–${MAINT_STATIONS[MAINT_STATIONS.length - 1].id})`} accent={C.orange}
+          <TablePanel id="tbl-015" title={`Department of National Roads Maintenance Stations (${MAINT_STATIONS[0].id}-${MAINT_STATIONS[MAINT_STATIONS.length - 1].id})`} accent={C.orange}
             source="maintenance_stations.geojson (public/data/)">
             <div style={{ padding: 10 }}>
               <SortableFilterableTable columns={MAINT_STATIONS_COLUMNS} rows={MAINT_STATIONS}
@@ -1943,7 +1943,7 @@ export default function TabularSummaries() {
 
           {/* tbl-020 */}
           <TablePanel id="tbl-020" title="Road Maintenance Budget Allocation by Work Type (Bn UGX)" accent={C.pink}
-            source="Department of National Roads Annual Budget Estimates 2022–2026" onNavigate={navigate}
+            source="Department of National Roads Annual Budget Estimates 2022-2026" onNavigate={navigate}
             chartTab="budget" chartLabel="📊 Budget →">
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead><tr><Th>Financial Year</Th><Th>Routine (Bn)</Th><Th>Periodic (Bn)</Th><Th>Rehab (Bn)</Th><Th>Development (Bn)</Th><Th>Total (Bn)</Th></tr></thead>
@@ -1999,7 +1999,7 @@ export default function TabularSummaries() {
             source="deep_ml_engine.py output / bot_results.json" onNavigate={navigate}
             chartTab="mlarchitecture" chartLabel="📊 ML System →">
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-              <thead><tr><Th>Link ID</Th><Th>Pred. IRI (m/km)</Th><Th>Rutting (mm)</Th><Th>Cracking (%)</Th><Th>Urgency (0–10)</Th><Th>Anomaly</Th></tr></thead>
+              <thead><tr><Th>Link ID</Th><Th>Pred. IRI (m/km)</Th><Th>Rutting (mm)</Th><Th>Cracking (%)</Th><Th>Urgency (0-10)</Th><Th>Anomaly</Th></tr></thead>
               <tbody>
                 {ML_PREDICTIONS.map(r => (
                   <tr key={r.link_id}><Td mono><span style={{ color:C.cyan }}>{r.link_id}</span></Td>
@@ -2028,7 +2028,7 @@ export default function TabularSummaries() {
             <tbody>{OVERLOADING_BY_VEH.map(r=><tr key={r.cls}><Td>{r.cls}</Td><Td align="right" mono style={{ color:r.pct_over>20?'#ef4444':C.yellow }}>{r.pct_over}%</Td><Td align="right" mono>{r.avg_excess_t}</Td><Td align="right" mono style={{ color:'#ef4444' }}>{r.rd_dmg_equiv}</Td></tr>)}</tbody></table>
           </TablePanel>
           {/* tbl-025 */}
-          <TablePanel id="tbl-025" title="Annual Overloading Enforcement Statistics 2019–2025" accent={C.orange} source="EACU annual reports">
+          <TablePanel id="tbl-025" title="Annual Overloading Enforcement Statistics 2019-2025" accent={C.orange} source="EACU annual reports">
             <table style={{ width:'100%', borderCollapse:'collapse' }}><thead><tr><Th>Year</Th><Th>Total Screened</Th><Th>Overloaded</Th><Th>% Overloaded</Th><Th>Fines (Bn UGX)</Th></tr></thead>
             <tbody>{OVERLOADING_ANNUAL.map(r=><tr key={r.yr}><Td mono>{r.yr}</Td><Td align="right" mono>{r.screened.toLocaleString()}</Td><Td align="right" mono style={{ color:C.orange }}>{r.overloaded.toLocaleString()}</Td><Td align="right" mono>{r.pct}%</Td><Td align="right" mono style={{ color:C.green }}>{r.fines_bn}</Td></tr>)}</tbody></table>
           </TablePanel>
@@ -2072,7 +2072,7 @@ export default function TabularSummaries() {
             <tbody>{ROAD_SAFETY_INFRA.map(r=><tr key={r.item}><Td>{r.item}</Td><Td align="right" mono>{r.total.toLocaleString()}</Td><Td align="right" mono style={{ color:C.green }}>{r.new_2025.toLocaleString()}</Td><Td align="right" mono style={{ color:C.orange }}>{r.maint_due.toLocaleString()}</Td></tr>)}</tbody></table>
           </TablePanel>
           {/* tbl-033 */}
-          <TablePanel id="tbl-033" title="Fatal Accident Trend 2019–2025 (National Roads)" accent={C.red} source="Uganda Police Force annual reports">
+          <TablePanel id="tbl-033" title="Fatal Accident Trend 2019-2025 (National Roads)" accent={C.red} source="Uganda Police Force annual reports">
             <table style={{ width:'100%', borderCollapse:'collapse' }}><thead><tr><Th>Year</Th><Th>Fatalities</Th><Th>Injuries</Th><Th>Accidents</Th></tr></thead>
             <tbody>{SAFETY_TREND.map(r=><tr key={r.yr}><Td mono>{r.yr}</Td><Td align="right" mono style={{ color:'#ef4444', fontWeight:700 }}>{r.fatalities.toLocaleString()}</Td><Td align="right" mono>{r.injuries.toLocaleString()}</Td><Td align="right" mono>{r.accidents.toLocaleString()}</Td></tr>)}</tbody></table>
           </TablePanel>
@@ -2091,7 +2091,7 @@ export default function TabularSummaries() {
             <tbody>{ROUTINE_MAINT.map(r=><tr key={r.region}><Td>{r.region}</Td><Td align="right" mono>{r.km_graded.toLocaleString()}</Td><Td align="right" mono>{r.km_patched}</Td><Td align="right" mono>{r.km_drained.toLocaleString()}</Td><Td align="right" mono style={{ color:C.teal }}>{r.cost_bn}</Td></tr>)}</tbody></table>
           </TablePanel>
           {/* tbl-036 */}
-          <TablePanel id="tbl-036" title="Emergency Works Responses 2024–2025" accent={C.teal} source="DNR emergency works register">
+          <TablePanel id="tbl-036" title="Emergency Works Responses 2024-2025" accent={C.teal} source="DNR emergency works register">
             <table style={{ width:'100%', borderCollapse:'collapse' }}><thead><tr><Th>Incident</Th><Th>Region</Th><Th>Cost (M UGX)</Th><Th>Duration (days)</Th><Th>Year</Th></tr></thead>
             <tbody>{EMERGENCY_WORKS.map(r=><tr key={r.incident}><Td>{r.incident}</Td><Td>{r.region}</Td><Td align="right" mono style={{ color:C.orange }}>{r.cost_m}</Td><Td align="right" mono>{r.duration_d}</Td><Td mono>{r.yr}</Td></tr>)}</tbody></table>
           </TablePanel>
@@ -2120,18 +2120,18 @@ export default function TabularSummaries() {
           <SectionHeader icon={<Clock size={15} style={{ color: C.purple }}/>} accent={C.purple}
             title="Link Lifecycle & Asset Age" sub="Pavement lifecycle management · HDM-4 trigger analysis · DNR asset registry 2025"/>
           {/* tbl-041 */}
-          <TablePanel id="tbl-041" title="Links Scheduled for Treatment 2025–2027 (HDM-4 Triggered)" accent={C.purple} source="DNR lifecycle management system">
+          <TablePanel id="tbl-041" title="Links Scheduled for Treatment 2025-2027 (HDM-4 Triggered)" accent={C.purple} source="DNR lifecycle management system">
             <table style={{ width:'100%', borderCollapse:'collapse' }}><thead><tr><Th>Link ID</Th><Th>Treatment</Th><Th>km</Th><Th>Cost (Bn UGX)</Th><Th>Year</Th><Th>IRI Trigger</Th></tr></thead>
             <tbody>{TREATMENT_SCHEDULE.map(r=><tr key={r.link_id}><Td mono style={{ color:C.cyan }}>{r.link_id}</Td><Td>{r.treatment}</Td><Td align="right" mono>{r.km}</Td><Td align="right" mono style={{ color:C.purple }}>{r.cost_bn}</Td><Td mono>{r.yr}</Td><Td align="right" mono style={{ color:r.iri>8?'#ef4444':r.iri>5?C.orange:C.green }}>{r.iri}</Td></tr>)}</tbody></table>
           </TablePanel>
           {/* tbl-042 */}
-          <TablePanel id="tbl-042" title="Rehabilitation History by Road Class (2015–2025)" accent={C.purple} source="DNR project records">
+          <TablePanel id="tbl-042" title="Rehabilitation History by Road Class (2015-2025)" accent={C.purple} source="DNR project records">
             <table style={{ width:'100%', borderCollapse:'collapse' }}><thead><tr><Th>Road Class</Th><Th>Total km</Th><Th>km Rehabbed (10 yr)</Th><Th>% Rehabbed</Th><Th>Avg Cost / km (M UGX)</Th></tr></thead>
             <tbody>{REHAB_HISTORY.map(r=><tr key={r.cls}><Td>{r.cls}</Td><Td align="right" mono>{r.km_total.toLocaleString()}</Td><Td align="right" mono style={{ color:C.green }}>{r.km_rehabbed_10yr.toLocaleString()}</Td><Td align="right" mono>{r.pct}%</Td><Td align="right" mono>{r.avg_cost_m}</Td></tr>)}</tbody></table>
           </TablePanel>
           {/* tbl-043 */}
           <TablePanel id="tbl-043" title="Pavement Age Distribution - Paved Network 2025" accent={C.purple} source="DNR road inventory / pave year data">
-            <table style={{ width:'100%', borderCollapse:'collapse' }}><thead><tr><Th>Age Band</Th><Th>km</Th><Th>% of Paved</Th><Th>Avg Condition Index (0–100)</Th></tr></thead>
+            <table style={{ width:'100%', borderCollapse:'collapse' }}><thead><tr><Th>Age Band</Th><Th>km</Th><Th>% of Paved</Th><Th>Avg Condition Index (0-100)</Th></tr></thead>
             <tbody>{PAVEMENT_AGE.map(r=><tr key={r.age}><Td>{r.age}</Td><Td align="right" mono>{r.km.toLocaleString()}</Td><Td align="right" mono>{r.pct}%</Td><Td align="right" mono style={{ color:r.cond_index>70?C.green:r.cond_index>45?C.yellow:C.orange }}>{r.cond_index}</Td></tr>)}</tbody></table>
           </TablePanel>
           {/* tbl-044 */}
@@ -2140,7 +2140,7 @@ export default function TabularSummaries() {
             <tbody>{DESIGN_LIFE.map(r=><tr key={r.surface}><Td>{r.surface}</Td><Td align="right" mono>{r.design_yr}</Td><Td align="right" mono>{r.actual_yr}</Td><Td align="right" mono style={{ color:r.used_pct>85?'#ef4444':r.used_pct>70?C.yellow:C.green }}>{r.used_pct}%</Td></tr>)}</tbody></table>
           </TablePanel>
           {/* tbl-045 */}
-          <TablePanel id="tbl-045" title="Asset Replacement Forecast 2026–2035" accent={C.purple} source="DNR long-term maintenance plan">
+          <TablePanel id="tbl-045" title="Asset Replacement Forecast 2026-2035" accent={C.purple} source="DNR long-term maintenance plan">
             <table style={{ width:'100%', borderCollapse:'collapse' }}><thead><tr><Th>Period</Th><Th>km Paved</Th><Th>km Gravel</Th><Th>Total Cost (Tn UGX)</Th><Th>Priority</Th></tr></thead>
             <tbody>{ASSET_REPLACEMENT_FORECAST.map(r=><tr key={r.period}><Td>{r.period}</Td><Td align="right" mono>{r.km_paved.toLocaleString()}</Td><Td align="right" mono>{r.km_gravel.toLocaleString()}</Td><Td align="right" mono style={{ color:C.purple }}>{r.cost_tn}</Td><Td><span style={{ color:r.priority==='Critical'?'#ef4444':r.priority==='High'?C.orange:C.yellow }}>{r.priority}</span></Td></tr>)}</tbody></table>
           </TablePanel>
@@ -2300,12 +2300,12 @@ export default function TabularSummaries() {
             <tbody>{BRIDGE_ASSET_VALUE.map(r=><tr key={r.type}><Td>{r.type}</Td><Td align="right" mono>{r.count}</Td><Td align="right" mono>{r.avg_span_m}</Td><Td align="right" mono>{r.unit_cost_m}</Td><Td align="right" mono style={{ color:C.green }}>{r.total_bn}</Td></tr>)}</tbody></table>
           </TablePanel>
           {/* tbl-073 */}
-          <TablePanel id="tbl-073" title="Capital Stock Accumulation - Uganda National Road Network 2000–2025" accent={C.green} source="DNR / MoWT infrastructure accounts">
+          <TablePanel id="tbl-073" title="Capital Stock Accumulation - Uganda National Road Network 2000-2025" accent={C.green} source="DNR / MoWT infrastructure accounts">
             <table style={{ width:'100%', borderCollapse:'collapse' }}><thead><tr><Th>Year</Th><Th>Paved (Bn UGX)</Th><Th>Gravel (Bn UGX)</Th><Th>Bridges (Bn UGX)</Th><Th>Total (Bn UGX)</Th></tr></thead>
             <tbody>{CAPITAL_STOCK.map(r=><tr key={r.yr}><Td mono>{r.yr}</Td><Td align="right" mono>{r.paved_bn}</Td><Td align="right" mono>{r.unpaved_bn}</Td><Td align="right" mono>{r.bridges_bn}</Td><Td align="right" mono style={{ color:C.green, fontWeight:700 }}>{r.total_bn}</Td></tr>)}</tbody></table>
           </TablePanel>
           {/* tbl-074 */}
-          <TablePanel id="tbl-074" title="Annual Road Asset Consumption vs Budget Coverage 2021–2025" accent={C.green} source="DNR / MoWT annual accounts">
+          <TablePanel id="tbl-074" title="Annual Road Asset Consumption vs Budget Coverage 2021-2025" accent={C.green} source="DNR / MoWT annual accounts">
             <table style={{ width:'100%', borderCollapse:'collapse' }}><thead><tr><Th>Year</Th><Th>Road Consumption (Bn UGX)</Th><Th>Bridge (Bn UGX)</Th><Th>Total (Bn UGX)</Th><Th>% Covered by Budget</Th></tr></thead>
             <tbody>{ANNUAL_CONSUMPTION.map(r=><tr key={r.yr}><Td mono>{r.yr}</Td><Td align="right" mono>{r.road_bn}</Td><Td align="right" mono>{r.bridge_bn}</Td><Td align="right" mono>{r.total_bn}</Td><Td align="right" mono style={{ color:r.covered_by_budget_pct>70?C.green:C.orange }}>{r.covered_by_budget_pct}%</Td></tr>)}</tbody></table>
           </TablePanel>
@@ -2358,12 +2358,12 @@ export default function TabularSummaries() {
             <tbody>{ACTIVE_CONTRACTS.map(r=><tr key={r.contract}><Td>{r.contract}</Td><Td align="right" mono>{r.km}</Td><Td>{r.contractor}</Td><Td align="right" mono style={{ color:C.orange }}>{r.cost_bn}</Td><Td align="right" mono><div style={{ background:`rgba(0, 255, 136,0.08)`, borderRadius:4, padding:'1px 6px' }}><span style={{ color:r.progress_pct>60?C.green:r.progress_pct>30?C.yellow:C.orange }}>{r.progress_pct}%</span></div></Td><Td mono>{r.yr}</Td></tr>)}</tbody></table>
           </TablePanel>
           {/* tbl-083 */}
-          <TablePanel id="tbl-083" title="Completed Road Rehabilitation by Financial Year 2020–2025" accent={C.orange} source="DNR project completion records">
+          <TablePanel id="tbl-083" title="Completed Road Rehabilitation by Financial Year 2020-2025" accent={C.orange} source="DNR project completion records">
             <table style={{ width:'100%', borderCollapse:'collapse' }}><thead><tr><Th>Period</Th><Th>km Paved</Th><Th>km Gravel</Th><Th>Cost (Bn UGX)</Th><Th>Contracts</Th></tr></thead>
             <tbody>{COMPLETED_REHAB.map(r=><tr key={r.period}><Td mono>{r.period}</Td><Td align="right" mono style={{ color:C.cyan }}>{r.km_paved}</Td><Td align="right" mono>{r.km_gravel}</Td><Td align="right" mono style={{ color:C.green }}>{r.cost_bn.toLocaleString()}</Td><Td align="right" mono>{r.contracts}</Td></tr>)}</tbody></table>
           </TablePanel>
           {/* tbl-084 */}
-          <TablePanel id="tbl-084" title="New Road Construction by Year 2015–2025 (km and Investment)" accent={C.orange} source="DNR statistics / MoWT investment data">
+          <TablePanel id="tbl-084" title="New Road Construction by Year 2015-2025 (km and Investment)" accent={C.orange} source="DNR statistics / MoWT investment data">
             <table style={{ width:'100%', borderCollapse:'collapse' }}><thead><tr><Th>Year</Th><Th>New Paved km</Th><Th>New Gravel km</Th><Th>Investment (Bn UGX)</Th></tr></thead>
             <tbody>{NEW_ROAD_BY_YEAR.map(r=><tr key={r.yr}><Td mono>{r.yr}</Td><Td align="right" mono style={{ color:C.cyan }}>{r.paved_km}</Td><Td align="right" mono>{r.gravel_km}</Td><Td align="right" mono style={{ color:C.green }}>{r.invest_bn.toLocaleString()}</Td></tr>)}</tbody></table>
           </TablePanel>

@@ -54,7 +54,7 @@ const CHAINAGE_COMPLETE_CLASS = [99, 93, 71]; // A, B, C
 const CHAINAGE_COMPLETE_AVG = 88; // network-wide weighted average
 
 // Chainage-reference completeness - 5-band distribution of the 850 numbered roads.
-const CHAINAGE_BAND_LBL = ['Complete (100%)', 'High (90–99%)', 'Moderate (70–89%)', 'Low (40–69%)', 'Minimal (<40%)'];
+const CHAINAGE_BAND_LBL = ['Complete (100%)', 'High (90-99%)', 'Moderate (70-89%)', 'Low (40-69%)', 'Minimal (<40%)'];
 const CHAINAGE_BAND_N = [412, 268, 110, 44, 16]; // sum 850
 
 // Road-numbering scheme compliance - 5-band distribution of the 850 numbered roads.
@@ -110,7 +110,7 @@ const ROUTES = Array.from({ length: 40 }, (_, i) => {
   return { x: len, y: districts, z: aadt };
 });
 
-// Regional atlas data-quality profile (best vs weakest region, 0–100 scale).
+// Regional atlas data-quality profile (best vs weakest region, 0-100 scale).
 const RADAR_DATA = [
   { axis: 'Plate Coverage', Central: 99, NorthEastern: 88 },
   { axis: 'Chainage Complete', Central: 96, NorthEastern: 71 },

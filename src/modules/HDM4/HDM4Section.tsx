@@ -48,12 +48,12 @@ const CALIB_DATA = [
 
 // ── IRI threshold table ───────────────────────────────────────────────────────
 const IRI_THRESHOLDS = [
-  { band: 'Very Good',  iri_min: 0,    iri_max: 2.0,  vci: '85–100', action: 'Routine maintenance only',            color: C.green },
-  { band: 'Good',       iri_min: 2.0,  iri_max: 4.0,  vci: '70–84',  action: 'Preventive maintenance (seal coat)',  color: C.teal  },
-  { band: 'Fair',       iri_min: 4.0,  iri_max: 6.0,  vci: '50–69',  action: 'Reseal / thin overlay',              color: C.yellow },
-  { band: 'Poor',       iri_min: 6.0,  iri_max: 8.0,  vci: '30–49',  action: 'Structural overlay / rehabilitation',color: C.orange },
-  { band: 'Very Poor',  iri_min: 8.0,  iri_max: 12.0, vci: '10–29',  action: 'Major rehabilitation',               color: C.red   },
-  { band: 'Failed',     iri_min: 12.0, iri_max: null,  vci: '0–9',   action: 'Reconstruction',                     color: C.pink  },
+  { band: 'Very Good',  iri_min: 0,    iri_max: 2.0,  vci: '85-100', action: 'Routine maintenance only',            color: C.green },
+  { band: 'Good',       iri_min: 2.0,  iri_max: 4.0,  vci: '70-84',  action: 'Preventive maintenance (seal coat)',  color: C.teal  },
+  { band: 'Fair',       iri_min: 4.0,  iri_max: 6.0,  vci: '50-69',  action: 'Reseal / thin overlay',              color: C.yellow },
+  { band: 'Poor',       iri_min: 6.0,  iri_max: 8.0,  vci: '30-49',  action: 'Structural overlay / rehabilitation',color: C.orange },
+  { band: 'Very Poor',  iri_min: 8.0,  iri_max: 12.0, vci: '10-29',  action: 'Major rehabilitation',               color: C.red   },
+  { band: 'Failed',     iri_min: 12.0, iri_max: null,  vci: '0-9',   action: 'Reconstruction',                     color: C.pink  },
 ];
 
 // ── Works cost matrix (Uganda FY 2024/25 MoWT unit costs) ────────────────────
@@ -99,7 +99,7 @@ const ESAL_FACTORS: Record<string, { name: string; factor: number }> = {
   bus_s:   { name: 'Small Bus',             factor: 0.05   },
   bus_l:   { name: 'Large Bus',             factor: 0.40   },
   lt:      { name: 'Light Truck (<5t GVW)', factor: 0.08   },
-  mt:      { name: 'Medium Truck (5–10t)',  factor: 0.80   },
+  mt:      { name: 'Medium Truck (5-10t)',  factor: 0.80   },
   ht:      { name: 'Heavy Truck (>10t)',    factor: 2.40   },
   tt_5ax:  { name: 'Truck Trailer 5-axle',  factor: 4.20   },
   tt_6ax:  { name: 'Truck Trailer 6-axle',  factor: 5.86   },
@@ -310,7 +310,7 @@ export default function HDM4Section() {
           {/* Interactive projection chart */}
           <div style={card(C.orange)}>
             <div style={{ fontSize: 11, fontWeight: 900, color: C.orange, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 14 }}>
-              IRI Projection 2024–2034 · Adjust Parameters
+              IRI Projection 2024-2034 · Adjust Parameters
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, marginBottom: 16 }}>
               {[
@@ -383,7 +383,7 @@ export default function HDM4Section() {
                   <div style={{ width: 8, height: 8, borderRadius: 2, background: r.color, flexShrink: 0 }}/>
                   <div style={{ minWidth: 80, fontWeight: 900, fontSize: 11, color: r.color }}>{r.band}</div>
                   <div style={{ minWidth: 100, fontSize: 10, color: 'rgba(148,163,184,0.7)', fontFamily: 'monospace' }}>
-                    {r.iri_min}–{r.iri_max ?? '∞'} m/km
+                    {r.iri_min}-{r.iri_max ?? '∞'} m/km
                   </div>
                   <div style={{ minWidth: 60, fontSize: 10, color: 'rgba(148,163,184,0.55)' }}>VCI {r.vci}</div>
                   <div style={{ fontSize: 10, color: 'rgba(196,210,225,0.8)', flex: 1 }}>{r.action}</div>
@@ -552,7 +552,7 @@ export default function HDM4Section() {
               ))}
             </div>
             <div style={{ fontSize: 10, color: 'rgba(148,163,184,0.5)', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: 10 }}>
-              Discount rate: 12% (Uganda MFPED). Analysis period: 10 years (2024–2034). Vehicle Operating Cost savings as primary benefit stream.
+              Discount rate: 12% (Uganda MFPED). Analysis period: 10 years (2024-2034). Vehicle Operating Cost savings as primary benefit stream.
               Road User Cost model: HDM-4 VOC equations calibrated to Uganda vehicle fleet and fuel prices (URA FY2024/25).
             </div>
           </div>

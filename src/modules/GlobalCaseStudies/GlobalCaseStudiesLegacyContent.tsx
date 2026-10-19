@@ -294,12 +294,12 @@ const CASE_STUDIES: CaseStudy[] = [
 
   // ── Sub-Saharan Africa ───────────────────────────────────────────────────────
   { id:16, agency:'FERMA/FMWH', country:'Nigeria', flag:'', networkKm:35000, system:'NRAMP + HDM-4', pavedPct:49, rmsYears:8, budgetPerKmUsd:11000, region:'Africa', lat:9.08, lng:8.68,
-    keyFeatures:['Federal Roads Maintenance Agency managing 35,000 km national network','OPRC pilots on Lagos–Ibadan and Abuja–Kaduna corridors'],
+    keyFeatures:['Federal Roads Maintenance Agency managing 35,000 km national network','OPRC pilots on Lagos-Ibadan and Abuja-Kaduna corridors'],
     lessonsDNR:'Nigeria\'s shift from input-based to OPRC on high-traffic corridors achieved 22% cost reduction - directly applicable to DNR\'s Class A corridors.',
     dataApproach:'Road condition survey vehicles + GPS; data shared with state road authorities', funding:'Federal Government + World Bank SURP', metrics:'49% federal network in good/fair (2024)' },
 
   { id:17, agency:'ANE', country:'Mozambique', flag:'', networkKm:30200, system:'RAMS + HDM-4', pavedPct:27, rmsYears:12, budgetPerKmUsd:10500, region:'Africa', lat:-18.67, lng:35.53,
-    keyFeatures:['HDM-4 calibrated for tropical coastal conditions','Annual ROMDAS on paved national roads (N1–N14)'],
+    keyFeatures:['HDM-4 calibrated for tropical coastal conditions','Annual ROMDAS on paved national roads (N1-N14)'],
     lessonsDNR:'Mozambique\'s N1 corridor OPRC with built-in emergency response for cyclone damage is a model for DNR\'s Karamoja lot emergency works provisions.',
     dataApproach:'Annual laser profilometer; visual survey on unpaved; GIS database in Maputo', funding:'World Bank, AfDB, EU, GoM Road Fund', metrics:'27% paved; 62% N1 in good condition (2024)' },
 
@@ -356,11 +356,11 @@ const CASE_STUDIES: CaseStudy[] = [
   { id:28, agency:'DGGT Rep. Congo', country:'Rep. of Congo', flag:'', networkKm:17000, system:'PMS', pavedPct:17, rmsYears:5, budgetPerKmUsd:9000, region:'Africa', lat:-0.23, lng:15.83,
     keyFeatures:['Oil-revenue funded road rehabilitation','CEMAC regional road corridor integration'],
     lessonsDNR:'Congo\'s CEMAC regional corridor funding for trans-national routes mirrors DNR\'s EAC/COMESA corridor obligations.',
-    dataApproach:'Visual surveys; periodic laser profilometer on paved', funding:'GoC oil revenues + AfDB', metrics:'17% paved; N1 Brazzaville–Pointe-Noire 78% good' },
+    dataApproach:'Visual surveys; periodic laser profilometer on paved', funding:'GoC oil revenues + AfDB', metrics:'17% paved; N1 Brazzaville-Pointe-Noire 78% good' },
 
   { id:29, agency:'MINTP Cameroon', country:'Cameroon', flag:'', networkKm:77000, system:'SIGMA', pavedPct:15, rmsYears:10, budgetPerKmUsd:8200, region:'Africa', lat:3.85, lng:11.50,
-    keyFeatures:['SIGMA road database system (French-language)','Performance-based contracts on Yaoundé–Douala corridor'],
-    lessonsDNR:'Cameroon\'s OPRC on the Yaoundé–Douala economic corridor demonstrates how to prioritise the highest freight-value route - matching DNR\'s Kampala–Gulu A109 priority.',
+    keyFeatures:['SIGMA road database system (French-language)','Performance-based contracts on Yaoundé-Douala corridor'],
+    lessonsDNR:'Cameroon\'s OPRC on the Yaoundé-Douala economic corridor demonstrates how to prioritise the highest freight-value route - matching DNR\'s Kampala-Gulu A109 priority.',
     dataApproach:'Annual surveys; SIGMA database at Ministry; ROMDAS on key paved links', funding:'World Bank, AFD, EU, GoC', metrics:'15% paved; 64% corridor links in good condition' },
 
   { id:30, agency:'FHA Nigeria (state)', country:'Côte d\'Ivoire', flag:'', networkKm:12000, system:'SITP + HDM-4', pavedPct:58, rmsYears:11, budgetPerKmUsd:16000, region:'Africa', lat:7.54, lng:-5.55,
@@ -394,14 +394,14 @@ const CASE_STUDIES: CaseStudy[] = [
     dataApproach:'GPS-based visual; satellite imagery', funding:'EU, World Bank, AfDB, UNDP', metrics:'8% paved; 3,100 km under active maintenance' },
 
   { id:36, agency:'SUDAAK Sudan', country:'Sudan', flag:'', networkKm:24000, system:'RAMS + HDM-4', pavedPct:65, rmsYears:9, budgetPerKmUsd:8000, region:'Africa', lat:12.86, lng:30.22,
-    keyFeatures:['Desert highway management for the Khartoum–Halfa corridor','OPRC pilot on 800 km Section 1'],
+    keyFeatures:['Desert highway management for the Khartoum-Halfa corridor','OPRC pilot on 800 km Section 1'],
     lessonsDNR:'Sudan\'s desert highway deterioration models - focused on thermal cracking and wind abrasion - are relevant for Uganda\'s dry Northern region roads.',
     dataApproach:'Annual ROMDAS on main roads; visual on secondary', funding:'Government + Islamic Development Bank + Arab Fund', metrics:'65% paved; 71% main roads in good condition' },
 
   { id:37, agency:'MoWT / DNR', country:'Uganda', flag:'', networkKm:21302, system:'DNR RMS Engine', pavedPct:30, rmsYears:6, budgetPerKmUsd:12500, region:'Africa', lat:1.37, lng:32.29,
     keyFeatures:['Official network: 21,302 km (NDPIV FY25-26)','ML-powered IRI prediction (PyTorch, R²=0.93)','1,014 links in GeoJSON; 6 active OPRC lots','25 ATC + 298 TIS traffic monitoring stations'],
     lessonsDNR:'This is the DNR platform itself - the benchmarks shown here represent Uganda\'s current asset management maturity and the targets set by this system.',
-    dataApproach:'ROMDAS annual surveys; ATC + TIS traffic counts; bridge inspections; satellite imagery', funding:'GoU Road Fund + World Bank + AfDB + JICA', metrics:'Official: 21,302 km | Mapped: 21,137 km (1,014 links) | Paved: 6,405 km (30.3%)' },
+    dataApproach:'ROMDAS annual surveys; ATC + TIS traffic counts; bridge inspections; satellite imagery', funding:'GoU Road Fund + World Bank + AfDB + JICA', metrics:'National Roads: 21,302 km | Mapped: 21,137 km (1,014 links) | Paved: 11,762.8 km (55.2%)' },
 
   { id:38, agency:'OBUHA Burundi', country:'Burundi', flag:'', networkKm:12322, system:'PMS', pavedPct:22, rmsYears:5, budgetPerKmUsd:7000, region:'Africa', lat:-3.37, lng:29.92,
     keyFeatures:['Lake Tanganyika corridor road development','EAC regional integration road programme'],
@@ -409,7 +409,7 @@ const CASE_STUDIES: CaseStudy[] = [
     dataApproach:'Periodic visual surveys; donor project reporting', funding:'World Bank, AfDB, EU, GoB', metrics:'22% paved; 58% in maintainable condition' },
 
   { id:39, agency:'MOPW Somalia', country:'Somalia', flag:'', networkKm:6000, system:'Basic', pavedPct:11, rmsYears:3, budgetPerKmUsd:4500, region:'Africa', lat:5.15, lng:46.20,
-    keyFeatures:['Post-conflict road rehabilitation','Hargeisa–Berbera corridor reconstruction'],
+    keyFeatures:['Post-conflict road rehabilitation','Hargeisa-Berbera corridor reconstruction'],
     lessonsDNR:'Somalia\'s post-conflict network baseline approach - mapping what exists before setting targets - is a reminder that establishing accurate GIS data is the first requirement for any RMS.',
     dataApproach:'GPS visual; satellite imagery; basic inventory', funding:'World Bank, EU, Arab funds', metrics:'11% paved; 680 km under active maintenance' },
 
@@ -419,7 +419,7 @@ const CASE_STUDIES: CaseStudy[] = [
     dataApproach:'Visual surveys; periodic condition assessments', funding:'Government only (limited donor access)', metrics:'80% paved; 72% in good/fair condition' },
 
   { id:41, agency:'DNED Djibouti', country:'Djibouti', flag:'', networkKm:3065, system:'Basic PMS', pavedPct:60, rmsYears:4, budgetPerKmUsd:18000, region:'Africa', lat:11.83, lng:42.59,
-    keyFeatures:['Port logistics corridor road management','Chinese-funded Djibouti–Addis railway parallel road'],
+    keyFeatures:['Port logistics corridor road management','Chinese-funded Djibouti-Addis railway parallel road'],
     lessonsDNR:'Djibouti\'s corridor road investment driven by port traffic mirrors DNR\'s need to prioritise roads feeding Malaba and Busia border crossings.',
     dataApproach:'Visual surveys; port traffic monitoring', funding:'GoD + Chinese financing + Arab funds', metrics:'60% paved; 75% of port corridor in good condition' },
 
@@ -439,7 +439,7 @@ const CASE_STUDIES: CaseStudy[] = [
     dataApproach:'Visual + GPS; donor project databases', funding:'World Bank, MCC, EU, GoL', metrics:'13% paved; 4,200 km in maintainable condition' },
 
   { id:45, agency:'DNTP Guinea', country:'Guinea', flag:'', networkKm:44348, system:'PMS', pavedPct:21, rmsYears:6, budgetPerKmUsd:8000, region:'Africa', lat:10.99, lng:-10.96,
-    keyFeatures:['Mining corridor road management','Conakry–Mamou expressway OPRC'],
+    keyFeatures:['Mining corridor road management','Conakry-Mamou expressway OPRC'],
     lessonsDNR:'Guinea\'s mining-corridor OPRC links infrastructure investment to commodity export economics - a model for DNR considering Albertine oil corridor roads.',
     dataApproach:'Visual surveys; periodic ROMDAS on paved', funding:'World Bank, Islamic Development Bank, Chinese financing', metrics:'21% paved; 65% mining corridors in good condition' },
 
@@ -494,7 +494,7 @@ const CASE_STUDIES: CaseStudy[] = [
     dataApproach:'Visual + GPS; Chinese contractor data; periodic ROMDAS', funding:'GoG oil revenues + Chinese financing', metrics:'27% paved; 61% national roads in good condition' },
 
   { id:56, agency:'MOPWT Equatorial Guinea', country:'Equatorial Guinea', flag:'', networkKm:2880, system:'PMS', pavedPct:34, rmsYears:5, budgetPerKmUsd:25000, region:'Africa', lat:1.65, lng:10.27,
-    keyFeatures:['Oil-funded road investment in small network','Malabo–Bata highway as showcase project'],
+    keyFeatures:['Oil-funded road investment in small network','Malabo-Bata highway as showcase project'],
     lessonsDNR:'Equatorial Guinea\'s showcase highway investment highlights the difference between political prestige projects and systematic maintenance funding - DNR must advocate for maintenance budgets.',
     dataApproach:'Visual surveys; Chinese contractor reporting', funding:'Government oil revenues', metrics:'34% paved; 70% main roads in good condition' },
 
@@ -520,7 +520,7 @@ const CASE_STUDIES: CaseStudy[] = [
     dataApproach:'Annual ROMDAS on all paved roads; visual on gravel; HDM-4 national analysis', funding:'GoT Road Fund + World Bank + IsDB', metrics:'73% paved; 76% in good/fair condition; IRI avg 3.1 m/km' },
 
   { id:61, agency:'CNER Algeria', country:'Algeria', flag:'', networkKm:113655, system:'SIGAL + HDM-4', pavedPct:73, rmsYears:15, budgetPerKmUsd:22000, region:'Africa', lat:28.03, lng:1.66,
-    keyFeatures:['East–West Highway 1,200 km expressway management','SIGAL national road management information system','Desert road management for Sahara sections'],
+    keyFeatures:['East-West Highway 1,200 km expressway management','SIGAL national road management information system','Desert road management for Sahara sections'],
     lessonsDNR:'Algeria\'s SIGAL system for long expressway sections uses segment-based condition reporting - directly applicable to DNR\'s link-based GeoJSON management approach.',
     dataApproach:'Annual profilometer + deflectograph on expressways; visual on secondary', funding:'Government hydrocarbon revenues', metrics:'73% paved; 68% in good condition; expressway avg IRI 1.9 m/km' },
 
@@ -592,8 +592,8 @@ const CASE_STUDIES: CaseStudy[] = [
     dataApproach:'Annual visual + profilometer; RMMS database; satellite imagery for flood assessment', funding:'World Bank, ADB, JICA, GoB Road Fund', metrics:'44% paved; 68% in good/fair condition; flood-resilient design on 6,800 km' },
 
   { id:75, agency:'RVPN Sri Lanka', country:'Sri Lanka', flag:'', networkKm:11997, system:'RIMS + HDM-4', pavedPct:81, rmsYears:14, budgetPerKmUsd:20000, region:'Asia-Pacific', lat:7.87, lng:80.77,
-    keyFeatures:['RIMS - Road Information Management System','Post-war north–south network reconstruction','Expressway concession performance contracts'],
-    lessonsDNR:'Sri Lanka\'s post-conflict north–south reconstruction phased by corridor priority is a sequencing model for DNR\'s NDPIV corridor investment programme.',
+    keyFeatures:['RIMS - Road Information Management System','Post-war north-south network reconstruction','Expressway concession performance contracts'],
+    lessonsDNR:'Sri Lanka\'s post-conflict north-south reconstruction phased by corridor priority is a sequencing model for DNR\'s NDPIV corridor investment programme.',
     dataApproach:'Annual surveys on all roads; RIMS central database', funding:'World Bank, ADB, Chinese financing, GoSL', metrics:'81% paved; 76% in good condition' },
 
   { id:76, agency:'DoR Nepal', country:'Nepal', flag:'', networkKm:29024, system:'RAMS + HDM-4', pavedPct:58, rmsYears:12, budgetPerKmUsd:18000, region:'Asia-Pacific', lat:28.39, lng:84.12,
@@ -628,7 +628,7 @@ const CASE_STUDIES: CaseStudy[] = [
     dataApproach:'Annual profilometer + visual; VRMS national database; GIS integration', funding:'ODA (Japan, World Bank, ADB) + GoV Road Fund', metrics:'55% paved; 70% in good condition; performance contracts on 9,500 km' },
 
   { id:82, agency:'MPWT Cambodia', country:'Cambodia', flag:'', networkKm:11700, system:'ROCKS + HDM-4', pavedPct:29, rmsYears:10, budgetPerKmUsd:11000, region:'Asia-Pacific', lat:12.57, lng:104.99,
-    keyFeatures:['ROCKS road data management system','World Bank-funded pavement management on NR1–NR6','Community road maintenance blocks on rural roads'],
+    keyFeatures:['ROCKS road data management system','World Bank-funded pavement management on NR1-NR6','Community road maintenance blocks on rural roads'],
     lessonsDNR:'Cambodia\'s community maintenance blocks on rural roads - community groups responsible for short sections - is a low-cost model for DNR\'s Class C maintenance coverage.',
     dataApproach:'Annual ROMDAS on national roads; visual on rural; ROCKS database', funding:'World Bank, ADB, Japan (JICA), Chinese financing', metrics:'29% paved; 68% NR network in good condition' },
 
@@ -717,7 +717,7 @@ const CASE_STUDIES: CaseStudy[] = [
 
   { id:99, agency:'ŘSD Czech Republic', country:'Czech Republic', flag:'', networkKm:55792, system:'SSMS + LCC', pavedPct:98, rmsYears:22, budgetPerKmUsd:55000, region:'Europe', lat:49.82, lng:15.47,
     keyFeatures:['40-year LCC whole-of-life cost management','Full BMS integrated with PMS','EU TEN-T motorway management'],
-    lessonsDNR:'Czech Republic\'s BMS–PMS integration - where bridge condition directly influences section-level maintenance programming - is the target architecture for DNR\'s GeoJSON + bridge registry integration.',
+    lessonsDNR:'Czech Republic\'s BMS-PMS integration - where bridge condition directly influences section-level maintenance programming - is the target architecture for DNR\'s GeoJSON + bridge registry integration.',
     dataApproach:'Annual automated surveys; FWD testing; full BMS integration; SSMS database', funding:'EU Structural Funds + State Fund for Transport Infrastructure', metrics:'98% paved; 84% in good condition; BMS-PMS integrated 100%' },
 
   { id:100, agency:'NRA Hungary', country:'Hungary', flag:'', networkKm:6966, system:'HAMS + HDM-4', pavedPct:97, rmsYears:18, budgetPerKmUsd:50000, region:'Europe', lat:47.16, lng:19.50,
@@ -757,7 +757,7 @@ const CASE_STUDIES: CaseStudy[] = [
     dataApproach:'Annual visual + GPS on national roads; periodic profilometer on paved', funding:'Government + IADB + CAF + World Bank', metrics:'20% paved; 62% in maintainable condition' },
 
   { id:107, agency:'MTOP Ecuador', country:'Ecuador', flag:'', networkKm:9700, system:'PMS + HDM-4', pavedPct:77, rmsYears:12, budgetPerKmUsd:22000, region:'Americas', lat:-1.83, lng:-78.18,
-    keyFeatures:['Annual profilometer survey on all national roads','Climate resilience investment after earthquake 2016','PPP on Ruta Viva Quito–Tababela'],
+    keyFeatures:['Annual profilometer survey on all national roads','Climate resilience investment after earthquake 2016','PPP on Ruta Viva Quito-Tababela'],
     lessonsDNR:'Ecuador\'s post-earthquake road resilience investment - rapidly assessing and restoring the network - provides a climate disaster response model for DNR\'s flood-season emergency works.',
     dataApproach:'Annual ROMDAS; visual on secondary; HDM-4 analysis; disaster rapid assessment', funding:'Government + World Bank + IADB + CAF', metrics:'77% paved; 74% in good condition; disaster response within 48hrs' },
 
@@ -839,8 +839,8 @@ const CASE_STUDIES: CaseStudy[] = [
     dataApproach:'Annual condition surveys; GRMS database; EU standards compliance', funding:'EBRD, EU, World Bank, ADB, GoG', metrics:'57% paved; 68% in good condition' },
 
   { id:123, agency:'ARNAP Armenia', country:'Armenia', flag:'', networkKm:7700, system:'PMS', pavedPct:60, rmsYears:8, budgetPerKmUsd:17000, region:'Europe', lat:40.07, lng:45.04,
-    keyFeatures:['North–South highway corridor investment','World Bank-funded road sector reform'],
-    lessonsDNR:'Armenia\'s North–South highway - connecting Georgia to Iran - shows how a small landlocked country can leverage transit geography to attract corridor investment, analogous to Uganda\'s EAC corridor position.',
+    keyFeatures:['North-South highway corridor investment','World Bank-funded road sector reform'],
+    lessonsDNR:'Armenia\'s North-South highway - connecting Georgia to Iran - shows how a small landlocked country can leverage transit geography to attract corridor investment, analogous to Uganda\'s EAC corridor position.',
     dataApproach:'Annual visual + GPS; periodic profilometer on main roads', funding:'World Bank, EBRD, ADB, GoA', metrics:'60% paved; 65% in maintainable condition' },
 
   { id:124, agency:'AZƏRROADS', country:'Azerbaijan', flag:'', networkKm:21600, system:'RIMS + HDM-4', pavedPct:73, rmsYears:10, budgetPerKmUsd:25000, region:'Middle East', lat:40.14, lng:47.58,

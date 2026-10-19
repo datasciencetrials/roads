@@ -187,11 +187,11 @@ function SurveyFormInner({ onClose }: Props) {
           <input type="number" step="1" min="0" style={FIELD} placeholder="e.g. 3" value={form.pothole_count} onChange={e => set('pothole_count', e.target.value)} />
         </div>
         <div>
-          <label style={LABEL}>PCI (0–100)</label>
+          <label style={LABEL}>PCI (0-100)</label>
           <input type="number" step="0.1" min="0" max="100" style={FIELD} placeholder="e.g. 78" value={form.pci} onChange={e => set('pci', e.target.value)} />
         </div>
         <div>
-          <label style={LABEL}>VCI - Visual Condition Index (0–100)</label>
+          <label style={LABEL}>VCI - Visual Condition Index (0-100)</label>
           <input type="number" step="0.1" min="0" max="100" style={FIELD} placeholder="e.g. 84" value={form.vci} onChange={e => set('vci', e.target.value)} />
           {liveRating && (
             <div style={{ marginTop: 5, fontSize: 10, fontWeight: 700, color: VCI_RATING_COLOR[liveRating] }}>
@@ -200,7 +200,7 @@ function SurveyFormInner({ onClose }: Props) {
           )}
         </div>
         <div>
-          <label style={LABEL}>Drainage Score (1–5)</label>
+          <label style={LABEL}>Drainage Score (1-5)</label>
           <SearchableSelect value={form.drainage_score} onChange={v => set('drainage_score', v)} style={FIELD}>
             {[1,2,3,4,5].map(n => <option key={n} value={n}>{n} - {['Very Poor','Poor','Fair','Good','Excellent'][n-1]}</option>)}
           </SearchableSelect>

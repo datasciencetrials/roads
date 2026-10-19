@@ -1,5 +1,5 @@
 /**
- * Uganda Department of National Roads Road Network — Link ID & Location Referencing Knowledge Base
+ * Uganda Department of National Roads Road Network - Link ID & Location Referencing Knowledge Base
  *
  * Sources:
  *  - DNR GIS Section: National Road Network Shapefile network2026.geojson
@@ -14,36 +14,36 @@
 export const ROAD_CLASSIFICATION = {
   A: {
     code: 'A',
-    name: 'Class A — National Trunk Roads',
+    name: 'Class A - National Trunk Roads',
     description: 'International and inter-regional trunk roads connecting Uganda to neighbouring countries and major regional centres',
     minCarriagewayWidth: 7.0,
     designSpeed: 100,
     lanes: 2,
-    standard: 'Paved (bituminous) — all weather',
+    standard: 'Paved (bituminous) - all weather',
     totalKm: 2615,
-    examples: ['A001 Kampala–Gulu–Nimule', 'A002 Kampala–Jinja–Malaba', 'A004 Kampala–Masaka–Mutukula'],
+    examples: ['A001 Kampala-Gulu-Nimule', 'A002 Kampala-Jinja-Malaba', 'A004 Kampala-Masaka-Mutukula'],
   },
   B: {
     code: 'B',
-    name: 'Class B — National Secondary Roads',
+    name: 'Class B - National Secondary Roads',
     description: 'Secondary national roads linking regional towns and districts to Class A roads',
     minCarriagewayWidth: 6.5,
     designSpeed: 80,
     lanes: 2,
-    standard: 'Paved or gravel — all weather',
+    standard: 'Paved or gravel - all weather',
     totalKm: 2863,
-    examples: ['B100 Kampala–Hoima', 'B101 Kampala–Masaka bypass', 'B150 Jinja–Iganga'],
+    examples: ['B100 Kampala-Hoima', 'B101 Kampala-Masaka bypass', 'B150 Jinja-Iganga'],
   },
   C: {
     code: 'C',
-    name: 'Class C — Regional Roads',
+    name: 'Class C - Regional Roads',
     description: 'Regional roads connecting district headquarters to national roads',
     minCarriagewayWidth: 6.0,
     designSpeed: 60,
     lanes: 2,
-    standard: 'Gravel — all weather',
+    standard: 'Gravel - all weather',
     totalKm: 15537,
-    examples: ['C003 Fort Portal–Bundibugyo', 'C150 Mbale–Moroto', 'C261 Matte–Sekanyonyi'],
+    examples: ['C003 Fort Portal-Bundibugyo', 'C150 Mbale-Moroto', 'C261 Matte-Sekanyonyi'],
   },
   M: {
     code: 'M',
@@ -193,18 +193,18 @@ export const LINK_QUERY_INTENTS = [
 
 // ── Key road corridors (real Department of National Roads road numbers) ───────────────────────────────
 export const KEY_CORRIDORS = [
-  { name: 'Northern Corridor',   roads: ['A002'], description: 'Kampala–Jinja–Malaba–Kenya border',   length: 247 },
-  { name: 'Central Corridor',    roads: ['A004'], description: 'Kampala–Masaka–Mutukula–Tanzania',     length: 220 },
-  { name: 'Western Corridor',    roads: ['A003'], description: 'Kampala–Mbarara–Kabale–Rwanda/DRC',    length: 510 },
-  { name: 'Northern Road',       roads: ['A001'], description: 'Kampala–Gulu–Nimule–South Sudan',      length: 515 },
-  { name: 'Eastern Corridor',    roads: ['A005'], description: 'Kampala–Jinja–Tororo–Kenya',           length: 247 },
-  { name: 'Hoima Road',          roads: ['B100'], description: 'Kampala–Hoima–Kafu',                   length: 237 },
+  { name: 'Northern Corridor',   roads: ['A002'], description: 'Kampala-Jinja-Malaba-Kenya border',   length: 247 },
+  { name: 'Central Corridor',    roads: ['A004'], description: 'Kampala-Masaka-Mutukula-Tanzania',     length: 220 },
+  { name: 'Western Corridor',    roads: ['A003'], description: 'Kampala-Mbarara-Kabale-Rwanda/DRC',    length: 510 },
+  { name: 'Northern Road',       roads: ['A001'], description: 'Kampala-Gulu-Nimule-South Sudan',      length: 515 },
+  { name: 'Eastern Corridor',    roads: ['A005'], description: 'Kampala-Jinja-Tororo-Kenya',           length: 247 },
+  { name: 'Hoima Road',          roads: ['B100'], description: 'Kampala-Hoima-Kafu',                   length: 237 },
 ] as const;
 
 // ── Help text the bot can use when asked about road/link numbering ─────────────
 export const LINK_ID_EXPLAINER = `
 Uganda Department of National Roads uses a LINEAR REFERENCING SYSTEM (LRS) where each road is divided into
-LINKS — management sections defined by nodes (intersections, towns, boundaries).
+LINKS - management sections defined by nodes (intersections, towns, boundaries).
 
 LINK ID FORMAT: [Road Number]_Link[Sequence Number]
   • A001_Link01 = First link on the A001 Kampala-Gulu highway
@@ -219,16 +219,16 @@ ROAD NUMBER FORMAT: Class letter + 3-digit zero-padded number
   • M3, M20 (municipal roads may use shorter codes)
 
 ROAD CLASSIFICATION:
-  • Class A: International/trunk roads — 2,615 km (e.g. A001, A002, A004)
-  • Class B: Secondary national roads — 2,863 km (e.g. B100, B101, B150)
-  • Class C: Regional roads — 15,537 km (e.g. C003, C150, C261)
-  • Class M: Municipal/urban classified roads — 145 km
+  • Class A: International/trunk roads - 2,615 km (e.g. A001, A002, A004)
+  • Class B: Secondary national roads - 2,863 km (e.g. B100, B101, B150)
+  • Class C: Regional roads - 15,537 km (e.g. C003, C150, C261)
+  • Class M: Municipal/urban classified roads - 145 km
 
 CHAINAGE: Distance measured in km from the road datum (start of road).
   • Stored as decimal km in fields chainage_f and chainage_t
   • Example: chainage_f = 0.0, chainage_t = 32.27 means link spans 0 to 32.27 km
 
-Total network: 21,160 km (mapped) across 1,013 links — Data: DNR GIS Jun 2025
+Total network: 21,160 km (mapped) across 1,013 links - Data: DNR GIS Jun 2025
 
 To look up a specific road or link, say:
   "Show me link A001_Link01"

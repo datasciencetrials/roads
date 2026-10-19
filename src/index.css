@@ -666,3 +666,34 @@
   color: #9ca3af;
   text-align: center;
 }
+
+@media (max-width: 640px) {
+  .nrms-sidebar {
+    width: 76px !important;
+    min-width: 76px !important;
+  }
+
+  .nrms-sidebar-brand-copy,
+  .nrms-sidebar-summary,
+  .nrms-sidebar-label,
+  .nrms-sidebar-chevron,
+  .nrms-sidebar-footer-copy {
+    display: none !important;
+  }
+
+  .nrms-sidebar nav {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
+
+  .nrms-sidebar button {
+    justify-content: center !important;
+    gap: 0 !important;
+    padding-left: 7px !important;
+    padding-right: 7px !important;
+  }
+
+  .nrms-sidebar-children {
+    padding-left: 0 !important;
+  }
+}

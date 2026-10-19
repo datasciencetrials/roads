@@ -182,8 +182,8 @@ export default function PlatformDashboard() {
         <StatTile label="Total Network" value="21302" unit="km" color="#4d9fff" onNav={nav}
           tooltip="Official NDPIV FY 2025/26 figure · 6 regions · 23 maintenance stations · Source: MoWT/DNR"
           navChips={[{ label: 'Road Network', view: 'roadnetwork' }]} />
-        <StatTile label="Paved Roads" value="6405" unit="km" color="#00ff88" onNav={nav}
-          tooltip="6,405 km paved (bituminous + DBST) · 30.3% of national network"
+        <StatTile label="Paved Roads" value="11762.8" unit="km" color="#00ff88" onNav={nav}
+          tooltip="11,762.8 km paved · 55.2% of the National Road Network"
           navChips={[{ label: 'Condition', view: 'roadcondition' }]} />
         <StatTile label="Total Links" value="1014" unit="" color="#ffd23f" onNav={nav}
           tooltip={`${structures.filter(s => s.type === 'bridge').length || 546} bridges · ${networkSummary?.stations_count || 23} stations · GeoJSON-mapped (165 km gap)`}
@@ -280,7 +280,7 @@ export default function PlatformDashboard() {
           <div className="flex items-center justify-between mb-4">
             <div>
               <div className="text-sm font-bold text-white">Paved Road Stock Growth</div>
-              <div className="text-[10px] text-slate-500">NDP II & III (2015/16 – 2022/23)</div>
+              <div className="text-[10px] text-slate-500">NDP II & III (2015/16 - 2022/23)</div>
             </div>
             <div className="flex items-center gap-2">
               <SourceTableButton anchor="tbl-005" />

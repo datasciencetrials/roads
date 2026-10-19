@@ -63,7 +63,7 @@ const SECTIONS: Record<string, Section> = {
   // sub-tabs. The content never moved or was deleted, so this just gives
   // each one its own row again, per an explicit request to bring back every
   // tab that has ever existed in the nav.
-  networkstory:    { id: 'networkstory',    label: 'Network Story 1986–', icon: <BookOpen size={14}/>,       color: N.purple },
+  networkstory:    { id: 'networkstory',    label: 'Network Story 1986-', icon: <BookOpen size={14}/>,       color: N.purple },
   roadnetwork:     { id: 'roadnetwork',     label: 'Road Network Map',      icon: <Navigation size={14}/>,     color: N.cyan   },
   registry:        { id: 'registry',        label: 'Structure Registry',    icon: <ClipboardList size={14}/>,  color: N.blue   },
   inspections:     { id: 'inspections',     label: 'Inspection Management', icon: <ClipboardCheck size={14}/>, color: N.blue   },
@@ -158,7 +158,7 @@ export default function Sidebar() {
 
   return (
     <aside
-      className="flex flex-col z-20 flex-shrink-0"
+      className="nrms-sidebar flex flex-col z-20 flex-shrink-0"
       style={{
         width: 240, minWidth: 240,
         background: 'rgba(8,14,28,0.72)',
@@ -181,7 +181,7 @@ export default function Sidebar() {
               boxShadow: '0 0 16px rgba(0, 245, 255,0.15)',
             }}
           />
-          <div style={{ minWidth: 0 }}>
+          <div className="nrms-sidebar-brand-copy" style={{ minWidth: 0 }}>
             <div className="metallic-chrome" style={{ fontSize: 10, fontWeight: 900,
               letterSpacing: '0.12em', lineHeight: 1.2 }}>UGROADS</div>
             <div style={{ fontSize: 8, color: 'rgba(148,163,184,0.6)', letterSpacing: '0.04em' }}>
@@ -197,7 +197,7 @@ export default function Sidebar() {
       </div>
 
       {/* Network summary strip */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', borderBottom: '1px solid rgba(0, 245, 255,0.08)' }}>
+      <div className="nrms-sidebar-summary" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', borderBottom: '1px solid rgba(0, 245, 255,0.08)' }}>
         <StatPill label="Roads"    value="21.3k" color={N.cyan} />
         <StatPill label="Bridges"  value={String(structures.filter(s=>s.type==='bridge').length)} color={N.blue} />
         <StatPill label="Critical" value={String(criticalCount)} color={N.pink} />
@@ -213,6 +213,7 @@ export default function Sidebar() {
             <div key={g.id} style={{ marginBottom: 4 }}>
               {/* Group header = top-level tab */}
               <button
+                title={g.label}
                 onClick={() => setOpenGroup(isOpen ? undefined : g.id)}
                 style={{
                   width: '100%', display: 'flex', alignItems: 'center', gap: 9,
@@ -231,10 +232,10 @@ export default function Sidebar() {
                   filter: isOpen || hasActive ? `drop-shadow(0 0 6px ${g.color})` : 'none' }}>
                   {g.icon}
                 </span>
-                <span style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                <span className="nrms-sidebar-label" style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {g.label}
                 </span>
-                <ChevronDown size={13} style={{
+                <ChevronDown className="nrms-sidebar-chevron" size={13} style={{
                   flexShrink: 0, opacity: 0.7,
                   transform: isOpen ? 'rotate(0deg)' : 'rotate(-90deg)',
                   transition: 'transform 0.2s',
@@ -247,7 +248,7 @@ export default function Sidebar() {
                 maxHeight: isOpen ? `${g.items.length * 40 + 8}px` : '0px',
                 transition: 'max-height 0.25s ease',
               }}>
-                <div style={{ padding: '4px 0 4px 8px' }}>
+                <div className="nrms-sidebar-children" style={{ padding: '4px 0 4px 8px' }}>
                   {g.items.map(id => {
                     const s = SECTIONS[id];
                     if (!s) return null;
@@ -256,6 +257,7 @@ export default function Sidebar() {
                     return (
                       <button
                         key={id}
+                        title={s.label}
                         onClick={() => navigate(id)}
                         style={{
                           width: '100%', display: 'flex', alignItems: 'center', gap: 9,
@@ -274,7 +276,7 @@ export default function Sidebar() {
                           filter: isActive ? `drop-shadow(0 0 5px ${s.color})` : 'none' }}>
                           {s.icon}
                         </span>
-                        <span style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                        <span className="nrms-sidebar-label" style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                           {s.label}
                         </span>
                         {isActive && (
@@ -295,7 +297,7 @@ export default function Sidebar() {
 
       {/* Footer */}
       <div style={{ padding: '8px 14px', borderTop: '1px solid rgba(0, 245, 255,0.08)', textAlign: 'center' }}>
-        <div style={{ fontSize: 7.5, color: 'rgba(100,116,139,0.45)', letterSpacing: '0.05em' }}>
+        <div className="nrms-sidebar-footer-copy" style={{ fontSize: 7.5, color: 'rgba(100,116,139,0.45)', letterSpacing: '0.05em' }}>
           Uganda NRMS v4.0 · DNR 2026 (FY25-26)
         </div>
         {/* Real Supabase connectivity check (useDbStatus), not a decorative
@@ -306,7 +308,7 @@ export default function Sidebar() {
             background: dbStatus === 'connected' ? '#00ff88' : dbStatus === 'offline' ? '#ff2d78' : '#94a3b8',
             boxShadow: dbStatus === 'connected' ? '0 0 6px #00ff88' : dbStatus === 'offline' ? '0 0 6px #ff2d78' : 'none',
             animation: dbStatus !== 'offline' ? 'pulse 2s ease-in-out infinite' : 'none', display: 'inline-block' }}/>
-          <span style={{ fontSize: 7.5,
+          <span className="nrms-sidebar-footer-copy" style={{ fontSize: 7.5,
             color: dbStatus === 'connected' ? 'rgba(0, 255, 136,0.6)' : dbStatus === 'offline' ? 'rgba(255, 45, 120,0.75)' : 'rgba(148,163,184,0.6)' }}>
             {dbStatus === 'connected' ? 'Database Connected' : dbStatus === 'offline' ? 'Database Offline' : 'Checking database…'}
           </span>

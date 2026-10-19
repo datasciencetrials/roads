@@ -155,7 +155,7 @@ function ConditionDetail({ structure: s }: { structure: Structure }) {
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-sm font-bold text-white flex items-center gap-2">
             <Activity size={15} className="text-blue-400" />
-            Condition History (2018 – 2024)
+            Condition History (2018 - 2024)
           </h3>
           <span className="text-xs text-slate-500">Lower = worse</span>
         </div>
@@ -184,7 +184,7 @@ function ConditionDetail({ structure: s }: { structure: Structure }) {
 
       {/* NBI component ratings */}
       <div className="bms-card">
-        <h3 className="text-sm font-bold text-white mb-4">NBI Component Ratings (0–9)</h3>
+        <h3 className="text-sm font-bold text-white mb-4">NBI Component Ratings (0-9)</h3>
         <div className="space-y-3">
           {nbiComponents.map(c => {
             const pct = (c.score / 9) * 100;

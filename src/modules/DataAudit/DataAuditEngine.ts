@@ -40,8 +40,8 @@ export async function runDataAudit(
   // source GeoJSON changes.
   const TOT     = 21302;   // official Department of National Roads total; GeoJSON has ~21,137 km mapped (~165 km unmapped)
   const LINKS   = 1014;
-  const PAVED   = 6405;
-  const UNPAVED = 14732;
+  const PAVED   = 11762.8;
+  const UNPAVED = 9539.2;
   const STATIONS= 23;
   const REGIONS = 6;
 

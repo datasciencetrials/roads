@@ -77,7 +77,7 @@ async function loadLinks(): Promise<LinkModel[]> {
       const id          = String(p.link_id ?? p.unique_id ?? '');
       // Condition anchor: paved links carry a real build/rehab year. Unpaved (gravel)
       // links have no build year - they are regraded on a cycle, so we anchor their
-      // condition to a deterministic recent grading year (2015–2025) spread by id.
+      // condition to a deterministic recent grading year (2015-2025) spread by id.
       const condYear = paved
         ? (builtReal || 2010)
         : 2026 - (1 + (hashStr(id) % 11));
@@ -133,7 +133,7 @@ export function iriBand(iri: number, paved: boolean): 'good' | 'fair' | 'poor' {
   return iri < 8 ? 'good' : iri < 12 ? 'fair' : 'poor';
 }
 
-// Fraction of the current calendar day elapsed (0–1), second resolution.
+// Fraction of the current calendar day elapsed (0-1), second resolution.
 function dayFraction(): number {
   const d = new Date();
   return (d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds()) / 86400;

@@ -1,5 +1,5 @@
 /**
- * useNetworkStats — single source of truth for all network KPIs.
+ * useNetworkStats - single source of truth for all network KPIs.
  *
  * Loads network2026.geojson (1,013 links) and bridges2026.geojson once,
  * computes every statistic used across the platform, and caches the result.
@@ -9,19 +9,21 @@
  */
 
 /**
- * Official total network length — Department of National Roads FY 2025/26.
- * Source: NDPIV Investment Programme FY 2025–2026 (MoWT/DNR, June 2025).
+ * Official total network length - Department of National Roads FY 2025/26.
+ * Source: NDPIV Investment Programme FY 2025-2026 (MoWT/DNR, June 2025).
  * This is the gazetted figure; it differs from GeoJSON-computed totalKm
  * because some links (mainly unclassified / recently gazetted roads) are
  * not yet in the GIS dataset.
  */
 export const OFFICIAL_NETWORK_KM = 21302;
+export const OFFICIAL_PAVED_KM = 11762.8;
+export const OFFICIAL_UNPAVED_KM = OFFICIAL_NETWORK_KM - OFFICIAL_PAVED_KM;
 import { useState, useEffect } from 'react';
 
 export interface NetworkStats {
-  // Totals — GeoJSON mapped vs official Department of National Roads figure
+  // Totals - GeoJSON mapped vs official Department of National Roads figure
   totalKm: number;       // from network2026.geojson (mapped)
-  officialKm: number;    // = OFFICIAL_NETWORK_KM (21,302 km) — NDPIV FY25/26
+  officialKm: number;    // = OFFICIAL_NETWORK_KM (21,302 km) - NDPIV FY25/26
   totalLinks: number;
   // Surface
   pavedKm: number;
@@ -30,9 +32,13 @@ export interface NetworkStats {
   // Road class
   classKm: Record<string, number>;
   classLinks: Record<string, number>;
+  classPavedKm: Record<string, number>;
+  classUnpavedKm: Record<string, number>;
   // Region
   regionKm: Record<string, number>;
   regionLinks: Record<string, number>;
+  regionPavedKm: Record<string, number>;
+  regionUnpavedKm: Record<string, number>;
   // Structures
   totalBridges: number;
   // Survey vintage
@@ -41,7 +47,7 @@ export interface NetworkStats {
   error?: string;
 }
 
-// Condition stats from bot_results Q12 (surveyed subset only — not full network)
+// Condition stats from bot_results Q12 (surveyed subset only - not full network)
 export interface SurveyedCondition {
   totalSurveyedLinks: number;
   goodLinks: number;
@@ -79,8 +85,10 @@ async function _load(): Promise<NetworkStats> {
     let unpavedKm = 0;
     const classKm: Record<string, number> = {};
     const classLinks: Record<string, number> = {};
+    const classPavedRaw: Record<string, number> = {};
     const regionKm: Record<string, number> = {};
     const regionLinks: Record<string, number> = {};
+    const regionPavedRaw: Record<string, number> = {};
 
     for (const feat of features) {
       const p = feat.properties;
@@ -90,8 +98,11 @@ async function _load(): Promise<NetworkStats> {
       const surface = String(p.surface_ty ?? '');
 
       totalKm += km;
-      if (surface === 'Bituminous') pavedKm += km;
-      else unpavedKm += km;
+      if (surface === 'Bituminous' || surface === 'Concrete') {
+        pavedKm += km;
+        classPavedRaw[cls] = (classPavedRaw[cls] ?? 0) + km;
+        regionPavedRaw[region] = (regionPavedRaw[region] ?? 0) + km;
+      } else unpavedKm += km;
 
       classKm[cls] = (classKm[cls] ?? 0) + km;
       classLinks[cls] = (classLinks[cls] ?? 0) + 1;
@@ -99,19 +110,29 @@ async function _load(): Promise<NetworkStats> {
       regionLinks[region] = (regionLinks[region] ?? 0) + 1;
     }
 
-    const totalBridges = bridgeRes?.features?.length ?? 483;
+    const totalBridges = bridgeRes?.features?.length ?? 546;
+
+    const pavedScale = pavedKm > 0 ? OFFICIAL_PAVED_KM / pavedKm : 1;
+    const classPavedKm = Object.fromEntries(Object.entries(classPavedRaw).map(([k, v]) => [k, Math.round(v * pavedScale)]));
+    const regionPavedKm = Object.fromEntries(Object.entries(regionPavedRaw).map(([k, v]) => [k, Math.round(v * pavedScale)]));
+    const classUnpavedKm = Object.fromEntries(Object.entries(classKm).map(([k, v]) => [k, Math.max(0, Math.round(v - (classPavedKm[k] ?? 0)))]));
+    const regionUnpavedKm = Object.fromEntries(Object.entries(regionKm).map(([k, v]) => [k, Math.max(0, Math.round(v - (regionPavedKm[k] ?? 0)))]));
 
     _cache = {
       totalKm:     Math.round(totalKm),
       officialKm:  OFFICIAL_NETWORK_KM,
       totalLinks:  features.length,
-      pavedKm:     Math.round(pavedKm),
-      unpavedKm:   Math.round(unpavedKm),
-      pavedPct:    totalKm > 0 ? parseFloat(((pavedKm / totalKm) * 100).toFixed(1)) : 0,
+      pavedKm:     OFFICIAL_PAVED_KM,
+      unpavedKm:   OFFICIAL_UNPAVED_KM,
+      pavedPct:    parseFloat(((OFFICIAL_PAVED_KM / OFFICIAL_NETWORK_KM) * 100).toFixed(1)),
       classKm:     Object.fromEntries(Object.entries(classKm).map(([k, v]) => [k, Math.round(v)])),
       classLinks,
+      classPavedKm,
+      classUnpavedKm,
       regionKm:    Object.fromEntries(Object.entries(regionKm).map(([k, v]) => [k, Math.round(v)])),
       regionLinks,
+      regionPavedKm,
+      regionUnpavedKm,
       totalBridges,
       dataVintage: 'DNR GIS / NDPIV FY25-26',
       loaded: true,
@@ -127,11 +148,15 @@ export function useNetworkStats(): NetworkStats {
   const [stats, setStats] = useState<NetworkStats>(
     _cache ?? {
       totalKm: 21160, officialKm: OFFICIAL_NETWORK_KM, totalLinks: 1022,
-      pavedKm: 6405, unpavedKm: 14897, pavedPct: 30.1,
+      pavedKm: OFFICIAL_PAVED_KM, unpavedKm: OFFICIAL_UNPAVED_KM, pavedPct: 55.2,
       classKm: { A: 2615, B: 2863, C: 15537, M: 145 },
       classLinks: { A: 0, B: 0, C: 0, M: 0 },
+      classPavedKm: { A: 0, B: 0, C: 0, M: 0 },
+      classUnpavedKm: { A: 0, B: 0, C: 0, M: 0 },
       regionKm: { Central: 4760, Eastern: 2775, 'North Eastern': 2716, Northern: 4595, Southern: 3546, Western: 2768 },
       regionLinks: {},
+      regionPavedKm: {},
+      regionUnpavedKm: {},
       totalBridges: 546,
       dataVintage: 'DNR GIS / NDPIV FY25-26',
       loaded: !!_cache,
@@ -148,15 +173,19 @@ export function useNetworkStats(): NetworkStats {
   return stats;
 }
 
-/** Sync accessor — returns defaults if not yet loaded. Safe to call outside React. */
+/** Sync accessor - returns defaults if not yet loaded. Safe to call outside React. */
 export function getNetworkStats(): NetworkStats {
   return _cache ?? {
     totalKm: 21160, officialKm: OFFICIAL_NETWORK_KM, totalLinks: 1022,
-    pavedKm: 6405, unpavedKm: 14897, pavedPct: 30.1,
+    pavedKm: OFFICIAL_PAVED_KM, unpavedKm: OFFICIAL_UNPAVED_KM, pavedPct: 55.2,
     classKm: { A: 2615, B: 2863, C: 15537, M: 145 },
     classLinks: {},
+    classPavedKm: {},
+    classUnpavedKm: {},
     regionKm: { Central: 4760, Eastern: 2775, 'North Eastern': 2716, Northern: 4595, Southern: 3546, Western: 2768 },
     regionLinks: {},
+    regionPavedKm: {},
+    regionUnpavedKm: {},
     totalBridges: 546,
     dataVintage: 'DNR GIS Jun 2025',
     loaded: false,

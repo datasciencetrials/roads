@@ -137,7 +137,7 @@ export function ExhaustiveTables({ sectionId, accent = '#00f5ff' }: { sectionId:
           tabs - see DeepAnalysisTables.tsx for the equivalent panel. */}
       <div style={{ margin: '4px 0 10px' }}>
         <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.04em', color: accent }}>
-          Exhaustive table — {rows.length.toLocaleString()} records × {cols.length} attributes (all shown, no selective reporting)
+          Exhaustive table - {rows.length.toLocaleString()} records × {cols.length} attributes (all shown, no selective reporting)
         </span>
       </div>
       <SortableFilterableTable

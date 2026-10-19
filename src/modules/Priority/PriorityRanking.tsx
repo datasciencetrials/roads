@@ -115,7 +115,7 @@ export default function PriorityRanking() {
                 { key: 'region', label: 'Region' },
                 { key: 'conditionRating', label: 'Condition', numeric: true, render: s => (
                     <span className={`badge ${conditionBadge(s.conditionRating)}`}>
-                      {s.conditionRating} – {conditionLabel(s.conditionRating)}
+                      {s.conditionRating} - {conditionLabel(s.conditionRating)}
                     </span>
                   ) },
                 { key: 'traffic', label: 'Traffic', render: s => (
@@ -189,7 +189,7 @@ export default function PriorityRanking() {
             {[5,4,3,2,1].map(r => (
               <div key={r} className="flex items-center gap-2 text-[10px]">
                 <span className="w-2.5 h-2.5 rounded-full" style={{ background: CONDITION_COLORS[r] }} />
-                <span className="text-slate-400">Condition {r} – {conditionLabel(r)}</span>
+                <span className="text-slate-400">Condition {r} - {conditionLabel(r)}</span>
               </div>
             ))}
           </div>
@@ -202,7 +202,7 @@ export default function PriorityRanking() {
               <div>Traffic:    × 2 (max 8)</div>
               <div>Age:        × 1 (max 4)</div>
               <div>Strategic:  × 1 (max 5)</div>
-              <div className="border-t border-slate-700 pt-1 text-slate-300">Total → scaled 0–100</div>
+              <div className="border-t border-slate-700 pt-1 text-slate-300">Total → scaled 0-100</div>
             </div>
           </div>
         </div>

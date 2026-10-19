@@ -1,6 +1,6 @@
 /**
  * NetworkOverviewDashboard - RMS "Dashboard" tab flagship view.
- * Port of public/dashboard.html Tab 1 (NETWORK OVERVIEW, charts c1–c15) into
+ * Port of public/dashboard.html Tab 1 (NETWORK OVERVIEW, charts c1-c15) into
  * live React/Recharts, extended to 20 chart tiles. Headline network totals
  * (total/paved/unpaved/unmapped, regional and class breakdowns) are sourced
  * live from useNetworkStats - the platform's single source of truth - so this
@@ -34,7 +34,7 @@ const CLASS_LBL = ['Class A Trunk', 'Class B Regional', 'Class C District'];
 const SURF_LBL = ['Bituminous', 'Concrete', 'Gravel', 'Earth'];
 const NET_YRS = [2010, 2012, 2014, 2016, 2018, 2020, 2022, 2024, 2025];
 const NET_KM = [18200, 18800, 19400, 20100, 20600, 20900, 21050, 21200, 21302];
-const NET_PAVED_TREND = [5200, 5600, 5800, 5900, 6100, 6200, 6300, 6380, 6405];
+const NET_PAVED_TREND = [5200, 5600, 5800, 5900, 6100, 6200, 7000, 9200, 11762.8];
 const IRI_A = [2.1, 2.4, 2.8, 3.2, 3.3, 3.3, 3.4, 3.6, 3.8, 4.2];
 const IRI_B = [3.2, 3.8, 4.2, 4.4, 4.5, 4.6, 5.0, 5.4, 5.8, 6.2];
 const IRI_C = [4.8, 5.2, 5.8, 6.2, 6.3, 6.4, 6.8, 7.2, 7.8, 9.1];
@@ -94,7 +94,7 @@ export default function NetworkOverviewDashboard() {
   return (
     <div>
       <KpiStrip>
-        <StatMini value={`${TOTAL.toLocaleString()} km`} label="Total Network" color={DASH_C.cyan} />
+        <StatMini value={`${TOTAL.toLocaleString()} km`} label="National Roads" color={DASH_C.cyan} />
         <StatMini value={`${PAVED.toLocaleString()} km`} label={`Paved (${pavedPctRounded}%)`} color={DASH_C.green} />
         <StatMini value={`${UNPAVED.toLocaleString()} km`} label={`Unpaved (${100 - pavedPctRounded}%)`} color={DASH_C.orange} />
         <StatMini value="6 Regions" label="Geographic Coverage" color={DASH_C.purple} />
@@ -126,7 +126,7 @@ export default function NetworkOverviewDashboard() {
         <ChartBox title="Road Segments" subtitle="traffic vs roughness - size=AADT" accent={DASH_C.purple} height={260}>
           <ScatterBubble data={SEGMENTS} xLabel="IRI (roughness)" yLabel="AADT (veh/day)" color={DASH_C.purple} />
         </ChartBox>
-        <ChartBox title="Condition Score" subtitle="region × class (0–100)" accent={DASH_C.pink} height={260}>
+        <ChartBox title="Condition Score" subtitle="region × class (0-100)" accent={DASH_C.pink} height={260}>
           <BarV data={REG_CLASS_ROWS.map(r => ({ name: r.name, A: REG_COND_A[REG_LBL.indexOf(r.name)], B: REG_COND_B[REG_LBL.indexOf(r.name)], C: REG_COND_C[REG_LBL.indexOf(r.name)] }))}
             xKey="name" series={[{ key: 'A', name: 'Class A', color: DASH_C.cyan }, { key: 'B', name: 'Class B', color: DASH_C.yellow }, { key: 'C', name: 'Class C', color: DASH_C.orange }]} />
         </ChartBox>
@@ -152,7 +152,7 @@ export default function NetworkOverviewDashboard() {
           <BarV data={CLASS_LBL.map((n, i) => ({ name: n.split(' ')[1], Total: CLASS_KM[i], Paved: CLASS_PAVED[i] }))} xKey="name"
             series={[{ key: 'Total', name: 'Total km', color: DASH_C.cyan }, { key: 'Paved', name: 'Paved km', color: DASH_C.green }]} unit="km" />
         </ChartBox>
-        <ChartBox title="Network Growth 2010–2025" accent={DASH_C.green} height={230}>
+        <ChartBox title="Network Growth 2010-2025" accent={DASH_C.green} height={230}>
           <LineMulti data={NET_YRS.map((y, i) => ({ year: y, Total: NET_KM[i], Paved: NET_PAVED_TREND[i] }))} xKey="year"
             series={[{ key: 'Total', name: 'Total km', color: DASH_C.cyan }, { key: 'Paved', name: 'Paved km', color: DASH_C.green }]} area />
         </ChartBox>

@@ -149,10 +149,10 @@ const DOCS: DocSection[] = [
     id: 'standards', title: '10 · UNRA Standards & Methodology',
     body: [
       { h: 'VCI condition bands (platform convention)', table: { head: ['Band', 'VCI'], rows: [
-        ['Very Good', '≥ 85'], ['Good', '75 – 84.9'], ['Fair', '65 – 74.9'], ['Poor', '55 – 64.9'], ['Very Poor', '< 55'],
+        ['Very Good', '≥ 85'], ['Good', '75 - 84.9'], ['Fair', '65 - 74.9'], ['Poor', '55 - 64.9'], ['Very Poor', '< 55'],
       ]}},
       { h: 'Visual Inspections Manual (Feb 2012) - codified in src/shared/unraStandards.ts', bullets: [
-        'Defect grading: 1–5 scale (degree × extent)',
+        'Defect grading: 1-5 scale (degree × extent)',
         '6 paved defect types; 9 unpaved defect types',
         'Inventory: 11 continuous + 9 discrete items, 8-way categorisation',
         '16-document Asset Management Manuals registry (0. Manuals/Asset Management Manuals)',

@@ -1,7 +1,7 @@
 /**
  * ProjectsOverviewDashboard - RMS "Dashboard" tab, Projects & Works view.
  * Port of public/dashboard.html Tab 6 (PROJECTS, CONTRACTS & OPRC, charts
- * c75–c87) into live React/Recharts, extended to 21 chart tiles. Real project
+ * c75-c87) into live React/Recharts, extended to 21 chart tiles. Real project
  * portfolio, OPRC lot and contract figures straight from the mockup's shared
  * data object `D`. No tables here - tabular breakdowns live under Exhaustive
  * Tables / Deep Analytics.
@@ -49,7 +49,7 @@ const AVG_OPRC_SCORE = Math.round(OPRC_SCORE.reduce((a, b) => a + b, 0) / OPRC_S
 // Ordered by score band - canonical risk/condition scale
 const OPRC_BAND_COUNTS = [
   { name: 'Excellent (≥80)', value: OPRC_SCORE.filter(v => v >= 80).length, color: '#22c55e' },
-  { name: 'Good (65–79)', value: OPRC_SCORE.filter(v => v >= 65 && v < 80).length, color: '#eab308' },
+  { name: 'Good (65-79)', value: OPRC_SCORE.filter(v => v >= 65 && v < 80).length, color: '#eab308' },
   { name: 'Needs Improvement (<65)', value: OPRC_SCORE.filter(v => v < 65).length, color: '#ef4444' },
 ];
 

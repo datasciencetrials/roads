@@ -61,7 +61,7 @@ const MILESTONES = [
   { year: 2023, label: 'OPRC Scale-Up',       color: C.pink,   detail: 'Continued rehabilitation under OPRC performance contracts; bridge and culvert inventory completed - 546 structures in the 2026 BMS register' },
   { year: 2024, label: 'Digital Transform',   color: C.indigo, detail: 'Digital transformation initiative; DNR RMS Engine development begins; ML-powered pavement condition assessment model (PyTorch, R²=0.93) enters training' },
   { year: 2025, label: 'Platform Live',       color: C.green,  detail: 'DNR Road Management System goes live; 1,014 links in GeoJSON; ML IRI prediction and HDM-4 analysis integrated; real-time ATC data feeds activated' },
-  { year: 2026, label: 'Current (FY25/26)',   color: C.cyan,   detail: 'Current year: Official network 21,302 km (NDPIV FY25-26) | GeoJSON mapped 21,137 km (1,014 links) | Paved 6,405 km (30.3%) | Unpaved 14,732 km (69.7%)' },
+  { year: 2026, label: 'Current (FY25/26)',   color: C.cyan,   detail: 'Current year: National Roads 21,302 km | GeoJSON mapped 21,137 km (1,014 links) | Paved 11,762.8 km (55.2%) | Unpaved 9,539.2 km (44.8%)' },
 ];
 
 const MAINTENANCE_FY = [
@@ -121,7 +121,7 @@ const WTSS_FALLBACK = [
   { fy: '2021/22', stock: 5878.5, increase: 287.0, pct: 27.8, ndp: 'NDP III' },
   { fy: '2022/23', stock: 6133.0, increase: 254.0, pct: 29.1, ndp: 'NDP III' },
   { fy: '2023/24', stock: 6313.0, increase: 180.0, pct: 29.7, ndp: 'NDP IV'  },
-  { fy: '2024/25', stock: 6405.0, increase:  92.0, pct: 30.1, ndp: 'NDP IV'  },
+  { fy: '2024/25', stock: 11762.8, increase:  5449.8, pct: 55.2, ndp: 'Approved baseline'  },
 ];
 
 // Maintenance stations - station names confirmed from analytics.json lowest_vci_links.station;
@@ -727,7 +727,7 @@ function FilterBar({
       <div style={{ display: 'flex', flexDirection: 'column', gap: 2, minWidth: 200 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <span style={{ fontSize: 9, color: 'rgba(148,163,184,0.55)', fontWeight: 600 }}>
-            YEAR {filters.yearRange[0]} – {filters.yearRange[1]}
+            YEAR {filters.yearRange[0]} - {filters.yearRange[1]}
           </span>
           {(filters.yearRange[0] !== 1986 || filters.yearRange[1] !== 2026) && (
             <button onClick={() => setFilters(f => ({ ...f, yearRange: [1986, 2026] }))}
@@ -819,7 +819,7 @@ function FilterBar({
 const PROJECT_GALLERY = [
   {
     id: 'kee1',
-    title: 'Kampala–Entebbe Expressway',
+    title: 'Kampala-Entebbe Expressway',
     year: '2018',
     stat: '51 km · USD 476M',
     desc: "Uganda's first expressway. The 2.3 km Nambigirwa viaduct soars over pristine papyrus wetlands connecting Kampala to Entebbe International Airport.",
@@ -838,7 +838,7 @@ const PROJECT_GALLERY = [
   {
     id: 'nbp',
     title: 'Kampala Northern Bypass',
-    year: '2009–2014',
+    year: '2009-2014',
     stat: '22 km · USD 108M',
     desc: 'Dual-carriageway ring road diverting heavy through-traffic from the Kampala CBD, with four major interchanges and grade separations.',
     img: `${import.meta.env.BASE_URL}media/northern_bypass.png`,
@@ -865,8 +865,8 @@ const PROJECT_GALLERY = [
   {
     id: 'bukakata',
     title: 'Bukakata Ferry · Lake Victoria',
-    year: 'UAV Survey 2021–24',
-    stat: 'Bukakata – Bussi Island',
+    year: 'UAV Survey 2021-24',
+    stat: 'Bukakata - Bussi Island',
     desc: 'Drone survey of the Bukakata ferry terminal - the critical water-road interface connecting the mainland to the Ssese Islands on Lake Victoria.',
     img: `${import.meta.env.BASE_URL}media/bukakata_lake.jpg`,
     accent: '#4d9fff',
@@ -1198,8 +1198,8 @@ export default function NetworkStory({ hideTables = false }: { hideTables?: bool
           </div>
         </Section>
 
-        {/* ── PAVED STOCK GROWTH 1986–2026 ── */}
-        <ChartSection id="paved-growth" title="Cumulative Paved Stock Growth · 1986–2026" accent={C.purple}
+        {/* ── PAVED STOCK GROWTH 1986-2026 ── */}
+        <ChartSection id="paved-growth" title="Cumulative Paved Stock Growth · 1986-2026" accent={C.purple}
           note="Cumulative km of paved national roads per year · Click milestone lines to learn more · Filter year range using slider above"
           minHeight={300}>
           <div style={{ perspective: '1200px' }}>
@@ -1258,7 +1258,7 @@ export default function NetworkStory({ hideTables = false }: { hideTables?: bool
         </ChartSection>
 
         {/* ── WTSS STOCK TIMELINE ── */}
-        <ChartSection id="wtss-stock" title="WTSS Paved Stock 2015/16 – 2022/23 · Official Statistics" accent={C.green}
+        <ChartSection id="wtss-stock" title="WTSS Paved Stock 2015/16 - 2022/23 · Official Statistics" accent={C.green}
           note="Work Tool for Sector Statistics official paved stock figures by financial year · NDP II → NDP III transition shown" minHeight={260}>
           <div style={{ transform: 'perspective(1200px) rotateX(1deg)', transformOrigin: 'center top' }}>
             <ResponsiveContainer width="100%" height={240}>
@@ -1305,7 +1305,7 @@ export default function NetworkStory({ hideTables = false }: { hideTables?: bool
         )}
 
         {/* ── TRAFFIC AADT TREND ── */}
-        <ChartSection id="traffic-aadt" title="Network Traffic AADT · 2017–2025 (Motorised Vehicles/Day)" accent={C.orange}
+        <ChartSection id="traffic-aadt" title="Network Traffic AADT · 2017-2025 (Motorised Vehicles/Day)" accent={C.orange}
           note="Length-weighted AADT from traffic surveys · 2021 survey covers partial network (450 links)" minHeight={260}>
           <div style={{ transform: 'perspective(1000px) rotateX(1deg)', transformOrigin: 'center top' }}>
             <ResponsiveContainer width="100%" height={240}>
@@ -1382,7 +1382,7 @@ export default function NetworkStory({ hideTables = false }: { hideTables?: bool
                     return (
                       <text x={(x ?? 0) + 6} y={(y ?? 0) + (height ?? 0) / 2} dy={4}
                         fontSize={9.5} fontWeight={700} fill="rgba(148,163,184,0.7)">
-                        no data{r?.region === 'North Eastern' ? ' — survey pending' : ''}
+                        no data{r?.region === 'North Eastern' ? ' - survey pending' : ''}
                       </text>
                     );
                   }} />
@@ -1393,7 +1393,7 @@ export default function NetworkStory({ hideTables = false }: { hideTables?: bool
 
         {/* ── VCI BY REGION ── */}
         <ChartSection id="vci-region" title="Road Condition VCI by Region · 2024/25 & 2025/26 Cycles" accent={C.teal}
-          note="Weighted average Visual Condition Index (VCI 0–100, higher = better) · Click bar to filter region" minHeight={280}>
+          note="Weighted average Visual Condition Index (VCI 0-100, higher = better) · Click bar to filter region" minHeight={280}>
           <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 16 }}>
             <ResponsiveContainer width="100%" height={240}>
               <BarChart data={filteredVciRegions} layout="vertical"
@@ -1691,7 +1691,7 @@ export default function NetworkStory({ hideTables = false }: { hideTables?: bool
         </>}
 
         {/* ── MILESTONE TIMELINE ── */}
-        <Section title="Key Policy Milestones · 1962–Present" accent={C.cyan}>
+        <Section title="Key Policy Milestones · 1962-Present" accent={C.cyan}>
           <div style={{ position: 'relative', paddingLeft: 28 }}>
             <div style={{
               position: 'absolute', left: 12, top: 8, bottom: 8, width: 2,
@@ -1764,7 +1764,7 @@ export default function NetworkStory({ hideTables = false }: { hideTables?: bool
         }}>
           <div style={{ color: 'rgba(148,163,184,0.4)', fontWeight: 700, marginBottom: 4 }}>DATA SOURCES &amp; NOTES</div>
           Department of National Roads (Department of National Roads) road inventory & ROMDAS condition surveys ·
-          Official WTSS statistics (2015/16–2022/23) ·
+          Official WTSS statistics (2015/16-2022/23) ·
           Traffic surveys (2017, 2020, 2021, 2025) · VCI from ROMDAS survey cycles (2024/25 & 2025/26) ·
           Maintenance funding: indicative Roads Fund estimates · Station-level paved/unpaved km are proportional estimates; VCI marked ✓ are survey-verified ·
           Asset replacement values for planning reference only · Filters apply to charts with available data ·

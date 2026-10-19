@@ -203,9 +203,9 @@ export default function AtlasContent() {
         <StatCard label="Total Network" value="21,137" unit="km" sub="1,014 road links · Jun 2025" color="#00f5ff" />
         <StatCard
           label="Paved Stock"
-          value={latestPaved ? latestPaved.km.toLocaleString(undefined, { maximumFractionDigits: 0 }) : '6,405'}
+          value={latestPaved ? latestPaved.km.toLocaleString(undefined, { maximumFractionDigits: 1 }) : '11,762.8'}
           unit="km"
-          sub={latestPaved ? `${latestPaved.pct.toFixed(1)}% of network · FY${latestPaved.fy}` : '30.3% of network'}
+          sub={latestPaved ? `${latestPaved.pct.toFixed(1)}% of National Roads · FY${latestPaved.fy}` : '55.2% of National Roads'}
           color="#00ff88"
         />
         <StatCard
@@ -227,7 +227,7 @@ export default function AtlasContent() {
       {/* ── Paved stock growth chart ── */}
       <SectionHeading title="Paved Road Stock Growth" sub="Historical expansion of paved network since 1986" />
       <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 20, marginBottom: 48 }}>
-        <ChartCard title="Cumulative Paved Stock (km)" sub="FY 1986/87 – present">
+        <ChartCard title="Cumulative Paved Stock (km)" sub="FY 1986/87 - present">
           <ResponsiveContainer width="100%" height={220}>
             <AreaChart data={pavedTimeline} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
               <defs>

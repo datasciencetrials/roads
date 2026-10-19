@@ -82,7 +82,7 @@ export default function Analytics() {
     const cnt: Record<number, number> = { 1:0, 2:0, 3:0, 4:0, 5:0 };
     structures.forEach(s => cnt[s.conditionRating]++);
     return [5,4,3,2,1].map(r => ({
-      name:    `${r} – ${conditionLabel(r)}`,
+      name:    `${r} - ${conditionLabel(r)}`,
       bridges: structures.filter(s => s.type === 'bridge' && s.conditionRating === r).length,
       culverts:structures.filter(s => s.type === 'culvert'&& s.conditionRating === r).length,
       total:   cnt[r],
@@ -324,7 +324,7 @@ function ConditionTab({ condData, condHistory }: { condData: any[]; condHistory:
 
       {/* Network trend over time */}
       <div className="bms-card">
-        <h3 className="text-sm font-bold text-white mb-4">Network Condition Trend 2018–2024</h3>
+        <h3 className="text-sm font-bold text-white mb-4">Network Condition Trend 2018-2024</h3>
         <Chart3DWrap>
           <ResponsiveContainer width="100%" height={240}>
             <AreaChart data={condHistory} margin={{ top:4, right:12, left:0, bottom:0 }}>

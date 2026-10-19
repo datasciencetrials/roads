@@ -4,7 +4,7 @@
  * Observed values are anchored at their survey year and carried forward to the
  * fractional "now" (e.g. 2026.4471…) with the platform's predictive models:
  *   IRI  - compound annual roughness progression (HDM-4-style growth rate)
- *   VCI  - linear condition decay per year, clamped 0–100
+ *   VCI  - linear condition decay per year, clamped 0-100
  *   ADT  - the 2016-base growth-factor curve, linearly interpolated so the
  *          factor moves continuously between calendar years
  * A 1-second tick re-renders consumers so displayed values are literally

@@ -468,28 +468,28 @@ function ConditionMap({
   const legendItems = useMemo(() => {
     if (mapLayer === 'condition') return [
       { label: 'Good  IRI < 3.5',        color: IRI_COLOR.good },
-      { label: 'Fair  3.5–6.5',          color: IRI_COLOR.fair },
-      { label: 'Poor  6.5–9.0',          color: IRI_COLOR.poor },
+      { label: 'Fair  3.5-6.5',          color: IRI_COLOR.fair },
+      { label: 'Poor  6.5-9.0',          color: IRI_COLOR.poor },
       { label: 'Very Poor  > 9.0',       color: IRI_COLOR.very_poor },
       { label: 'Not Surveyed / Works',   color: '#94a3b8' },
     ];
     if (mapLayer === 'urgency') return [
       { label: '2026 - Act Now',   color: URGENCY_COLOR.now },
       { label: '2027',             color: URGENCY_COLOR.urgent },
-      { label: '2028–29',          color: URGENCY_COLOR.soon },
+      { label: '2028-29',          color: URGENCY_COLOR.soon },
       { label: '2030+',            color: URGENCY_COLOR.planned },
     ];
     if (mapLayer === 'rutting') return [
       { label: 'Light   < 5 mm',   color: '#22c55e' },
-      { label: 'Moderate 5–10 mm', color: '#eab308' },
-      { label: 'Heavy  10–20 mm',  color: '#f97316' },
+      { label: 'Moderate 5-10 mm', color: '#eab308' },
+      { label: 'Heavy  10-20 mm',  color: '#f97316' },
       { label: 'Severe > 20 mm',   color: '#ef4444' },
       { label: 'Not surveyed',     color: '#94a3b8' },
     ];
     if (mapLayer === 'cracking') return [
       { label: 'Low  < 10%',     color: '#22c55e' },
-      { label: 'Moderate 10–25%',color: '#eab308' },
-      { label: 'High 25–50%',    color: '#f97316' },
+      { label: 'Moderate 10-25%',color: '#eab308' },
+      { label: 'High 25-50%',    color: '#f97316' },
       { label: 'Severe > 50%',   color: '#ef4444' },
       { label: 'Not surveyed',   color: '#94a3b8' },
     ];
@@ -718,13 +718,13 @@ function ConditionMap({
             <FilterGroup label="Condition Band">
               <FilterSelect value={filterCondBand} onChange={setFilterCondBand}
                 options={['all', 'good', 'fair', 'poor', 'very_poor', 'unsurveyed']}
-                labels={{ all: 'All', good: 'Good (IRI < 3.5)', fair: 'Fair (3.5–6.5)',
-                          poor: 'Poor (6.5–9.0)', very_poor: 'Very Poor (> 9.0)',
+                labels={{ all: 'All', good: 'Good (IRI < 3.5)', fair: 'Fair (3.5-6.5)',
+                          poor: 'Poor (6.5-9.0)', very_poor: 'Very Poor (> 9.0)',
                           unsurveyed: 'Not Surveyed' }}/>
             </FilterGroup>
 
             {/* Survey year range */}
-            <FilterGroup label={`Trigger Year: ${filterYearMin}–${filterYearMax}`}>
+            <FilterGroup label={`Trigger Year: ${filterYearMin}-${filterYearMax}`}>
               <div style={{ display: 'flex', gap: 6, alignItems: 'center', fontSize: 9 }}>
                 <input type="number" value={filterYearMin} min={2016} max={2030}
                   onChange={e => setFilterYearMin(Number(e.target.value))}
@@ -802,8 +802,8 @@ function ConditionMap({
 function CondKPIs({ c24, c30, linksProjected, totalNetworkKm }: { c24: CondBand; c30: CondBand; linksProjected?: number; totalNetworkKm?: number }) {
   const bands = [
     { key: 'good_pct' as const,      label: 'Good',      color: '#00ff88', sub: 'IRI < 3.5' },
-    { key: 'fair_pct' as const,      label: 'Fair',      color: '#ffd23f', sub: 'IRI 3.5–6.5' },
-    { key: 'poor_pct' as const,      label: 'Poor',      color: '#ff6b35', sub: 'IRI 6.5–9.0' },
+    { key: 'fair_pct' as const,      label: 'Fair',      color: '#ffd23f', sub: 'IRI 3.5-6.5' },
+    { key: 'poor_pct' as const,      label: 'Poor',      color: '#ff6b35', sub: 'IRI 6.5-9.0' },
     { key: 'very_poor_pct' as const, label: 'Very Poor', color: '#ff2d78', sub: 'IRI > 9.0' },
   ];
   const netKm = totalNetworkKm ?? 21302;
@@ -886,7 +886,7 @@ function DetCurves({
       <div className="flex items-center justify-between mb-3">
         <div>
           <div className="text-sm font-bold text-white flex items-center gap-2">
-            <TrendingUp size={15} style={{ color: ACCENT }}/> Deterioration Curves 2024–2035
+            <TrendingUp size={15} style={{ color: ACCENT }}/> Deterioration Curves 2024-2035
           </div>
           <div className="text-[10px] text-slate-500 mt-0.5">
             Network-average IRI by road class · HDM-4 calibrated · ±18% CI
@@ -1007,7 +1007,7 @@ function BudgetPlanner({ budget, total }: { budget: BudgetPt[]; total: number })
       <div className="flex items-center justify-between mb-4">
         <div>
           <div className="text-sm font-bold text-white flex items-center gap-2">
-            <DollarSign size={15} style={{ color: ACCENT }}/> Maintenance Budget Plan 2024–2030
+            <DollarSign size={15} style={{ color: ACCENT }}/> Maintenance Budget Plan 2024-2030
           </div>
           <div className="text-[10px] text-slate-500 mt-0.5">
             USD millions by treatment type · MoWT unit costs
@@ -1431,7 +1431,7 @@ export default function RoadConditionView({ activeTab, embedded = false }: RoadC
         fontSize: 10, color: '#94a3b8',
       }}>
         <span style={{ fontWeight: 800, color: '#a5b4fc', fontSize: 9, letterSpacing: '0.06em', textTransform: 'uppercase', marginRight: 8 }}>NDPIV FY25-26</span>
-        <b style={{ color: '#fff' }}>21,302 km</b> · <b style={{ color: '#22c55e' }}>6,405 paved (30.3%)</b> · <b style={{ color: '#f59e0b' }}>14,732 unpaved</b> · GeoJSON <b style={{ color: '#fff' }}>21,137 km / 1,014 links</b> · <b style={{ color: '#fb923c' }}>165 km gap</b>
+        <b style={{ color: '#fff' }}>21,302 km National Roads</b> · <b style={{ color: '#22c55e' }}>11,762.8 km paved (55.2%)</b> · <b style={{ color: '#f59e0b' }}>9,539.2 km unpaved</b> · GeoJSON <b style={{ color: '#fff' }}>21,137 km / 1,014 links</b> · <b style={{ color: '#fb923c' }}>165 km gap</b>
       </div>
 
       {/* ══════════ DASHBOARD (Overview) ══════════ */}
@@ -1447,7 +1447,7 @@ export default function RoadConditionView({ activeTab, embedded = false }: RoadC
               { label: 'Model',           value: 'HDM-4 + MLP',                                                  unit: 'ensemble',  color: '#6366f1' },
               { label: 'Model Accuracy',  value: `R²=${d.r_squared.toFixed(4)}`,                                 unit: 'goodness of fit', color: '#00ff88' },
               { label: 'Links Projected', value: d.links_projected.toLocaleString(),                               unit: 'road links', color: '#00f5ff' },
-              { label: 'Budget 24–30',    value: `$${(d.total_maintenance_budget_2024_2030_usd/1e9).toFixed(2)}B`, unit: 'USD total',  color: '#ffd23f' },
+              { label: 'Budget 24-30',    value: `$${(d.total_maintenance_budget_2024_2030_usd/1e9).toFixed(2)}B`, unit: 'USD total',  color: '#ffd23f' },
               { label: 'Interventions',   value: (d.intervention_schedule?.length ?? 0).toLocaleString(),         unit: 'triggers',   color: '#ff6b35' },
             ];
             return (
@@ -1542,7 +1542,7 @@ export default function RoadConditionView({ activeTab, embedded = false }: RoadC
                     <div className="text-sm font-black text-white">{tot.toFixed(0)} km</div>
                     <div className="text-[9px] text-slate-400">{ndp} additions</div>
                     <div className="text-[9px] text-slate-500">
-                      {items[0]?.year} – {items[items.length-1]?.year}
+                      {items[0]?.year} - {items[items.length-1]?.year}
                     </div>
                   </div>
                 );
@@ -1584,12 +1584,12 @@ export default function RoadConditionView({ activeTab, embedded = false }: RoadC
                   { label:'Total Network',  col:'#94a3b8',
                     val: a ? `${a.totalNetworkKm.toLocaleString(undefined,{maximumFractionDigits:0})} km` : '21,137 km (mapped)' },
                   { label:'Paved',          col:'#00ff88',
-                    val: a ? `${a.pavedKm.toLocaleString(undefined,{maximumFractionDigits:0})} km` : '6,405 km' },
+                    val: a ? `${a.pavedKm.toLocaleString(undefined,{maximumFractionDigits:1})} km` : '11,762.8 km' },
                   { label:'Paved Share',    col:'#00f5ff',
-                    val: a ? `${a.percentPaved.toFixed(1)}%` : '30.3%' },
+                    val: a ? `${a.percentPaved.toFixed(1)}%` : '55.2%' },
                   { label:'Links Modelled', col: ACCENT,
                     val: d ? d.links_projected.toLocaleString() : '-' },
-                  { label:'Budget 24–30',   col:'#ffd23f',
+                  { label:'Budget 24-30',   col:'#ffd23f',
                     val: d ? `$${(d.total_maintenance_budget_2024_2030_usd/1e9).toFixed(2)}B` : '-' },
                 ].map(row => (
                   <div key={row.label}
@@ -1922,7 +1922,7 @@ function FWDRealSurveys() {
       </div>
       <div style={{ fontSize: 10, color: 'rgba(148,163,184,0.6)', marginBottom: 10 }}>
         {data.surveys.length} survey runs · {data.total_points.toLocaleString()} averaged deflection bowls ·
-        Dynatest FWD · centre deflection D₀ (μm); classification: ≤400 Sound · 400–600 Monitor · 600–800 Weak · &gt;800 Failed
+        Dynatest FWD · centre deflection D₀ (μm); classification: ≤400 Sound · 400-600 Monitor · 600-800 Weak · &gt;800 Failed
       </div>
       <SortableFilterableTable<FwdSurvey & { assessment: string }>
         accent="#00f5ff"
@@ -1932,7 +1932,7 @@ function FWDRealSurveys() {
           { key: 'sheet', label: 'Lane / Sheet' },
           { key: 'n', label: 'Bowls', numeric: true, total: 'sum' },
           { key: 'ch_from', label: 'Chainage (km)', numeric: true,
-            render: sv => `${sv.ch_from.toFixed(1)} – ${sv.ch_to.toFixed(1)}` },
+            render: sv => `${sv.ch_from.toFixed(1)} - ${sv.ch_to.toFixed(1)}` },
           { key: 'd0_mean', label: 'Mean D₀ (μm)', numeric: true,
             render: sv => <span style={{ color: cls(sv.d0_mean)[1], fontWeight: 800 }}>{sv.d0_mean.toFixed(0)}</span> },
           { key: 'd0_max', label: 'Max D₀ (μm)', numeric: true,
@@ -1957,14 +1957,14 @@ function FWDPanel() {
   const ACCENT2 = '#f97316';
 
   const FWD_LINKS = [
-    { link_id:'A001_Link01', road_name:'Kampala–Jinja', region:'Central',  class:'A', length_km:83,  snr:3.2, max_d0:380, avg_d0:210, sn_back:4.8, e_mod_mpa:2400, sbn_critical:0.18, rci:'Good',    survey:'Dec 2023' },
-    { link_id:'A001_Link02', road_name:'Kampala–Jinja', region:'Central',  class:'A', length_km:71,  snr:2.8, max_d0:490, avg_d0:290, sn_back:3.9, e_mod_mpa:1860, sbn_critical:0.29, rci:'Fair',    survey:'Dec 2023' },
-    { link_id:'A002_Link01', road_name:'Mbarara–Kabale', region:'Western', class:'A', length_km:120, snr:1.9, max_d0:720, avg_d0:420, sn_back:2.8, e_mod_mpa:1100, sbn_critical:0.54, rci:'Poor',    survey:'Feb 2024' },
-    { link_id:'A104_Link01', road_name:'Gulu–Kampala',  region:'Northern', class:'A', length_km:360, snr:3.1, max_d0:410, avg_d0:230, sn_back:4.5, e_mod_mpa:2150, sbn_critical:0.22, rci:'Good',    survey:'Jan 2024' },
-    { link_id:'B001_Link01', road_name:'Tororo–Mbale',  region:'Eastern',  class:'B', length_km:55,  snr:1.4, max_d0:890, avg_d0:560, sn_back:1.9, e_mod_mpa: 680, sbn_critical:0.78, rci:'Very Poor', survey:'Mar 2024' },
-    { link_id:'B104_Link01', road_name:'Hoima–Masindi', region:'Western',  class:'B', length_km:68,  snr:2.2, max_d0:630, avg_d0:360, sn_back:3.2, e_mod_mpa:1340, sbn_critical:0.41, rci:'Poor',   survey:'Nov 2023' },
+    { link_id:'A001_Link01', road_name:'Kampala-Jinja', region:'Central',  class:'A', length_km:83,  snr:3.2, max_d0:380, avg_d0:210, sn_back:4.8, e_mod_mpa:2400, sbn_critical:0.18, rci:'Good',    survey:'Dec 2023' },
+    { link_id:'A001_Link02', road_name:'Kampala-Jinja', region:'Central',  class:'A', length_km:71,  snr:2.8, max_d0:490, avg_d0:290, sn_back:3.9, e_mod_mpa:1860, sbn_critical:0.29, rci:'Fair',    survey:'Dec 2023' },
+    { link_id:'A002_Link01', road_name:'Mbarara-Kabale', region:'Western', class:'A', length_km:120, snr:1.9, max_d0:720, avg_d0:420, sn_back:2.8, e_mod_mpa:1100, sbn_critical:0.54, rci:'Poor',    survey:'Feb 2024' },
+    { link_id:'A104_Link01', road_name:'Gulu-Kampala',  region:'Northern', class:'A', length_km:360, snr:3.1, max_d0:410, avg_d0:230, sn_back:4.5, e_mod_mpa:2150, sbn_critical:0.22, rci:'Good',    survey:'Jan 2024' },
+    { link_id:'B001_Link01', road_name:'Tororo-Mbale',  region:'Eastern',  class:'B', length_km:55,  snr:1.4, max_d0:890, avg_d0:560, sn_back:1.9, e_mod_mpa: 680, sbn_critical:0.78, rci:'Very Poor', survey:'Mar 2024' },
+    { link_id:'B104_Link01', road_name:'Hoima-Masindi', region:'Western',  class:'B', length_km:68,  snr:2.2, max_d0:630, avg_d0:360, sn_back:3.2, e_mod_mpa:1340, sbn_critical:0.41, rci:'Poor',   survey:'Nov 2023' },
     { link_id:'A109_Link01', road_name:'Kampala N Bypass', region:'Central', class:'A', length_km:17, snr:4.1, max_d0:190, avg_d0:110, sn_back:6.2, e_mod_mpa:3800, sbn_critical:0.08, rci:'Good', survey:'Oct 2023' },
-    { link_id:'B064_Link01', road_name:'Mubende–Mityana', region:'Central', class:'B', length_km:74, snr:2.5, max_d0:550, avg_d0:310, sn_back:3.6, e_mod_mpa:1580, sbn_critical:0.33, rci:'Fair', survey:'Jan 2024' },
+    { link_id:'B064_Link01', road_name:'Mubende-Mityana', region:'Central', class:'B', length_km:74, snr:2.5, max_d0:550, avg_d0:310, sn_back:3.6, e_mod_mpa:1580, sbn_critical:0.33, rci:'Fair', survey:'Jan 2024' },
   ];
 
   const totalFwdKm = FWD_LINKS.reduce((s, l) => s + l.length_km, 0);
@@ -2056,8 +2056,8 @@ function FWDPanel() {
         <div style={{ display:'grid', gridTemplateColumns:'repeat(2,1fr)', gap:10 }}>
           {[
             { label:'SN ≥ 4.0 · E-mod > 2,000 MPa', tag:'Structurally Adequate', color:'#22c55e', desc:'No structural intervention required. Monitor with routine IRI surveys.' },
-            { label:'SN 2.5–4.0 · E-mod 1,000–2,000 MPa', tag:'Monitor', color:'#eab308', desc:'Approaching structural threshold. Schedule overlay or preventive treatment within 3 years.' },
-            { label:'SN 1.5–2.5 · E-mod 500–1,000 MPa', tag:'Rehabilitation Required', color:'#f97316', desc:'Structural deficiency confirmed. Full-depth reclamation or major overlay required.' },
+            { label:'SN 2.5-4.0 · E-mod 1,000-2,000 MPa', tag:'Monitor', color:'#eab308', desc:'Approaching structural threshold. Schedule overlay or preventive treatment within 3 years.' },
+            { label:'SN 1.5-2.5 · E-mod 500-1,000 MPa', tag:'Rehabilitation Required', color:'#f97316', desc:'Structural deficiency confirmed. Full-depth reclamation or major overlay required.' },
             { label:'SN < 1.5 · D₀ > 800 μm', tag:'Urgent Reconstruction', color:'#ef4444', desc:'Pavement structure failed. Emergency reconstruction investigation. Remove from traffic load.' },
           ].map(row => (
             <div key={row.tag} style={{ background:`${row.color}11`, border:`1px solid ${row.color}33`, borderRadius:8, padding:'10px 12px' }}>

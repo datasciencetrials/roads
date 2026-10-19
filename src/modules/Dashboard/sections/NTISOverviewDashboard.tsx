@@ -141,7 +141,7 @@ export default function NTISOverviewDashboard() {
       <SectionHdr accent={DASH_C.cyan}>AADT, Axle-Load &amp; Road Safety Intelligence · 27 Views</SectionHdr>
 
       <ChartGrid cols="3">
-        <ChartBox title="National AADT Trend" subtitle="2016–2025" accent={DASH_C.cyan} height={210}>
+        <ChartBox title="National AADT Trend" subtitle="2016-2025" accent={DASH_C.cyan} height={210}>
           <LineMulti data={NAT_YRS.map((y, i) => ({ year: y, National: NAT_AADT[i], 'Kla-Entebbe': KLA_EBB_TREND[i] }))} xKey="year"
             series={[{ key: 'National', name: 'National Avg AADT', color: DASH_C.cyan }, { key: 'Kla-Entebbe', name: 'Kla-Entebbe (peak)', color: DASH_C.pink }]} area />
         </ChartBox>
@@ -199,7 +199,7 @@ export default function NTISOverviewDashboard() {
           <BarH data={WB_STATIONS.map((s, i) => ({ station: s, overload: WB_OVERLOAD[i] }))} yKey="station"
             series={[{ key: 'overload', name: 'Overload %', color: DASH_C.orange }]} unit="%" />
         </ChartBox>
-        <ChartBox title="Compliance Rate Trend" subtitle="2018–2025" accent={DASH_C.green} height={210}>
+        <ChartBox title="Compliance Rate Trend" subtitle="2018-2025" accent={DASH_C.green} height={210}>
           <LineMulti data={COMPLY_YRS.map((y, i) => ({ year: y, compliant: COMPLY_PCT[i] }))} xKey="year"
             series={[{ key: 'compliant', name: 'Compliant Loads %', color: DASH_C.green }]} unit="%" />
         </ChartBox>
@@ -208,9 +208,9 @@ export default function NTISOverviewDashboard() {
       <ChartGrid cols="3">
         <ChartBox title="Overload Severity Mix" subtitle="among overloaded HGVs" accent={DASH_C.orange} height={200}>
           <DonutChart data={[
-            { name: 'Low (0–10% over)', value: 55, color: RISK_5[0] },
-            { name: 'Moderate (10–25% over)', value: 28, color: RISK_5[2] },
-            { name: 'High (25–50% over)', value: 12, color: RISK_5[3] },
+            { name: 'Low (0-10% over)', value: 55, color: RISK_5[0] },
+            { name: 'Moderate (10-25% over)', value: 28, color: RISK_5[2] },
+            { name: 'High (25-50% over)', value: 12, color: RISK_5[3] },
             { name: 'Severe (>50% over)', value: 5, color: RISK_5[4] },
           ]} />
         </ChartBox>
@@ -224,7 +224,7 @@ export default function NTISOverviewDashboard() {
       </ChartGrid>
 
       <ChartGrid cols="3">
-        <ChartBox title="Road Fatalities Trend" subtitle="national corridors, 2016–2025" accent={RISK_5[4]} height={210}>
+        <ChartBox title="Road Fatalities Trend" subtitle="national corridors, 2016-2025" accent={RISK_5[4]} height={210}>
           <LineMulti data={NAT_YRS.map((y, i) => ({ year: y, fatalities: FATALITIES[i] }))} xKey="year"
             series={[{ key: 'fatalities', name: 'Fatalities', color: RISK_5[4] }]} />
         </ChartBox>
@@ -271,7 +271,7 @@ export default function NTISOverviewDashboard() {
           <ScatterBubble data={ATC_ALL} xLabel="Rank" yLabel="AADT (veh/day)" color={DASH_C.purple} />
         </ChartBox>
         <ChartBox title="Legacy vs New Stations" subtitle="25 ATC stations" accent={DASH_C.purple} height={210}>
-          <DonutChart data={[{ name: 'Legacy Stations', value: 15, color: DASH_C.purple }, { name: 'New Stations (2023–25)', value: 10, color: DASH_C.cyan }]} />
+          <DonutChart data={[{ name: 'Legacy Stations', value: 15, color: DASH_C.purple }, { name: 'New Stations (2023-25)', value: 10, color: DASH_C.cyan }]} />
         </ChartBox>
         <ChartBox title="ATC Network Uptime" subtitle="target 95%" accent={DASH_C.cyan} height={210}>
           <GaugeC value={91.4} max={100} target={95} color={DASH_C.cyan} suffix="%" label="Network uptime" />

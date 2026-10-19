@@ -32,7 +32,7 @@ function boldMarkdownToHtml(s: string): string {
 }
 
 // ── Network summary canonical response ───────────────────────────────────────
-const NETWORK_SUMMARY_RESPONSE = 'The national road network is **21,302 km** (FY 2025/26), comprising **6,405 km paved (30.3%)** and **14,732 km unpaved (69.7%)**, covering **1,014 mapped links** across **6 regions** and **23 maintenance stations**. Source: NDPIV FY 2025/26 official figures, MoWT/DNR.';
+const NETWORK_SUMMARY_RESPONSE = 'The National Road Network is **21,302 km** (FY 2025/26), comprising **11,762.8 km paved (55.2%)** and **9,539.2 km unpaved (44.8%)**, covering **1,014 mapped links** across **6 regions** and **23 maintenance stations**. Source: approved repository baseline, MoWT/DNR.';
 
 const NETWORK_KEYWORDS = /\b(network size|how big|total km|total length|how long|total roads|network total|national road network|road network is|size of|coverage)\b/i;
 

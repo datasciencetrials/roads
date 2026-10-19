@@ -28,46 +28,46 @@ const RAW_DICTIONARY: DictEntry[] = [
   // ── Pavement condition ─────────────────────────────────────────────────────
   {
     key: 'iri', term: 'IRI', label: 'International Roughness Index', unit: 'm/km', group: 'Pavement Condition',
-    range: '0 (perfect) – 20+ (impassable)', source: 'ROMDAS laser profilometer survey, carried forward by the deterioration model',
+    range: '0 (perfect) - 20+ (impassable)', source: 'ROMDAS laser profilometer survey, carried forward by the deterioration model',
     description: 'The world-standard measure of longitudinal road roughness - the accumulated suspension travel (mm) a quarter-car experiences per km driven. Lower is smoother. Drives ride quality, vehicle operating cost and the maintenance trigger.',
     values: [
       { value: '< 3.5', meaning: 'Good - smooth, recently surfaced', color: '#00ff88' },
-      { value: '3.5 – 6.5', meaning: 'Fair - routine maintenance', color: '#ffd23f' },
-      { value: '6.5 – 9.0', meaning: 'Poor - periodic maintenance due', color: '#ff8c00' },
+      { value: '3.5 - 6.5', meaning: 'Fair - routine maintenance', color: '#ffd23f' },
+      { value: '6.5 - 9.0', meaning: 'Poor - periodic maintenance due', color: '#ff8c00' },
       { value: '> 9.0', meaning: 'Very Poor - rehabilitation/reconstruction', color: '#ff2d78' },
     ],
   },
   {
     key: 'vci', term: 'VCI', label: 'Visual Condition Index', unit: '%', group: 'Pavement Condition',
-    range: '0 (failed) – 100 (perfect)', source: 'Visual defect survey, weighted-deduction model (UNRA AMS manual)',
-    description: 'A 0–100 score of surface condition from visible distress (cracking, ravelling, potholes, rutting, edge break). 100 = no distress; deductions are taken per defect type and severity. The headline pavement-health indicator.',
+    range: '0 (failed) - 100 (perfect)', source: 'Visual defect survey, weighted-deduction model (UNRA AMS manual)',
+    description: 'A 0-100 score of surface condition from visible distress (cracking, ravelling, potholes, rutting, edge break). 100 = no distress; deductions are taken per defect type and severity. The headline pavement-health indicator.',
     values: [
       { value: '≥ 85', meaning: 'Very Good', color: '#00ff88' },
-      { value: '75 – 84', meaning: 'Good', color: '#7CFC00' },
-      { value: '65 – 74', meaning: 'Fair', color: '#ffd23f' },
-      { value: '55 – 64', meaning: 'Poor', color: '#ff8c00' },
+      { value: '75 - 84', meaning: 'Good', color: '#7CFC00' },
+      { value: '65 - 74', meaning: 'Fair', color: '#ffd23f' },
+      { value: '55 - 64', meaning: 'Poor', color: '#ff8c00' },
       { value: '< 55', meaning: 'Very Poor', color: '#ff2d78' },
     ],
   },
   {
-    key: 'pci', term: 'PCI', label: 'Pavement Condition Index', unit: '0–100', group: 'Pavement Condition',
-    range: '0 – 100', source: 'ASTM D6433 distress survey',
-    description: 'Composite 0–100 index combining distress type, severity and density into one pavement-health number (ASTM D6433). Complementary to VCI; higher is better.',
+    key: 'pci', term: 'PCI', label: 'Pavement Condition Index', unit: '0-100', group: 'Pavement Condition',
+    range: '0 - 100', source: 'ASTM D6433 distress survey',
+    description: 'Composite 0-100 index combining distress type, severity and density into one pavement-health number (ASTM D6433). Complementary to VCI; higher is better.',
   },
   {
     key: 'rut_mm', term: 'Rutting', unit: 'mm', group: 'Pavement Condition', aliases: ['rutting', 'rut'],
-    range: '0 – 30 mm', source: 'ROMDAS transverse laser profile',
+    range: '0 - 30 mm', source: 'ROMDAS transverse laser profile',
     description: 'Depth of longitudinal depressions in the wheel paths, caused by traffic-induced deformation of the pavement layers. >20 mm holds water and is a safety (aquaplaning) hazard.',
     values: [
       { value: '< 5 mm', meaning: 'Negligible', color: '#22c55e' },
-      { value: '5 – 10 mm', meaning: 'Moderate', color: '#eab308' },
-      { value: '10 – 20 mm', meaning: 'Severe', color: '#f97316' },
+      { value: '5 - 10 mm', meaning: 'Moderate', color: '#eab308' },
+      { value: '10 - 20 mm', meaning: 'Severe', color: '#f97316' },
       { value: '> 20 mm', meaning: 'Critical - safety hazard', color: '#ef4444' },
     ],
   },
   {
     key: 'cracking', term: 'Cracking', unit: '% area', group: 'Pavement Condition', aliases: ['crack', 'cracking_pct'],
-    range: '0 – 100 %', source: 'Visual / AI image survey',
+    range: '0 - 100 %', source: 'Visual / AI image survey',
     description: 'Proportion of the surface affected by cracking (longitudinal, transverse, block or crocodile/fatigue). Crocodile cracking signals structural fatigue; high cracking lets water reach the base and accelerates failure.',
   },
   {
@@ -141,8 +141,8 @@ const RAW_DICTIONARY: DictEntry[] = [
     description: 'Predicted demand ÷ design capacity for the link (capacities: M 15k, A 10k, B 5k, C 2.5k PCU/day).',
     values: [
       { value: 'Low', meaning: '< 40% of capacity - free flow', color: '#00ff88' },
-      { value: 'Medium', meaning: '40–70% - monitor growth', color: '#ffd23f' },
-      { value: 'High', meaning: '70–90% - plan capacity improvement', color: '#ff8c00' },
+      { value: 'Medium', meaning: '40-70% - monitor growth', color: '#ffd23f' },
+      { value: 'High', meaning: '70-90% - plan capacity improvement', color: '#ff8c00' },
       { value: 'Critical', meaning: '> 90% - immediate upgrade', color: '#ff2d78' },
     ],
   },
@@ -155,7 +155,7 @@ const RAW_DICTIONARY: DictEntry[] = [
   },
   {
     key: 'load_kn', term: 'FWD Load', unit: 'kN', group: 'FWD / Structural',
-    description: 'Impulse load applied by the Falling Weight Deflectometer (typically ~40–50 kN, simulating a heavy wheel) to measure the pavement’s deflection response.',
+    description: 'Impulse load applied by the Falling Weight Deflectometer (typically ~40-50 kN, simulating a heavy wheel) to measure the pavement’s deflection response.',
   },
   {
     key: 'sn', term: 'Structural Number (SN)', group: 'FWD / Structural', aliases: ['sn_required', 'sn_existing', 'critical_index'],
@@ -204,7 +204,7 @@ const RAW_DICTIONARY: DictEntry[] = [
     values: [
       { value: 'now', meaning: 'Immediate - condition past trigger', color: '#ff2d78' },
       { value: 'urgent', meaning: 'This financial year', color: '#ff8c00' },
-      { value: 'soon', meaning: 'Within the medium-term plan (1–3 yr)', color: '#ffd23f' },
+      { value: 'soon', meaning: 'Within the medium-term plan (1-3 yr)', color: '#ffd23f' },
       { value: 'planned', meaning: 'Monitored, in the long-term programme', color: '#00ff88' },
     ],
   },
@@ -269,7 +269,7 @@ const RAW_DICTIONARY: DictEntry[] = [
 
   // ── Road Geometry & Alignment ───────────────────────────────────────────
   { key: 'carriageway_width', term: 'Carriageway Width', unit: 'm', group: 'Geometry & Alignment', description: 'Total width of the trafficked surface excluding shoulders.' },
-  { key: 'lane_width', term: 'Lane Width', unit: 'm', group: 'Geometry & Alignment', description: 'Width of a single traffic lane (typically 3.0–3.65 m on national roads).' },
+  { key: 'lane_width', term: 'Lane Width', unit: 'm', group: 'Geometry & Alignment', description: 'Width of a single traffic lane (typically 3.0-3.65 m on national roads).' },
   { key: 'shoulder_width', term: 'Shoulder Width', unit: 'm', group: 'Geometry & Alignment', aliases: ['shoulder_width_m'], description: 'Width of the paved or unpaved verge beside the carriageway for stopping, recovery and edge support.' },
   { key: 'gradient', term: 'Gradient', unit: '%', group: 'Geometry & Alignment', description: 'Longitudinal slope of the road; steep gradients raise vehicle operating cost and crash risk.' },
   { key: 'superelevation', term: 'Super-elevation', unit: '%', group: 'Geometry & Alignment', description: 'Transverse banking of the carriageway on a curve to counteract centrifugal force.' },
@@ -295,14 +295,14 @@ const RAW_DICTIONARY: DictEntry[] = [
   { key: 'bearing', term: 'Bearing', group: 'Bridges', description: 'Component transmitting deck loads to substructure while allowing controlled movement (thermal, rotation).' },
   { key: 'deck_width', term: 'Deck Width', unit: 'm', group: 'Bridges', aliases: ['width_m'], description: 'Out-to-out width of the bridge deck, governing how many lanes/footways it carries.' },
   { key: 'load_rating', term: 'Load Rating', group: 'Bridges', description: 'Assessed safe live-load capacity of a bridge; below legal loads triggers posting or restriction.' },
-  { key: 'bci', term: 'Bridge Condition Index', abbr: 'BCI', unit: '0–100', group: 'Bridges', description: 'Composite 0–100 score of overall bridge health from weighted element condition ratings.' },
+  { key: 'bci', term: 'Bridge Condition Index', abbr: 'BCI', unit: '0-100', group: 'Bridges', description: 'Composite 0-100 score of overall bridge health from weighted element condition ratings.' },
   { key: 'superstructure', term: 'Superstructure', group: 'Bridges', description: 'The span structure above the bearings - deck, beams/girders - that carries traffic.' },
   { key: 'substructure', term: 'Substructure', group: 'Bridges', description: 'Supports below the bearings - abutments, piers, foundations - that transfer loads to the ground.' },
   { key: 'wing_wall', term: 'Wing Wall', group: 'Bridges', description: 'Retaining wall extending from an abutment to hold back and protect the approach fill.' },
   { key: 'waterway', term: 'Waterway Area', unit: 'm²', group: 'Bridges', description: 'Cross-sectional opening under a bridge available to pass flood flow; undersizing causes afflux and scour.' },
 
   // ── Traffic & Transportation (extended) ─────────────────────────────────
-  { key: 'pcu', term: 'Passenger Car Unit', abbr: 'PCU', group: 'Traffic', description: 'Traffic-equivalence factor expressing mixed vehicles as equivalent cars (a truck ≈ 2–3 PCU) for capacity analysis.' },
+  { key: 'pcu', term: 'Passenger Car Unit', abbr: 'PCU', group: 'Traffic', description: 'Traffic-equivalence factor expressing mixed vehicles as equivalent cars (a truck ≈ 2-3 PCU) for capacity analysis.' },
   { key: 'hcv', term: 'Heavy Commercial Vehicle', abbr: 'HCV', group: 'Traffic', description: 'Trucks and large buses; the main contributors to pavement structural damage.' },
   { key: 'phf', term: 'Peak Hour Factor', abbr: 'PHF', group: 'Traffic', description: 'Ratio of peak-hour volume to four times the peak 15-minute flow - a measure of within-hour flow variability.' },
   { key: 'directional_split', term: 'Directional Split', unit: '%', group: 'Traffic', description: 'Share of traffic in each direction; used to design lanes and assess directional capacity.' },
@@ -327,7 +327,7 @@ const RAW_DICTIONARY: DictEntry[] = [
   { key: 'boq', term: 'Bill of Quantities', abbr: 'BOQ', group: 'Financial & Procurement', description: 'Itemised list of works with quantities and rates forming the priced basis of a construction contract.' },
   { key: 'ipc', term: 'Interim Payment Certificate', abbr: 'IPC', group: 'Financial & Procurement', description: 'Periodic certificate of work done that authorises a progress payment to the contractor.' },
   { key: 'variation_order', term: 'Variation Order', abbr: 'VO', group: 'Financial & Procurement', description: 'Formal instruction changing the contract scope/quantities, adjusting price and/or time.' },
-  { key: 'retention', term: 'Retention', unit: '%', group: 'Financial & Procurement', description: 'Portion of each payment withheld (e.g. 5–10%) as security for defects, released after the defects period.' },
+  { key: 'retention', term: 'Retention', unit: '%', group: 'Financial & Procurement', description: 'Portion of each payment withheld (e.g. 5-10%) as security for defects, released after the defects period.' },
   { key: 'performance_bond', term: 'Performance Bond', group: 'Financial & Procurement', description: 'Bank/insurer guarantee callable if the contractor fails to perform the contract.' },
   { key: 'provisional_sum', term: 'Provisional Sum', group: 'Financial & Procurement', description: 'A budgeted allowance in the contract for work not yet fully defined at tender.' },
   { key: 'contingency', term: 'Contingency', unit: '%', group: 'Financial & Procurement', description: 'Reserve allowance for unforeseen works/price changes within the project budget.' },
@@ -414,7 +414,7 @@ const RAW_DICTIONARY: DictEntry[] = [
   { key: 'borrow_pit', term: 'Borrow Pit', group: 'Environmental & Social', description: 'Excavation supplying construction material (gravel/soil), requiring rehabilitation after use.' },
 
   // ── Climate & Weather ───────────────────────────────────────────────────
-  { key: 'idf_curve', term: 'IDF Curve', label: 'Intensity–Duration–Frequency', group: 'Climate & Weather', description: 'Relationship of rainfall intensity to storm duration and return period - the basis for drainage design.' },
+  { key: 'idf_curve', term: 'IDF Curve', label: 'Intensity-Duration-Frequency', group: 'Climate & Weather', description: 'Relationship of rainfall intensity to storm duration and return period - the basis for drainage design.' },
   { key: 'rainfall_intensity', term: 'Rainfall Intensity', unit: 'mm/hr', group: 'Climate & Weather', description: 'Rate of rainfall; high intensities drive peak runoff and drainage/scour design.' },
 
   // ── Emergency & Disaster ────────────────────────────────────────────────
@@ -428,7 +428,7 @@ const RAW_DICTIONARY: DictEntry[] = [
 
   // ── Pavement distress types ─────────────────────────────────────────────────
   { key: 'alligator_cracking', term: 'Alligator Cracking', aliases:['fatigue cracking','crocodile cracking'], group: 'Pavement Distress', description: 'Interconnected cracks forming a pattern of small polygons resembling alligator skin, caused by repeated traffic loading exceeding the fatigue life of the bituminous layer. A structural (load-associated) failure.' },
-  { key: 'block_cracking', term: 'Block Cracking', group: 'Pavement Distress', description: 'Interconnected cracks dividing the surface into roughly rectangular blocks (~0.3–3 m), caused by shrinkage of the bitumen and daily temperature cycling. Generally non-load-associated.' },
+  { key: 'block_cracking', term: 'Block Cracking', group: 'Pavement Distress', description: 'Interconnected cracks dividing the surface into roughly rectangular blocks (~0.3-3 m), caused by shrinkage of the bitumen and daily temperature cycling. Generally non-load-associated.' },
   { key: 'longitudinal_cracking', term: 'Longitudinal Cracking', group: 'Pavement Distress', description: 'Cracks running parallel to the centreline, from poorly constructed joints, reflection from underlying layers, or shoulder settlement.' },
   { key: 'transverse_cracking', term: 'Transverse Cracking', group: 'Pavement Distress', description: 'Cracks roughly perpendicular to the centreline, usually thermal/shrinkage related, not load associated.' },
   { key: 'reflective_cracking', term: 'Reflective Cracking', group: 'Pavement Distress', description: 'Cracks in an overlay that propagate upward from joints or cracks in the underlying (often cracked or stabilised) layer.' },
@@ -455,7 +455,7 @@ const RAW_DICTIONARY: DictEntry[] = [
   { key: 'structural_number', term: 'Structural Number', abbr:'SN', group: 'Pavement Structure', description: 'AASHTO index of the total structural capacity of a flexible pavement, summing each layer’s thickness × layer coefficient × drainage coefficient.' },
 
   // ── Materials & testing ─────────────────────────────────────────────────────
-  { key: 'cbr', term: 'CBR', label: 'California Bearing Ratio', abbr:'CBR', unit:'%', group: 'Materials & Testing', range:'2 (very weak) – 80+ (strong base)', description: 'A penetration test measuring the load-bearing strength of soil/aggregate relative to crushed stone. The primary input for subgrade classification and pavement thickness design.' },
+  { key: 'cbr', term: 'CBR', label: 'California Bearing Ratio', abbr:'CBR', unit:'%', group: 'Materials & Testing', range:'2 (very weak) - 80+ (strong base)', description: 'A penetration test measuring the load-bearing strength of soil/aggregate relative to crushed stone. The primary input for subgrade classification and pavement thickness design.' },
   { key: 'atterberg_limits', term: 'Atterberg Limits', group: 'Materials & Testing', description: 'Moisture-content boundaries (liquid limit, plastic limit) defining the consistency states of fine soils; used to classify soils and assess suitability.' },
   { key: 'plasticity_index', term: 'Plasticity Index', abbr:'PI', group: 'Materials & Testing', description: 'Liquid limit minus plastic limit - the moisture range over which a soil is plastic. High PI indicates expansive, moisture-sensitive material unsuitable for base layers.' },
   { key: 'proctor', term: 'Proctor Compaction', aliases:['mdd','omc','maximum dry density'], group: 'Materials & Testing', description: 'Laboratory test establishing the maximum dry density (MDD) and optimum moisture content (OMC) at which a material compacts best - the field compaction target.' },
@@ -480,7 +480,7 @@ const RAW_DICTIONARY: DictEntry[] = [
   { key: 'vertical_alignment', term: 'Vertical Alignment', group: 'Geometry & Alignment', description: 'The profile-view geometry - grades and the crest/sag vertical curves connecting them.' },
   { key: 'gradient', term: 'Gradient', aliases:['grade','longitudinal gradient'], unit:'%', group: 'Geometry & Alignment', description: 'The rate of rise or fall of the road along its length, expressed as a percentage; steep grades reduce truck speeds and capacity.' },
   { key: 'superelevation', term: 'Superelevation', aliases:['cant'], group: 'Geometry & Alignment', description: 'The banking (cross-slope) of the road on a curve to counteract centrifugal force and allow safe higher-speed cornering.' },
-  { key: 'camber', term: 'Camber', aliases:['crossfall','cross slope'], unit:'%', group: 'Geometry & Alignment', description: 'The transverse slope of the carriageway from crown to edge that sheds rainwater to the drains (typically 2.5–3% on paved roads).' },
+  { key: 'camber', term: 'Camber', aliases:['crossfall','cross slope'], unit:'%', group: 'Geometry & Alignment', description: 'The transverse slope of the carriageway from crown to edge that sheds rainwater to the drains (typically 2.5-3% on paved roads).' },
   { key: 'sight_distance', term: 'Sight Distance', group: 'Geometry & Alignment', description: 'The length of road visible ahead to a driver; stopping sight distance must exceed the distance needed to stop safely for the design speed.' },
   { key: 'design_speed', term: 'Design Speed', unit:'km/h', group: 'Geometry & Alignment', description: 'The reference speed used to set geometric standards (curve radius, sight distance, superelevation) for a road class.' },
   { key: 'carriageway', term: 'Carriageway', group: 'Geometry & Alignment', description: 'The part of the road constructed for the movement of vehicles, comprising one or more traffic lanes (excludes shoulders).' },
@@ -516,13 +516,13 @@ const RAW_DICTIONARY: DictEntry[] = [
   { key: 'adt', term: 'ADT', label: 'Average Daily Traffic', unit:'vpd', group: 'Traffic & Demand', description: 'Average vehicles per day over a period shorter than a year (not seasonally corrected); a raw count measure.' },
   { key: 'vpd', term: 'vpd', label: 'Vehicles Per Day', unit:'vpd', group: 'Traffic & Demand', description: 'Unit of traffic volume - number of vehicles passing a point in 24 hours.' },
   { key: 'atc', term: 'ATC', label: 'Automatic Traffic Counter', abbr:'ATC', group: 'Traffic & Demand', description: 'A roadside device (tube, loop or radar) that continuously counts and classifies passing vehicles, the primary source of volume data.' },
-  { key: 'pcu', term: 'PCU', label: 'Passenger Car Unit', abbr:'PCU', group: 'Traffic & Demand', description: 'A factor expressing different vehicle types in terms of equivalent passenger cars for capacity analysis (a truck ≈ 2–3 PCU).' },
+  { key: 'pcu', term: 'PCU', label: 'Passenger Car Unit', abbr:'PCU', group: 'Traffic & Demand', description: 'A factor expressing different vehicle types in terms of equivalent passenger cars for capacity analysis (a truck ≈ 2-3 PCU).' },
   { key: 'peak_hour_factor', term: 'Peak Hour Factor', abbr:'PHF', group: 'Traffic & Demand', description: 'Ratio of total hourly volume to the peak 15-minute rate ×4; describes the peaking of demand within the busiest hour.' },
   { key: 'directional_split', term: 'Directional Split', group: 'Traffic & Demand', description: 'The proportion of traffic in each direction during a period; influences lane and capacity design.' },
   { key: 'growth_factor', term: 'Traffic Growth Factor', group: 'Traffic & Demand', source:'Base year 2016 = 1.00', description: 'The multiplier applied to base-year (2016) traffic to project demand to a future year, derived from observed and forecast growth rates.' },
   { key: 'traffic_composition', term: 'Traffic Composition', group: 'Traffic & Demand', description: 'The mix of vehicle classes (cars, buses, light/heavy goods) in the stream, which determines loading and capacity impacts.' },
   { key: 'vehicle_class', term: 'Vehicle Class', group: 'Traffic & Demand', description: 'Category of vehicle by axle configuration/use (e.g. motorcycle, car, minibus, bus, 2-axle truck, multi-axle truck) used in counts and loading analysis.' },
-  { key: 'level_of_service', term: 'Level of Service', abbr:'LOS', group: 'Traffic & Demand', range:'A (free flow) – F (forced flow)', description: 'A qualitative A–F grade of operating conditions (speed, density, delay) experienced by road users.' },
+  { key: 'level_of_service', term: 'Level of Service', abbr:'LOS', group: 'Traffic & Demand', range:'A (free flow) - F (forced flow)', description: 'A qualitative A-F grade of operating conditions (speed, density, delay) experienced by road users.' },
 
   // ── Axle load & overloading ─────────────────────────────────────────────────
   { key: 'esal', term: 'ESAL', label: 'Equivalent Standard Axle Load', abbr:'ESAL', group: 'Axle Load', description: 'The number of passes of a standard 8.16-tonne single axle that would cause the same pavement damage as the actual mixed traffic; the design loading measure. Damage rises with roughly the 4th power of axle load.' },
@@ -540,7 +540,7 @@ const RAW_DICTIONARY: DictEntry[] = [
   { key: 'crash_rate', term: 'Crash Rate', group: 'Road Safety', description: 'Crashes normalised by exposure (per 100 million vehicle-km or per km-year), enabling comparison between sites of different traffic.' },
   { key: 'road_safety_audit', term: 'Road Safety Audit', abbr:'RSA', group: 'Road Safety', description: 'A formal independent check of a road/scheme at design or in service to identify and reduce crash risk before harm occurs.' },
   { key: 'guardrail', term: 'Guardrail', aliases:['crash barrier','safety barrier'], group: 'Road Safety', description: 'A roadside barrier that redirects errant vehicles away from hazards (drop-offs, obstacles) and reduces crash severity.' },
-  { key: 'star_rating', term: 'iRAP Star Rating', aliases:['irap'], group: 'Road Safety', range:'1 (least safe) – 5 (safest) stars', description: 'International Road Assessment Programme rating of built-in safety of a road for each user type, from infrastructure attributes.' },
+  { key: 'star_rating', term: 'iRAP Star Rating', aliases:['irap'], group: 'Road Safety', range:'1 (least safe) - 5 (safest) stars', description: 'International Road Assessment Programme rating of built-in safety of a road for each user type, from infrastructure attributes.' },
 
   // ── Road furniture & markings ───────────────────────────────────────────────
   { key: 'road_marking', term: 'Road Marking', group: 'Road Furniture', description: 'Painted/thermoplastic lines and symbols guiding and regulating traffic (lanes, edges, pedestrian crossings).' },

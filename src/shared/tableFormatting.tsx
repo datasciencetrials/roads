@@ -108,7 +108,7 @@ export function NullableCell({ value, children }: { value: unknown; children: Re
 
 // ─── Condition colour by string label ─────────────────────────────────────────
 // For datasets that store condition as a label ('Very Poor'…'Excellent')
-// rather than the 1–5 ConditionRating used elsewhere - same traffic-light scale.
+// rather than the 1-5 ConditionRating used elsewhere - same traffic-light scale.
 const CONDITION_LABEL_COLORS: Record<string, string> = {
   'Very Poor': '#ef4444', 'Poor': '#f97316', 'Fair': '#eab308',
   'Good': '#84cc16', 'Very Good': '#22c55e', 'Excellent': '#22c55e',

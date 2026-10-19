@@ -37,7 +37,7 @@ const DEFS: Record<string, { title: string; body: string; icon: string }> = {
   // SQL Database & Schema | Data Capture shell as every other section,
   // instead of the bespoke one-off page it used to be rendered as directly
   // in App.tsx. No exceptions - full UI cohesion across the sidebar.
-  networkstory:  { icon: '📖', title: 'Network Story 1986–',       body: 'The Uganda road network\'s historical narrative from 1986 to present - policy eras, network growth, and paving milestones.' },
+  networkstory:  { icon: '📖', title: 'Network Story 1986-',       body: 'The Uganda road network\'s historical narrative from 1986 to present - policy eras, network growth, and paving milestones.' },
   roadnetwork:   { icon: '🗺',  title: 'Road Network Map',           body: 'The full classified road network on an interactive map - all 1,017 links, searchable and filterable by class, region, and surface.' },
   registry:      { icon: '📋', title: 'Structure Registry',         body: 'The complete bridge and culvert inventory register - physical properties, condition, and location for every structure.' },
   inspections:   { icon: '✅', title: 'Inspection Management',      body: 'Scheduling, recording, and tracking of routine, principal, special, and emergency structure inspections.' },
@@ -163,9 +163,9 @@ function SectionSubTabs({ sectionId, accent }: { sectionId: string; accent: stri
   // Every section uses the exact same six-tab bar, same order, no exceptions -
   // section-specific content (e.g. TIS Road Safety) lives inside one of these
   // fixed slots via SECTION_EXTRAS instead of adding its own tab.
-  const tabs = import.meta.env.VITE_STANDALONE === '1' && import.meta.env.VITE_APP_ID === 'nbms'
-    ? SUBTABS.filter(item => item.id !== 'capture')
-    : SUBTABS;
+  // Public deployments are read-only. Data entry remains available only
+  // through the separately protected administrative route.
+  const tabs = SUBTABS.filter(item => item.id !== 'capture');
 
   // Publish the visible tab (and which section it belongs to) so the
   // platform-wide Export menu in PageToolbar can offer formats relevant to
@@ -640,7 +640,7 @@ export default function SectionDashboard({ sectionId, accent }: { sectionId: str
         <span style={{ fontSize: 13, fontWeight: 900, color: '#e2eaf4' }}>{def.title}</span>
       </div>
 
-      {/* Section Sub-Tabs: Dashboard | Interactive Map | Exhaustive Tables | Deep Analytics | SQL Database & Schema | Data Capture */}
+      {/* Public section sub-tabs are read-only; protected data entry is not exposed here. */}
       <SectionSubTabs sectionId={sectionId} accent={accent} />
     </div>
   );

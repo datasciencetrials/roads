@@ -1,7 +1,7 @@
 /**
  * RoadNetworkView - Uganda National Road Network
  * Features:
- *  - Animated timeline 1960–2026 showing road paving progression
+ *  - Animated timeline 1960-2026 showing road paving progression
  *  - Paved (cyan) vs Unsealed (amber) clear symbology
  *  - Play/pause with adjustable speed
  *  - Road Network Dashboard with accurate statistics
@@ -892,15 +892,15 @@ function DashboardPanel({ stats, storyData, networkSummary }: {
 
       <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:8, marginBottom:16 }}>
         <KpiCard val={(networkSummary?.official_total_km || 21302).toLocaleString()} unit="km" label="Total Network" sub="1,018 links · National inventory FY25-26" color="#00f5ff"/>
-        <KpiCard val="6,405" unit="km" label="Paved Roads" sub="30.3% of network" color="#00ff88"/>
-        <KpiCard val="14,732" unit="km" label="Unsealed Roads" sub="69.7% of network" color="#ff8c00"/>
+        <KpiCard val="11,762.8" unit="km" label="Paved Roads" sub="55.2% of National Roads" color="#00ff88"/>
+        <KpiCard val="9,539.2" unit="km" label="Unpaved Roads" sub="44.8% of National Roads" color="#ff8c00"/>
         <KpiCard val={`+${growth.toFixed(0)}%`} unit="" label="Growth Since 1986" sub={`+${(cp2025-cp1986).toFixed(0)} km paved`} color="#ffd23f"/>
       </div>
 
       {/* Cumulative paved chart */}
       <div style={{ marginBottom:16 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div style={sectionHead}>Paved Road Growth 1960–2026</div>
+          <div style={sectionHead}>Paved Road Growth 1960-2026</div>
           <SourceTableButton anchor="tbl-005" />
         </div>
         <div style={{ height:140 }}>
@@ -1030,7 +1030,7 @@ function DashboardPanel({ stats, storyData, networkSummary }: {
           { year:2006, km:2476, label:'Department of National Roads established - 2,476 km' },
           { year:2015, km:3927, label:'NDP II target - 3,927 km' },
           { year:2020, km:5360, label:'NDP III - 5,360 km paved' },
-          { year:2025, km:6405, label:'Current - 6,405 km (30.3%)' },
+          { year:2025, km:11762.8, label:'Current - 11,762.8 km (55.2%)' },
         ].map(m => (
           <div key={m.year} style={{ display:'flex', gap:10, marginBottom:8, alignItems:'flex-start' }}>
             <div style={{ fontSize:10, fontWeight:900, color:'rgba(0, 245, 255,0.6)',
@@ -1039,7 +1039,7 @@ function DashboardPanel({ stats, storyData, networkSummary }: {
               <div style={{ fontSize:10, color:'#e2eaf4' }}>{m.label}</div>
               <div style={{ height:2, background:'rgba(255,255,255,0.05)', borderRadius:1, marginTop:3 }}>
                 <div style={{ height:'100%', background:'linear-gradient(90deg,#00f5ff,#00b8ff)',
-                  width:`${(m.km/6405*100)}%`, borderRadius:1 }}/>
+                  width:`${(m.km/11762.8*100)}%`, borderRadius:1 }}/>
               </div>
             </div>
             <div style={{ fontSize:10, fontWeight:700, color:C.paved, minWidth:50, textAlign:'right' }}>

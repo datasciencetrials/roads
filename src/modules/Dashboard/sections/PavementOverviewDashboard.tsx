@@ -1,6 +1,6 @@
 /**
  * PavementOverviewDashboard - RMS "Dashboard" tab, Pavement section.
- * Port of public/dashboard.html Tab 2 (PAVEMENT MANAGEMENT, charts c16–c30)
+ * Port of public/dashboard.html Tab 2 (PAVEMENT MANAGEMENT, charts c16-c30)
  * into live React/Recharts, extended to 23 chart tiles. Real figures from the
  * mockup's shared `D` data object (pavCond/unpavCond/treatLbl/costPerKm/etc).
  * No tables here - tabular breakdowns live under Exhaustive Tables / Deep Analytics.
@@ -16,10 +16,10 @@ const REG_LBL = ['Central', 'Northern', 'Eastern', 'Western', 'Southern', 'North
 const REG_KM = [4436, 3920, 4290, 3000, 3300, 2356];
 
 const COND_LBL = ['Good', 'Fair', 'Poor', 'Critical'];
-const PAV_COND = [2242, 2242, 1281, 640]; // sums to PAVED=6405
+const PAV_COND = [4117, 4117, 2353.8, 1175]; // sums to the approved 11,762.8 km paved baseline
 const UNPAV_COND = [1490, 4469, 5959, 2979];
 const TOTAL_COND = [3732, 6711, 7240, 3619]; // = PAV_COND + UNPAV_COND element-wise
-const PAVED_TOTAL = PAV_COND.reduce((a, b) => a + b, 0); // 6405
+const PAVED_TOTAL = PAV_COND.reduce((a, b) => a + b, 0); // 11,762.8
 
 const REG_GOOD = [780, 620, 700, 660, 640, 332];
 const REG_FAIR = [1400, 1250, 1350, 1050, 1100, 561];
@@ -42,7 +42,7 @@ const TREAT_COLORS = [DASH_C.green, DASH_C.yellow, '#ffa63f', '#ff5330', DASH_C.
 const COST_TREAT_LBL = ['Routine', 'Resealing', 'Overlay', 'Rehab', 'Reconstruct'];
 const COST_PER_KM = [4.5, 118, 320, 780, 1450]; // mn UGX / km
 
-// Evolution of paved condition mix 2020–2025 (% of paved network)
+// Evolution of paved condition mix 2020-2025 (% of paved network)
 const EVOL_GOOD = [39, 38, 37, 36, 36, 35];
 const EVOL_FAIR = [34, 34, 35, 35, 35, 35];
 const EVOL_POOR = [18, 19, 19, 20, 20, 20];
@@ -89,15 +89,15 @@ function boxStats(name: string, raw: number[], color: string) {
 // Deterministic "segment sample" points - stable across renders (no Math.random()).
 const AGE_IRI_POINTS = Array.from({ length: 42 }, (_, i) => {
   const seed = i * 53.7;
-  const age = ((seed * 131 + 17) % 3000) / 100; // 0–30 yrs
-  const iri = 1 + ((seed * 271 + 53) % 800) / 100; // 1–9 m/km
+  const age = ((seed * 131 + 17) % 3000) / 100; // 0-30 yrs
+  const iri = 1 + ((seed * 271 + 53) % 800) / 100; // 1-9 m/km
   const aadt = 200 + ((i * 613) % 10000);
   return { x: +age.toFixed(1), y: +iri.toFixed(2), z: aadt };
 });
 
 const IRI_AADT_POINTS = Array.from({ length: 40 }, (_, i) => {
   const seed = i * 41.3;
-  const iri = 1 + ((seed * 97 + 13) % 900) / 100; // 1–10 m/km
+  const iri = 1 + ((seed * 97 + 13) % 900) / 100; // 1-10 m/km
   const aadt = 200 + Math.round((seed * 311 + 29) % 18000);
   return { x: +iri.toFixed(2), y: aadt };
 });
@@ -146,7 +146,7 @@ export default function PavementOverviewDashboard() {
       </ChartGrid>
 
       <ChartGrid cols="3">
-        <ChartBox title="IRI Trend by Road Class" subtitle="2020–2025" accent={DASH_C.cyan} height={210}>
+        <ChartBox title="IRI Trend by Road Class" subtitle="2020-2025" accent={DASH_C.cyan} height={210}>
           <LineMulti data={IRI_YRS.map((y, i) => ({ year: y, ClassA: IRI_A[i], ClassB: IRI_B[i], ClassC: IRI_C[i] }))} xKey="year"
             series={[
               { key: 'ClassA', name: 'Class A Trunk', color: DASH_C.cyan }, { key: 'ClassB', name: 'Class B Regional', color: DASH_C.yellow },
@@ -166,7 +166,7 @@ export default function PavementOverviewDashboard() {
         <ChartBox title="IRI vs Traffic Volume" accent={DASH_C.pink} height={210}>
           <ScatterBubble data={IRI_AADT_POINTS} xLabel="IRI (m/km)" yLabel="AADT (veh/day)" color={DASH_C.pink} />
         </ChartBox>
-        <ChartBox title="Condition Evolution" subtitle="% of paved network, 2020–2025" accent={DASH_C.green} height={210}>
+        <ChartBox title="Condition Evolution" subtitle="% of paved network, 2020-2025" accent={DASH_C.green} height={210}>
           <LineMulti data={IRI_YRS.map((y, i) => ({ year: y, Good: EVOL_GOOD[i], Fair: EVOL_FAIR[i], Poor: EVOL_POOR[i], Critical: EVOL_CRIT[i] }))}
             xKey="year" series={[
               { key: 'Good', name: 'Good %', color: DASH_C.green }, { key: 'Fair', name: 'Fair %', color: DASH_C.yellow },
@@ -183,7 +183,7 @@ export default function PavementOverviewDashboard() {
         <ChartBox title="IRI Heatmap" subtitle="region × treatment need" accent={DASH_C.red} height={210}>
           <HeatGrid matrix={IRI_HEAT_TREAT} xLabels={TREAT_LBL} yLabels={REG_LBL} accent={DASH_C.red} unit=" m/km" />
         </ChartBox>
-        <ChartBox title="PCR Distribution by Region" subtitle="0–100, box approximation of violin" accent={DASH_C.cyan} height={210}>
+        <ChartBox title="PCR Distribution by Region" subtitle="0-100, box approximation of violin" accent={DASH_C.cyan} height={210}>
           <BoxPlotApprox data={REG_LBL.map(r => boxStats(r, PCR_RAW[r], REGION_COLORS[REG_LBL.indexOf(r)]))} />
         </ChartBox>
         <ChartBox title="Treatment Pipeline" subtitle="FY25/26" accent={DASH_C.blue} height={210}>

@@ -83,35 +83,35 @@ interface Project {
 // ─────────────────────────────────────────────────────────────────────────
 const PROJECTS: Project[] = [
   {
-    id: 'P001', name: 'Kampala–Jinja Expressway (KJE)',
+    id: 'P001', name: 'Kampala-Jinja Expressway (KJE)',
     road: 'Expressway', region: 'Central', funder: 'GoU / PPP Consortium',
     contractor: 'TBA (Procurement)', lengthKm: 95, budgetBn: 4200, spentBn: 85,
     phase: 'Procurement', physical: 5, financial: 2, planned: 8,
     startDate: '2024-01', endDate: '2028-12', behind: false, category: 'NDPIV',
   },
   {
-    id: 'P002', name: 'Tirinyi–Mbale–Soroti Upgrading',
+    id: 'P002', name: 'Tirinyi-Mbale-Soroti Upgrading',
     road: 'A109', region: 'Eastern', funder: 'World Bank / IDA',
     contractor: 'China State Construction', lengthKm: 272, budgetBn: 2730, spentBn: 420,
     phase: 'Construction', physical: 22, financial: 15, planned: 35,
     startDate: '2023-06', endDate: '2026-12', behind: true, category: 'NDPIV',
   },
   {
-    id: 'P003', name: 'Gulu–Atiak Highway',
+    id: 'P003', name: 'Gulu-Atiak Highway',
     road: 'A1', region: 'Northern', funder: 'AfDB',
     contractor: 'CCCC (China)', lengthKm: 74, budgetBn: 735, spentBn: 368,
     phase: 'Construction', physical: 58, financial: 50, planned: 55,
     startDate: '2022-01', endDate: '2025-06', behind: false, category: 'NDPIV',
   },
   {
-    id: 'P004', name: 'Kyotera–Mutukula Road',
+    id: 'P004', name: 'Kyotera-Mutukula Road',
     road: 'A109', region: 'Central', funder: 'JICA',
     contractor: 'Hazama Ando', lengthKm: 76, budgetBn: 332, spentBn: 332,
     phase: 'Complete', physical: 100, financial: 100, planned: 100,
     startDate: '2018-01', endDate: '2022-12', behind: false, category: 'NDPIV',
   },
   {
-    id: 'P005', name: 'Masaka–Bukakata Road Upgrading',
+    id: 'P005', name: 'Masaka-Bukakata Road Upgrading',
     road: 'C6', region: 'Southern', funder: 'GoU',
     contractor: 'DOTT Services', lengthKm: 45, budgetBn: 168, spentBn: 62,
     phase: 'Construction', physical: 35, financial: 37, planned: 50,
@@ -139,7 +139,7 @@ const PROJECTS: Project[] = [
     startDate: '2025-01', endDate: '2028-06', behind: false, category: 'Vision2040',
   },
   {
-    id: 'P009', name: 'Kampala–Entebbe Expressway - Phase 2 Widening',
+    id: 'P009', name: 'Kampala-Entebbe Expressway - Phase 2 Widening',
     road: 'Expressway', region: 'Central', funder: 'China EXIM',
     contractor: 'TBA', lengthKm: 28, budgetBn: 580, spentBn: 0,
     phase: 'Planning', physical: 0, financial: 0, planned: 0,

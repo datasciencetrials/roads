@@ -34,7 +34,7 @@ const COLUMNS: STColumn<Row>[] = [
   { key: 'road',   label: 'Road',      comment: 'Road the structure carries (national network).' },
   { key: 'region', label: 'Region' },
   { key: 'ratingLabel', label: 'Condition',
-    comment: 'BMS condition rating: 1 Critical · 2 Poor · 3 Fair · 4 Good · 5 Excellent. This view shows only 1–2.',
+    comment: 'BMS condition rating: 1 Critical · 2 Poor · 3 Fair · 4 Good · 5 Excellent. This view shows only 1-2.',
     render: r => (
     <span style={{ display: 'inline-block', padding: '2px 9px', borderRadius: 999,
       fontSize: 9.5, fontWeight: 800, color: RATING_COLOR[r.rating],
@@ -43,7 +43,7 @@ const COLUMNS: STColumn<Row>[] = [
     </span>
   ) },
   { key: 'priorityScore', label: 'Priority', numeric: true, total: 'avg',
-    comment: 'Priority score 0–100, computed from condition, traffic level and strategic importance. Higher = more urgent.' },
+    comment: 'Priority score 0-100, computed from condition, traffic level and strategic importance. Higher = more urgent.' },
   { key: 'priorityRank',  label: 'Rank',     numeric: true,
     comment: 'Network-wide priority rank (1 = most urgent).' },
   { key: 'spanLength',    label: 'Span (m)', numeric: true, total: 'sum',

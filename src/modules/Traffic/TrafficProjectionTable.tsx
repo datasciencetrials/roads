@@ -83,16 +83,16 @@ export default function TrafficProjectionTable() {
         // Fallback synthetic data for 20 representative links - only used if
         // the real traffic_predictions.geojson feed fails to fetch/parse.
         const synthetic: LinkRow[] = [
-          { link_id:'A001_Link01', link_name:'Kampala–Jinja',         road_class:'A', region:'Central',  length_km:83,  base_aadt:6364, base_year:2016 },
-          { link_id:'A001_Link02', link_name:'Jinja–Tororo',          road_class:'A', region:'Eastern',  length_km:74,  base_aadt:4774, base_year:2016 },
-          { link_id:'A002_Link01', link_name:'Kampala–Mbarara',       road_class:'A', region:'Western',  length_km:262, base_aadt:6011, base_year:2016 },
-          { link_id:'A104_Link01', link_name:'Gulu–Kampala',          road_class:'A', region:'Northern', length_km:360, base_aadt:2829, base_year:2016 },
+          { link_id:'A001_Link01', link_name:'Kampala-Jinja',         road_class:'A', region:'Central',  length_km:83,  base_aadt:6364, base_year:2016 },
+          { link_id:'A001_Link02', link_name:'Jinja-Tororo',          road_class:'A', region:'Eastern',  length_km:74,  base_aadt:4774, base_year:2016 },
+          { link_id:'A002_Link01', link_name:'Kampala-Mbarara',       road_class:'A', region:'Western',  length_km:262, base_aadt:6011, base_year:2016 },
+          { link_id:'A104_Link01', link_name:'Gulu-Kampala',          road_class:'A', region:'Northern', length_km:360, base_aadt:2829, base_year:2016 },
           { link_id:'A109_Link01', link_name:'Kampala Northern Bypass',road_class:'A', region:'Central', length_km:17,  base_aadt:8664, base_year:2016 },
-          { link_id:'B001_Link01', link_name:'Tororo–Mbale',          road_class:'B', region:'Eastern',  length_km:55,  base_aadt:1857, base_year:2016 },
-          { link_id:'B064_Link01', link_name:'Mubende–Mityana',       road_class:'B', region:'Central',  length_km:74,  base_aadt:1591, base_year:2016 },
-          { link_id:'B104_Link01', link_name:'Hoima–Masindi',         road_class:'B', region:'Western',  length_km:68,  base_aadt:1238, base_year:2016 },
-          { link_id:'C001_Link01', link_name:'Adjumani–Moyo',         road_class:'C', region:'Northern', length_km:87,  base_aadt: 301, base_year:2016 },
-          { link_id:'C020_Link01', link_name:'Kapchorwa–Mbale',       road_class:'C', region:'Eastern',  length_km:61,  base_aadt: 424, base_year:2016 },
+          { link_id:'B001_Link01', link_name:'Tororo-Mbale',          road_class:'B', region:'Eastern',  length_km:55,  base_aadt:1857, base_year:2016 },
+          { link_id:'B064_Link01', link_name:'Mubende-Mityana',       road_class:'B', region:'Central',  length_km:74,  base_aadt:1591, base_year:2016 },
+          { link_id:'B104_Link01', link_name:'Hoima-Masindi',         road_class:'B', region:'Western',  length_km:68,  base_aadt:1238, base_year:2016 },
+          { link_id:'C001_Link01', link_name:'Adjumani-Moyo',         road_class:'C', region:'Northern', length_km:87,  base_aadt: 301, base_year:2016 },
+          { link_id:'C020_Link01', link_name:'Kapchorwa-Mbale',       road_class:'C', region:'Eastern',  length_km:61,  base_aadt: 424, base_year:2016 },
         ];
         setLinks(synthetic);
       })
@@ -176,7 +176,7 @@ export default function TrafficProjectionTable() {
             display:'flex', alignItems:'center', gap:6, padding:'7px 14px', borderRadius:8, fontSize:10, fontWeight:700,
             background:'rgba(0, 245, 255,0.1)', border:'1px solid rgba(0, 245, 255,0.3)', color:'#00f5ff', cursor:'pointer',
           }}>
-            <Download size={12}/> Export Full CSV (2016–2040)
+            <Download size={12}/> Export Full CSV (2016-2040)
           </button>
         </div>
 

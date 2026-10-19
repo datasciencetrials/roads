@@ -276,7 +276,7 @@ function LinkPopup({
             </div>
             <div style={{ fontSize:9, color:'rgba(148,163,184,0.6)' }}>Predicted AADT (veh/day)</div>
             <div style={{ fontSize:9, color:`rgba(${hexRgb(color)},0.7)`, marginTop:3 }}>
-              95% CI: {(p.aadt_lower_95 ?? 0).toLocaleString()}–{(p.aadt_upper_95 ?? 0).toLocaleString()}
+              95% CI: {(p.aadt_lower_95 ?? 0).toLocaleString()}-{(p.aadt_upper_95 ?? 0).toLocaleString()}
             </div>
           </div>
         )}
@@ -429,7 +429,7 @@ function CongestionBreakdownTable({
       <div style={{ marginTop:8, fontSize:9, color:'rgba(100,116,139,0.4)' }}>
         Congestion risk = predicted AADT ÷ design capacity (Uganda roads standard) ·
         Capacity: M-class 15k, A-class 10k, B-class 5k, C-class 2.5k PCU/day ·
-        Model: XGBoost + LightGBM ensemble, spatial-lag features, trained 2018–2025
+        Model: XGBoost + LightGBM ensemble, spatial-lag features, trained 2018-2025
       </div>
     </div>
   );
@@ -537,7 +537,7 @@ export default function PredictionsPanel() {
           <div style={{ fontSize:11, color:'rgba(148,163,184,0.6)', marginTop:3 }}>
             {liveMode
               ? `Estimated current-hour vehicle flow · All ${features.length} road links · Updates every 60 s`
-              : `ML predictions for all ${features.length} road links · Spatial-temporal model trained 2018–2025`}
+              : `ML predictions for all ${features.length} road links · Spatial-temporal model trained 2018-2025`}
           </div>
         </div>
 

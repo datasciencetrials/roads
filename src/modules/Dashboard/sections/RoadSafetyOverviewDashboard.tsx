@@ -1,7 +1,7 @@
 /**
  * RoadSafetyOverviewDashboard - RMS "Dashboard" tab, Road Safety section.
- * Port of public/dashboard.html Tab 7 (ROAD SAFETY & BLACKSPOTS, charts c88–c100)
- * into live React/Recharts, extended beyond the original 13 views. Real 2016–2025
+ * Port of public/dashboard.html Tab 7 (ROAD SAFETY & BLACKSPOTS, charts c88-c100)
+ * into live React/Recharts, extended beyond the original 13 views. Real 2016-2025
  * fatality, blackspot-corridor, enforcement-pipeline and RSE-compliance figures
  * (matches the platform's official 3,247 2025-fatality / 847-blackspot count).
  * No tables here - tabular breakdowns live under Exhaustive Tables / Deep Analytics.
@@ -30,7 +30,7 @@ const FATAL_USER_VAL = [1240, 820, 468, 340, 218, 98, 63];
 const TOD_LBL = ['00-03', '03-06', '06-09', '09-12', '12-15', '15-18', '18-21', '21-24'];
 const TOD_PCT = [8.2, 4.1, 12.4, 9.8, 11.2, 14.8, 18.4, 21.1];
 
-// Region fatalities 2016–2025 (matches D.regLbl / D.regCol from the network model).
+// Region fatalities 2016-2025 (matches D.regLbl / D.regCol from the network model).
 const REG_LBL = ['Central', 'Northern', 'Eastern', 'Western', 'Southern', 'North Eastern'];
 const REG_COL = [DASH_C.cyan, DASH_C.green, DASH_C.yellow, DASH_C.purple, DASH_C.pink, DASH_C.orange];
 const REG_KM = [4436, 3920, 4290, 3000, 3300, 2356]; // reused from network model for regional-share tiles
@@ -78,7 +78,7 @@ const MONTH_HR_MATRIX = MONTH_LBL.map((_, m) =>
 // Blackspot severity buckets from the top-10 corridor accident counts (matches c90's colour thresholds).
 const SEVERITY_BUCKETS = [
   { name: 'High (≥350/yr)', value: ACC_COUNT.filter(v => v >= 350).reduce((a, b) => a + b, 0), color: DASH_C.pink },
-  { name: 'Medium (250–349/yr)', value: ACC_COUNT.filter(v => v >= 250 && v < 350).reduce((a, b) => a + b, 0), color: DASH_C.orange },
+  { name: 'Medium (250-349/yr)', value: ACC_COUNT.filter(v => v >= 250 && v < 350).reduce((a, b) => a + b, 0), color: DASH_C.orange },
   { name: 'Low (<250/yr)', value: ACC_COUNT.filter(v => v < 250).reduce((a, b) => a + b, 0), color: DASH_C.yellow },
 ];
 const severityColor = (v: number) => (v >= 350 ? DASH_C.pink : v >= 250 ? DASH_C.orange : DASH_C.yellow);
@@ -107,7 +107,7 @@ export default function RoadSafetyOverviewDashboard() {
       <SectionHdr accent={DASH_C.red}>Road Safety &amp; Blackspots · 22 Views</SectionHdr>
 
       <ChartGrid cols="3">
-        <ChartBox title="Road Fatalities Trend (2016–2025)" subtitle="vs UN Decade Target" accent={DASH_C.red} height={210}>
+        <ChartBox title="Road Fatalities Trend (2016-2025)" subtitle="vs UN Decade Target" accent={DASH_C.red} height={210}>
           <LineMulti
             data={SAFETY_YRS.map((y, i) => ({ year: y, Fatalities: FATALITIES[i], 'UN Target': UN_TARGET[i] }))}
             xKey="year"
@@ -127,7 +127,7 @@ export default function RoadSafetyOverviewDashboard() {
           belong on maps only, never charts. Corridor accident counts are already
           covered above by "Top 10 Accident Blackspot Corridors". */}
       <ChartGrid cols="1">
-        <ChartBox title="Fatalities by Region 2016–2025" accent={DASH_C.cyan} height={260}>
+        <ChartBox title="Fatalities by Region 2016-2025" accent={DASH_C.cyan} height={260}>
           <LineMulti data={SAFETY_YRS.map((y, i) => {
             const row: any = { year: y };
             REG_LBL.forEach((r, ri) => { row[r] = REG_FATAL[ri][i]; });
@@ -203,8 +203,8 @@ export default function RoadSafetyOverviewDashboard() {
         <ChartBox title="Accident Causes - Estimated Count" subtitle="2025, from cause share × accidents reported" accent={DASH_C.yellow} height={210}>
           <BarH data={CAUSE_LBL.map((n, i) => ({ cause: n, count: CAUSE_COUNT[i] }))} yKey="cause" series={[{ key: 'count', name: 'Est. accidents', color: DASH_C.yellow }]} />
         </ChartBox>
-        <ChartBox title="Annual Fatalities Distribution" subtitle="2016–2025" accent={DASH_C.red} height={210}>
-          <BoxPlotApprox data={[boxStats(FATAL_SORTED, DASH_C.red, '2016–2025')]} unit=" deaths" />
+        <ChartBox title="Annual Fatalities Distribution" subtitle="2016-2025" accent={DASH_C.red} height={210}>
+          <BoxPlotApprox data={[boxStats(FATAL_SORTED, DASH_C.red, '2016-2025')]} unit=" deaths" />
         </ChartBox>
         <ChartBox title="Blackspot Severity Mix" subtitle="inner = severity band, outer = corridor" accent={DASH_C.pink} height={210}>
           <SunburstApprox inner={SEVERITY_BUCKETS} outer={CORRIDOR_SEVERITY} />

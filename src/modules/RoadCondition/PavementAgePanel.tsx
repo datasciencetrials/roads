@@ -22,10 +22,10 @@ interface Link {
 
 const DESIGN_LIFE = { paved: 20, unpaved: 7 };
 const BANDS = [
-  { label: '0–5 yrs',   min: 0,  max: 5,        color: '#00ff88' },
-  { label: '6–10 yrs',  min: 6,  max: 10,       color: '#00d4aa' },
-  { label: '11–15 yrs', min: 11, max: 15,       color: '#ffd23f' },
-  { label: '16–20 yrs', min: 16, max: 20,       color: '#ff6b35' },
+  { label: '0-5 yrs',   min: 0,  max: 5,        color: '#00ff88' },
+  { label: '6-10 yrs',  min: 6,  max: 10,       color: '#00d4aa' },
+  { label: '11-15 yrs', min: 11, max: 15,       color: '#ffd23f' },
+  { label: '16-20 yrs', min: 16, max: 20,       color: '#ff6b35' },
   { label: '>20 yrs',   min: 21, max: Infinity, color: '#ff2d78' },
 ];
 

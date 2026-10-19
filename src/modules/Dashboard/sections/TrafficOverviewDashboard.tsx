@@ -1,6 +1,6 @@
 /**
  * TrafficOverviewDashboard - RMS "Dashboard" tab traffic-intelligence view.
- * Port of public/dashboard.html Tab 3 (TRAFFIC INTELLIGENCE, charts c31–c45) into
+ * Port of public/dashboard.html Tab 3 (TRAFFIC INTELLIGENCE, charts c31-c45) into
  * live React/Recharts, extended to 21 chart tiles. Real corridor AADT counts,
  * ATC station network, vehicle composition, and 3-scenario forecast figures
  * The 3,847 "Avg AADT (Counted Stations)" stat is a simple mean across
@@ -108,7 +108,7 @@ export default function TrafficOverviewDashboard() {
           <BarH data={CORRIDORS.map((c, i) => ({ corridor: c, aadt: CORR_AADT[i] }))} yKey="corridor"
             series={[{ key: 'aadt', name: 'AADT (veh/day)', color: DASH_C.pink }]} />
         </ChartBox>
-        <ChartBox title="National AADT Trend" subtitle="2016–2025" accent={DASH_C.yellow} height={210}>
+        <ChartBox title="National AADT Trend" subtitle="2016-2025" accent={DASH_C.yellow} height={210}>
           <LineMulti data={NAT_YRS.map((y, i) => ({ year: y, National: NAT_AADT[i], 'Kla-Entebbe': KLA_EBB_TREND[i] }))} xKey="year"
             series={[{ key: 'National', name: 'National Avg AADT', color: DASH_C.yellow }, { key: 'Kla-Entebbe', name: 'Kla-Entebbe', color: DASH_C.pink }]} />
         </ChartBox>
@@ -122,7 +122,7 @@ export default function TrafficOverviewDashboard() {
         <ChartBox title="ATC Station AADT Ranking" subtitle="25 stations, ranked - size=AADT" accent={DASH_C.purple} height={260}>
           <ScatterBubble data={ATC_STATIONS} xLabel="Rank" yLabel="AADT (veh/day)" color={DASH_C.purple} />
         </ChartBox>
-        <ChartBox title="AADT Forecast 2016–2035" subtitle="3 scenarios" accent={DASH_C.cyan} height={260}>
+        <ChartBox title="AADT Forecast 2016-2035" subtitle="3 scenarios" accent={DASH_C.cyan} height={260}>
           <LineMulti data={FC_YRS.map((y, i) => ({ year: y, Normal: FC_NORM[i], Optimistic: FC_OPT[i], Pessimistic: FC_PESS[i] }))} xKey="year"
             series={[
               { key: 'Normal', name: 'Normal (4%/yr)', color: DASH_C.cyan },
@@ -160,7 +160,7 @@ export default function TrafficOverviewDashboard() {
         <ChartBox title="Traffic Growth Rate by Corridor" subtitle="%/yr" accent={DASH_C.green} height={210}>
           <BarV data={CORRIDORS.map((c, i) => ({ corridor: c, growth: CORR_GROWTH[i] }))} xKey="corridor" series={[{ key: 'growth', name: 'Growth %/yr', color: DASH_C.green }]} unit="%" />
         </ChartBox>
-        <ChartBox title="AADT Trend by Region" subtitle="2018–2025" accent={DASH_C.cyan} height={210}>
+        <ChartBox title="AADT Trend by Region" subtitle="2018-2025" accent={DASH_C.cyan} height={210}>
           <LineMulti
             data={REG_YRS.map((y, yi) => {
               const row: any = { year: y };

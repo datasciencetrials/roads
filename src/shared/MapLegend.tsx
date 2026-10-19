@@ -142,17 +142,17 @@ export const LEGEND_STRUCTURE_CONDITION: LegendItem[] = [
 // PAVEMENT CONDITION LEGEND - HDM-4 / SATCC TRH17 IRI thresholds
 export const LEGEND_CONDITION: LegendItem[] = [
   { color: '#22c55e', label: 'Good   IRI ≤ 3.5 m/km', circle: true },
-  { color: '#84cc16', label: 'Fair   IRI 3.5–5.5', circle: true },
-  { color: '#eab308', label: 'Poor   IRI 5.5–8.0', circle: true },
-  { color: '#f97316', label: 'Bad    IRI 8.0–12.0', circle: true },
+  { color: '#84cc16', label: 'Fair   IRI 3.5-5.5', circle: true },
+  { color: '#eab308', label: 'Poor   IRI 5.5-8.0', circle: true },
+  { color: '#f97316', label: 'Bad    IRI 8.0-12.0', circle: true },
   { color: '#ef4444', label: 'Very Bad  IRI > 12.0', circle: true },
 ];
 
 // TRAFFIC VOLUME LEGEND - AADT (Annual Average Daily Traffic) correct app thresholds
 export const LEGEND_TRAFFIC: LegendItem[] = [
   { color: '#00ff88', label: 'AADT < 2,000   Low', circle: true },
-  { color: '#ffd23f', label: 'AADT 2k–8k   Medium', circle: true },
-  { color: '#ff6b35', label: 'AADT 8k–15k  High', circle: true },
+  { color: '#ffd23f', label: 'AADT 2k-8k   Medium', circle: true },
+  { color: '#ff6b35', label: 'AADT 8k-15k  High', circle: true },
   { color: '#ff2d78', label: 'AADT > 15k   Very High', circle: true },
 ];
 

@@ -81,7 +81,7 @@ export default function DownloadsView() {
     {
       icon: <Globe size={18} />,
       title: 'KML - Google Earth',
-      description: 'Open in Google Earth Pro or Maps. Placemarks colour-coded by condition rating (1–5).',
+      description: 'Open in Google Earth Pro or Maps. Placemarks colour-coded by condition rating (1-5).',
       badge: 'KML',
       badgeColor: '#00ff88',
       action: withFeedback('kml', () =>

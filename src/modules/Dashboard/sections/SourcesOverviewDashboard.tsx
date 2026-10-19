@@ -35,7 +35,7 @@ const AGENCY_COUNT = [1140, 512, 398, 340, 301, 156]; // sums to TOTAL_SOURCES
 const AGENCY_COLORS = [DASH_C.cyan, DASH_C.orange, DASH_C.yellow, DASH_C.green, DASH_C.purple, DASH_C.pink];
 
 // Freshness (age of underlying evidence) - canonical ordered scale, freshest first.
-const FRESH_LBL = ['<1 yr', '1–2 yr', '2–3 yr', '3–5 yr', '>5 yr'];
+const FRESH_LBL = ['<1 yr', '1-2 yr', '2-3 yr', '3-5 yr', '>5 yr'];
 const FRESH_COUNT = [892, 764, 583, 412, 196]; // sums to TOTAL_SOURCES
 
 // Evidence confidence rating - canonical ordered scale, most-confident first.
@@ -80,7 +80,7 @@ const MOST_CITED = [
 const AGENCY_MEDIAN_AGE_YRS = [1.4, 2.1, 1.7, 2.6, 3.2, 2.9]; // per AGENCY_LBL
 const AGENCY_AVG_CONFIDENCE = [78, 74, 69, 85, 58, 81]; // per AGENCY_LBL
 
-// Evidence quality dimensions (0–100), primary vs secondary evidence.
+// Evidence quality dimensions (0-100), primary vs secondary evidence.
 const QUALITY_AXES = [
   { axis: 'Completeness', primary: 88, secondary: 79 },
   { axis: 'Accuracy', primary: 91, secondary: 82 },
@@ -201,7 +201,7 @@ export default function SourcesOverviewDashboard() {
       </ChartGrid>
 
       <ChartGrid cols="3">
-        <ChartBox title="Confidence Score Distribution" subtitle="by document type (0–100)" accent={DASH_C.orange} height={210}>
+        <ChartBox title="Confidence Score Distribution" subtitle="by document type (0-100)" accent={DASH_C.orange} height={210}>
           <BoxPlotApprox data={[
             boxStats(CONF_SURVEY, DASH_C.cyan, 'Survey'), boxStats(CONF_CONTRACT, DASH_C.orange, 'Contract'),
             boxStats(CONF_SATELLITE, DASH_C.teal, 'Satellite'), boxStats(CONF_FINANCIAL, DASH_C.pink, 'Financial'),
@@ -232,7 +232,7 @@ export default function SourcesOverviewDashboard() {
         <ChartBox title="Source Freshness by Agency" subtitle="illustrative median age, yrs" accent={DASH_C.orange} height={200}>
           <BarH data={AGENCY_LBL.map((n, i) => ({ agency: n, age: AGENCY_MEDIAN_AGE_YRS[i] }))} yKey="agency" series={[{ key: 'age', name: 'Median age (yrs)', color: DASH_C.orange }]} unit=" yr" />
         </ChartBox>
-        <ChartBox title="Evidence Confidence by Agency" subtitle="illustrative average score (0–100)" accent={DASH_C.pink} height={200}>
+        <ChartBox title="Evidence Confidence by Agency" subtitle="illustrative average score (0-100)" accent={DASH_C.pink} height={200}>
           <BarV data={AGENCY_LBL.map((n, i) => ({ name: n, score: AGENCY_AVG_CONFIDENCE[i] }))} xKey="name" series={[{ key: 'score', name: 'Avg. confidence', color: DASH_C.pink }]} />
         </ChartBox>
       </ChartGrid>

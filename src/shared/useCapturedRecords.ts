@@ -5,7 +5,7 @@
  * captures/<table>.jsonl write-back log).
  *
  * These files only exist once someone has actually run `python
- * drive_sync.py` after a field session and redeployed — a fresh checkout or
+ * drive_sync.py` after a field session and redeployed - a fresh checkout or
  * a build with no captures yet simply won't have them, which is expected
  * and not an error. Callers get [] in that case (same as an empty table),
  * not a thrown error or a loading-forever state.
@@ -43,7 +43,7 @@ function loadTable(table: string): Promise<unknown[]> {
 /**
  * Fetch the folded records for one write-back table (see WRITABLE_TABLES in
  * server/index.js for the canonical table list). Returns `{ records,
- * loading }` — `records` is `[]` until the fetch resolves (or if the file
+ * loading }` - `records` is `[]` until the fetch resolves (or if the file
  * doesn't exist / isn't valid JSON), never `undefined`.
  */
 export function useCapturedRecords<T = Record<string, unknown>>(table: string): { records: T[]; loading: boolean } {

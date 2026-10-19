@@ -423,7 +423,7 @@ export function SunburstApprox({ inner, outer }: { inner: Slice[]; outer: Slice[
   );
 }
 
-/** Box-plot approximation: composed bar (min–max whisker via stacked transparent base + range bar) plus a median tick. */
+/** Box-plot approximation: composed bar (min-max whisker via stacked transparent base + range bar) plus a median tick. */
 export function BoxPlotApprox({ data, unit }: {
   data: { name: string; min: number; q1: number; median: number; q3: number; max: number; color: string }[]; unit?: string;
 }) {

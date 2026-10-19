@@ -159,7 +159,7 @@ export default function OprcSection() {
           <TrendingUp size={15} style={{ color: '#00f5ff' }} />
         </div>
         <div>
-          <div style={{ fontSize: 16, fontWeight: 900, letterSpacing: '-0.01em' }}>OPRC — Roads Selected for Contracting</div>
+          <div style={{ fontSize: 16, fontWeight: 900, letterSpacing: '-0.01em' }}>OPRC - Roads Selected for Contracting</div>
           <div style={{ fontSize: 10, color: '#64748b', marginTop: 1 }}>
             Output &amp; Performance-based Road Contracts · Department of National Roads · roads currently scoped, not yet awarded
           </div>

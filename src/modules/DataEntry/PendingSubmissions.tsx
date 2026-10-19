@@ -17,17 +17,17 @@ const CONDITION_COLOR: Record<string, string> = {
 // Mirrors WRITABLE_TABLES in server/index.js (kept as a plain label map here
 // since this panel only needs table -> display name, not the write rules).
 const SYNCED_TABLES: Record<string, string> = {
-  road_link_condition:         'RMS — Condition Surveys',
-  structure_condition_history: 'BMS — Structure Condition History',
-  inspections:                 'BMS — Inspections',
-  work_orders:                 'BMS — Work Orders',
-  bridge_documents:            'BMS — Bridge Documents',
-  maintenance_programme:       'PMS — Maintenance Programme',
-  road_reserve_records:        'Road Reserve — Records',
-  road_reserve_encroachments:  'Road Reserve — Encroachments',
-  road_reserve_gazette:        'Road Reserve — Gazette Status',
-  road_reserve_applicants:     'Road Reserve — Applicants (PII)',
-  road_reserve_applications:   'Road Reserve — Applications (PII)',
+  road_link_condition:         'RMS - Condition Surveys',
+  structure_condition_history: 'BMS - Structure Condition History',
+  inspections:                 'BMS - Inspections',
+  work_orders:                 'BMS - Work Orders',
+  bridge_documents:            'BMS - Bridge Documents',
+  maintenance_programme:       'PMS - Maintenance Programme',
+  road_reserve_records:        'Road Reserve - Records',
+  road_reserve_encroachments:  'Road Reserve - Encroachments',
+  road_reserve_gazette:        'Road Reserve - Gazette Status',
+  road_reserve_applicants:     'Road Reserve - Applicants (PII)',
+  road_reserve_applications:   'Road Reserve - Applications (PII)',
   project_tracker:             'Project Tracker',
 };
 
@@ -56,7 +56,7 @@ function SyncedCapturesPanel() {
       <div style={{ color:'#e2e8f0', fontSize:15, fontWeight:700 }}>Synced Field Captures</div>
       <div style={{ color:'#64748b', fontSize:11, marginTop:2, marginBottom:14 }}>
         From captures/&lt;table&gt;.jsonl (written by the data-entry server), folded into
-        public/data/captures_&lt;table&gt;.json by <code>drive_sync.py</code> as of the last build —
+        public/data/captures_&lt;table&gt;.json by <code>drive_sync.py</code> as of the last build -
         {' '}{totalSynced} record{totalSynced !== 1 ? 's' : ''} across {rows.length} table{rows.length !== 1 ? 's' : ''} in this deploy.
       </div>
       <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(220px, 1fr))', gap:8 }}>

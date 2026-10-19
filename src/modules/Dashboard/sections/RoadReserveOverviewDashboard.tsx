@@ -7,7 +7,7 @@
  * across 6 regions (Central, Northern, Eastern, Western, Southern, North
  * Eastern) and 3 road classes - Class A Trunk 4,200 km, Class B Regional
  * 5,800 km, Class C District 11,302 km - each carrying a standard road-reserve
- * corridor width (50 m / 30 m / 15–20 m respectively, per Uganda practice).
+ * corridor width (50 m / 30 m / 15-20 m respectively, per Uganda practice).
  * All reserve/encroachment figures below are an internally-consistent
  * illustrative data model (not live survey data), sized like the other
  * flagship section dashboards. No tables here - tabular breakdowns live under
@@ -82,7 +82,7 @@ const CASES_RESOLVED = 860;
 const CASES_PENDING_COMPLIANCE = 780;
 const CASES_ESCALATED_LEGAL = 508; // Resolved + Pending + Escalated sums to TOTAL_CASES
 
-// New-case trend + cumulative resolution, 2021–2025.
+// New-case trend + cumulative resolution, 2021-2025.
 const TREND_YRS = [2021, 2022, 2023, 2024, 2025];
 const NEW_CASES = [320, 380, 410, 460, 578]; // sums to TOTAL_CASES
 let cum = 0;
@@ -100,7 +100,7 @@ const ENFORCEMENT_FUNNEL = [
 const DISTRICT_LBL = ['Wakiso', 'Mukono', 'Kampala', 'Jinja', 'Mbarara', 'Mbale', 'Masaka', 'Gulu', 'Lira', 'Arua'];
 const DISTRICT_COUNT = [214, 178, 165, 142, 128, 112, 96, 88, 76, 62];
 
-// Case age (months open) vs severity score (0–100) - older unresolved cases skew more severe.
+// Case age (months open) vs severity score (0-100) - older unresolved cases skew more severe.
 const CASE_AGE_VS_SEVERITY = [
   { x: 2, y: 22 }, { x: 4, y: 28 }, { x: 6, y: 35 }, { x: 8, y: 30 }, { x: 10, y: 42 },
   { x: 12, y: 48 }, { x: 14, y: 55 }, { x: 18, y: 50 }, { x: 21, y: 62 }, { x: 24, y: 68 },
@@ -184,7 +184,7 @@ export default function RoadReserveOverviewDashboard() {
           <BarV data={CLASS_LBL.map((n, i) => ({ name: n.split(' ')[1], Total: CLASS_KM[i], Surveyed: CLASS_SURVEYED_KM[i], Gazetted: CLASS_GAZETTED_KM[i] }))} xKey="name"
             series={[{ key: 'Total', name: 'Total km', color: DASH_C.cyan }, { key: 'Surveyed', name: 'Surveyed km', color: DASH_C.blue }, { key: 'Gazetted', name: 'Gazetted km', color: DASH_C.teal }]} unit="km" />
         </ChartBox>
-        <ChartBox title="Encroachment Cases 2021–2025" subtitle="cumulative registered vs resolved" accent={DASH_C.green} height={230}>
+        <ChartBox title="Encroachment Cases 2021-2025" subtitle="cumulative registered vs resolved" accent={DASH_C.green} height={230}>
           <LineMulti data={TREND_YRS.map((y, i) => ({ year: y, Registered: CUM_CASES[i], Resolved: CUM_RESOLVED[i] }))} xKey="year"
             series={[{ key: 'Registered', name: 'Cumulative Registered', color: DASH_C.orange }, { key: 'Resolved', name: 'Cumulative Resolved', color: DASH_C.green }]} area />
         </ChartBox>
@@ -230,7 +230,7 @@ export default function RoadReserveOverviewDashboard() {
       </ChartGrid>
 
       <ChartGrid cols="2">
-        <ChartBox title="Case Age vs Severity Score" subtitle="months open vs severity (0–100)" accent="#ef4444" height={200}>
+        <ChartBox title="Case Age vs Severity Score" subtitle="months open vs severity (0-100)" accent="#ef4444" height={200}>
           <ScatterBubble data={CASE_AGE_VS_SEVERITY} xLabel="Age (months)" yLabel="Severity Score" color="#ef4444" />
         </ChartBox>
         <ChartBox title="Case Resolution Status" accent={DASH_C.green} height={200}>

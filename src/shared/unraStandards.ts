@@ -5,7 +5,7 @@
  *
  *   Primary source: "Manual: Visual Inspections of Paved and Unpaved Roads"
  *   (UNRA, Feb 2012, incl. Addendum No. 1) - survey defect categories with
- *   1–5 grade scales, and the official road-inventory item lists
+ *   1-5 grade scales, and the official road-inventory item lists
  *   (Continuous/Line data vs Discrete/Point data).
  *
  * Anything in the platform that names defects, grades, condition surveys or
@@ -13,7 +13,7 @@
  */
 
 // ── Survey grade scale (Visual Inspections manual, all defect tables) ─────────
-/** Official 1–5 grading used across the visual-inspection defect tables. */
+/** Official 1-5 grading used across the visual-inspection defect tables. */
 export const GRADE_SCALE = [
   { grade: 1, meaning: 'None / as-new - defect not present' },
   { grade: 2, meaning: 'Minor - isolated occurrence, limited area/severity' },
@@ -124,7 +124,7 @@ export const INVENTORY_CATEGORIES: InventoryCategory[] = [
 
 // ── Asset Management Manuals registry (the ingested document set) ─────────────
 export const AMS_MANUALS = [
-  { id: 'visual-2012',  title: 'Manual: Visual Inspections of Paved & Unpaved Roads (Feb 2012, + Addendum 1)', role: 'Defect grading (1–5) & inventory survey items - THE taxonomy source' },
+  { id: 'visual-2012',  title: 'Manual: Visual Inspections of Paved & Unpaved Roads (Feb 2012, + Addendum 1)', role: 'Defect grading (1-5) & inventory survey items - THE taxonomy source' },
   { id: 'rms-user',     title: 'UNRA AMS 3 - RMS User Manual 2017',                       role: 'Road Management System operation' },
   { id: 'pms-user',     title: 'UNRA AMS 5 - PMS User Manual 2017',                       role: 'Pavement Management System operation' },
   { id: 'bms-user',     title: 'UNRA AMS 6 - BMS User Manual v1 (Sept 2017)',             role: 'Bridge Management System operation' },

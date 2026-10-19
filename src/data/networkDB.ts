@@ -4,7 +4,7 @@
  * All data is sourced from:
  *   • National Road Network_FY25-26(NDPIV) - draft.xlsx  (1,014 links)
  *   • Bridges and Culverts 2026.xlsx                     (515 bridges, 452 culverts)
- *   • TIS 2023–2025 AADT analysis.xlsx                   (298 stations, 10 vehicle classes)
+ *   • TIS 2023-2025 AADT analysis.xlsx                   (298 stations, 10 vehicle classes)
  *
  * Built by scripts/build_db.py → public/data/central_network_db.json
  * Network-level stats → public/data/network_stats.json
@@ -44,7 +44,7 @@ export interface TrafficYear {
   aadt:         number | null;  // estimated 24h AADT from 12h daytime count
   day_wd_total: number;         // sum of all classes, daytime weekday
   day_we_total: number;         // sum of all classes, daytime weekend
-  vc_day:       Record<string, number>;   // keys '1'–'10'
+  vc_day:       Record<string, number>;   // keys '1'-'10'
   vc_night:     Record<string, number>;
 }
 
@@ -111,7 +111,7 @@ export interface TCSStation {
   surface:   string | null;
 }
 
-/** Vehicle class labels keyed '1'–'10' (from TIS Key sheet) */
+/** Vehicle class labels keyed '1'-'10' (from TIS Key sheet) */
 export const VEHICLE_CLASS_LABELS: Record<string, string> = {
   '1':  'NMT (Bicycles & Carts)',
   '2':  'Motorcycle',

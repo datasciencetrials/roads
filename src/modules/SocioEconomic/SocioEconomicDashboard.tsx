@@ -206,7 +206,7 @@ export default function SocioEconomicDashboard() {
         <ChartBox title="Generation Mix" subtitle="% installed capacity" accent={DASH_C.cyan} height={200}>
           <DonutChart data={ENERGY_MIX} />
         </ChartBox>
-        <ChartBox title="Installed Capacity Trend" subtitle="MW, 2015–2024" accent={DASH_C.blue} height={200}>
+        <ChartBox title="Installed Capacity Trend" subtitle="MW, 2015-2024" accent={DASH_C.blue} height={200}>
           <LineMulti data={CAP_TREND} xKey="yr" series={[{ key: 'mw', name: 'Capacity (MW)', color: DASH_C.blue }]} area />
         </ChartBox>
         <ChartBox title="Electrification Rate by Region" subtitle="%" accent={DASH_C.green} height={200}>
@@ -219,7 +219,7 @@ export default function SocioEconomicDashboard() {
         <ChartBox title="Top Export Commodity Revenue" subtitle="USD M" accent={DASH_C.green} height={200}>
           <BarV data={CROP_REV} xKey="name" series={[{ key: 'rev', name: 'Revenue (USD M)', color: DASH_C.green }]} />
         </ChartBox>
-        <ChartBox title="Agricultural GDP Share Trend" subtitle="%, 2019–2024" accent={DASH_C.teal} height={200}>
+        <ChartBox title="Agricultural GDP Share Trend" subtitle="%, 2019-2024" accent={DASH_C.teal} height={200}>
           <LineMulti data={AGRI_GDP} xKey="yr" series={[{ key: 'v', name: 'Agri GDP %', color: DASH_C.teal }]} unit="%" area />
         </ChartBox>
         <ChartBox title="Top Crops by Production" subtitle="000 tonnes" accent={DASH_C.yellow} height={200}>
@@ -232,7 +232,7 @@ export default function SocioEconomicDashboard() {
         <ChartBox title="Protected Areas by Category" subtitle="site count" accent={DASH_C.green} height={200}>
           <DonutChart data={PA_TYPES} />
         </ChartBox>
-        <ChartBox title="Forest Cover Loss" subtitle="M ha, 2000–2024" accent={DASH_C.pink} height={200}>
+        <ChartBox title="Forest Cover Loss" subtitle="M ha, 2000-2024" accent={DASH_C.pink} height={200}>
           <LineMulti data={FOREST_TREND} xKey="yr" series={[{ key: 'v', name: 'Forest Cover (M ha)', color: DASH_C.pink }]} area />
         </ChartBox>
         <ChartBox title="Major Lakes Area" subtitle="km²" accent={DASH_C.cyan} height={200}>
@@ -261,7 +261,7 @@ export default function SocioEconomicDashboard() {
         <ChartBox title="Urban vs Rural Split" subtitle="%" accent={DASH_C.green} height={200}>
           <DonutChart data={URBAN_RURAL} />
         </ChartBox>
-        <ChartBox title="Population Growth Projection" subtitle="millions, 2000–2040" accent={DASH_C.purple} height={200}>
+        <ChartBox title="Population Growth Projection" subtitle="millions, 2000-2040" accent={DASH_C.purple} height={200}>
           <LineMulti data={POP_GROWTH} xKey="yr" series={[{ key: 'v', name: 'Population (M)', color: DASH_C.purple }]} area />
         </ChartBox>
         <ChartBox title="Largest Ethnic Groups" subtitle="% of population" accent={DASH_C.orange} height={200}>
@@ -274,7 +274,7 @@ export default function SocioEconomicDashboard() {
         <ChartBox title="GDP by Sector" subtitle="%" accent={DASH_C.blue} height={200}>
           <DonutChart data={GDP_BY_SECTOR} />
         </ChartBox>
-        <ChartBox title="Total Export Revenue Trend" subtitle="USD B, 2018–2024" accent={DASH_C.green} height={200}>
+        <ChartBox title="Total Export Revenue Trend" subtitle="USD B, 2018-2024" accent={DASH_C.green} height={200}>
           <LineMulti data={EXPORTS_TREND} xKey="yr" series={[{ key: 'v', name: 'Exports (USD B)', color: DASH_C.green }]} area />
         </ChartBox>
         <ChartBox title="Top Economic Zones - Investment" subtitle="USD M" accent={DASH_C.orange} height={200}>
@@ -290,7 +290,7 @@ export default function SocioEconomicDashboard() {
         <ChartBox title="Estimated Reserves Value" subtitle="USD M" accent={DASH_C.gray} height={200}>
           <BarV data={RESERVES_VAL} xKey="name" series={[{ key: 'v', name: 'Value (USD M)', color: DASH_C.yellow }]} />
         </ChartBox>
-        <ChartBox title="Mineral Export Revenue Trend" subtitle="USD M, 2019–2024" accent={DASH_C.orange} height={200}>
+        <ChartBox title="Mineral Export Revenue Trend" subtitle="USD M, 2019-2024" accent={DASH_C.orange} height={200}>
           <LineMulti data={MINERAL_EXPORT_TREND} xKey="yr" series={[{ key: 'v', name: 'Exports (USD M)', color: DASH_C.orange }]} area />
         </ChartBox>
       </ChartGrid>

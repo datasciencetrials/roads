@@ -52,7 +52,7 @@ const STALE_3YR_PLUS = RECENCY_A[3] + RECENCY_B[3] + RECENCY_C[3]; // 1,460 km s
 const VEH_LBL = ['RV-01 · Central', 'RV-02 · Central', 'RV-03 · Eastern', 'RV-04 · Northern', 'RV-05 · Western', 'RVL-06 · Mobile/NE'];
 const VEH_UTIL = [88, 81, 92, 76, 85, 69]; // % of available survey days active
 
-// Survey pass volume & footage storage, 2019–2025
+// Survey pass volume & footage storage, 2019-2025
 const SVY_YRS = [2019, 2020, 2021, 2022, 2023, 2024, 2025];
 const PASS_KM = [980, 1450, 2050, 2600, 3100, 3600, 4020]; // fresh km surveyed that year
 const RAW_TB = [8, 16, 29, 47, 74, 109, 152];
@@ -117,15 +117,15 @@ const FRAMES_C = [140, 120, 160, 135, 110, 150, 125, 105, 145, 130, 115, 155];
 // Deterministic "segment sample" points - stable across renders (no Math.random()).
 const VINTAGE_IRI_POINTS = Array.from({ length: 40 }, (_, i) => {
   const seed = i * 47.9;
-  const vintage = ((seed * 131 + 23) % 450) / 100; // 0–4.5 yrs since last video pass
-  const iri = 2 + ((seed * 217 + 41) % 700) / 100; // 2–9 m/km
+  const vintage = ((seed * 131 + 23) % 450) / 100; // 0-4.5 yrs since last video pass
+  const iri = 2 + ((seed * 217 + 41) % 700) / 100; // 2-9 m/km
   const aadt = 300 + ((i * 577) % 12000);
   return { x: +vintage.toFixed(1), y: +iri.toFixed(2), z: aadt };
 });
 const IRI_DENSITY_POINTS = Array.from({ length: 38 }, (_, i) => {
   const seed = i * 53.3;
-  const iri = 1 + ((seed * 97 + 19) % 800) / 100; // 1–9 m/km
-  const density = 0.5 + ((seed * 331 + 11) % 1450) / 100; // 0.5–15 flags/km
+  const iri = 1 + ((seed * 97 + 19) % 800) / 100; // 1-9 m/km
+  const density = 0.5 + ((seed * 331 + 11) % 1450) / 100; // 0.5-15 flags/km
   return { x: +iri.toFixed(2), y: +density.toFixed(2) };
 });
 

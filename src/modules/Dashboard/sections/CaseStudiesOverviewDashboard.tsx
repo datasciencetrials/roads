@@ -30,7 +30,7 @@ const OUTCOME_COUNT = [58, 27, 11]; // sums to 96
 const OUTCOME_COLORS = ['#22c55e', '#eab308', '#ef4444'];
 
 // Value-for-money score distribution - ordered good→bad, canonical 5-stop scale
-const VFM_BAND_LBL = ['Excellent (≥85)', 'Good (70–84)', 'Fair (55–69)', 'Weak (40–54)', 'Poor (<40)'];
+const VFM_BAND_LBL = ['Excellent (≥85)', 'Good (70-84)', 'Fair (55-69)', 'Weak (40-54)', 'Poor (<40)'];
 const VFM_BAND_COUNT = [22, 34, 24, 12, 4]; // sums to 96
 const VFM_BAND_COLORS = ['#22c55e', '#84cc16', '#eab308', '#f97316', '#ef4444'];
 

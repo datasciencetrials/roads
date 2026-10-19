@@ -212,7 +212,7 @@ export default function RoadInventory() {
             {active.relatedDefects.length > 0 && (
               <div>
                 <div style={{ fontSize: 8.5, fontWeight: 800, color: C.yellow, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>
-                  Related survey defects (graded 1–5)
+                  Related survey defects (graded 1-5)
                 </div>
                 {active.relatedDefects.map(d => (
                   <div key={d} style={{ fontSize: 10, color: '#c4d2e1', padding: '1px 0' }}>• {d}</div>

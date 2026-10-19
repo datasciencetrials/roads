@@ -74,7 +74,7 @@ export default function InspectionManagement() {
       ) },
     { key: 'overallCondition', label: 'Overall Condition', render: i => (
         <span className={`badge ${conditionBadge(i.overallCondition)}`}>
-          {i.overallCondition} – {conditionLabel(i.overallCondition)}
+          {i.overallCondition} - {conditionLabel(i.overallCondition)}
         </span>
       ) },
     { key: 'nextInspection', label: 'Next Due', date: true, render: i => formatDate(i.nextInspection) },

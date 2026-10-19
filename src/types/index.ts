@@ -61,14 +61,14 @@ export interface Inspection {
   date: string;
   inspector: string;
   type: InspectionType;
-  // NBI-style component ratings (0–9)
+  // NBI-style component ratings (0-9)
   deckRating: number;
   superstructureRating: number;
   substructureRating: number;
   channelRating: number;
   overallCondition: ConditionRating;
   // Visual
-  visualScore: number;           // 0–100
+  visualScore: number;           // 0-100
   findings: string;
   defects: string[];
   recommendations: string;
@@ -148,7 +148,7 @@ export type ActiveView =
   | 'analytics'      // BMS analytics
   | 'priority'       // Priority ranking
   | 'phototwin'      // Photo & digital twin
-  | 'networkstory'   // Uganda Road Network historical story (1986–present)
+  | 'networkstory'   // Uganda Road Network historical story (1986-present)
   | 'trafficanalytics'  // Traffic demand analytics dashboard
   | 'trafficsummary'   // Traffic summary tables (Road Links + Stations)
   | 'oprc'             // OPRC contracts dashboard

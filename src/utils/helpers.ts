@@ -104,10 +104,10 @@ export function calcPriorityScore(
   strategicImportance: number,
 ): number {
   const age = 2024 - yearBuilt;
-  const condScore       = (5 - conditionRating) * 3;          // 0–12
-  const trafficScore    = TRAFFIC_SCORE[traffic] * 2;         // 2–8
-  const ageScore        = age > 50 ? 4 : age > 30 ? 3 : age > 15 ? 2 : 1;  // 1–4
-  const strategicScore  = strategicImportance;                 // 1–5
+  const condScore       = (5 - conditionRating) * 3;          // 0-12
+  const trafficScore    = TRAFFIC_SCORE[traffic] * 2;         // 2-8
+  const ageScore        = age > 50 ? 4 : age > 30 ? 3 : age > 15 ? 2 : 1;  // 1-4
+  const strategicScore  = strategicImportance;                 // 1-5
   const raw = condScore + trafficScore + ageScore + strategicScore; // max 29
   return Math.round((raw / 29) * 100);
 }
@@ -153,7 +153,7 @@ const ALL_DEFECTS = [
   'Expansion joint failure', 'Drainage blockage', 'Deformation/settlement',
   'Parapet damage', 'Paint deterioration', 'Corrosion of steel',
   'Wingwall cracking', 'Approach slab settlement', 'Erosion at abutments',
-  'Loss of bearing area', 'Honeycomb concrete', 'Alkali–silica reaction',
+  'Loss of bearing area', 'Honeycomb concrete', 'Alkali-silica reaction',
   'Debris accumulation',
 ];
 

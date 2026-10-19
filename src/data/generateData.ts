@@ -105,7 +105,7 @@ function material(seed: number): string {
 }
 
 function replacementCost(spanLen: number, noSpans: number, seed: number): number {
-  // UGX: roughly 1–5 Bn depending on size
+  // UGX: roughly 1-5 Bn depending on size
   const base = spanLen * noSpans * seededInt(seed, 8_000_000, 20_000_000);
   return Math.round(base / 1_000_000) * 1_000_000; // round to nearest 1M
 }

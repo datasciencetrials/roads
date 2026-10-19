@@ -67,7 +67,7 @@ const DEFECT_ZONES: Record<string, { label: string; zone: 'deck'|'parapet'|'gird
   'Erosion at abutments':   { label: 'Erosion at abutments',   zone: 'channel' },
   'Loss of bearing area':   { label: 'Loss of bearing area',   zone: 'girder' },
   'Honeycomb concrete':     { label: 'Honeycomb concrete',     zone: 'deck' },
-  'Alkali–silica reaction': { label: 'Alkali–silica reaction', zone: 'deck' },
+  'Alkali-silica reaction': { label: 'Alkali-silica reaction', zone: 'deck' },
   'Debris accumulation':    { label: 'Debris accumulation',    zone: 'channel' },
 };
 

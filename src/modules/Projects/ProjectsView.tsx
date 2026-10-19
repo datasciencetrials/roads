@@ -32,7 +32,7 @@ interface UCorridor {
 const UNDER_CONSTRUCTION: UCorridor[] = [
   {
     id: 'neramp-lot1',
-    name: 'Kamdini – Lira – Soroti – Koloin',
+    name: 'Kamdini - Lira - Soroti - Koloin',
     km: 216,
     funder: 'World Bank (NERAMP)',
     contractor: 'Mota-Engil Consortium',
@@ -43,7 +43,7 @@ const UNDER_CONSTRUCTION: UCorridor[] = [
   },
   {
     id: 'hoima-wanseko',
-    name: 'Hoima – Butiaba – Wanseko (Oil Road)',
+    name: 'Hoima - Butiaba - Wanseko (Oil Road)',
     km: 111,
     funder: 'GoU / TotalEnergies',
     contractor: 'China Harbour Engineering',
@@ -65,7 +65,7 @@ const UNDER_CONSTRUCTION: UCorridor[] = [
   },
   {
     id: 'kla-jinja-exp',
-    name: 'Kampala – Jinja Expressway',
+    name: 'Kampala - Jinja Expressway',
     km: 76,
     funder: 'GoU / PPP',
     contractor: 'China Road & Bridge Corp.',
@@ -775,11 +775,11 @@ export default function ProjectsView() {
             </div>
             <div style={{ fontSize: 9, color: 'rgba(148,163,184,0.8)', lineHeight: 1.5 }}>
               <span style={{ color: '#fcd34d', fontWeight: 700 }}>Lot 1 (216 km)</span>
-              {' '}Kamdini–Lira–Soroti–Koloin · Mota-Engil · World Bank · Completion Jun 2027
+              {' '}Kamdini-Lira-Soroti-Koloin · Mota-Engil · World Bank · Completion Jun 2027
             </div>
             <div style={{ fontSize: 9, color: 'rgba(148,163,184,0.8)', lineHeight: 1.5, marginTop: 2 }}>
               <span style={{ color: '#fcd34d', fontWeight: 700 }}>Lot 2 (307 km)</span>
-              {' '}Soroti–Moroto–Kotido · In procurement · World Bank NERAMP
+              {' '}Soroti-Moroto-Kotido · In procurement · World Bank NERAMP
             </div>
             <div style={{ fontSize: 8, color: 'rgba(100,116,139,0.5)', marginTop: 4 }}>
               NERAMP = North East Road Asset Management Programme · 10-yr performance contracts
@@ -794,7 +794,7 @@ export default function ProjectsView() {
             borderRadius: 8, padding: '8px 12px',
           }}>
             <div style={{ fontSize: 9, fontWeight: 900, color: '#4d9fff', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 5 }}>
-              📋 NDP IV Targets · FY 2025/26 – 2029/30
+              📋 NDP IV Targets · FY 2025/26 - 2029/30
             </div>
             <div style={{ fontSize: 9, color: 'rgba(148,163,184,0.8)', lineHeight: 1.5 }}>
               <span style={{ color: '#00ff88', fontWeight: 700 }}>1,200+ km</span>
@@ -805,7 +805,7 @@ export default function ProjectsView() {
               {' '}Albertine oil roads · GKMA improvements · Northern Bypass Ph 2 · border connectivity
             </div>
             <div style={{ fontSize: 8, color: 'rgba(100,116,139,0.5)', marginTop: 4 }}>
-              Target: 35% paved network by 2030 · Current baseline: ~30.3% (6,405 km)
+              Approved baseline: 55.2% paved National Road Network (11,762.8 km)
             </div>
           </div>
 
@@ -888,7 +888,7 @@ export default function ProjectsView() {
         <div style={{ flex: 1, overflowY: 'auto', padding: '14px 18px', minHeight: 0 }}>
           <div style={{ fontSize: 14, fontWeight: 900, color: '#e2eaf4', marginBottom: 4 }}>NDP IV Road Projects</div>
           <div style={{ fontSize: 10, color: 'rgba(148,163,184,0.55)', marginBottom: 12 }}>
-            National Development Plan IV · FY 2025/26 – 2029/30 · links matched from master network register
+            National Development Plan IV · FY 2025/26 - 2029/30 · links matched from master network register
           </div>
           <SortableFilterableTable
             accent="#4d9fff"

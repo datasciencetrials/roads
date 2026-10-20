@@ -10,6 +10,7 @@ import {
   INVENTORY_CATEGORIES, GRADE_SCALE, MANUAL_SOURCE_NOTE,
 } from '../../shared/unraStandards';
 import { SortableFilterableTable, type STColumn } from '../../shared/SortableFilterableTable';
+import { normaliseSurfaceType } from '../../shared/governedValues';
 
 interface InvLink {
   link_id: string; link_name: string | null; region: string | null; station: string | null;
@@ -59,7 +60,10 @@ export default function RoadInventory() {
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}data/network_links.json`)
       .then(r => r.json())
-      .then(d => setLinks(d))
+      .then((d: LinkRow[]) => setLinks(d.map(link => ({
+        ...link,
+        surface_type: normaliseSurfaceType(link.surface_type) ?? '',
+      }))))
       .catch(() => setLinks([]));
     fetch(`${import.meta.env.BASE_URL}data/road_inventory_2023.json`)
       .then(r => r.json())

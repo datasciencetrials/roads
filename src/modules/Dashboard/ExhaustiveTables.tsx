@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { supabase } from '../../lib/supabase';
 import { SortableFilterableTable, type STColumn } from '../../shared/SortableFilterableTable';
+import { normaliseGovernedRow } from '../../shared/governedValues';
 
 type Row = Record<string, unknown>;
 const ACRONYMS = new Set(['aadt','id','km','esal','gps','pci','iri','vci','wim','atc','esa','fwd','mef','tcs','vcpd','gis','sql','ndpiv','osm','wgs']);
@@ -53,7 +54,7 @@ async function loadRows(sectionId: string): Promise<Row[]> {
     const q = fetchAllRows(table);
     const t = new Promise<null>(res => setTimeout(() => res(null), 9000));
     const data = await Promise.race([q, t]);
-    if (data) return data;
+    if (data) return data.map(normaliseGovernedRow);
   } catch {}
   // No static-file fallback: this view promises "ALL records" from the live
   // table, so an empty/failed live query returns honestly empty rather than

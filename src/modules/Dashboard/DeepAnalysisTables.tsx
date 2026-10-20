@@ -5,6 +5,7 @@ import { mean, stdDevPop, stdError, quantile as q, mode as modeOf, skewness, kur
 import { SortableFilterableTable, type STColumn } from '../../shared/SortableFilterableTable';
 import { RoadClassPill, ConditionLabelBadge } from '../../shared/tableFormatting';
 import { MAINTENANCE_REGIONS } from '../AssetBot/linkIdKnowledge';
+import { normaliseGovernedRow } from '../../shared/governedValues';
 
 type Row = Record<string, unknown>;
 const ACRONYMS = new Set(['aadt','id','km','esal','gps','pci','iri','vci','wim','atc','esa','fwd','mef','tcs','vcpd','gis','sql','ndpiv','osm','wgs']);
@@ -56,7 +57,7 @@ async function loadRows(sectionId: string): Promise<Row[]> {
     const q = fetchAllRows(table);
     const t = new Promise<null>(res => setTimeout(() => res(null), 9000));
     const data = await Promise.race([q, t]);
-    return (data ?? []) as Row[];
+    return ((data ?? []) as Row[]).map(normaliseGovernedRow);
   } catch { return [] as Row[]; }
 }
 const num = (v: unknown): number | null => { if (typeof v === 'number' && isFinite(v)) return v; if (typeof v === 'string' && v !== '' && isFinite(Number(v))) return Number(v); return null; };

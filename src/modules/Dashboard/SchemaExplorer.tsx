@@ -23,7 +23,7 @@ const TABLES: TableDef[] = [
   region         VARCHAR(40) NOT NULL,
   district       VARCHAR(80),
   length_km      NUMERIC(8,2) NOT NULL,
-  surface_type   VARCHAR(30),          -- Paved / Gravel / Earth
+  surface_type   VARCHAR(10) NOT NULL CHECK (surface_type IN ('Paved','Unpaved')),
   lanes          SMALLINT DEFAULT 2,
   gazette_status VARCHAR(30),
   updated_at     TIMESTAMPTZ DEFAULT now()

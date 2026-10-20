@@ -3,14 +3,15 @@ import { Octokit } from '@octokit/rest';
 import fs from 'node:fs';
 import path from 'node:path';
 
-const OWNER = 'networkengineringmowt-ai';
+const [repositoryOwner, repositoryName] = (process.env.GITHUB_REPOSITORY || '').split('/');
+const OWNER = repositoryOwner || 'datasciencetrials';
+const SELF = repositoryName || 'roads';
 const ALL_REPOS = [
   'uganda_nrms', 'tricycles', 'uganda_npms', 'uganda_network_traffic',
   'uganda_ducar', 'uganda_nbms', 'uganda_gis_enterprise', 'bridge_mculverts',
   'kee', 'uganda_kee', 'uganda_kee_rss', 'uganda_ntis',
 ];
 
-const SELF = (process.env.GITHUB_REPOSITORY || '').split('/')[1];
 const TOKEN = process.env.GITHUB_TOKEN;
 const SIBLINGS = ALL_REPOS.filter((r) => r !== SELF);
 const URL = `https://${OWNER}.github.io/${SELF}/`;
@@ -44,6 +45,7 @@ async function auditSelf() {
   let brokenImages = [];
   let hashLinks = [];
   let chartElementCount = 0;
+  let mobileChartGridColumns = [];
   let extractedFigures = [];
   let districtOptions = null;
 
@@ -66,6 +68,15 @@ async function auditSelf() {
 
     try {
       chartElementCount = await page.$$eval('canvas, svg', (els) => els.length);
+    } catch { /* ignore */ }
+
+    try {
+      await page.setViewportSize({ width: 390, height: 844 });
+      await page.waitForTimeout(250);
+      mobileChartGridColumns = await page.$$eval('.dashboard-chart-grid', (grids) => grids.map((grid) => {
+        const columns = getComputedStyle(grid).gridTemplateColumns.trim().split(/\s+/).filter(Boolean);
+        return columns.length;
+      }));
     } catch { /* ignore */ }
 
     const figureRe = /([\d]{1,3}(?:,\d{3})*(?:\.\d+)?)\s*(km|kilomet\w*)/gi;
@@ -97,6 +108,7 @@ async function auditSelf() {
     brokenImages,
     hashLinksFound: hashLinks,
     chartElementCount,
+    mobileChartGridColumns,
   };
 
   const majorTechnicalIssues = [];
@@ -105,6 +117,9 @@ async function auditSelf() {
   if (!loadFailed && bodyTextLen <= 50) majorTechnicalIssues.push('Page rendered with little/no visible content (possible blank SPA shell)');
   if (consoleErrors.length > 0) majorTechnicalIssues.push(`${consoleErrors.length} console error(s) captured`);
   if (brokenImages.length > 0) majorTechnicalIssues.push(`${brokenImages.length} broken image(s): ${brokenImages.slice(0, 5).join(', ')}`);
+  if (mobileChartGridColumns.some((count) => count !== 1)) {
+    majorTechnicalIssues.push(`Mobile dashboard chart grids did not collapse to one column: ${mobileChartGridColumns.join(', ')}`);
+  }
 
   return { technical, majorTechnicalIssues, extractedFigures, districtOptions };
 }

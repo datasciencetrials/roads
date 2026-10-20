@@ -121,7 +121,7 @@ const GRID_COLS: Record<string, string> = {
 
 export function ChartGrid({ cols = '3', children }: { cols?: '1' | '2' | '3' | '4' | '12' | '21' | '13'; children: ReactNode }) {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: GRID_COLS[cols], gap: 12, marginBottom: 14 }}>
+    <div className="dashboard-chart-grid" style={{ display: 'grid', gridTemplateColumns: GRID_COLS[cols], gap: 12, marginBottom: 14 }}>
       {children}
     </div>
   );

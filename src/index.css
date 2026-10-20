@@ -668,6 +668,10 @@
 }
 
 @media (max-width: 640px) {
+  .dashboard-chart-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
   .nrms-sidebar {
     width: 76px !important;
     min-width: 76px !important;

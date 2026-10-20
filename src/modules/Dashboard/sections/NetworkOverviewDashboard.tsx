@@ -31,7 +31,7 @@ const REG_COND_A = [80, 70, 72, 75, 78, 65];
 const REG_COND_B = [62, 55, 58, 60, 61, 50];
 const REG_COND_C = [45, 38, 40, 42, 44, 34];
 const CLASS_LBL = ['Class A Trunk', 'Class B Regional', 'Class C District'];
-const SURF_LBL = ['Bituminous', 'Concrete', 'Gravel', 'Earth'];
+const SURF_LBL = ['Paved', 'Unpaved'];
 const NET_YRS = [2010, 2012, 2014, 2016, 2018, 2020, 2022, 2024, 2025];
 const NET_KM = [18200, 18800, 19400, 20100, 20600, 20900, 21050, 21200, 21302];
 const NET_PAVED_TREND = [5200, 5600, 5800, 5900, 6100, 6200, 7000, 9200, 11762.8];
@@ -82,14 +82,7 @@ export default function NetworkOverviewDashboard() {
   const CLASS_KM = [(netStats.classKm['A'] ?? 0) + classM, netStats.classKm['B'] ?? 0, netStats.classKm['C'] ?? 0];
   const CLASS_PAVED = [(netStats.classPavedKm?.['A'] ?? 0) + classPavedM, netStats.classPavedKm?.['B'] ?? 0, netStats.classPavedKm?.['C'] ?? 0];
 
-  // Surface type is a finer split than paved/unpaved with no live 4-way
-  // source; keep the original Bitumen:Concrete and Gravel:Earth ratios,
-  // rescaled so the four bars always sum to the live PAVED/UNPAVED totals.
-  const SURF_BITUMEN = Math.round(PAVED * (5840 / 6405));
-  const SURF_CONCRETE = PAVED - SURF_BITUMEN;
-  const SURF_GRAVEL = Math.round(UNPAVED * (10240 / 14897));
-  const SURF_EARTH = UNPAVED - SURF_GRAVEL;
-  const SURF_KM = [SURF_BITUMEN, SURF_CONCRETE, SURF_GRAVEL, SURF_EARTH];
+  const SURF_KM = [PAVED, UNPAVED];
 
   return (
     <div>
@@ -109,8 +102,8 @@ export default function NetworkOverviewDashboard() {
           <SunburstApprox
             inner={[{ name: 'Paved', value: PAVED, color: DASH_C.cyan }, { name: 'Unpaved', value: UNPAVED, color: DASH_C.orange }]}
             outer={[
-              { name: 'Bitumen', value: SURF_BITUMEN, color: '#00ccdd' }, { name: 'Concrete', value: SURF_CONCRETE, color: '#00aa66' },
-              { name: 'Gravel', value: SURF_GRAVEL, color: '#c25e2a' }, { name: 'Earth', value: SURF_EARTH, color: '#8a4a26' },
+              { name: 'Paved', value: PAVED, color: '#00ccdd' },
+              { name: 'Unpaved', value: UNPAVED, color: '#c25e2a' },
             ]}
           />
         </ChartBox>
@@ -134,7 +127,7 @@ export default function NetworkOverviewDashboard() {
 
       <ChartGrid cols="4">
         <ChartBox title="Surface Type" accent={DASH_C.teal} height={190}>
-          <PieChartTile data={SURF_LBL.map((n, i) => ({ name: n, value: SURF_KM[i] }))} colors={['#00f5ff', '#00aacc', '#ff6b35', '#c2532a']} />
+          <PieChartTile data={SURF_LBL.map((n, i) => ({ name: n, value: SURF_KM[i] }))} colors={['#00f5ff', '#ff6b35']} />
         </ChartBox>
         <ChartBox title="Paved Network %" subtitle="target 40% by 2027" accent={DASH_C.cyan} height={190}>
           <GaugeC value={pavedPctRounded} target={40} color={DASH_C.cyan} />
@@ -169,8 +162,8 @@ export default function NetworkOverviewDashboard() {
         </ChartBox>
         <ChartBox title="Network Composition" subtitle="waterfall, km" accent={DASH_C.pink} height={210}>
           <WaterfallC steps={[
-            { name: 'Total', delta: netStats.totalKm, isTotal: true }, { name: '−Class C', delta: -CLASS_KM[2] }, { name: '−Class B', delta: -CLASS_KM[1] },
-            { name: '=Class A', delta: CLASS_KM[0], isTotal: true }, { name: '−Earth', delta: -SURF_EARTH }, { name: '−Gravel', delta: -SURF_GRAVEL },
+            { name: 'Total', delta: netStats.totalKm, isTotal: true },
+            { name: '-Unpaved', delta: -UNPAVED },
             { name: '=Paved', delta: PAVED, isTotal: true },
           ]} unit="km" />
         </ChartBox>

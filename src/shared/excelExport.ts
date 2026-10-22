@@ -34,6 +34,123 @@ const HEADER_FILL = 'FF16263E';
 const HEADER_FONT = 'FF7DD3E0';
 const TOTAL_FILL  = 'FF101C33';
 
+const CF_RED   = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFECACA' } };
+const CF_AMBER = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFEF3C7' } };
+const CF_GREEN = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFDCFCE7' } };
+const CF_BLUE  = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFDBEAFE' } };
+const CF_GREY  = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF3F4F6' } };
+
+function containsAnyFormula(cell: string, words: string[]): string {
+  const checks = words.map(word => `ISNUMBER(SEARCH("${word}",UPPER(${cell}&"")))`);
+  return checks.length === 1 ? checks[0] : `OR(${checks.join(',')})`;
+}
+
+/**
+ * Add bounded conditional formatting to governed analytical columns.
+ * Rules are derived from column labels and the actual exported row count, so
+ * filters and changing datasets never leave formatting on unbounded rows.
+ */
+export function applyGovernedConditionalFormatting(
+  ws: any,
+  columns: Array<{ label: string; numeric?: boolean }>,
+  dataStartRow: number,
+  dataEndRow: number,
+): void {
+  if (dataEndRow < dataStartRow) return;
+
+  columns.forEach((column, index) => {
+    const letter = ws.getColumn(index + 1).letter;
+    const ref = `${letter}${dataStartRow}:${letter}${dataEndRow}`;
+    const cell = `$${letter}${dataStartRow}`;
+    const label = column.label.toLowerCase();
+
+    // Formula errors are always highlighted, including in columns that later
+    // gain formulas when a user extends the exported table in Excel.
+    ws.addConditionalFormatting({
+      ref,
+      rules: [{
+        type: 'expression',
+        formulae: [`ISERROR(${cell})`],
+        style: { fill: CF_RED, font: { color: { argb: 'FF991B1B' }, bold: true } },
+        priority: 1,
+        stopIfTrue: true,
+      }],
+    });
+
+    if (label.includes('surface')) {
+      ws.addConditionalFormatting({
+        ref,
+        rules: [
+          { type: 'expression', formulae: [`UPPER(TRIM(${cell}&""))="PAVED"`], style: { fill: CF_BLUE }, priority: 2 },
+          { type: 'expression', formulae: [`UPPER(TRIM(${cell}&""))="UNPAVED"`], style: { fill: CF_AMBER }, priority: 3 },
+        ],
+      });
+      return;
+    }
+
+    if (label.includes('condition') || label.includes('rating')) {
+      if (column.numeric) {
+        ws.addConditionalFormatting({
+          ref,
+          rules: [
+            { type: 'cellIs', operator: 'lessThanOrEqual', formulae: [2], style: { fill: CF_RED }, priority: 2, stopIfTrue: true },
+            { type: 'cellIs', operator: 'equal', formulae: [3], style: { fill: CF_AMBER }, priority: 3, stopIfTrue: true },
+            { type: 'cellIs', operator: 'greaterThanOrEqual', formulae: [4], style: { fill: CF_GREEN }, priority: 4 },
+          ],
+        });
+      } else {
+        ws.addConditionalFormatting({
+          ref,
+          rules: [
+            { type: 'expression', formulae: [containsAnyFormula(cell, ['CRITICAL', 'VERY POOR', 'POOR', 'FAILED'])], style: { fill: CF_RED }, priority: 2, stopIfTrue: true },
+            { type: 'expression', formulae: [containsAnyFormula(cell, ['FAIR', 'MARGINAL', 'SATISFACTORY'])], style: { fill: CF_AMBER }, priority: 3, stopIfTrue: true },
+            { type: 'expression', formulae: [containsAnyFormula(cell, ['GOOD', 'EXCELLENT'])], style: { fill: CF_GREEN }, priority: 4 },
+          ],
+        });
+      }
+      return;
+    }
+
+    if (label.includes('risk') || label.includes('status') || label.includes('coverage')) {
+      ws.addConditionalFormatting({
+        ref,
+        rules: [
+          { type: 'expression', formulae: [containsAnyFormula(cell, ['CRITICAL', 'HIGH', 'FAILED', 'BLOCKED', 'OVERDUE'])], style: { fill: CF_RED }, priority: 2, stopIfTrue: true },
+          { type: 'expression', formulae: [containsAnyFormula(cell, ['MEDIUM', 'PENDING', 'DUE', 'PARTIAL'])], style: { fill: CF_AMBER }, priority: 3, stopIfTrue: true },
+          { type: 'expression', formulae: [containsAnyFormula(cell, ['LOW', 'COMPLETE', 'COMPLETED', 'ACTIVE', 'CURRENT', 'COVERED'])], style: { fill: CF_GREEN }, priority: 4 },
+        ],
+      });
+      return;
+    }
+
+    const magnitude = column.numeric || /length|chainage|span|traffic|aadt|volume|score|amount|cost|km/.test(label);
+    if (magnitude) {
+      ws.addConditionalFormatting({
+        ref,
+        rules: [{
+          type: 'colorScale',
+          cfvo: [{ type: 'min' }, { type: 'percentile', value: 50 }, { type: 'max' }],
+          color: [{ argb: 'FFF3F4F6' }, { argb: 'FFBFDBFE' }, { argb: 'FF2563EB' }],
+          priority: 2,
+        }],
+      });
+      return;
+    }
+
+    if (label.includes('type') || label.includes('class')) {
+      ws.addConditionalFormatting({
+        ref,
+        rules: [{
+          type: 'expression',
+          formulae: [`LEN(TRIM(${cell}&""))>0`],
+          style: { fill: CF_GREY },
+          priority: 2,
+        }],
+      });
+    }
+  });
+}
+
 export async function exportTableToExcel(opts: XlsOptions): Promise<void> {
   const ExcelJS = (await import('exceljs')).default;
   const { columns, rows } = opts;
@@ -76,6 +193,17 @@ export async function exportTableToExcel(opts: XlsOptions): Promise<void> {
     }));
   }
 
+  // Fit ordinary text columns to their exported content while keeping very
+  // long narrative or geometry values bounded to a practical worksheet width.
+  columns.forEach((c, idx) => {
+    if (c.width != null) return;
+    const contentWidth = rows.reduce((max, row) => {
+      const value = row[c.key];
+      return Math.max(max, String(value ?? '').length);
+    }, c.label.length);
+    ws.getColumn(idx + 1).width = Math.min(c.numeric ? 18 : 42, Math.max(12, contentWidth + 2));
+  });
+
   // ── Totals row with real Excel formulas ─────────────────────────────────────
   const hasTotals = columns.some(c => c.total);
   if (hasTotals && rows.length > 0) {
@@ -107,6 +235,8 @@ export async function exportTableToExcel(opts: XlsOptions): Promise<void> {
   columns.forEach((c, idx) => {
     if (c.numeric) ws.getColumn(idx + 1).numFmt = '#,##0.##';
   });
+
+  applyGovernedConditionalFormatting(ws, columns, 2, rows.length + 1);
 
   // ── Metadata sheet ──────────────────────────────────────────────────────────
   const metaWs = wb.addWorksheet('Metadata');

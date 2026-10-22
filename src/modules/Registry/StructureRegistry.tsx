@@ -51,7 +51,7 @@ const COLUMNS: STColumn<Structure>[] = [
   { key: 'noOfLanes',       label: 'Lanes', numeric: true },
   { key: 'material',        label: 'Material' },
   { key: 'yearBuilt',       label: 'Year Built', numeric: true },
-  { key: 'conditionRating', label: 'Condition', render: (s) => (
+  { key: 'conditionRating', label: 'Condition', numeric: true, render: (s) => (
       <span className={`badge ${conditionBadge(s.conditionRating)}`}>
       {s.conditionRating}: {conditionLabel(s.conditionRating)}
       </span>

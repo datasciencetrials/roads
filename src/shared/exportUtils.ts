@@ -4,6 +4,7 @@
  * for geodata.
  */
 import { toPng } from 'html-to-image';
+import { applyGovernedConditionalFormatting } from './excelExport';
 
 // ── Internal helper ───────────────────────────────────────────────────────────
 
@@ -190,7 +191,21 @@ export async function exportTableToXLSX(
 
   for (const r of rows) ws.addRow(headers.map(h => r[h] ?? ''));
 
+  headers.forEach((header, idx) => {
+    const contentWidth = rows.reduce(
+      (max, row) => Math.max(max, String(row[header] ?? '').length),
+      header.length,
+    );
+    ws.getColumn(idx + 1).width = Math.min(42, Math.max(12, contentWidth + 2));
+  });
+
   ws.autoFilter = { from: { row: 1, column: 1 }, to: { row: 1, column: headers.length } };
+  applyGovernedConditionalFormatting(
+    ws,
+    headers.map(label => ({ label, numeric: false })),
+    2,
+    rows.length + 1,
+  );
 
   const buf = await wb.xlsx.writeBuffer();
   const blob = new Blob([buf], {

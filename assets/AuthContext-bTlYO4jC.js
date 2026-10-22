@@ -1,0 +1,1 @@
+import{r as t}from"./index.nbms.source-BeoRmwUm.js";const e=t.createContext({user:null,login:async()=>!1,logout:()=>{},isAuthenticated:!1,refreshAccess:async()=>{}}),o=()=>t.useContext(e);export{o as u};

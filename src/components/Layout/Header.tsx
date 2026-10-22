@@ -41,7 +41,7 @@ const VIEW_TITLES: Record<string, { title: string; sub: string; color?: string }
   // BMS
   gismap:        { title: 'Structure GIS Map',                sub: 'GIS structure map · All bridges & major culverts · 2018-2024 time series', color: '#00ff88' },
   dashboard:     { title: 'BMS Dashboard',                sub: 'Bridge Management System · DNR',                        color: '#00f5ff' },
-  registry:      { title: 'Structure Registry',           sub: '312 bridges · 234 culverts · 546 total',        color: '#4d9fff' },
+  registry:      { title: 'Structure Registry',           sub: '552 bridges · 452 major culverts · 1,004 total',        color: '#4d9fff' },
   inspections:   { title: 'Inspection Management',        sub: 'Schedule, record and track field inspections',          color: '#ffd23f' },
   condition:     { title: 'Condition Assessment',         sub: 'Component ratings and defect analysis',                 color: '#ff6b35' },
   maintenance:   { title: 'Maintenance & Works',          sub: 'Work orders, contracts and maintenance records',        color: '#b967ff' },

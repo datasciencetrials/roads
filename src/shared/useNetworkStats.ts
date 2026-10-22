@@ -110,7 +110,7 @@ async function _load(): Promise<NetworkStats> {
       regionLinks[region] = (regionLinks[region] ?? 0) + 1;
     }
 
-    const totalBridges = bridgeRes?.features?.length ?? 546;
+    const totalBridges = bridgeRes?.features?.length ?? 552;
 
     const pavedScale = pavedKm > 0 ? OFFICIAL_PAVED_KM / pavedKm : 1;
     const classPavedKm = Object.fromEntries(Object.entries(classPavedRaw).map(([k, v]) => [k, Math.round(v * pavedScale)]));
@@ -157,7 +157,7 @@ export function useNetworkStats(): NetworkStats {
       regionLinks: {},
       regionPavedKm: {},
       regionUnpavedKm: {},
-      totalBridges: 546,
+      totalBridges: 552,
       dataVintage: 'DNR GIS / NDPIV FY25-26',
       loaded: !!_cache,
     }
@@ -186,7 +186,7 @@ export function getNetworkStats(): NetworkStats {
     regionLinks: {},
     regionPavedKm: {},
     regionUnpavedKm: {},
-    totalBridges: 546,
+    totalBridges: 552,
     dataVintage: 'DNR GIS Jun 2025',
     loaded: false,
   };

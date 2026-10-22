@@ -87,7 +87,7 @@ const NODES: NodeDef[] = [
     x: 6, y: 62,
     detail: {
       algorithm: 'Visual inspection + NBI rating protocol',
-      trainingSize: '546 structures (312 bridges, 142 box culverts, 68 culverts, 24 drifts)',
+      trainingSize: '1,004 structures (552 bridges, 452 major culverts)',
       accuracy: 'Condition rating ±0.5 NBI units',
       inputs: ['Inspector field scores', 'Photos', 'Defect codes', 'Load data'],
       outputs: ['NBI component ratings 0-9', 'Structure condition index', 'Priority score'],
@@ -187,7 +187,7 @@ const NODES: NodeDef[] = [
     x: 39, y: 78,
     detail: {
       algorithm: 'NBI component rating aggregation',
-      trainingSize: '546 structures',
+      trainingSize: '552 bridges',
       accuracy: 'Component rating 0-9 scale',
       inputs: ['Deck/superstructure/substructure ratings', 'ADT', 'Year built', 'Span length'],
       outputs: ['Structure Health Index (SHI)', 'Load capacity ratio', 'Remaining service life'],
@@ -237,7 +237,7 @@ const NODES: NodeDef[] = [
     x: 56, y: 62,
     detail: {
       algorithm: 'Random Forest classifier (500 trees)',
-      trainingSize: '546 structures, 22 features',
+      trainingSize: '552 bridges, 22 features',
       accuracy: 'Priority rank correlation ρ = 0.91',
       inputs: ['SHI', 'ADT', 'Age', 'Span', 'Flood risk', 'Strategic importance'],
       outputs: ['Priority score 0-100', 'Intervention urgency', 'Budget year allocation'],
@@ -287,7 +287,7 @@ const NODES: NodeDef[] = [
     x: 74, y: 62,
     detail: {
       algorithm: 'Multi-criteria scoring + budget optimisation',
-      trainingSize: '546 structures',
+      trainingSize: '552 bridges',
       accuracy: 'Programme delivery rate 91% (FY2023/24)',
       inputs: ['RF priority scores', 'Inspection dates', 'Cost estimates'],
       outputs: ['Annual inspection programme', 'Maintenance work orders', 'Capital works priority list'],

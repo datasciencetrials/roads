@@ -96,7 +96,7 @@ const NODES: Node[] = [
   { id:'sec-pms',      label:'PMS - Condition',       sub:'tbl 006, 007, 038',          layer:7, x:1390, y:154,  w:180, h:50, color:'#fb923c',
     detail:'RoadConditionView.tsx - IRI/condition/urgency map. tbl-006 (IRI by class), tbl-007 (paved condition 2024), tbl-038 (ML predictions).' },
   { id:'sec-bms',      label:'BMS - Bridges',         sub:'tbl 011, 012, 072',          layer:7, x:1390, y:216,  w:180, h:50, color:'#4d9fff',
-    detail:'BMSSection.tsx - 546 bridges. tbl-011 (bridge inventory), tbl-012 (condition ratings 2024), tbl-072 (priority ranking). Source: structures + inspections.' },
+    detail:'BMSSection.tsx - 552 bridges. tbl-011 (bridge inventory), tbl-012 (condition ratings 2024), tbl-072 (priority ranking). Source: structures + inspections.' },
   { id:'sec-tis',      label:'TIS - Traffic',         sub:'tbl 008-010, 069',           layer:7, x:1390, y:278,  w:180, h:50, color:'#ffd23f',
     detail:'TrafficSection.tsx - AADT map, ATC dashboard, growth projections. tbl-008 (AADT by link), tbl-009 (vehicle composition), tbl-010 (ATC hourly), tbl-069 (TIS stations).' },
   { id:'sec-ndpiv',    label:'NDPIV Projects',        sub:'tbl 014, 086',               layer:7, x:1390, y:340,  w:180, h:50, color:'#b967ff',

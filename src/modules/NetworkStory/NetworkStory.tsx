@@ -58,7 +58,7 @@ const MILESTONES = [
   { year: 2013, label: 'NDP II',              color: C.yellow, detail: 'NDP II target: 6,000 km paved by FY 2019/20' },
   { year: 2020, label: 'NDP III',             color: C.orange, detail: 'NDP III target: 10,000 km paved by FY 2025/26' },
   { year: 2022, label: 'NDP IV Launch',       color: C.teal,   detail: 'NDP IV launched; official national road network defined as 21,302 km; OPRC contracts expanded to 9 active lots covering all six regions' },
-  { year: 2023, label: 'OPRC Scale-Up',       color: C.pink,   detail: 'Continued rehabilitation under OPRC performance contracts; bridge and culvert inventory completed - 546 structures in the 2026 BMS register' },
+  { year: 2023, label: 'OPRC Scale-Up',       color: C.pink,   detail: 'Continued rehabilitation under OPRC performance contracts; bridge and culvert inventory completed - 552 bridges and 452 major culverts (1,004 total) in the 2026 BMS register' },
   { year: 2024, label: 'Digital Transform',   color: C.indigo, detail: 'Digital transformation initiative; DNR RMS Engine development begins; ML-powered pavement condition assessment model (PyTorch, R²=0.93) enters training' },
   { year: 2025, label: 'Platform Live',       color: C.green,  detail: 'DNR Road Management System goes live; 1,014 links in GeoJSON; ML IRI prediction and HDM-4 analysis integrated; real-time ATC data feeds activated' },
   { year: 2026, label: 'Current (FY25/26)',   color: C.cyan,   detail: 'Current year: National Roads 21,302 km | GeoJSON mapped 21,137 km (1,014 links) | Paved 11,762.8 km (55.2%) | Unpaved 9,539.2 km (44.8%)' },
@@ -1735,7 +1735,7 @@ export default function NetworkStory({ hideTables = false }: { hideTables?: bool
         <Section title="Bridge &amp; Structure Inventory" accent={C.teal}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }}>
             {[
-              { label: 'Total Structures', value: '546',   color: C.teal, sub: '312 bridges · 234 culverts' },
+              { label: 'Total Structures', value: '1,004', color: C.teal, sub: '552 bridges · 452 major culverts' },
               { label: 'Total Length', value: '8,517 m', color: C.cyan, sub: 'Combined bridge deck' },
               { label: 'Avg Length', value: '19.6 m', color: C.blue, sub: 'Per bridge average' },
               { label: 'Road C-Class', value: '284 (65%)', color: C.green, sub: 'Community road bridges' },

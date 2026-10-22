@@ -36,5 +36,3 @@ arcgis-src/
 offline-tiles/
 public/s-photos/
 gis-enterprise/.env
-desktop.ini
-**/desktop.ini

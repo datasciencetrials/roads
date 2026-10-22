@@ -5,7 +5,7 @@
  * breakdowns live under Exhaustive Tables / Deep Analytics.
  *
  * TOTAL_STRUCT/STR_TYPE/STR_COND below are real, sourced from
- * public/data/bridges_summary.json (552 bridges + 452 culverts = 1,004
+ * public/data/bridges_summary.json (546 bridges + 452 culverts = 998
  * structures total) - corrected from an earlier mockup version that called
  * "546" the grand total across 4 invented types (312/142/68/24), which
  * contradicted every other reference to "546" on the platform (that number
@@ -25,12 +25,12 @@ import {
 } from '../../../shared/dashboardKit';
 
 // ─── Data model (real: public/data/bridges_summary.json) ─
-const TOTAL_STRUCT = 1004; // 552 bridges + 452 culverts
-const STR_TYPE = [552, 372, 43, 37];
+const TOTAL_STRUCT = 998; // 546 bridges + 452 culverts
+const STR_TYPE = [546, 372, 43, 37];
 const STR_TYPE_LBL = ['Bridges', 'Pipe Culverts', 'Concrete Box Culverts', 'Other Culverts'];
 const STR_TYPE_COLORS = ['#00f5ff', '#00aacc', '#006688', '#003344'];
 
-const STR_COND = [760, 166, 53, 17];
+const STR_COND = [711, 197, 53, 37];
 const COND_LBL = ['Good', 'Fair', 'Poor', 'Critical'];
 
 const STR_MAT = [286, 134, 76, 38, 12];
@@ -65,7 +65,7 @@ const DEFICIENCY_COUNT = [142, 84, 128, 96, 180, 72, 56, 64];
 
 // Inspection funnel & trend
 const INSPECTION_FUNNEL = [
-  { name: 'Total Registered', value: 552 }, { name: 'Principal Insp.', value: 420 },
+  { name: 'Total Registered', value: 546 }, { name: 'Principal Insp.', value: 420 },
   { name: 'Routine Insp.', value: 380 }, { name: 'Good Condition', value: 197 },
   { name: 'Maintenance Due', value: 185 }, { name: 'Needs Urgent Works', value: 54 },
 ];
@@ -109,7 +109,7 @@ export default function StructuresOverviewDashboard() {
         <StatMini value={`${TOTAL_STRUCT}`} label="Structures (Bridges + Culverts)" color={DASH_C.purple} />
         <StatMini value={`${Math.round((STR_COND[0] / TOTAL_STRUCT) * 100)}%`} label="Good Condition" color={DASH_C.green} />
         <StatMini value={`${STR_COND[3]}`} label="Critical Structures" color="#ef4444" />
-        <StatMini value="552" label="Bridges" color={DASH_C.cyan} />
+        <StatMini value="546" label="Bridges" color={DASH_C.cyan} />
         <StatMini value="43" label="Concrete Box Culverts" color={DASH_C.yellow} />
         <StatMini value="36 m" label="Avg Bridge Span" color={DASH_C.orange} />
       </KpiStrip>

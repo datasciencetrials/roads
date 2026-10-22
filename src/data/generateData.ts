@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Loads the real GeoJSON bridge/culvert data from /public and augments each
  * feature with synthetic condition ratings, inspection dates, defects, costs
  * and priority scores - all deterministically generated from the structure's
@@ -140,7 +140,7 @@ async function loadBridges(): Promise<Structure[]> {
   const res   = await fetch(`${import.meta.env.BASE_URL}data/bridges2026.geojson`);
   const geo   = await res.json() as { features: { geometry: { coordinates: [number, number] } | null; properties: Record<string, any> }[] };
 
-  // Keep ALL bridges (552) - structures without GPS still belong in the
+  // Keep ALL bridges (546) - structures without GPS still belong in the
   // registry/counts; they simply have no map marker (lat/lng 0).
   return geo.features
     .map((f, idx) => {

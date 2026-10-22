@@ -22,7 +22,7 @@ const QUALITY_SCALE = ['#22c55e', '#84cc16', '#eab308', '#f97316', '#ef4444'];
 // ─── Data model ──────────────────────────────────────────────────────────────
 const TOTAL_LAYERS = 214;
 const TOTAL_NETWORK_KM = 21302;
-const TOTAL_STRUCTURES = 552;
+const TOTAL_STRUCTURES = 546;
 const REG_LBL = ['Central', 'Northern', 'Eastern', 'Western', 'Southern', 'North Eastern'];
 
 // Layer catalogue by category

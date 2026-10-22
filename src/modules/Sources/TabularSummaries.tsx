@@ -723,7 +723,7 @@ const SURVEY_COVERAGE = [
 const DATA_VINTAGE = [
   { dataset:'Road network GeoJSON',   source:'DNR GIS Section',  vintage:'Jun 2026', features:1013 },
   { dataset:'Condition data (NAPR)',  source:'NAPR survey',      vintage:'Jul 2026', features:780  },
-  { dataset:'Bridge BMS',             source:'BMS field survey', vintage:'Oct 2026', features:552  },
+  { dataset:'Bridge BMS',             source:'BMS field survey', vintage:'Jun 2026', features:546  },
   { dataset:'TIS traffic counts',    source:'TIS / ATC',        vintage:'Apr 2026', features:298  },
   { dataset:'Weighbridge records',   source:'EACU weighbridge', vintage:'Jun 2026', features:8    },
   { dataset:'OPRC performance',      source:'DNR contracts',    vintage:'May 2026', features:9    },
@@ -742,7 +742,7 @@ const KPI_VALIDATION = [
   { kpi:'Total links',       value:'1,014',  source:'GeoJSON',      geojson:'1,014',  delta:'0',     ok:true },
   { kpi:'Paved km',          value:'11,762.8', source:'Approved baseline', geojson:'11,762.8', delta:'0', ok:true },
   { kpi:'Paved pct',         value:'55.2%', source:'Approved baseline', geojson:'55.2%', delta:'0', ok:true },
-  { kpi:'Total bridges',     value:'552',    source:'BMS',          geojson:'552',    delta:'0',     ok:true },
+  { kpi:'Total bridges',     value:'546',    source:'BMS',          geojson:'546',    delta:'0',     ok:true },
   { kpi:'ATC stations',      value:'25',     source:'TIS database', geojson:'N/A',    delta:'N/A',   ok:true },
 ];
 const DUPLICATE_CHECK = [
@@ -1752,7 +1752,7 @@ export default function TabularSummaries() {
                 ))}
                 <tr style={{ borderTop:'1px solid rgba(255,255,255,0.1)' }}>
                   <Td><strong>Total bridges</strong></Td>
-                  <Td mono align="right"><strong>552</strong></Td>
+                  <Td mono align="right"><strong>546</strong></Td>
                   <Td/><Td/>
                 </tr>
               </tbody>

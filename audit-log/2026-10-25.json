@@ -1,0 +1,169 @@
+{
+  "date": "2026-10-25",
+  "repo": "roads",
+  "url": "https://datasciencetrials.github.io/roads/",
+  "technical": {
+    "httpStatus": 200,
+    "loadFailed": false,
+    "pageRendered": true,
+    "bodyTextLength": 3418,
+    "consoleErrors": [],
+    "brokenImages": [],
+    "hashLinksFound": [],
+    "chartElementCount": 95,
+    "mobileChartGridColumns": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "accuracy": {
+    "extractedFigures": [
+      {
+        "value": 21302,
+        "raw": "21,302 km",
+        "context": "es\nDeep Analytics\nSQL Database & Schema"
+      },
+      {
+        "value": 11762.8,
+        "raw": "11,762.8 km",
+        "context": "abase & Schema\n21,302 km\nNATIONAL ROADS"
+      },
+      {
+        "value": 9539.2,
+        "raw": "9,539.2 km",
+        "context": "NATIONAL ROADS\n11,762.8 km\nPAVED (55%)"
+      },
+      {
+        "value": 165,
+        "raw": "165 km",
+        "context": "E\n3 Classes\nTRUNK / REGIONAL / DISTRICT"
+      },
+      {
+        "value": 0,
+        "raw": "0km",
+        "context": "avedUnpaved\nNetwork by Road Class\nA\nB\nC"
+      },
+      {
+        "value": 0,
+        "raw": "000km",
+        "context": "npaved\nNetwork by Road Class\nA\nB\nC\n0km\n4"
+      },
+      {
+        "value": 0,
+        "raw": "000km",
+        "context": "Network by Road Class\nA\nB\nC\n0km\n4000km\n8"
+      },
+      {
+        "value": 0,
+        "raw": "000km",
+        "context": "by Road Class\nA\nB\nC\n0km\n4000km\n8000km\n12"
+      },
+      {
+        "value": 0,
+        "raw": "000km",
+        "context": "Class\nA\nB\nC\n0km\n4000km\n8000km\n12000km\n16"
+      },
+      {
+        "value": 0,
+        "raw": "0km",
+        "context": "tionwaterfall, km\nTotal\n-Unpaved\n=Paved"
+      },
+      {
+        "value": 500,
+        "raw": "500km",
+        "context": "aterfall, km\nTotal\n-Unpaved\n=Paved\n0km\n5"
+      },
+      {
+        "value": 0,
+        "raw": "000km",
+        "context": ", km\nTotal\n-Unpaved\n=Paved\n0km\n5500km\n11"
+      },
+      {
+        "value": 500,
+        "raw": "500km",
+        "context": "al\n-Unpaved\n=Paved\n0km\n5500km\n11000km\n16"
+      },
+      {
+        "value": 0,
+        "raw": "000km",
+        "context": "ved\n=Paved\n0km\n5500km\n11000km\n16500km\n22"
+      },
+      {
+        "value": 0,
+        "raw": "0km",
+        "context": "vedUnpaved\nClass Paved vs Unpaved\nA\nB\nC"
+      },
+      {
+        "value": 0,
+        "raw": "000km",
+        "context": "paved\nClass Paved vs Unpaved\nA\nB\nC\n0km\n4"
+      },
+      {
+        "value": 0,
+        "raw": "000km",
+        "context": "lass Paved vs Unpaved\nA\nB\nC\n0km\n4000km\n8"
+      },
+      {
+        "value": 0,
+        "raw": "000km",
+        "context": "ed vs Unpaved\nA\nB\nC\n0km\n4000km\n8000km\n12"
+      },
+      {
+        "value": 0,
+        "raw": "000km",
+        "context": "paved\nA\nB\nC\n0km\n4000km\n8000km\n12000km\n16"
+      },
+      {
+        "value": 165,
+        "raw": "165 km",
+        "context": "Gap by Regionillustrative split of the"
+      },
+      {
+        "value": 0,
+        "raw": "0km",
+        "context": "Eastern\nWestern\nSouthern\nNorth Eastern"
+      },
+      {
+        "value": 10,
+        "raw": "10km",
+        "context": "tern\nWestern\nSouthern\nNorth Eastern\n0km"
+      },
+      {
+        "value": 20,
+        "raw": "20km",
+        "context": "Western\nSouthern\nNorth Eastern\n0km\n10km"
+      },
+      {
+        "value": 30,
+        "raw": "30km",
+        "context": "rn\nSouthern\nNorth Eastern\n0km\n10km\n20km"
+      },
+      {
+        "value": 40,
+        "raw": "40km",
+        "context": "uthern\nNorth Eastern\n0km\n10km\n20km\n30km"
+      }
+    ],
+    "discrepancies": []
+  },
+  "consistency": {
+    "districtList": null,
+    "notes": [
+      "uganda_nrms: no audit-log available yet for comparison",
+      "uganda_npms: no audit-log available yet for comparison",
+      "uganda_network_traffic: no audit-log available yet for comparison",
+      "uganda_ducar: no audit-log available yet for comparison",
+      "uganda_nbms: no audit-log available yet for comparison",
+      "uganda_gis_enterprise: no audit-log available yet for comparison",
+      "bridge_mculverts: no audit-log available yet for comparison",
+      "uganda_kee: no audit-log available yet for comparison",
+      "uganda_kee_rss: no audit-log available yet for comparison",
+      "uganda_ntis: no audit-log available yet for comparison"
+    ]
+  }
+}

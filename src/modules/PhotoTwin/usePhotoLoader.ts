@@ -177,15 +177,16 @@ export function usePhotoLoader(structureId: string | null): {
     const timer = setTimeout(() => {
       if (cancelled) return;
 
-      // Show verified published thumbnails while the fuller Drive manifest loads.
+      // The local photo manifest is retained for development, but its files
+      // are not deployed. Production uses only verified Drive photos.
       setLoading(true);
       let driveHasPhotos = false;
-      const localPhotos = loadManifest().then(async manifest => {
+      const localPhotos = import.meta.env.PROD ? Promise.resolve([] as BridgePhoto[]) : loadManifest().then(async manifest => {
         const entries = manifest?.[folder];
         return entries?.length ? verifyPhotos(photosFromManifest(folder, entries)) : [];
       });
       void localPhotos.then(verified => {
-        if (cancelled || driveHasPhotos) return;
+        if (cancelled || driveHasPhotos || !verified.length) return;
         setPhotos(verified);
         setLoading(false);
       });
@@ -211,6 +212,8 @@ export function usePhotoLoader(structureId: string | null): {
           }
           if (import.meta.env.PROD) {
             photoCache.set(folder, []);
+            setPhotos([]);
+            setLoading(false);
           } else {
             runProbe();
           }

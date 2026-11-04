@@ -293,17 +293,13 @@ export default function Sidebar() {
         <div className="nrms-sidebar-footer-copy" style={{ fontSize: 7.5, color: 'rgba(100,116,139,0.45)', letterSpacing: '0.05em' }}>
           Data Science Trials | National Road Network data view
         </div>
-        {/* Real Supabase connectivity check (useDbStatus), not a decorative
-            dot - this used to always read "System Online" in green even
-            when the database was completely unreachable. */}
+        {/* The public view is a static export, not a live database session. */}
         <div style={{ marginTop: 5, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5 }}>
           <span style={{ width: 5, height: 5, borderRadius: '50%',
-            background: dbStatus === 'connected' ? '#00ff88' : dbStatus === 'offline' ? '#ff2d78' : '#94a3b8',
-            boxShadow: dbStatus === 'connected' ? '0 0 6px #00ff88' : dbStatus === 'offline' ? '0 0 6px #ff2d78' : 'none',
-            animation: dbStatus !== 'offline' ? 'pulse 2s ease-in-out infinite' : 'none', display: 'inline-block' }}/>
+            background: '#94a3b8', display: 'inline-block' }}/>
           <span className="nrms-sidebar-footer-copy" style={{ fontSize: 7.5,
-            color: dbStatus === 'connected' ? 'rgba(0, 255, 136,0.6)' : dbStatus === 'offline' ? 'rgba(255, 45, 120,0.75)' : 'rgba(148,163,184,0.6)' }}>
-            {dbStatus === 'connected' ? 'Database Connected' : dbStatus === 'offline' ? 'Database Offline' : 'Checking database…'}
+            color: 'rgba(148,163,184,0.6)' }}>
+            Published data view, database not connected
           </span>
         </div>
       </div>

@@ -321,16 +321,13 @@ export function SchemaExplorer({ sectionId, accent = '#00f5ff' }: { sectionId: s
           SQL DATABASE AND SCHEMA · {ALL_TABLES.length} SECTION TABLES · {QUERIES.length} LINKING QUERIES
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          {/* Live check against the Supabase project, not the static schema
-              text below - this tab used to only show designed DDL with no
-              indication of whether the platform is actually connected. */}
+          {/* This schema is a reference, not proof of a live database. */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
             <span style={{ width: 6, height: 6, borderRadius: '50%',
-              background: dbStatus === 'connected' ? '#00ff88' : dbStatus === 'offline' ? '#ff2d78' : '#94a3b8',
-              boxShadow: dbStatus === 'connected' ? '0 0 6px #00ff88' : dbStatus === 'offline' ? '0 0 6px #ff2d78' : 'none' }}/>
+              background: '#94a3b8' }}/>
             <span style={{ fontSize: 10, fontWeight: 700,
-              color: dbStatus === 'connected' ? '#00ff88' : dbStatus === 'offline' ? '#ff2d78' : '#94a3b8' }}>
-              {dbStatus === 'connected' ? 'Server: Live' : dbStatus === 'offline' ? 'Server: Unreachable' : 'Server: Checking…'}
+              color: '#94a3b8' }}>
+              Schema reference, database not connected
             </span>
           </div>
           <button onClick={() => setShowAll(v => !v)}

@@ -75,7 +75,7 @@ const SECTIONS: Record<string, Section> = {
   growthfactors:   { id: 'growthfactors',   label: 'Growth Factors',        icon: <TrendingUp size={14}/>,     color: N.orange },
   overloading:     { id: 'overloading',     label: 'Overloading Analytics', icon: <AlertTriangle size={14}/>,  color: N.orange },
   oprc:            { id: 'oprc',            label: 'OPRC Contracts',        icon: <HardHat size={14}/>,        color: N.green  },
-  ndpiv:           { id: 'ndpiv',           label: 'NDP IV (Vision 2040)',  icon: <Target size={14}/>,         color: N.yellow },
+  ndpiv:           { id: 'ndpiv',           label: 'Development Planning', icon: <Target size={14}/>,         color: N.yellow },
   hdm4:            { id: 'hdm4',            label: 'HDM-4 Analysis',        icon: <Cpu size={14}/>,            color: N.teal   },
   mlarchitecture:  { id: 'mlarchitecture',  label: 'ML System Architecture',icon: <BrainCircuit size={14}/>,   color: N.purple },
   projecttracker:  { id: 'projecttracker',  label: 'Project Tracker',       icon: <ListTodo size={14}/>,       color: N.green  },
@@ -143,8 +143,6 @@ export default function Sidebar() {
   const { user } = useAuth();
   const dbStatus = useDbStatus();
 
-  const criticalCount = structures.filter(s => s.conditionRating === 1).length;
-
   // super level: dashboards & reports only - Admin Tools stays hidden
   const isAdmin = user?.role === 'admin';
   const visibleGroups = GROUPS
@@ -171,21 +169,16 @@ export default function Sidebar() {
       {/* Brand header */}
       <div style={{ padding: '14px 14px 12px', borderBottom: '1px solid rgba(0, 245, 255,0.08)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
-          <img
-            src={`${import.meta.env.BASE_URL}mowt.jpg`}
-            alt="Ministry of Works and Transport"
-            style={{
-              width: 34, height: 34, borderRadius: 9, flexShrink: 0, objectFit: 'contain',
-              background: '#fff', padding: 2,
-              border: '1px solid rgba(0, 245, 255,0.3)',
-              boxShadow: '0 0 16px rgba(0, 245, 255,0.15)',
-            }}
-          />
+          <div aria-hidden="true" style={{
+            width: 34, height: 34, borderRadius: 9, flexShrink: 0,
+            display: 'grid', placeItems: 'center', color: '#00f5ff',
+            fontSize: 11, fontWeight: 900, border: '1px solid rgba(0, 245, 255,0.3)',
+          }}>DS</div>
           <div className="nrms-sidebar-brand-copy" style={{ minWidth: 0 }}>
             <div className="metallic-chrome" style={{ fontSize: 10, fontWeight: 900,
-              letterSpacing: '0.12em', lineHeight: 1.2 }}>UGROADS</div>
+              letterSpacing: '0.12em', lineHeight: 1.2 }}>DATA SCIENCE TRIALS</div>
             <div style={{ fontSize: 8, color: 'rgba(148,163,184,0.6)', letterSpacing: '0.04em' }}>
-              Ministry of Works & Transport · DNR
+              Personal learning site, not an official Ministry product
             </div>
           </div>
         </div>
@@ -198,9 +191,9 @@ export default function Sidebar() {
 
       {/* Network summary strip */}
       <div className="nrms-sidebar-summary" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', borderBottom: '1px solid rgba(0, 245, 255,0.08)' }}>
-        <StatPill label="Roads"    value="21.3k" color={N.cyan} />
-        <StatPill label="Bridges"  value={String(structures.filter(s=>s.type==='bridge').length)} color={N.blue} />
-        <StatPill label="Critical" value={String(criticalCount)} color={N.pink} />
+        <StatPill label="National km" value="21,302" color={N.cyan} />
+        <StatPill label="Bridges FY 2026-27" value="552" color={N.blue} />
+        <StatPill label="Culverts extract" value={String(structures.filter(s=>s.type==='culvert').length)} color={N.pink} />
       </div>
 
       {/* ── 4 top-level tabs (accordion groups) ── */}
@@ -298,7 +291,7 @@ export default function Sidebar() {
       {/* Footer */}
       <div style={{ padding: '8px 14px', borderTop: '1px solid rgba(0, 245, 255,0.08)', textAlign: 'center' }}>
         <div className="nrms-sidebar-footer-copy" style={{ fontSize: 7.5, color: 'rgba(100,116,139,0.45)', letterSpacing: '0.05em' }}>
-          Uganda NRMS v4.0 · DNR 2026 (FY25-26)
+          Data Science Trials | National Road Network data view
         </div>
         {/* Real Supabase connectivity check (useDbStatus), not a decorative
             dot - this used to always read "System Online" in green even

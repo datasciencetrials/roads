@@ -13,7 +13,7 @@ const VIEW_TITLES: Record<string, { title: string; sub: string; color?: string }
   pim:           { title: 'Public Investment',            sub: 'PIM funding · PPP projects · Donor vs GoU financing', color: '#ffd23f' },
   projecttracker:{ title: 'Project Tracker',              sub: 'Execution tracking · Physical vs financial progress', color: '#00ff88' },
   oprc:          { title: 'OPRC Contracts',               sub: 'Output & performance-based road contracts · 2,235 km · 90 links', color: '#00ff88' },
-  ndpiv:         { title: 'NDP IV Investments',           sub: 'National Development Plan IV road projects & funding', color: '#b967ff' },
+  ndpiv:         { title: 'Development Planning',         sub: 'Road project analysis', color: '#b967ff' },
   overloading:   { title: 'Overloading Analytics',        sub: 'Axle-load risk index · Weighbridge analytics · Hotspot map', color: '#ff3366' },
   growthfactors: { title: 'Growth Factors',               sub: 'Monthly / seasonal expansion factors · Annual growth', color: '#00d4aa' },
   trafficanalytics: { title: 'Traffic Analytics',         sub: 'AADT trends · Vehicle composition · Regional distribution', color: '#00f5ff' },
@@ -30,7 +30,7 @@ const VIEW_TITLES: Record<string, { title: string; sub: string; color?: string }
   sources:       { title: 'Sources & Evidence',            sub: 'Evidence Catalogue · Tabular Summaries · Documents · Downloads', color: '#94a3b8' },
   platform:      { title: 'Platform Overview',            sub: 'Uganda National Roads Management Platform',             color: '#00f5ff' },
   networkstory:  { title: 'Network Story 1986-',          sub: 'Road network development since liberation · 40-year arc', color: '#b967ff' },
-  roadnetwork:   { title: 'Road Network Map',             sub: '1,014 national road links · 21,302 km official (FY25-26) · Data: DNR GIS / NDPIV FY25-26', color: '#00ff88' },
+  roadnetwork:   { title: 'Road Network Map',             sub: 'National Road Network map | 21,302 km approved baseline', color: '#00ff88' },
   casestudies:   { title: 'Global Case Studies',          sub: 'World map · Comparative analytics · Literature Review Matrix (195 countries) · Lessons for DNR', color: '#00d4aa' },
   roadreserve:   { title: 'Road Reserve Management',      sub: 'Gazette status · Reserve corridor map · Encroachment register · Legal enforcement', color: '#00d4aa' },
   roadvideoview: { title: 'Road Survey Video',             sub: 'Road surface video archive · 2021-2026',               color: '#ff6b35' },
@@ -41,7 +41,7 @@ const VIEW_TITLES: Record<string, { title: string; sub: string; color?: string }
   // BMS
   gismap:        { title: 'Structure GIS Map',                sub: 'GIS structure map · All bridges & major culverts · 2018-2024 time series', color: '#00ff88' },
   dashboard:     { title: 'BMS Dashboard',                sub: 'Bridge Management System · DNR',                        color: '#00f5ff' },
-  registry:      { title: 'Structure Registry',           sub: '312 bridges · 234 culverts · 546 total',        color: '#4d9fff' },
+  registry:      { title: 'Structure Registry',           sub: '546 Bridges and 452 Major Culverts in the 2026 source extract', color: '#4d9fff' },
   inspections:   { title: 'Inspection Management',        sub: 'Schedule, record and track field inspections',          color: '#ffd23f' },
   condition:     { title: 'Condition Assessment',         sub: 'Component ratings and defect analysis',                 color: '#ff6b35' },
   maintenance:   { title: 'Maintenance & Works',          sub: 'Work orders, contracts and maintenance records',        color: '#b967ff' },
@@ -52,7 +52,7 @@ const VIEW_TITLES: Record<string, { title: string; sub: string; color?: string }
   // Newly-wired sections - keep banner chrome consistent with the rest of the platform
   roadatlas:     { title: 'Road Atlas',                   sub: 'Visual intelligence atlas · 21,137 km mapped national network · DNR GIS', color: '#00d4aa' },
   roadvideo:     { title: 'Road Video Survey',            sub: 'Georeferenced pavement survey video · frame-by-frame · 2021-2026', color: '#ff6b35' },
-  bridgeworks:   { title: 'Bridge Works Programme',       sub: 'Bridge & major-culvert development projects · MoWT status report', color: '#4d9fff' },
+  bridgeworks:   { title: 'Bridge Works Programme',       sub: 'Historical project snapshot, not a live programme register', color: '#4d9fff' },
   downloads:     { title: 'Downloads',                    sub: 'Network, bridge & culvert inventory · WGS84 shapefiles · CSV · GeoJSON', color: '#94a3b8' },
   gisenterprise: { title: 'GIS Enterprise',               sub: 'Enterprise GIS architecture · client / service / data layers · WMS & tile services', color: '#b967ff' },
   hdm4:          { title: 'HDM-4 Analysis',               sub: 'Highway Development & Management · works cost matrix · economic appraisal', color: '#00f5ff' },
@@ -68,7 +68,7 @@ export default function Header({ showSearch, onMenuClick }: { showSearch?: boole
     return () => clearInterval(t);
   }, []);
 
-  const meta        = VIEW_TITLES[state.activeView] ?? { title: state.activeView, sub: 'DNR · Ministry of Works & Transport', color: '#00f5ff' };
+  const meta        = VIEW_TITLES[state.activeView] ?? { title: state.activeView, sub: 'Personal Data Science Trials data view', color: '#00f5ff' };
   const accent      = meta.color ?? '#00f5ff';
   const accentRgb   = hexToRgb(accent);
 

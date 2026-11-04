@@ -213,12 +213,12 @@ export default function StructureRegistry() {
   return (
     <div className="flex flex-col h-full animate-fade-in overflow-auto p-4">
       <TypeRegistry
-        title="Bridges" subtitle="MoWT · Bridge Inventory · NBI"
+        title="Bridges" subtitle="2026 bridge extract"
         accent="#00f5ff" rows={bridges} regions={bridgeRegions}
         onSelect={setSelected} columns={columns}
       />
       <TypeRegistry
-        title="Major Culverts" subtitle="MoWT · Culvert Inventory"
+        title="Major Culverts" subtitle="2026 culvert extract"
         accent="#b967ff" rows={culverts} regions={culvertRegions}
         onSelect={setSelected} columns={columns}
       />

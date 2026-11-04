@@ -126,8 +126,8 @@ export default function GISMapView() {
     <div className="relative flex flex-col h-full w-full overflow-hidden">
 
         <div style={{background:'rgba(16,185,129,0.04)',border:'1px solid rgba(16,185,129,0.14)',borderRadius:10,padding:'10px 16px',marginBottom:16,display:'flex',alignItems:'center',gap:10,flexWrap:'wrap'}}>
-          <span style={{fontSize:15,fontWeight:800,color:'rgba(16,185,129,1)',letterSpacing:-0.3}}>National Roads GIS Map</span>
-          <span style={{fontSize:11,color:'#94a3b8',fontWeight:500}}>MoWT · PostGIS · Vector Tiles · Leaflet</span>
+          <span style={{fontSize:15,fontWeight:800,color:'rgba(16,185,129,1)',letterSpacing:-0.3}}>Roads and Structures Map</span>
+          <span style={{fontSize:11,color:'#94a3b8',fontWeight:500}}>Personal data view | Leaflet</span>
         </div>
 
       {/* ── Map canvas + all floating overlays (own positioning context, starts BELOW the Definition Card so nothing collides with it) ── */}
@@ -192,7 +192,7 @@ export default function GISMapView() {
         <div className="bg-slate-900/92 backdrop-blur border border-slate-700 rounded-xl px-4 py-3">
           <div className="text-xs font-bold text-white">Bridges & Major Culverts</div>
           <div className="text-[10px] text-slate-400 mt-0.5">{displayStructures.length} structures shown</div>
-          <div className="text-[9px] text-slate-500 mt-1.5">Source: Unified Database</div>
+          <div className="text-[9px] text-slate-500 mt-1.5">2026 structure extract</div>
         </div>
 
         {/* Layer filter */}

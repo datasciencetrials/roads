@@ -1,8 +1,8 @@
 /**
- * nbms.tsx - standalone entry for the Uganda National Bridge Management System.
+ * nbms.tsx - standalone entry for the Data Science Trials bridge data view.
  * Mounts ONLY the BMS section (Dashboard · Structure Map · Inventory & Condition
  * incl. the Digital Twin · Bridge Works) in the providers it needs, with its own
- * branded header. Deployed separately to networkengineringmowt-ai/uganda_nbms.
+ * branded header for the personal learning site.
  *
  * This public deployment is a read-only data view. Operational authentication
  * and field-capture workflows remain separate from this public entry point.
@@ -24,26 +24,18 @@ function Header() {
       borderBottom: '1px solid rgba(0, 245, 255,0.15)',
       width: '100%', minWidth: 0,
     }}>
-      <img src={`${import.meta.env.BASE_URL}mowt.jpg`} alt="MoWT"
-        style={{ width: 32, height: 32, borderRadius: 8, objectFit: 'contain',
-          background: '#fff', padding: 2, border: '1px solid rgba(0, 245, 255,0.3)' }} />
       <div style={{ lineHeight: 1.25, flex: 1, minWidth: 0 }}>
-
-        <div style={{background:'rgba(14,165,233,0.04)',border:'1px solid rgba(14,165,233,0.14)',borderRadius:10,padding:'10px 16px',marginBottom:16,display:'flex',alignItems:'center',gap:10,flexWrap:'wrap'}}>
-          <span style={{fontSize:15,fontWeight:800,color:'rgba(14,165,233,1)',letterSpacing:-0.3,overflowWrap:'anywhere'}}>National Bridge Management System</span>
-          <span style={{fontSize:11,color:'#94a3b8',fontWeight:500}}>NBMS · MoWT · NBI Protocol · AfDB Standards</span>
-        </div>
         <div style={{ fontSize: 14, fontWeight: 900, color: '#00f5ff', letterSpacing: '0.04em', overflowWrap: 'anywhere' }}>
-          Uganda National Bridge Management System
+          Bridge Data Studio
         </div>
         <div style={{ fontSize: 9.5, color: 'rgba(148,163,184,0.6)' }}>
-          Ministry of Works &amp; Transport · Department of National Roads · NBMS
+          Data Science Trials | Personal learning site, not an official Ministry product
         </div>
       </div>
       <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 6, flexShrink: 0 }}>
         <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#00ff88',
           boxShadow: '0 0 6px #00ff88' }} />
-        <span style={{ fontSize: 9.5, color: 'rgba(0, 255, 136,0.7)', fontWeight: 700 }}>System Online</span>
+        <span style={{ fontSize: 9.5, color: 'rgba(0, 255, 136,0.7)', fontWeight: 700 }}>Data view</span>
       </div>
     </header>
   );

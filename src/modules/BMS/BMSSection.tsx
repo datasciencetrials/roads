@@ -107,7 +107,7 @@ export default function BMSSection() {
 
         <div className="nbms-system-banner" style={{background:'rgba(14,165,233,0.04)',border:'1px solid rgba(14,165,233,0.14)',borderRadius:10,padding:'10px 16px',marginBottom:16,display:'flex',alignItems:'center',gap:10,flexWrap:'wrap',width:'100%',minWidth:0,maxWidth:'100%'}}>
           <span style={{fontSize:15,fontWeight:800,color:'rgba(14,165,233,1)',letterSpacing:-0.3}}>Bridge Management System</span>
-          <span style={{fontSize:11,color:'#94a3b8',fontWeight:500}}>MoWT · NBI Protocol · Load Capacity · Inspection</span>
+          <span style={{fontSize:11,color:'#94a3b8',fontWeight:500}}>Bridge data | Load capacity | Inspection</span>
         </div>
       <style>{`
         @keyframes bms-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }

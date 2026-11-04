@@ -84,14 +84,14 @@ export default function BridgeWorksSection() {
           <span style={{ fontSize:26 }}>🌉</span>
           <div>
             <div style={{ fontSize:15, fontWeight:900, color:'#e2e8f0', letterSpacing:'-0.02em' }}>Bridge Works Programme</div>
-            <div style={{ fontSize:10, color:'rgba(148,163,184,0.55)', fontWeight:600, textTransform:'uppercase', letterSpacing:'0.08em' }}>MoWT Bridge Construction</div>
+            <div style={{ fontSize:10, color:'rgba(148,163,184,0.55)', fontWeight:600, textTransform:'uppercase', letterSpacing:'0.08em' }}>Historical project snapshot</div>
           </div>
         </div>
         <p style={{ fontSize:11, color:'rgba(148,163,184,0.72)', lineHeight:1.6, margin:0 }}>
-          Active and completed bridge construction, rehabilitation, and maintenance contracts across Uganda's road network - tracking lot progress, contractor performance, disbursements, and physical completion against MoWT programme targets.
+          Historical bridge works figures for analysis. This personal learning view is not an official programme register.
         </p>
         <div style={{ display:'flex', flexWrap:'wrap', gap:6, marginTop:10 }}>
-          {['MoWT Programme','MoWT Contracts','URF Funded','AfDB Co-financed','PPDA Compliant'].map((b: string)=>(
+          {['Bridge works','Historical snapshot'].map((b: string)=>(
             <span key={b} style={{ fontSize:9, fontWeight:700, color:'#00d4aa', background:'rgba(0, 212, 170,0.07)', border:'1px solid rgba(0, 212, 170,0.18)', borderRadius:20, padding:'2px 8px', textTransform:'uppercase', letterSpacing:'0.07em' }}>{b}</span>
           ))}
         </div>
@@ -108,12 +108,12 @@ export default function BridgeWorksSection() {
               Bridge Works - Development Projects
             </div>
             <div style={{ fontSize: 11.5, color: 'rgba(200,225,235,0.7)', marginTop: 2 }}>
-              MOWT Projects Status Report · End of April 2026 · {kpis.count} active lots
+              April 2026 project extract | {kpis.count} recorded lots
             </div>
           </div>
           <span className="nbms-works-source" style={{ ...glass(src === 'supabase' ? C.green : C.gray, 999), padding: '5px 12px',
             fontSize: 10, fontWeight: 800, color: src === 'supabase' ? C.green : C.gray }}>
-            {src === 'supabase' ? '● GOVERNED DATABASE MIRROR' : src === 'bundle' ? '● GOVERNED REPOSITORY DATA' : '… loading'}
+            {src === 'supabase' ? 'Database response' : src === 'bundle' ? 'Static data extract' : 'Loading'}
           </span>
         </div>
       </div>
@@ -209,8 +209,7 @@ export default function BridgeWorksSection() {
       </div>
 
       <div style={{ fontSize: 9, color: 'rgba(148,163,184,0.45)', marginTop: 18, textAlign: 'center' }}>
-        Source: MOWT Projects Status Report - §1.4 Bridges Development Projects (April 2026).
-        {src === 'bundle' && ' Serving from the governed repository data bundle.'}
+        Historical snapshot. Figures are not a live programme register.
       </div>
     </div>
   );

@@ -177,47 +177,40 @@ export function usePhotoLoader(structureId: string | null): {
     const timer = setTimeout(() => {
       if (cancelled) return;
 
-      // Drive-first: photos served from the user's Google Drive
+      // Show verified published thumbnails while the fuller Drive manifest loads.
       setLoading(true);
+      let driveHasPhotos = false;
+      const localPhotos = loadManifest().then(async manifest => {
+        const entries = manifest?.[folder];
+        return entries?.length ? verifyPhotos(photosFromManifest(folder, entries)) : [];
+      });
+      void localPhotos.then(verified => {
+        if (cancelled || driveHasPhotos) return;
+        setPhotos(verified);
+        setLoading(false);
+      });
+
       void loadDriveManifest().then(async dm => {
-        if (cancelled) return;
         const dEntries = dm?.[folder];
         if (dEntries?.length) {
           const verified = await verifyPhotos(photosFromDrive(dEntries));
           if (cancelled) return;
           if (verified.length) {
+            driveHasPhotos = true;
             photoCache.set(folder, verified);
             setPhotos(verified);
             setLoading(false);
             return;
           }
-          // Drive manifest listed entries but none actually resolved (dead
-          // script / moved folder) - fall through to the local manifest.
         }
-        // Fallback: locally shipped thumbnails
-        void loadManifest().then(async manifest => {
+        void localPhotos.then(verified => {
           if (cancelled) return;
-          const entries = manifest?.[folder];
-          if (entries?.length) {
-            const verified = await verifyPhotos(photosFromManifest(folder, entries));
-            if (cancelled) return;
-            if (verified.length) {
-              photoCache.set(folder, verified);
-              setPhotos(verified);
-              setLoading(false);
-              return;
-            }
-            // Manifest listed files that were never actually shipped - fall
-            // through to brute-force probing rather than reporting photos
-            // that don't exist.
+          if (verified.length) {
+            photoCache.set(folder, verified);
+            return;
           }
           if (import.meta.env.PROD) {
-            // Production only publishes manifest-listed photos. Guessing file
-            // names would generate 1,020 requests per structure and cannot
-            // discover files outside the published manifests.
             photoCache.set(folder, []);
-            setPhotos([]);
-            setLoading(false);
           } else {
             runProbe();
           }

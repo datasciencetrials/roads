@@ -12,11 +12,11 @@ dist
 dist-ssr
 *.local
 
-# Secrets — never commit (service_role keys, etc.)
-.env
-.env.local
-server/.env
-server/.env.local
+# Local environment files are plaintext and must never be committed.
+# Put actual secrets in an encrypted secret store and inject them at runtime.
+**/.env
+**/.env.*
+!**/.env.example
 
 # Editor directories and files
 .vscode/*

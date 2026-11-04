@@ -12,31 +12,13 @@ Usage:  python etl_all.py
 import json, urllib.request, urllib.error, os, time
 from pathlib import Path
 
-# NOTE: this URL + anon-key fallback pointed at "udionwmqmjcfzbdhoetv" - an
-# earlier Supabase project that the app has since migrated away from (see
-# src/lib/supabase.ts, which uses "vbidhkvzjigatfygnycg"). Left unfixed, every
-# run of this script (whenever SUPABASE_SERVICE_ROLE_KEY isn't set/found)
-# silently talks to the wrong - likely defunct - database instead of the one
-# the deployed app actually reads/writes. Updated to match the current project.
-URL = "https://vbidhkvzjigatfygnycg.supabase.co/rest/v1"
-KEY = ("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
-       ".eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZiaWRoa3Z6amlnYXRmeWdueWNnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3Mzg0NDQsImV4cCI6MjA5NzMxNDQ0NH0"
-       ".4M5lsUvcoh2giNpbF5X7nMPepNVp1U9Em6Ro4aZwgY4")
-import os as _os
-def _service_key():
-    k = _os.environ.get('SUPABASE_SERVICE_ROLE_KEY')
-    if k: return k
-    for envp in [_os.path.join(_os.path.dirname(__file__), '..', 'server', '.env'),
-                 _os.path.join(_os.path.dirname(__file__), 'uganda-roads', 'server', '.env')]:
-        try:
-            for line in open(envp, encoding='utf-8'):
-                if line.startswith('SUPABASE_SERVICE_ROLE_KEY='):
-                    return line.split('=', 1)[1].strip()
-        except OSError:
-            pass
-    return None
-_sk = _service_key()
-if _sk: KEY = _sk  # service_role: keeps ETL working after anon write-revoke
+# Credentials are supplied by an encrypted environment secret store. Do not
+# embed them in source or fall back to a public browser key for write operations.
+_project_url = os.environ.get("SUPABASE_URL", "").rstrip("/")
+KEY = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "")
+if not _project_url or not KEY:
+    raise RuntimeError("SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are required")
+URL = f"{_project_url}/rest/v1"
 HERE = Path(__file__).parent.parent / "public" / "data"   # JSON sources live in public/data
 BATCH = 500
 

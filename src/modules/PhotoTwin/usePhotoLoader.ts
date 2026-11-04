@@ -211,7 +211,16 @@ export function usePhotoLoader(structureId: string | null): {
             // through to brute-force probing rather than reporting photos
             // that don't exist.
           }
-          runProbe();
+          if (import.meta.env.PROD) {
+            // Production only publishes manifest-listed photos. Guessing file
+            // names would generate 1,020 requests per structure and cannot
+            // discover files outside the published manifests.
+            photoCache.set(folder, []);
+            setPhotos([]);
+            setLoading(false);
+          } else {
+            runProbe();
+          }
         });
       });
 

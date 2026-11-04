@@ -1,4 +1,4 @@
-import { X, MapPin, Calendar, Wrench, AlertTriangle, Camera } from 'lucide-react';
+import { X, MapPin, Calendar, Wrench, AlertTriangle } from 'lucide-react';
 import type { Structure } from '../../index';
 import { conditionLabel, conditionColor, conditionBadge, formatDate, formatUGX } from '../../utils/helpers';
 import { CURRENT_YEAR } from '../../shared/year';
@@ -9,21 +9,7 @@ interface Props {
   onClose: () => void;
 }
 
-// S:\PHOTOS\B001\ style paths - derive from bridge ID
-function photoUrl(id: string, idx: number): string {
-  // Bridge IDs like BRG-B001 → S:\PHOTOS\B001\
-  const match = id.match(/B(\d+)/);
-  if (!match) return '';
-  const num   = match[1];
-  const padded = num.padStart(3, '0');
-  return `file:///S:/PHOTOS/B${padded}/B${padded}_08_0${idx + 1}.JPG`;
-}
-
 export default function StructureDetailModal({ structure: s, onClose }: Props) {
-  const photos = s.type === 'bridge'
-    ? [0, 1, 2, 3].map(i => photoUrl(s.id, i)).filter(u => u)
-    : [];
-
   const histData = s.conditionHistory.map(h => ({ year: String(h.year), rating: h.rating }));
 
   return (
@@ -157,40 +143,6 @@ export default function StructureDetailModal({ structure: s, onClose }: Props) {
                 </Section>
               )}
 
-              {/* Photos - real S:\PHOTOS\ links */}
-              {photos.length > 0 && (
-                <Section title="Site Photos">
-                  <div className="flex items-center gap-1 mt-1">
-                    <Camera size={13} className="text-slate-500" />
-                    <span className="text-xs text-slate-400">Photos available in</span>
-                    <code className="text-[10px] text-blue-400 bg-blue-500/10 px-1.5 py-0.5 rounded">
-                      S:\PHOTOS\{s.id.replace('BRG-', '')}\
-                    </code>
-                  </div>
-                  {/* file:// paths point to the field survey team's shared drive and can
-                      never resolve from a browser (no web server exists at S:\), so these
-                      are shown as informational placeholders rather than clickable/loadable
-                      images - a real <img src="file://..."> silently fails with no useful
-                      feedback for the user. */}
-                  <div className="grid grid-cols-2 gap-2 mt-2">
-                    {photos.slice(0, 4).map((url, i) => {
-                      const fileName = url.split('/').pop();
-                      return (
-                        <div
-                          key={i}
-                          title={`${fileName} - available on the shared drive, not viewable in the web app`}
-                          className="aspect-video rounded-lg bg-slate-700 border border-slate-600 border-dashed flex flex-col items-center justify-center gap-1 text-slate-500"
-                        >
-                          <Camera size={20} />
-                          <span className="text-[10px] text-slate-500 px-1 text-center leading-tight">
-                            Not viewable here - see shared drive
-                          </span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </Section>
-              )}
             </div>
           </div>
         </div>

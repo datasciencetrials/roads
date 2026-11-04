@@ -257,9 +257,7 @@ function PhotosView({ structure: s }: { structure: Structure }) {
       <div className="flex flex-col items-center justify-center h-full gap-4">
         <Camera size={48} className="text-slate-600" />
         <div className="text-slate-400 text-sm">No photos found for {s.id}</div>
-        <div className="text-slate-600 text-xs">
-          Expected at: <code className="font-mono text-blue-400">S:\PHOTOS\{s.id.replace('BRG-','').replace('CUL-','')}\</code>
-        </div>
+        <div className="text-slate-600 text-xs">No published inspection photos are available for this structure.</div>
         <BridgeSchematic structure={s} />
       </div>
     );
@@ -519,7 +517,6 @@ function TwinView({ structure: s }: { structure: Structure }) {
           <div className="text-xs text-slate-300">
             <strong className="text-white">{photos.length}</strong> inspection photos found across&nbsp;
             <strong className="text-white">{Object.keys(usePhotoYears(s.id)).length}</strong> inspection visits
-            · Path: <code className="text-blue-400 font-mono text-[10px]">S:\PHOTOS\{s.id.replace('BRG-','')}\</code>
           </div>
         </div>
       )}
@@ -618,7 +615,7 @@ function LoadingPhotos({ structureId }: { structureId: string }) {
         <div className="absolute inset-0 rounded-full border-2 border-blue-500/30 border-t-blue-500 animate-spin" />
       </div>
       <div className="text-sm text-slate-400">Loading photos for {structureId}…</div>
-      <div className="text-xs text-slate-600">Scanning <code className="font-mono text-blue-500/60">S:\PHOTOS\{structureId.replace('BRG-','').replace('CUL-','')}\</code></div>
+      <div className="text-xs text-slate-600">Checking published inspection photos</div>
     </div>
   );
 }

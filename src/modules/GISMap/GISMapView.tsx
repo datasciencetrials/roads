@@ -17,7 +17,7 @@ import {
   ChevronLeft, ChevronRight, ExternalLink, Clock, Download,
   AlertCircle, Badge, TrendingDown,
 } from 'lucide-react';
-import { downloadGeoJSON, downloadKML, downloadShapefileZip } from '../../utils/downloads';
+import { downloadGeoJSON, downloadKML } from '../../utils/downloads';
 import { useBMS } from '../../store/BMSContext';
 import type { Structure, ActiveView } from '../../index';
 import {
@@ -350,9 +350,8 @@ export default function GISMapView() {
       {/* ── Top-right download toolbar ── (offset down to clear the global PageToolbar cluster) */}
       <div className="absolute z-[900] flex flex-col gap-1.5" style={{ top: 54, right: 16 }}>
         {[
-          { label: 'GeoJSON', fn: () => downloadGeoJSON(displayStructures, 'structures_filtered.geojson'), color: '#00f5ff' },
-          { label: 'KML',     fn: () => downloadKML(displayStructures, 'structures_filtered.kml'),         color: '#00ff88' },
-          { label: 'SHP ZIP', fn: () => downloadShapefileZip('all'),                                        color: '#b967ff' },
+          { label: 'GeoJSON', fn: () => downloadGeoJSON(displayStructures, 'Data Science Trials - Filtered Structures.geojson'), color: '#00f5ff' },
+          { label: 'KML',     fn: () => downloadKML(displayStructures, 'Data Science Trials - Filtered Structures.kml'),         color: '#00ff88' },
         ].map(({ label, fn, color }) => (
           <button
             key={label}

@@ -109,7 +109,7 @@ function TypeRegistry({
     return list;
   }, [rows, query, condFilter, regionFilter]);
 
-  const fileStem = `Department of National Roads_${title.replace(/\s+/g, '_')}_${new Date().toISOString().slice(0,10)}`;
+  const fileStem = `Data Science Trials - ${title} - ${new Date().toISOString().slice(0,10)}`;
 
   return (
     <div className="flex flex-col animate-fade-in" style={{ marginBottom: 28 }}>

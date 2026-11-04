@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import {
-  Download, FileJson, Map, Table, Archive, Globe,
-  FileText, Info, CheckCircle, ExternalLink,
+  Download, FileJson, Map, Table, Globe,
+  FileText, Info, CheckCircle,
 } from 'lucide-react';
 import { useBMS } from '../../store/BMSContext';
 import {
   downloadCSV, downloadGeoJSON, downloadKML,
-  downloadShapefileZip, downloadStaticFile,
 } from '../../utils/downloads';
 
 interface ExportCard {
@@ -33,50 +32,13 @@ export default function DownloadsView() {
 
   const GEOSPATIAL: ExportCard[] = [
     {
-      icon: <Archive size={18} />,
-      title: 'Shapefile - All Structures',
-      description: 'Point shapefile with full attribute table. Compatible with ArcGIS, QGIS, MapInfo.',
-      badge: 'SHP',
-      badgeColor: '#b967ff',
-      action: withFeedback('shp-all', () => downloadShapefileZip('all')),
-      size: '~68 KB',
-    },
-    {
-      icon: <Archive size={18} />,
-      title: 'Shapefile - Bridges only',
-      description: `${bridges.length} bridge point features with span, material, condition attributes.`,
-      badge: 'SHP',
-      badgeColor: '#b967ff',
-      action: withFeedback('shp-brg', () => downloadShapefileZip('bridges')),
-      size: '~41 KB',
-    },
-    {
-      icon: <Archive size={18} />,
-      title: 'Shapefile - Culverts only',
-      description: `${culverts.length} major culvert point features.`,
-      badge: 'SHP',
-      badgeColor: '#b967ff',
-      action: withFeedback('shp-cul', () => downloadShapefileZip('culverts')),
-      size: '~29 KB',
-    },
-    {
       icon: <FileJson size={18} />,
       title: 'GeoJSON - All Structures',
       description: 'Current app data as GeoJSON FeatureCollection. Live snapshot matching displayed structures.',
       badge: 'GeoJSON',
       badgeColor: '#00f5ff',
       action: withFeedback('geojson-all', () =>
-        downloadGeoJSON(structures, `Department of National Roads_Structures_${new Date().toISOString().slice(0,10)}.geojson`)),
-    },
-    {
-      icon: <FileJson size={18} />,
-      title: 'GeoJSON - Static (pre-built)',
-      description: 'Server-generated GeoJSON with all 546 structures. Use for full dataset including offline.',
-      badge: 'GeoJSON',
-      badgeColor: '#00f5ff',
-      action: withFeedback('geojson-static', () =>
-        downloadStaticFile('/downloads/structures_all.geojson', 'structures_all.geojson')),
-      size: '~683 KB',
+        downloadGeoJSON(structures, `Data Science Trials - Structures - ${new Date().toISOString().slice(0,10)}.geojson`)),
     },
     {
       icon: <Globe size={18} />,
@@ -85,7 +47,7 @@ export default function DownloadsView() {
       badge: 'KML',
       badgeColor: '#00ff88',
       action: withFeedback('kml', () =>
-        downloadKML(structures, `Department of National Roads_Structures_${new Date().toISOString().slice(0,10)}.kml`)),
+        downloadKML(structures, `Data Science Trials - Structures - ${new Date().toISOString().slice(0,10)}.kml`)),
     },
   ];
 
@@ -97,7 +59,7 @@ export default function DownloadsView() {
       badge: 'CSV',
       badgeColor: '#ffd23f',
       action: withFeedback('csv-all', () =>
-        downloadCSV(structures, `Department of National Roads_Structures_Registry_${new Date().toISOString().slice(0,10)}.csv`)),
+        downloadCSV(structures, `Data Science Trials - Structure Registry - ${new Date().toISOString().slice(0,10)}.csv`)),
     },
     {
       icon: <Table size={18} />,
@@ -106,7 +68,7 @@ export default function DownloadsView() {
       badge: 'CSV',
       badgeColor: '#ffd23f',
       action: withFeedback('csv-brg', () =>
-        downloadCSV(bridges, `Department of National Roads_Bridges_${new Date().toISOString().slice(0,10)}.csv`)),
+        downloadCSV(bridges, `Data Science Trials - Bridges - ${new Date().toISOString().slice(0,10)}.csv`)),
     },
     {
       icon: <Table size={18} />,
@@ -115,27 +77,13 @@ export default function DownloadsView() {
       badge: 'CSV',
       badgeColor: '#ffd23f',
       action: withFeedback('csv-cul', () =>
-        downloadCSV(culverts, `Department of National Roads_Culverts_${new Date().toISOString().slice(0,10)}.csv`)),
-    },
-    {
-      icon: <Table size={18} />,
-      title: 'Full CSV - Static (pre-built)',
-      description: 'Server-generated CSV matching the master dataset.',
-      badge: 'CSV',
-      badgeColor: '#ffd23f',
-      action: withFeedback('csv-static', () =>
-        downloadStaticFile('/downloads/structures_all.csv', 'structures_all.csv')),
-      size: '~186 KB',
+        downloadCSV(culverts, `Data Science Trials - Major Culverts - ${new Date().toISOString().slice(0,10)}.csv`)),
     },
   ];
 
   return (
     <div className="min-h-full bg-slate-950 text-slate-100 p-6 animate-fade-in">
 
-        <div style={{background:'rgba(100,116,139,0.04)',border:'1px solid rgba(100,116,139,0.14)',borderRadius:10,padding:'10px 16px',marginBottom:16,display:'flex',alignItems:'center',gap:10,flexWrap:'wrap'}}>
-          <span style={{fontSize:15,fontWeight:800,color:'rgba(100,116,139,1)',letterSpacing:-0.3}}>Downloads & Reports Centre</span>
-          <span style={{fontSize:11,color:'#94a3b8',fontWeight:500}}>PDF · Excel · CSV · GIS Shapefiles · MoWT Reports</span>
-        </div>
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-2">
@@ -145,16 +93,15 @@ export default function DownloadsView() {
           <h1 className="text-xl font-bold text-white">Downloads &amp; Exports</h1>
         </div>
         <p className="text-slate-400 text-sm ml-11">
-          Export the complete Department of National Roads bridge and culvert inventory in multiple formats.
-          Geospatial files use WGS84 (EPSG:4326). Shapefile ZIPs include .shp, .dbf, .shx, .prj, .cpg.
+          Export the displayed bridge and major culvert source extract. Geospatial coordinates use WGS84 (EPSG:4326).
         </p>
 
         {/* Stats strip */}
         <div className="ml-11 mt-4 flex flex-wrap gap-4">
           {[
             { label: 'Total Structures', value: structures.length, color: '#00f5ff' },
-            { label: 'Bridges',   value: bridges.length,  color: '#4d9fff' },
-            { label: 'Culverts',  value: culverts.length, color: '#b967ff' },
+            { label: 'Bridges in extract', value: bridges.length,  color: '#4d9fff' },
+            { label: 'Major Culverts',  value: culverts.length, color: '#b967ff' },
             { label: 'Critical',  value: structures.filter(s => s.conditionRating === 1).length, color: '#ff2d78' },
           ].map(({ label, value, color }) => (
             <div key={label} className="bg-slate-900 border border-slate-700 rounded-lg px-4 py-2">
@@ -179,10 +126,9 @@ export default function DownloadsView() {
       <div className="mt-8 flex items-start gap-3 bg-slate-900 border border-slate-700 rounded-xl p-4 text-sm text-slate-400">
         <Info size={16} className="text-slate-500 mt-0.5 flex-shrink-0" />
         <div>
-          <strong className="text-slate-300">Data source:</strong> Department of National Roads Bridge Management System -
-          the 2026 consolidated Bridges &amp; Major Culverts register.
-          Condition ratings are modelled from year-built using a 15-year degradation schedule
-          with inspection frequency weighting. Coordinates are WGS84 decimal degrees.
+          This personal learning extract is not the approved FY 2026-27 count of 552 Bridges.
+          The exported condition ratings are modelled, not verified inspection results.
+          Coordinates are WGS84 decimal degrees.
         </div>
       </div>
     </div>

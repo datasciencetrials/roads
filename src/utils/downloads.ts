@@ -1,7 +1,5 @@
 /**
- * Download helpers - CSV, GeoJSON, KML, and pre-built shapefile ZIPs.
- * All geospatial exports are built client-side from app state, matching
- * the server-generated files in /public/downloads/.
+ * Download helpers for CSV, GeoJSON and KML generated from displayed data.
  */
 import type { Structure } from '../index';
 
@@ -100,8 +98,8 @@ export function downloadKML(structures: Structure[], filename = 'structures.kml'
   const kml = `<?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
 <Document>
-  <name>Uganda National Road Structures</name>
-  <description>Department of National Roads Bridge and Major Culvert Inventory - ${structures.length} structures</description>
+  <name>Data Science Trials Structures</name>
+  <description>Personal learning extract - ${structures.length} Bridges and Major Culverts</description>
 ${placemarks}
 </Document>
 </kml>`;
@@ -110,30 +108,4 @@ ${placemarks}
 
 function escapeXML(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
-
-// ── Pre-built server-side shapefile ZIPs (link to /public/downloads/) ─────────
-
-export function downloadShapefileZip(which: 'all' | 'bridges' | 'culverts' = 'all') {
-  const map: Record<string, string> = {
-    all:      '/downloads/structures_all.zip',
-    bridges:  '/downloads/structures_bridges.zip',
-    culverts: '/downloads/structures_culverts.zip',
-  };
-  const url = map[which];
-  const a   = document.createElement('a');
-  a.href     = url;
-  a.download = `structures_${which}.zip`;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-}
-
-export function downloadStaticFile(url: string, filename: string) {
-  const a   = document.createElement('a');
-  a.href     = url;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
 }

@@ -1,12 +1,14 @@
 {
   "total_links": 1016,
-  "total_length_km": 21102.7,
-  "official_total_km": 21302.0,
+  "total_length_km": 21284.02,
+  "official_total_km": 21284.02,
   "regions_count": 6,
   "stations_count": 23,
   "measured_links": 119,
   "measured_pct": 11.7,
   "avg_iri_national": 3.31,
   "total_pms_cost_million": 1408.6,
-  "timestamp": "2026-06-08T17:44:23.958228"
+  "timestamp": "17/11/2026",
+  "paved_km": 6406.69,
+  "unpaved_km": 14877.33
 }

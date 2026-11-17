@@ -471,3 +471,16 @@ svg text {
 .border-gray-700 {
   border-color: #E2E8F0 !important;
 }
+
+
+/* Eliminate any residual dark inline linear-gradients on cards and panels */
+div[style*="linear-gradient"],
+div[style*="rgba(2, 5, 8"],
+div[style*="rgba(15, 23, 42"],
+.dashboard-chart-grid > div {
+  background-color: #FFFFFF !important;
+  background-image: none !important;
+  color: #0F172A !important;
+  border-color: #E2E8F0 !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06) !important;
+}

@@ -1,0 +1,36 @@
+name: Load Database (ETL)
+
+# Manually-triggered only - this writes real data into the LIVE production
+# Supabase database (scripts/etl_all.py), so it must never fire automatically
+# on push or a schedule. Run it from the Actions tab ("Run workflow") whenever
+# the JSON exports in public/data change and the live tables need refreshing.
+#
+# Requires encrypted repository secrets SUPABASE_URL and
+# SUPABASE_SERVICE_ROLE_KEY. The public app contains no database API key.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  etl:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run ETL → Supabase
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then
+            echo "::error::Supabase URL and service-role secrets must both be configured before ETL."
+            exit 1
+          fi
+          python scripts/etl_all.py

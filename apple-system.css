@@ -1,0 +1,473 @@
+/*
+ * Data Science Trials shared light interface.
+ * Keeps each portal's data colours while standardising its application shell.
+ */
+:root {
+  color-scheme: light !important;
+  --apple-page: #f4f6f8;
+  --apple-surface: #ffffff;
+  --apple-surface-soft: #f8fafc;
+  --apple-text: #111827;
+  --apple-muted: #4b5563;
+  --apple-line: #cbd5e1;
+  --apple-blue: #2563eb;
+  --apple-blue-soft: #eaf2ff;
+  --apple-teal: #0f8fa8;
+  --apple-green: #278a50;
+  --apple-amber: #b77900;
+  --apple-orange: #c75a24;
+  --apple-red: #c43d4d;
+  --apple-purple: #7258b7;
+  --apple-rose: #b83d6b;
+  --apple-radius: 14px;
+  --apple-shadow: 0 1px 2px rgba(0, 0, 0, .04), 0 10px 28px rgba(0, 0, 0, .06);
+  --bg-primary: #f5f5f7 !important;
+  --bg-secondary: #ffffff !important;
+  --bg-tertiary: #f2f2f7 !important;
+  --background: #f5f5f7 !important;
+  --surface: #ffffff !important;
+  --surface-1: #ffffff !important;
+  --surface-2: #f5f5f7 !important;
+  --card-bg: #ffffff !important;
+  --panel-bg: #ffffff !important;
+  --text-primary: #1d1d1f !important;
+  --text-secondary: #6e6e73 !important;
+  --text-muted: #86868b !important;
+  --border-color: #d2d2d7 !important;
+  --accent: #0071e3 !important;
+  --primary: #2563eb !important;
+  --accent-cyan: #0f8fa8 !important;
+  --accent-green: #278a50 !important;
+  --accent-yellow: #b77900 !important;
+  --accent-orange: #c75a24 !important;
+  --accent-red: #c43d4d !important;
+  --accent-purple: #7258b7 !important;
+  --c: #2563eb !important;
+  --g: #278a50 !important;
+  --p: #b83d6b !important;
+  --o: #c75a24 !important;
+  --y: #b77900 !important;
+}
+
+html,
+html.dark {
+  color-scheme: light !important;
+  background: var(--apple-page) !important;
+}
+
+html,
+body,
+#root,
+#app {
+  min-height: 100%;
+  background: var(--apple-page) !important;
+  color: var(--apple-text) !important;
+  font-family: Arial, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif !important;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+header,
+.header,
+.app-header,
+.topbar,
+.top-bar,
+.navbar,
+nav {
+  background: rgba(255, 255, 255, .88) !important;
+  color: var(--apple-text) !important;
+  border-color: rgba(0, 0, 0, .10) !important;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, .06) !important;
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+aside,
+.sidebar,
+.side-panel,
+.drawer,
+.filters,
+.filter-panel {
+  background: rgba(255, 255, 255, .96) !important;
+  color: var(--apple-text) !important;
+  border-color: var(--apple-line) !important;
+}
+
+main,
+.main,
+.content,
+.page-content,
+.dashboard,
+.workspace {
+  color: var(--apple-text) !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label,
+legend,
+strong {
+  color: var(--apple-text) !important;
+}
+
+p,
+small,
+.helper,
+.subtitle,
+.description,
+.muted {
+  color: var(--apple-muted) !important;
+}
+
+a {
+  color: var(--apple-blue);
+}
+
+button,
+.button,
+.btn,
+[role="button"],
+[role="tab"],
+.tab,
+.nav-tab {
+  border-radius: 10px !important;
+  border-color: rgba(0, 0, 0, .12) !important;
+  color: var(--apple-text) !important;
+  background: rgba(255, 255, 255, .84) !important;
+  font-family: inherit !important;
+  transition: background-color .16s ease, border-color .16s ease, box-shadow .16s ease, transform .16s ease;
+}
+
+button:hover,
+.button:hover,
+.btn:hover,
+[role="button"]:hover,
+[role="tab"]:hover {
+  background: #ffffff !important;
+  border-color: rgba(0, 113, 227, .42) !important;
+}
+
+button:focus-visible,
+.button:focus-visible,
+.btn:focus-visible,
+[role="button"]:focus-visible,
+[role="tab"]:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(0, 113, 227, .28) !important;
+  outline-offset: 2px;
+}
+
+button.active,
+.button.active,
+.btn.active,
+[aria-selected="true"],
+[aria-pressed="true"],
+.tab.active,
+.nav-tab.active {
+  color: #ffffff !important;
+  background: var(--apple-blue) !important;
+  border-color: var(--apple-blue) !important;
+  box-shadow: 0 4px 14px rgba(0, 113, 227, .22) !important;
+}
+
+.card,
+.panel,
+.kpi,
+.kpi-card,
+.metric-card,
+.stat-card,
+.chart-card,
+.table-card,
+.widget,
+.modal,
+.dialog,
+.popup,
+[class*="Card"],
+[class*="-card"] {
+  background: var(--apple-surface) !important;
+  color: var(--apple-text) !important;
+  border-color: rgba(0, 0, 0, .10) !important;
+  border-radius: var(--apple-radius) !important;
+  box-shadow: var(--apple-shadow) !important;
+}
+
+input,
+select,
+textarea,
+.search-box,
+.form-control {
+  color: var(--apple-text) !important;
+  background: #ffffff !important;
+  border: 1px solid var(--apple-line) !important;
+  border-radius: 10px !important;
+  font-family: inherit !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #8e8e93 !important;
+}
+
+select option {
+  color: var(--apple-text) !important;
+  background: #ffffff !important;
+}
+
+table {
+  color: var(--apple-text) !important;
+  background: #ffffff !important;
+  border-color: var(--apple-line) !important;
+}
+
+thead,
+thead tr,
+th {
+  color: var(--apple-text) !important;
+  background: #f2f2f7 !important;
+  border-color: var(--apple-line) !important;
+}
+
+td,
+tbody tr {
+  color: var(--apple-text) !important;
+  background: #ffffff !important;
+  border-color: #e5e5ea !important;
+}
+
+tbody tr:nth-child(even) td {
+  background: #fafafa !important;
+}
+
+tbody tr:hover td {
+  background: var(--apple-blue-soft) !important;
+}
+
+code,
+pre {
+  color: #242426 !important;
+  background: #f2f2f7 !important;
+  border-color: var(--apple-line) !important;
+}
+
+.leaflet-control,
+.maplibregl-ctrl,
+.mapboxgl-ctrl {
+  color: var(--apple-text) !important;
+  background: rgba(255, 255, 255, .94) !important;
+  border-color: rgba(0, 0, 0, .12) !important;
+  box-shadow: var(--apple-shadow) !important;
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip,
+.maplibregl-popup-content,
+.mapboxgl-popup-content {
+  color: var(--apple-text) !important;
+  background: #ffffff !important;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c7c7cc;
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background-clip: padding-box;
+}
+
+@media (max-width: 720px) {
+  header,
+  .header,
+  .app-header,
+  nav {
+    backdrop-filter: saturate(160%) blur(16px);
+    -webkit-backdrop-filter: saturate(160%) blur(16px);
+  }
+
+  .card,
+  .panel,
+  .kpi,
+  .kpi-card,
+  .metric-card,
+  .stat-card,
+  .chart-card,
+  .table-card,
+  .widget,
+  [class*="Card"],
+  [class*="-card"] {
+    border-radius: 12px !important;
+  }
+}
+
+/* High-contrast light-theme and visibility safeguards. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:where(.modal-content, .dialog-content, .popover, .dropdown-menu, .menu, .tooltip, details, summary) {
+  color: var(--apple-text) !important;
+  background-color: var(--apple-surface) !important;
+  border-color: var(--apple-line) !important;
+}
+
+:where(.badge, .pill, .chip, .tag, .status, [class*="-badge"], [class*="-pill"], [class*="-chip"]) {
+  color: #17324d !important;
+  background: #eaf2ff !important;
+  border-color: #9dbce8 !important;
+  box-shadow: none !important;
+}
+
+:where(.badge-success, .status-good, .condition-good, [data-status="good"]) {
+  color: #165c36 !important;
+  background: #e5f5eb !important;
+  border-color: #79b991 !important;
+}
+
+:where(.badge-warning, .status-fair, .condition-fair, [data-status="fair"]) {
+  color: #684600 !important;
+  background: #fff3d6 !important;
+  border-color: #d9ae4b !important;
+}
+
+:where(.badge-danger, .status-poor, .condition-poor, .condition-critical, [data-status="poor"], [data-status="critical"]) {
+  color: #842b38 !important;
+  background: #fde8ec !important;
+  border-color: #d88b96 !important;
+}
+
+:where(.legend, .chart-legend, .map-legend, .leaflet-control-layers, [class*="-legend"]) {
+  color: var(--apple-text) !important;
+  background-color: rgba(255, 255, 255, .96) !important;
+  border-color: var(--apple-line) !important;
+}
+
+:where(.table-scroll, .table-wrap, .table-wrapper, .data-table-wrap, .table-container) {
+  max-width: 100%;
+  overflow: auto;
+  overscroll-behavior-inline: contain;
+}
+
+:where(.chart, .chart-wrap, .chart-container, .plot, .plot-container, .map, .map-container) {
+  min-width: 0;
+}
+
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+svg text {
+  fill: var(--apple-text);
+  font-family: Arial, sans-serif !important;
+}
+
+:where(.secondary, .supporting, .meta, .caption, .note, .hint, [class*="-subtitle"], [class*="-description"]) {
+  color: var(--apple-muted) !important;
+}
+
+:disabled,
+[aria-disabled="true"] {
+  opacity: .65 !important;
+}
+
+::selection {
+  color: #ffffff;
+  background: #2563eb;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   MANDATORY APPLE HIG LIGHT THEME OVERRIDES FOR ROADS PORTAL
+   ══════════════════════════════════════════════════════════════════════════════ */
+:root {
+  --bg-void: #F5F5F7 !important;
+  --bg-deep: #F8FAFC !important;
+  --bg-surface: #FFFFFF !important;
+  --bg-panel: #FFFFFF !important;
+  --glass-bg: rgba(255, 255, 255, 0.92) !important;
+  --glass-bg-light: rgba(255, 255, 255, 0.85) !important;
+  --glass-border: #E2E8F0 !important;
+  --glass-border-h: #CBD5E1 !important;
+  --neon-cyan: #0284C7 !important;
+  --neon-green: #16A34A !important;
+  --neon-orange: #D97706 !important;
+  --neon-purple: #7C3AED !important;
+  --neon-yellow: #CA8A04 !important;
+  --neon-pink: #DB2777 !important;
+  --neon-blue: #0071E3 !important;
+  --neon-red: #DC2626 !important;
+}
+
+.echo-particles,
+[class*="particles"],
+[class*="starfield"] {
+  display: none !important;
+}
+
+/* Force light background on all dark containers and cards */
+[class*="dark"],
+[class*="bg-void"],
+[class*="bg-deep"],
+[class*="bg-surface"],
+[class*="bg-panel"],
+.bg-slate-900,
+.bg-slate-950,
+.bg-gray-900,
+.bg-gray-950,
+.bg-black {
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+}
+
+/* Ensure all text has maximum contrast */
+.text-white,
+.text-slate-100,
+.text-slate-200,
+.text-gray-100,
+.text-gray-200 {
+  color: #0F172A !important;
+}
+
+.text-slate-400,
+.text-slate-500,
+.text-gray-400,
+.text-gray-500 {
+  color: #475569 !important;
+}
+
+/* Hairline borders */
+.border-slate-800,
+.border-slate-700,
+.border-gray-800,
+.border-gray-700 {
+  border-color: #E2E8F0 !important;
+}

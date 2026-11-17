@@ -1,0 +1,64 @@
+name: Weekly Rebuild & Sync
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'   # Every Monday at 06:00 UTC
+  workflow_dispatch:        # Allow manual trigger
+
+permissions:
+  contents: write
+
+concurrency:
+  group: github-pages-deploy
+  cancel-in-progress: true
+
+jobs:
+  rebuild-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund --legacy-peer-deps
+
+      - name: Restore clean source HTML entry points
+        # See deploy.yml — .github/source-html/ is the golden copy of the
+        # real Vite entry HTML, restored before every build so the previous
+        # run's BUILT html (which lands on these same root paths) is never
+        # mistaken for source.
+        run: cp .github/source-html/index.html .github/source-html/index.ntis.html .github/source-html/index.npms.html .github/source-html/index.nbms.html ./
+
+      # Build directly with Vite (skip local-only export-data/tsc). See deploy.yml.
+      - name: Build
+        run: npx vite build
+        env:
+          NODE_ENV: production
+          VITE_SUPABASE_URL: https://vbidhkvzjigatfygnycg.supabase.co
+
+      - name: Reject credentials in public build
+        run: |
+          if grep -R -E -q 'eyJhbGciOi|sb_secret_|sk-[A-Za-z0-9_-]{20,}' dist; then
+            echo '::error::Credential-like value found in public build'
+            exit 1
+          fi
+
+      - name: Publish build output to main branch root
+        run: |
+          rsync -a dist/ ./ --exclude '.git'
+          touch .nojekyll
+
+      - name: Commit and push built site to main
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: weekly rebuild — publish built site to main [skip ci]"
+          commit_user_name: "MoWT Deploy Bot"
+          commit_user_email: "deploy@mowt.go.ug"
+          push_options: '--force-with-lease'

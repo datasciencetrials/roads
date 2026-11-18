@@ -8588,7 +8588,7 @@
       "dateModified": "45004",
       "sectionOrLinkNo": "A002_Link08",
       "river": null,
-      "road": "Mbarara(Bushenyi Junction)  - Ntungamo",
+      "road": "Mbarara (Bushenyi Junction)  - Ntungamo",
       "coordinates": {
         "e": 30.377,
         "s": -0.72
@@ -8612,7 +8612,7 @@
       "dateModified": "45003",
       "sectionOrLinkNo": "A002_Link08",
       "river": null,
-      "road": "Mbarara(Bushenyi Junction)  - Ntungamo",
+      "road": "Mbarara (Bushenyi Junction)  - Ntungamo",
       "coordinates": {
         "e": 30.634,
         "s": -0.624
@@ -8624,7 +8624,7 @@
       "dateModified": "45004",
       "sectionOrLinkNo": "A002_Link08",
       "river": null,
-      "road": "Mbarara(Bushenyi Junction)  - Ntungamo",
+      "road": "Mbarara (Bushenyi Junction)  - Ntungamo",
       "coordinates": {
         "e": 30.474,
         "s": -0.657
@@ -12870,7 +12870,7 @@
       {
         "rank": 22,
         "linkId": "A002_Link07",
-        "linkName": "Lyantonde - Mbarara(Bushenyi junction)",
+        "linkName": "Lyantonde - Mbarara (Bushenyi junction)",
         "region": "Southern",
         "lengthKm": 67.306,
         "intervention": "OPRC Maintenance",
@@ -12929,7 +12929,7 @@
     },
     {
       "roadNo": "A002",
-      "roadName": "Kibuye-Mpigi-Lukaya-Mbarara(Bushenyi junction)-Ntungamo-Kabale-Katuna",
+      "roadName": "Kibuye-Mpigi-Lukaya-Mbarara (Bushenyi junction)-Ntungamo-Kabale-Katuna",
       "lengthKm": 421.318,
       "ageYears": 13,
       "vciPct": 83,

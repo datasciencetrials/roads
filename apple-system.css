@@ -484,3 +484,5 @@ div[style*="rgba(15, 23, 42"],
   border-color: #E2E8F0 !important;
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06) !important;
 }
+
+.leaflet-container { background: #E2E8F0 !important; }

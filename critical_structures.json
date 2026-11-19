@@ -2453,7 +2453,7 @@
   {
     "StructureType": "Bridge",
     "BridgeNumber": "B162",
-    "BridgeName": "Road over River",
+    "BridgeName": "Atari Bridge",
     "ResolvedConditionBridgeNo": "B162",
     "LinkID": "B300_Link03",
     "LinkName": "Muyembe - Namalu",
@@ -5538,7 +5538,7 @@
   {
     "StructureType": "Bridge",
     "BridgeNumber": "B871",
-    "BridgeName": "Road over River",
+    "BridgeName": "Atari Bridge",
     "ResolvedConditionBridgeNo": "B871",
     "LinkID": "B304_Link02",
     "LinkName": "Kaserem-Kapchorwa-Suam",

@@ -38220,7 +38220,7 @@
   {
     "_id": "bridge-B162",
     "BridgeNumber": "B162",
-    "BridgeName": "Road Over River",
+    "BridgeName": "Atari Bridge",
     "RoadDescrPrincipal": "Muyembe - Namalu",
     "LinkID": "B300_Link03",
     "KmPrincipal": 32.5,
@@ -38255,7 +38255,7 @@
     "condition_source_row": 179,
     "historical_match": {
       "bridge_no": "B162",
-      "bridge_name": "ROAD OVER RIVER",
+      "bridge_name": "Atari Bridge",
       "link_id": "B300_Link03",
       "match_method": "name_link"
     },
@@ -38269,7 +38269,7 @@
     "bridge_no": "B162",
     "new_bridge_no": "B162",
     "original_bridge_no": "B162",
-    "bridge_nam": "Road Over River",
+    "bridge_nam": "Atari Bridge",
     "road_descr_principal": "Muyembe - Namalu",
     "link_no": "B300_Link03",
     "km": 32.5,
@@ -38310,7 +38310,7 @@
       "bridge_no": "B162",
       "new_bridge_no": "B162",
       "original_bridge_no": "B162",
-      "bridge_nam": "Road Over River",
+      "bridge_nam": "Atari Bridge",
       "road_descr_principal": "Muyembe - Namalu",
       "link_no": "B300_Link03",
       "km": 32.5,
@@ -38349,7 +38349,7 @@
       "overall_rating": 3,
       "condition_source_row": 179,
       "historical_bridge_no": "B162",
-      "historical_bridge_name": "ROAD OVER RIVER",
+      "historical_bridge_name": "Atari Bridge",
       "historical_match_method": "name_link",
       "road_class": "Class B (National Trunk Road)",
       "river": "Atari River",
@@ -126756,7 +126756,7 @@
   {
     "_id": "bridge-B871",
     "BridgeNumber": "B871",
-    "BridgeName": "Road Over River",
+    "BridgeName": "Atari Bridge",
     "RoadDescrPrincipal": "Kapchorwa - Suam",
     "LinkID": "B304_Link02",
     "KmPrincipal": 7.0,

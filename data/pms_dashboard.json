@@ -2,7 +2,7 @@
   "generated_at": "17/11/2026",
   "reporting_at": "17/11/2026",
   "model": {
-    "name": "MoWT National Pavement Intelligence Engine",
+    "name": "National Roads National Pavement Intelligence Engine",
     "version": "FY 2026/27 Baseline \u00b7 Vision 2040",
     "algorithm": "MOBICAP(Road condition assesment tool) & ROMDAS(Roughness and rutting machine based testing)",
     "metrics": {

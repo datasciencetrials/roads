@@ -1,6 +1,6 @@
 # Uganda National Roads Management Platform — System Documentation
 
-> Generated 2026-06-11 · NRMS v4.0 · Department of National Roads, Ministry of Works & Transport.
+> Generated 2026-06-11 · NRMS v4.0 · National Roads Directorate, National Transport Enterprise & Transport.
 > The same content is browsable in-app: **Admin Tools → Sources & Evidence** (admin level).
 
 ## 1 · Platform overview

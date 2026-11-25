@@ -631,3 +631,41 @@ tbody tr:hover {
   color: #B91C1C !important;
   border: 1px solid #FECACA !important;
 }
+
+
+/* ==========================================================================
+   25 FPS Continuous Flowing Traffic Animation & Apple HIG Micro-interactions
+   ========================================================================== */
+@keyframes traffic-flow-25fps {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -50px;
+  }
+}
+
+/* Polylines and road link layers in Leaflet / SVG across all portals */
+.leaflet-interactive[stroke-dasharray],
+path.leaflet-interactive[stroke-dasharray],
+.flowing-traffic-link,
+.traffic-flowing-link,
+path.traffic-flow,
+.traffic-stream,
+.road-network-stream {
+  animation: traffic-flow-25fps 1s steps(25) infinite !important;
+}
+
+/* Apple HIG Micro-interactions */
+button, .btn, .tab-btn, .nav-item, .card, .stat-card, .metric-box {
+  transition: transform 0.16s cubic-bezier(0.2, 0, 0.2, 1), box-shadow 0.16s cubic-bezier(0.2, 0, 0.2, 1), background-color 0.16s ease !important;
+}
+
+button:hover:not(:disabled), .btn:hover:not(:disabled), .tab-btn:hover {
+  transform: scale(1.02);
+}
+
+.card:hover, .stat-card:hover, .metric-box:hover, .summary-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+}

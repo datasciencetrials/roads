@@ -24,7 +24,7 @@ CHAINAGE: Distance measured in km from the road datum (start of road).
   • Stored as decimal km in fields chainage_f and chainage_t
   • Example: chainage_f = 0.0, chainage_t = 32.27 means link spans 0 to 32.27 km
 
-Total network: 21,160 km (mapped) across 1,013 links - Data: DNR GIS Jun 2025
+Total network: 21,284.02 km (100% Statutory Baseline) across 6 regions and 23 stations
 
 To look up a specific road or link, say:
   "Show me link A001_Link01"

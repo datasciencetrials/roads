@@ -44,46 +44,48 @@
       }
     },
     {
-      "id": "condition",
-      "title": "National Road Network Condition",
-      "subtitle": "FY 2025/26 to FY 2026/27 assessment (km)",
-      "type": "donut",
+      "id": "structural_capacity",
+      "title": "Pavement Structural Number (SNeff)",
+      "subtitle": "AASHTO 1993 effective structural capacity (km)",
+      "type": "bars",
       "unit": "km",
       "payload": [
         {
-          "label": "Good (59.20%)",
-          "value": 12610.0,
-          "km": 12610.0,
-          "pct": 59.2
+          "label": "SNeff < 2.5 (Critical)",
+          "value": 70.47
         },
         {
-          "label": "Fair (36.82%)",
-          "value": 7844.0,
-          "km": 7844.0,
-          "pct": 36.82
+          "label": "SNeff 2.5-3.5 (Marginal)",
+          "value": 160.17
         },
         {
-          "label": "Poor (3.98%)",
-          "value": 848.0,
-          "km": 848.0,
-          "pct": 3.98
+          "label": "SNeff 3.5-4.5 (Adequate)",
+          "value": 1787.47
+        },
+        {
+          "label": "SNeff > 4.5 (Robust)",
+          "value": 4388.58
         }
       ]
     },
     {
-      "id": "coverage",
-      "title": "Network Surface Composition",
-      "subtitle": "Paved (30.10%) vs Unpaved (69.90%)",
-      "type": "donut",
+      "id": "subgrade_strength",
+      "title": "Subgrade Resilient Modulus (Mr)",
+      "subtitle": "FWD backcalculated subgrade stiffness (km)",
+      "type": "bars",
       "unit": "km",
       "payload": [
         {
-          "label": "Paved (Bituminous)",
-          "value": 6406.69
+          "label": "S1/S2 (< 50 MPa)",
+          "value": 230.64
         },
         {
-          "label": "Unpaved (Gravel)",
-          "value": 14877.33
+          "label": "S3/S4 (50-100 MPa)",
+          "value": 890.53
+        },
+        {
+          "label": "S5/S6 (> 100 MPa)",
+          "value": 5285.52
         }
       ]
     },
